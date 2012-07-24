@@ -1,7 +1,5 @@
 engine.onStart = function () {
     engine.autoNext = false;
-
-    setTimeout(engine.displayResults, 2000);
 };
 
 /**
@@ -34,19 +32,13 @@ engine.displayResults = function () {
     // fragment (ie. an html file) for each benefit and for each obligation.
     // Load the appropriate fragments from the server and insert them into the page.
     if (benefitPageUrls.length > 0) {
-        //engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
-            //engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
+        engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
+            engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
                 $("#eligible").slideDown(engine.SLIDE_TIME);
-                //$("form").hide();
-                //$('html,body').scrollTop(0);
-                /*
-                setTimeout(function() {
-                    alert($("#eligible").length);
-                    alert($("#eligible").html());
-                }, 1000);
-                */
-            //});
-        //});
+                $("form").hide();
+                $('html,body').scrollTop(0);
+            });
+        });
     }
 
     // They're not entitled to anything. Say so.
