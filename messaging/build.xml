@@ -1,0 +1,11 @@
+<project name="messaging">
+    
+    <target name="build">
+        <xslt basedir="wsdl" 
+              destdir="resources"
+              includes="**/*.wsdl"
+              extension=".xsd"
+              style="src/main/resources/META-INF/client-services/interfaces/wsdls/extractXsdFromWsdl.xsl"/>
+    </target>
+    
+</project>

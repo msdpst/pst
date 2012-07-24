@@ -1,0 +1,893 @@
+<!doctype html>
+<!--
+TODO now:
+- CHANGE SCROLL STYLE TO HAVE SWITCH TO ALLOW FOR BOTH TYPES (PST)
+- SKIPPING age ranges
+- handle checkboxes
+- enforce at lease one childAgeRange selected
+- scroll position on back to first group
+
+TODO:
+- moz-specific css
+- Not sure that auto-next is desirable - make it a switch
+    - in any case, it shouldn't do anything if there are unanswered questions in the group (this happens when
+      they answer questions out of order, but also when the answer to the last question reveals a new question)
+- Make header, including progress bar, fixed so that it always displays
+- Make it work in all browsers!
+- Navigate directly back to particular sections (worth it?)
+- Or, what happens if past sections not disabled?
+- Date parsing (and validation): we're relying on the built-in parsing which won't be reliable
+- Towns and their areas
+- section labels? These are on the left in Terri's word doc
+- Loop! (Indicate if you or your partner expect to get any other income in the next 52 weeks)
+- change next button back to submit?
+- replace clearer with clearfix
+- disable function-interception debugging!
+- <details> and <summary> for expandable help
+- make sure got all help
+- local copies of all js and css
+
+NOTES:
+- final text for specific benefits is in Success Text tab of Rules and Defs spreadsheet
+-->
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css">
+    <link rel="stylesheet" href="index.css" type="text/css" />
+    <script src="../thirdparty/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="../thirdparty/jquery.validate.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="../engine/debugHelper.js" type="text/javascript"></script>
+    <script src="../engine/engine.js" type="text/javascript"></script>
+    <script src="rules.js" type="text/javascript"></script>
+    <script src="calculator.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <!--[if (gte IE 6)&(lte IE 8)]>
+    <script src="../thirdparty/selectivizr-min.js"></script>
+    <script src="../thirdparty/html5shiv.js"></script>
+    <![endif]-->
+
+    <!--
+    Hide content until everything's loaded. We do this here in the html so that content isn't visible
+    while we're waiting for JS and/or CSS to load.
+    -->
+    <style>
+        .group, .results {
+            display: none;
+        }
+    </style>
+
+    <title>Check what you might get</title>
+</head>
+
+<body>
+
+<header>
+    <img src="images/logo.gif" alt="MSD Logo">
+
+    <div id="headerInner">
+        <h1>Check what you might get</h1>
+        <label id="progressLabel">Progress</label>
+        <div id="progress"></div>
+    </div>
+    <div id="buffer"></div>
+</header>
+
+<div id="outer">
+
+    <form>
+        <!-- ======== Your Details ========= -->
+
+        <fieldset class="group">
+
+	        <div class="question" data-ineligible="$age < 16">
+                <label for="dateOfBirth">What is your date of birth?</label>
+                <input type="text" name="dateOfBirth" id="dateOfBirth" class="date">
+            </div>
+
+            <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
+                <label for="residency">What is your residency status?</label>
+                <select name="residency" id="residency">
+                    <option value="">-- Choose an option --</option>
+                    <option>NZ Citizen (by birth)</option>
+                    <option>NZ Citizen (Other)</option>
+                    <option>Permanent Resident</option>
+                    <option>Refugee - Quota</option>
+                    <option>Australian</option>
+                    <option>Refugee - Other with Permanent Residence</option>
+                    <option>Limited Purpose Permit</option>
+                    <option>Living In Other Countries</option>
+                    <option>No Current Permit</option>
+                    <option>Refugee - other without Permanent</option>
+                    <option>Student Permit</option>
+                    <option>Temporary Work Permit</option>
+                    <option>Visitor Permit</option>
+                    <option>Working Holiday</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Have you lived in New Zealand continuously for two years at any one time since
+                        becoming a New Zealand Citizen or permanent resident?</div>
+                    <input type="radio" name="twoYears" id="twoYearsYes" value="true"> <label for="twoYearsYes">Yes</label>
+                    <input type="radio" name="twoYears" id="twoYearsNo" value="false"> <label for="twoYearsNo">No</label>
+                </fieldset>
+
+                <p class="info">This means that you consider New Zealand your home, you are a legal resident, usually
+                    live here and intend to stay permanently.</p>
+            </div>
+
+            <div class="question" data-ineligible="!$stayingInNz">
+                <fieldset>
+                    <div>Do you usually live in New Zealand and intend to stay here?</div>
+                    <input type="radio" name="stayingInNz" id="stayingInNzYes" value="true"> <label for="stayingInNzYes">Yes</label>
+                    <input type="radio" name="stayingInNz" id="stayingInNzNo" value="false"> <label for="stayingInNzNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question">
+                <label for="area">What town or city do you live in?</label>
+                <select name="area" id="area">
+                    <!-- These values are area numbers 1-4, not town identifiers -->
+                    <option value="">-- Choose an option --</option>
+                    <option value="1">Abbotsford</option>
+                    <option value="1">Auckland</option>
+                    <option value="2">Wellington</option>
+                </select>
+            </div>
+
+            <div class="question" data-visible="$seniorsAge">
+                <fieldset>
+                    <div>Have you lived at least 10 years in NZ since the age of 20?</div>
+                    <input type="radio" name="tenYears" id="tenYearsYes" value="true"> <label for="tenYearsYes">Yes</label>
+                    <input type="radio" name="tenYears" id="tenYearsNo" value="false"> <label for="tenYearsNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$seniorsAge">
+                <fieldset>
+                    <div>Have you lived at least 5 years in NZ since the age of 50?</div>
+                    <input type="radio" name="fiveYears" id="fiveYearsYes" value="true"> <label for="fiveYearsYes">Yes</label>
+                    <input type="radio" name="fiveYears" id="fiveYearsNo" value="false"> <label for="fiveYearsNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Are you:</div>
+                    <input type="radio" name="gender" id="genderMale" value="Male"> <label for="genderMale">Male</label>
+                    <input type="radio" name="gender" id="genderFemale" value="Female"> <label for="genderFemale">Female</label>
+                </fieldset>
+            </div>
+            <div class="question">
+                <fieldset>
+                    <div>Do you have a partner?</div>
+                    <input type="radio" name="partner" id="partnerYes" value="true"> <label for="partnerYes">Yes</label>
+                    <input type="radio" name="partner" id="partnerNo" value="false"> <label for="partnerNo">No</label>
+                </fieldset>
+
+                <p class="info">A partner is your husband or wife, your civil union partner, or a person of the
+                same or opposite sex with whom you have a de facto relationship.
+                <a href="#" class="helpButton">More information</a></p>
+
+                <div class="help">
+                    When we work out if you can get income assistance, we will consider you have a partner if you are:
+                    <ul>
+                        <li>married</li>
+                        <li>in a civil union with someone of the same or opposite sex</li>
+                        <li>in a de facto relationship with someone of the same or opposite sex.</li>
+                    </ul>
+                    <br>There also needs to be a degree of companionship in which two people are:
+                    <ul>
+                        <li>committed to each other emotionally for the foreseeable future and</li>
+                        <li>financially interdependent on each other.</li>
+                    </ul>
+                    <br>To give you a better idea of what we mean by this, think about whether:
+                    <ul>
+                        <li>you live together at the same address most of the time</li>
+                        <li>you live separately but stay overnight at each other's place a few nights a week
+                        </li>
+                        <li>you share responsibilities, for example bringing up children (if any)</li>
+                        <li>you socialise and holiday together</li>
+                        <li>you share money, bank accounts or credit cards</li>
+                        <li>you share household bills</li>
+                        <li>you have a sexual relationship</li>
+                        <li>people think of you as a couple</li>
+                        <li>you give each other emotional support and companionship</li>
+                        <li>your partner would be willing to financially support you if you couldn't support
+                            yourself.
+                        </li>
+                    </ul>
+                    We also consider the length of time you've been in your relationship.<br/><br/>We know it
+                    can be difficult to determine whether you're in a relationship for income assistance
+                    purposes. If you're unsure about whether we would consider you to be in a relationship,
+                    please talk to us. We will be happy to discuss this with you when you meet with us.
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="group">
+            <div class="question" data-visible="$partner && $seniorOk">
+                <label for="partnerAge">How old is your partner?</label>
+                <input type="text" name="partnerAge" id="partnerAge" class="number" min="0" max="120">
+            </div>
+
+            <div class="question" data-visible="$partner">
+                <label for="relationshipStatusPartner">What best describes your relationship status?</label>
+                <select name="relationshipStatusPartner" id="relationshipStatusPartner">
+                    <option value="">-- Choose an option --</option>
+                    <option>Living Defacto</option>
+                    <option>Civil Union</option>
+                    <option>Married</option>
+                    <option>Defacto - Partner in prison</option>
+                    <option>Civil Union - Partner in prison</option>
+                    <option>Married - Partner in prison</option>
+                </select>
+            </div>
+
+            <div class="question" data-visible="!$partner">
+                <label for="relationshipStatusSingle">What best describes your relationship status?</label>
+                <select name="relationshipStatusSingle" id="relationshipStatusSingle">
+                    <option value="">-- Choose an option --</option>
+                    <option>Separated from Civil Union Partner</option>
+                    <option>Separated from Defacto Partner</option>
+                    <option>Separated from Spouse</option>
+                    <option>Divorced</option>
+                    <option>Civil Union Dissolved</option>
+                    <option>Widowed</option>
+                    <option>Defacto Partner Deceased</option>
+                    <option>Civil Union Partner Deceased</option>
+                    <option>Single</option>
+                </select>
+            </div>
+
+	        <div class="question">
+                <label for="dependentChildren">How many dependent children do you have?</label>
+                <input type="text" name="dependentChildren" id="dependentChildren" class="number" min="0">
+                <div class="info">
+                    A child (whether your own, stepchild, adopted, grandchild or mokopuna)
+                    is considered dependent if they are:
+                    <ul>
+                        <li>primarily under your care and responsibility</li>
+                        <li>living with you as a member of your family</li>
+                        <li>substantially reliant on you for financial support.</li>
+                    </ul>
+                </div>
+            </div>
+
+	        <div class="question" data-visible="$dependentChildren > 0">
+                <fieldset>
+                    <div>Please select the age ranges of your dependent child / children.</div>
+                    <input type="checkbox" name="childAged04" value="true" id="childAged04"/><label for="childAged04">Aged 0 to 4 years old</label><br/>
+                    <input type="checkbox" name="childAged5NotAtSchool" value="true" id="childAged5NotAtSchool"/><label for="childAged5NotAtSchool">Aged 5 years old and not at school</label><br/>
+                    <input type="checkbox" name="childAged513" value="true" id="childAged513"/><label for="childAged513">Aged 5 to 13 years old and at school</label><br/>
+                    <input type="checkbox" name="childAged1418" value="true" id="childAged1418"/><label for="childAged1418">Aged 14 to 18 years old</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+
+
+        <!-- ======== Your Partner's Details (Super) ========= -->
+
+        <!-- New Zealand Superannuation partner living details -->
+        <fieldset class="group" data-visible="$seniorOk && $partner">
+	        <div class="question">
+                <fieldset>
+                    <div>Does your partner usually live in New Zealand and intend to stay here?</div>
+                    <input type="radio" name="partnerNZ" id="partnerNZYes" value="true"> <label for="partnerNZYes">Yes</label>
+                    <input type="radio" name="partnerNZ" id="partnerNZNo" value="false"> <label for="partnerNZNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question">
+                <label for="partnerResidency">What is your partner’s residency status?</label>
+                <select name="partnerResidency" id="partnerResidency">
+                    <option value="">-- Choose an option --</option>
+                    <option>NZ Citizen (by birth)</option>
+                    <option>NZ Citizen (Other)</option>
+                    <option>Permanent Resident</option>
+                    <option>Refugee - Quota</option>
+                    <option>Australian</option>
+                    <option>Refugee - Other with Permanent Residence</option>
+                    <option>Limited Purpose Permit</option>
+                    <option>Living In Other Countries</option>
+                    <option>No Current Permit</option>
+                    <option>Refugee - other without Permanent</option>
+                    <option>Student Permit</option>
+                    <option>Temporary Work Permit</option>
+                    <option>Visitor Permit</option>
+                    <option>Working Holiday</option>
+                </select>
+            </div>
+
+	        <div class="question">
+                <fieldset>
+                    <div>Do you and your partner live at the same address?</div>
+                    <input type="radio" name="liveTogether" id="liveTogetherYes" value="true"> <label for="liveTogetherYes">Yes</label>
+                    <input type="radio" name="liveTogether" id="liveTogetherNo" value="false"> <label for="liveTogetherNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="!$liveTogether">
+                <label for="partnerLives">Where does your partner live?</label>
+                <select name="partnerLives" id="partnerLives">
+                    <option value="">-- Choose an option --</option>
+                    <option>Rest home</option>
+                    <option>Public hospital</option>
+                    <option>Private hospital</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+        </fieldset>
+
+
+        <!-- ======== Your Income ========= -->
+
+        <fieldset class="group">
+	        <div class="question">
+                <fieldset>
+                    <div>Have you worked in the last 52 weeks?</div>
+                    <input type="radio" name="haveWorked" id="haveWorkedYes" value="true"> <label for="haveWorkedYes">Yes</label>
+                    <input type="radio" name="haveWorked" id="haveWorkedNo" value="false"> <label for="haveWorkedNo">No</label>
+                </fieldset>
+
+                <p class="info">Paid employment includes employment for which you receive non-monetary benefits such as free board, payments in kind, or drawings from an unprofitable business.</p>
+            </div>
+
+	        <div class="question" data-visible="$haveWorked">
+                <fieldset>
+                    <div>Are you still working?</div>
+                    <input type="radio" name="stillWorking" id="stillWorkingYes" value="true"> <label for="stillWorkingYes">Yes</label>
+                    <input type="radio" name="stillWorking" id="stillWorkingNo" value="false"> <label for="stillWorkingNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$stillWorking">
+                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label>
+                $&nbsp;<input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="number">
+
+                <p class="info">
+                    Please include the value of any non-monetary benefits received, for example free board or any
+                    drawings, whether or not the business makes a profit.
+                </p>
+                <p class="info">
+                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
+                </p>
+            </div>
+
+	        <div class="question" data-visible="$stillWorking">
+                <label for="weeklyHours">What is the total number of hours you work per week?</label>
+                <input type="text" name="weeklyHours" id="weeklyHours" class="number">
+            </div>
+
+            <!-- ACC Details (Seniors only) -->
+
+	        <div class="question" data-visible="$seniorOk">
+                <fieldset>
+                    <div>Are you currently receiving weekly compensation payments from ACC? (ACC is the Accident Compensation Corporation)</div>
+                    <input type="radio" name="acc" id="accYes" value="true"> <label for="accYes">Yes</label>
+                    <input type="radio" name="acc" id="accNo" value="false"> <label for="accNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$acc">
+                <fieldset>
+                    <div>Has ACC confirmed that you can receive both weekly compensation from ACC and New Zealand Superannuation for 12 months?</div>
+                    <input type="radio" name="accNZS" id="accNZSYes" value="true"> <label for="accNZSYes">Yes</label>
+                    <input type="radio" name="accNZS" id="accNZSNo" value="false"> <label for="accNZSNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+        <fieldset class="group">
+	        <div class="question" data-visible="$partner">
+                <fieldset>
+                    <div>Has your partner worked in the last 52 weeks?</div>
+                    <input type="radio" name="partnerWorked" id="partnerWorkedYes" value="true"> <label for="partnerWorkedYes">Yes</label>
+                    <input type="radio" name="partnerWorked" id="partnerWorkedNo" value="false"> <label for="partnerWorkedNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$partnerWorked">
+                <fieldset>
+                    <div>Is your partner still working?</div>
+                    <input type="radio" name="partnerStillWorking" id="partnerStillWorkingYes" value="true"> <label for="partnerStillWorkingYes">Yes</label>
+                    <input type="radio" name="partnerStillWorking" id="partnerStillWorkingNo" value="false"> <label for="partnerStillWorkingNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$partnerStillWorking">
+                <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label>
+                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="number">
+                <p class="info">
+                    Please include the value of any non-monetary benefits received, for example free board or any
+                    drawings, whether or not the business makes a profit.
+                </p>
+                <p class="info">
+                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
+                </p>
+            </div>
+
+            <div class="question" data-visible="$seniorOk && $partner">
+                <fieldset>
+                    <div>Do you want to include your partner in your New Zealand Superannuation?</div>
+                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSYes" value="true"> <label for="includePartnerInNZSYes">Yes</label>
+                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSNo" value="false"> <label for="includePartnerInNZSNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$seniorOk && $partner">
+                <fieldset>
+                    <div>Is your partner receiving New Zealand Superannuation or a Veterans Pension?</div>
+                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSYes" value="true"> <label for="partnerReceivingNZSYes">Yes</label>
+                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSNo" value="false"> <label for="partnerReceivingNZSNo">No</label>
+                </fieldset>
+            </div>
+
+            <!-- TODO There are several questions which we need to repeat -->
+
+	        <div class="question">
+                <fieldset>
+                    <div>Do you or your partner expect to get other income in the next 52 weeks?</div>
+                    <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
+                    <input type="radio" name="expectIncome" id="expectIncomeNo" value="false"> <label for="expectIncomeNo">No</label>
+                </fieldset>
+                <p class="info">
+                    Other income might be from things such as ACC payments, dividends, overseas payments or child support. For more examples click on Help.
+                    <a href="#" class="helpButton">More information</a></p>
+
+                <div class="help">
+					Examples of income from other sources:
+                    <ul>
+                        <li>wages or salary</li>
+                        <li>accident compensation</li>
+                        <li>farm or business income (include drawings)</li>
+                        <li>self employment</li>
+                        <li>interest from savings or investments</li>
+                        <li>dividends from shares</li>
+                        <li>income from rents</li>
+                        <li>redundancy or termination type payments</li>
+                        <li>Child Support</li>
+                        <li>maintenance payments</li>
+                        <li>boarders</li>
+                        <li>Student Allowance, scholarship or Student Loan living cost payments</li>
+                        <li>any other income, for example family trusts, overseas payments.</li>
+                    </ul>
+				</div>
+            </div>
+
+        </fieldset>
+
+
+
+        <!-- =============== Your circumstances ============== -->
+
+        <fieldset class="group">
+	        <div class="question">
+                <fieldset>
+                    <div>Are you already on or plan to start a training course?</div>
+                    <input type="radio" name="trainingCourse" id="trainingCourseYes" value="true"> <label for="trainingCourseYes">Yes</label>
+                    <input type="radio" name="trainingCourse" id="trainingCourseNo" value="false"> <label for="trainingCourseNo">No</label>
+                </fieldset>
+				<p class="info">
+					If you are not sure if your training course is approved, confirm this with your Training Provider.
+				</p>
+            </div>
+
+            <div class="question" data-visible="$trainingCourse">
+                <fieldset>
+                    <div>Is the training a Training Opportunities (TOP) course?</div>
+                    <input type="radio" name="topCourse" id="topCourseYes" value="true"> <label for="topCourseYes">Yes</label>
+                    <input type="radio" name="topCourse" id="topCourseNo" value="false"> <label for="topCourseNo">No</label>
+                </fieldset>
+				<p class="info">
+                    Training Opportunities Programmes (TOP) are funded by the Tertiary Education Commission. If you're not sure if your course is a TOP course, talk to your Training Provider.
+				</p>
+            </div>
+        </fieldset>
+
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Do you have a health condition or disability?</div>
+                    <input type="radio" name="healthDisability" id="healthDisabilityYes" value="true"> <label for="healthDisabilityYes">Yes</label>
+                    <input type="radio" name="healthDisability" id="healthDisabilityNo" value="false"> <label for="healthDisabilityNo">No</label>
+                </fieldset>
+                <div class="info">
+                    You may get Sickness Benefit if you are sick, injured, disabled or pregnant and you:
+                    <ul>
+                        <li>have had to reduce your hours OR</li>
+                        <li>have had to stop working OR</li>
+                        <li>are not working, or are working part-time, and find it hard to look for and do full-time work.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TODO this precondition is dodgy-->
+            <div class="question" data-visible="$healthDisability && $gender == 'Female'">
+                <fieldset>
+                    <div>Are you pregnant?</div>
+                    <input type="radio" name="pregnant" id="pregnantYes" value="true"> <label for="pregnantYes">Yes</label>
+                    <input type="radio" name="pregnant" id="pregnantNo" value="false"> <label for="pregnantNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$healthDisability">
+                <fieldset>
+                    <div>Select one or more from the following list:</div>
+                    <input type="checkbox" name="illness" value="true" id="illness"/><label for="illness">Illness / Sickness</label><br/>
+                    <input type="checkbox" name="disability" value="true" id="disability"/><label for="disability">Disability</label><br/>
+                    <input type="checkbox" name="injury" value="true" id="injury"/><label for="injury">Injury</label><br/>
+                    <input type="checkbox" name="totallyBlind" value="true" id="totallyBlind"/><label for="totallyBlind">Totally blind</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$healthDisability">
+                <fieldset>
+                    <div>Does this health condition or disability affect your ability to work?</div>
+                    <input type="radio" name="healthDisabilityAffectsWork" id="healthDisabilityAffectsWorkYes" value="true"> <label for="healthDisabilityAffectsWorkYes">Yes</label>
+                    <input type="radio" name="healthDisabilityAffectsWork" id="healthDisabilityAffectsWorkNo" value="false"> <label for="healthDisabilityAffectsWorkNo">No</label>
+                </fieldset>
+            </div>
+
+        </fieldset>
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Are you caring full time for someone at home?</div>
+                    <input type="radio" name="caringFullTime" id="caringFullTimeYes" value="true"> <label for="caringFullTimeYes">Yes</label>
+                    <input type="radio" name="caringFullTime" id="caringFullTimeNo" value="false"> <label for="caringFullTimeNo">No</label>
+                </fieldset>
+                <div class="info">
+                    Answer 'Yes' to this question if you are providing full time care and attention to a person (other then your spouse or partner) at home who would otherwise need:
+                    <ul>
+                        <li>hospital care</li>
+                        <li>rest home care</li>
+                        <li>residential disability care</li>
+                        <li>extended care services provided for severely disabled children and young persons.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question" data-visible="$caringFullTime">
+                <label for="carerRelationship">What is their relationship to you?</label>
+                <select name="carerRelationship" id="carerRelationship">
+                    <option value="">-- Choose an option --</option>
+                    <option>Parent</option>
+                    <option>Step-parent</option>
+                    <option>Child or Step-child</option>
+                    <option>Grandparent</option>
+                    <option>Great-grandparent</option>
+                    <option>Sister</option>
+                    <option>Step-sister</option>
+                    <option>Brother</option>
+                    <option>Step-brother</option>
+                    <option>Aunty</option>
+                    <option>Uncle</option>
+                    <option>Nephew</option>
+                    <option>Niece</option>
+                    <option>First Cousin</option>
+                    <option>Friend</option>
+                    <option>Partner</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!-- Woman alone questions -->
+        <fieldset class="group" data-visible="$gender == 'Female' && $relationshipSituation && $age >= 50 && $dependentChildren == 0">
+            <div class="question">
+                <fieldset>
+                    <div>
+                        <b>Has one of the following events taken place after you turned 50 years of age?</b><br><br>
+                        Have you stopped caring for a relative who needed full time care and who was not your partner?
+                    </div>
+                    <input type="radio" name="stoppedCaring" id="stoppedCaringYes" value="true"> <label for="stoppedCaringYes">Yes</label>
+                    <input type="radio" name="stoppedCaring" id="stoppedCaringNo" value="false"> <label for="stoppedCaringNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question">
+                <fieldset>
+                    <div>Your last dependent child is no longer dependent.</div>
+                    <input type="radio" name="lastChildNoLongerDependent" id="lastChildNoLongerDependentYes" value="true"> <label for="lastChildNoLongerDependentYes">Yes</label>
+                    <input type="radio" name="lastChildNoLongerDependent" id="lastChildNoLongerDependentNo" value="false"> <label for="lastChildNoLongerDependentNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question">
+                <fieldset>
+                    <div>You have lost the support of your spouse or partner.</div>
+                    <input type="radio" name="noSpouseSupport" id="noSpouseSupportYes" value="true"> <label for="noSpouseSupportYes">Yes</label>
+                    <input type="radio" name="noSpouseSupport" id="noSpouseSupportNo" value="false"> <label for="noSpouseSupportNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+
+        <!-- =============== Super ============== -->
+
+        <!-- Living Alone Details -->
+        <fieldset class="group" data-visible="$seniorOk && $livingAlonePartnerInCare">
+	        <div class="question">
+                <fieldset>
+                    <div>Do you live alone?</div>
+                    <input type="radio" name="liveAlone" id="liveAloneYes" value="true"> <label for="liveAloneYes">Yes</label>
+                    <input type="radio" name="liveAlone" id="liveAloneNo" value="false"> <label for="liveAloneNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question">
+                <fieldset>
+                    <div>Do you have a visitor(s) aged 18 years or older who will staying with you for 13 weeks or longer?</div>
+                    <input type="radio" name="visitorStaying" id="visitorStayingYes" value="true"> <label for="visitorStayingYes">Yes</label>
+                    <input type="radio" name="visitorStaying" id="visitorStayingNo" value="false"> <label for="visitorStayingNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="!$visitorStaying">
+                <fieldset>
+                    <div>Do you live with anyone aged 18 years or over?</div>
+                    <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
+                    <input type="radio" name="liveWithAdult" id="liveWithAdultNo" value="false"> <label for="liveWithAdultNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+        <!-- TODO precondition. Error in spreadsheet? Seems to refer to itself. -->
+        <!--
+        <div class="group" data-visible="$seniorOk && $livingAlonePartnerInCare && !$visitorStaying">
+	        <div class="question">
+                <fieldset>
+                    <div>Do you live with anyone, who is not a dependent child attending school or a tertiary institution?</div>
+                    <input type="radio" name="mystery" id="mysteryYes" value="true"> <label for="mysteryYes">Yes</label>
+                    <input type="radio" name="mystery" id="mysteryNo" value="false"> <label for="mysteryNo">No</label>
+                </fieldset>
+
+                <p class="info">"Do not include children under 18 years of age in this answer.
+                    <a href="#" class="helpButton">More information</a></p>
+                <div class="help">
+                    A dependent child is a child who is financially supported by you and is living with you as a member of your family.  This includes stepchildren, children at boarding school, adopted children, grandchildren and mokopuna.
+                </div>
+            </div>
+        </div>
+        -->
+
+
+
+        <!-- ======== Young person circumstances ========= -->
+
+        <fieldset class="group">
+
+            <div class="question" data-visible="$under20 || ($youth && !$totallyBlind)">
+                <fieldset>
+                    <div>Are you living at your parent’s/step-parent’s/guardian’s home?</div>
+                    <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
+                    <input type="radio" name="livingAtHome" id="livingAtHomeNo" value="false"> <label for="livingAtHomeNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren > 0">
+                <label for="parentsIncome">What is your parents' combined weekly income?</label>
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="number">
+            </div>
+
+            <div class="question" data-visible="$youth && !$livingAtHome">
+                <fieldset>
+                    <div>Are you receiving any financial support from your parents / step-parents / guardians?</div>
+                    <input type="radio" name="parentSupport" id="parentSupportYes" value="true"> <label for="parentSupportYes">Yes</label>
+                    <input type="radio" name="parentSupport" id="parentSupportNo" value="false"> <label for="parentSupportNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$youth && !$livingAtHome && !$parentSupport">
+                <fieldset>
+                    <div>Please select the reason why you are not living with them:</div>
+                    <input type="radio" name="reasonNotLivingAtHome" id="relationshipBreakdown" value="relationshipBreakdown"> <label for="relationshipBreakdown">Relationship breakdown with parents</label><br>
+                    <input type="radio" name="reasonNotLivingAtHome" id="absent" value="absent"> <label for="absent">Parents are absent</label><br>
+                    <input type="radio" name="reasonNotLivingAtHome" id="otherNotLivingAtHome" value="other"> <label for="otherNotLivingAtHome">Other good and sufficient reason</label><br>
+                    <input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+
+        <!-- ======== Additional assistance ========= -->
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Do you pay rent, board or have costs from owning a home?</div>
+                    <input type="radio" name="accomodationCosts" id="accomodationCostsYes" value="true"> <label for="accomodationCostsYes">Yes</label>
+                    <input type="radio" name="accomodationCosts" id="accomodationCostsNo" value="false"> <label for="accomodationCostsNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$accomodationCosts">
+                <fieldset>
+                    <div>What type of accommodation are you in?</div>
+                    <input type="radio" name="accomodationType" id="accomodationType1" value="Rent"> <label for="accomodationType1">Rent</label>
+                    <input type="radio" name="accomodationType" id="accomodationType2" value="Board"> <label for="accomodationType2">Board</label>
+                    <input type="radio" name="accomodationType" id="accomodationType3" value="Own Home"> <label for="accomodationType3">Own Home</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$accomodationType == 'Rent'">
+                <fieldset>
+                    <div>Do you live in a property owned or managed by Housing New Zealand?</div>
+                    <input type="radio" name="housingNz" id="housingNzYes" value="true"> <label for="housingNzYes">Yes</label>
+                    <input type="radio" name="housingNz" id="housingNzNo" value="false"> <label for="housingNzNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$accomodationType == 'Rent'">
+                <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="number">
+            </div>
+
+            <div class="question" data-visible="$accomodationType == 'Board'">
+                <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="number">
+            </div>
+
+            <div class="question" data-visible="$accomodationType == 'Own Home'">
+                <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="number">
+            </div>
+
+        </fieldset>
+
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Do you or any member of your family have ongoing costs because of a disability which is likely to last at least six months?</div>
+                    <input type="radio" name="disabilityCosts" id="disabilityCostsYes" value="true"> <label for="disabilityCostsYes">Yes</label>
+                    <input type="radio" name="disabilityCosts" id="disabilityCostsNo" value="false"> <label for="disabilityCostsNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$dependentChildren > 0">
+                <fieldset>
+                    <div>Do you have a child or young person who needs constant care and attention for at least 12 months because of a serious disability?</div>
+                    <input type="radio" name="caringForChild" id="caringForChildYes" value="true"> <label for="caringForChildYes">Yes</label>
+                    <input type="radio" name="caringForChild" id="caringForChildNo" value="false"> <label for="caringForChildNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$caringForChild">
+                <fieldset>
+                    <div>Does the child or young person usually live in New Zealand and intend to stay here?</div>
+                    <input type="radio" name="childStayingInNz" id="childStayingInNzYes" value="true"> <label for="childStayingInNzYes">Yes</label>
+                    <input type="radio" name="childStayingInNz" id="childStayingInNzNo" value="false"> <label for="childStayingInNzNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$caringForChild">
+                <fieldset>
+                    <div>What is the child or young person's living situation?</div>
+                    <input type="radio" name="childLivingSituation" id="childLivingSituation1" value="Living at home"> <label for="childLivingSituation1">Living at home</label>
+                    <input type="radio" name="childLivingSituation" id="childLivingSituation2" value="Residential Home or Hostel"> <label for="childLivingSituation2">Residential Home or Hostel</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$childLivingSituation == 'Residential Home or Hostel'">
+                <fieldset>
+                    <div>Do you provide financial support while the child or young person lives in the residential home or hostel?</div>
+                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelYes" value="true"> <label for="supportChildInHostelYes">Yes</label>
+                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelNo" value="false"> <label for="supportChildInHostelNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+
+        <fieldset class="group">
+            <div class="question">
+                <fieldset>
+                    <div>Are you struggling to meet your essential living costs from what income you earn or from other sources?</div>
+                    <input type="radio" name="notMeetingLivingCosts" id="livingCostsYes" value="true"> <label for="livingCostsYes">Yes</label>
+                    <input type="radio" name="notMeetingLivingCosts" id="livingCostsNo" value="false"> <label for="livingCostsNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$notMeetingLivingCosts || $accomodationCosts">
+                <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label>
+                $&nbsp;<input type="text" name="cashAssets" id="cashAssets" class="number">
+            </div>
+        </fieldset>
+
+        <fieldset class="group">
+
+            <div class="question" data-visible="$dependentChildren > 0">
+                <fieldset>
+                    <div>Do you have a dependent child attending an approved Out of School (OSCAR) or pre-school childcare service for at least three hours a week?</div>
+                    <input type="radio" name="oscar" id="oscarYes" value="true"> <label for="oscarYes">Yes</label>
+                    <input type="radio" name="oscar" id="oscarNo" value="false"> <label for="oscarNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$oscar">
+                <fieldset>
+                    <div>Have you or your partner received Childcare Assistance at any time from 28 September 2009 up to, and including, 26 September 2010?</div>
+                    <input type="radio" name="receivedChildcare" id="receivedChildcareYes" value="true"> <label for="receivedChildcareYes">Yes</label>
+                    <input type="radio" name="receivedChildcare" id="receivedChildcareNo" value="false"> <label for="receivedChildcareNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$childAged1418">
+                <fieldset>
+                    <div>Is the child or young person who is Aged 14 to 18 getting a Child Disability Allowance?</div>
+                    <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceYes" value="true"> <label for="childDisabilityAllowanceYes">Yes</label>
+                    <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceNo" value="false"> <label for="childDisabilityAllowanceNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$partner && ($oscarAgedChild || $childDisabilityAllowance)">
+                <fieldset>
+                    <div>Can your partner provide childcare?</div>
+                    <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareYes" value="true"> <label for="partnerProvideChildcareYes">Yes</label>
+                    <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareNo" value="false"> <label for="partnerProvideChildcareNo">No</label>
+                </fieldset>
+            </div>
+        </fieldset>
+
+
+        <div id="controlBox">
+            <button id="backButton" type="button" onclick="engine.onBack()">Back</button>
+            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;">Next</button>
+        </div>
+
+    </form>
+
+
+
+    <!--  =============== Results ================== -->
+
+    <div id="eligible" class="results">
+        <h2>Based on your answers, you may be entitled to:</h2>
+        <div id="benefits">
+            <div>
+                <span class="benefitName">Some kind of benefit</span> - a benefit for people who are just testing
+                the calculator.<br>
+                This might be $500 a week.
+            </div>
+        </div>
+
+        <h2>You will need to:</h2>
+        <div id="obligations">
+            <p>Do some stuff.</p>
+        </div>
+
+        <button onclick="calculator.onBackFromResults()">Back</button>
+        <div class="clearer"></div>
+    </div>
+
+    <div id="ineligible" class="results">
+        <p>Based on your answers you might not be able to get financial assistance from us.</p>
+
+        <p>Call us on 0800 559 009.</p>
+
+        <p>If you're deaf, hearing-impaired or find it hard to communicate by phone you can contact us on
+            Deaf Link free-fax 0800 621 621, TTY 0800 111 113 or email MSD_Deaf_Services@msd.govt.nz.</p>
+
+        <p>Contact us and we'll ensure that you get any assistance that you're entitled to from us. We may
+            also be able to refer you to other agencies for help.</p>
+
+        <p>Remember, we're here to help if you need it, whether or not you receive financial assistance from us.</p>
+
+        <button onclick="calculator.onBackFromResults()">Back</button>
+        <div class="clearer"></div>
+    </div>
+</div>
+</body>
+</html>

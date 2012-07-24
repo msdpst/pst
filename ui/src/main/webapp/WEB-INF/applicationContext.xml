@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+    <!--
+    To run this application on your own PC during development, just enable the "localdev"
+    Spring profile, like this:
+    
+    - if you're running Tomcat through the IDE (or from the command line), 
+      launch with "-Dspring.profiles.active=localdev"
+      
+    - if you're running using Maven, do it like this: "mvn tomcat:run -Plocaldev"
+    
+    That's all you need to change - there's no need to edit properties files 
+    or change your class path.
+    
+    When localdev is enabled, the properties file pst.dev.properties
+    is used.
+    
+    See the end of this file for the actual profile configuration.
+    -->
+    
+    <import resource="classpath*:/pd.xml"/>
+    
+    <context:property-placeholder properties-ref="applicationProperties"/>
+    <context:annotation-config/>
+    
+    
+    
+    
+
+
+    <!-- =============== Profiles. For instructions, see the top of this file. =============== -->
+
+    <!-- The default, used when deployed to the weblogic server. -->
+    <beans profile="default">
+        <bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+              p:location="classpath:/pst.properties"/>
+    </beans>
+
+    <!-- Enable this when developing on your own PC. -->
+    <beans profile="localdev">
+        <bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+              p:location="classpath:/pst.dev.properties"/>
+    </beans>
+</beans>

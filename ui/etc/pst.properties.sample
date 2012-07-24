@@ -1,0 +1,5 @@
+# Example deployed application properties file.
+# When deployed, the properties file lives outside the web application in the domain's etc directory.
+
+someProperty=A Bee Sea
+

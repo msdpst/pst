@@ -1,0 +1,211 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #666666;
+    text-shadow: 0 1px 0 #FFFFFF;
+    /*background-image: -moz-linear-gradient(to bottom, rgb(208, 29, 32) 176px, white 200px);*/
+    background-color: #f0f0f0;
+}
+
+header {
+    height: 176px;
+    background-image: url("images/bg-page-gradient2.jpg");
+}
+header img {
+    position: relative;
+    left: 50%;
+    margin-left: -21em;
+}
+
+h1 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0.3em 0 0.5em 0;
+    padding: 0;
+    text-align: center;
+}
+
+#outer {
+    left: 50%;
+    margin-left: -21em;
+    width: 40em;
+    padding: 1em 1em 2000px 1em;
+    position: relative;
+    margin-top: -5em;
+    background-color: white;
+    min-height: 50em;
+    box-shadow: 0 0 1em #d0d0d0;
+}
+
+#blurb {
+    font-size: 14px;
+    margin: 0 7em 0 6em;
+}
+
+form {
+    width: 480px;
+    margin-left: 5em;
+}
+
+.question, #results > .section {
+    background-color: #eeeeee;
+    padding: 0.8em 1em 0.9em 1em;
+    border: 1px solid #d0d0d0;
+    border-bottom-width: 0;
+    color: #888888;
+}
+
+.current .question, #results > .section  {
+    background-color: #ffffee;
+    color: #444444;
+    font-weight: 500;
+    border-color: #a0a0a0;
+}
+
+.current  {
+    border-bottom: 1px solid #a0a0a0;
+}
+
+#controlBox {
+    text-align: right;
+    padding-top: 0.5em;
+    border-top: 1px solid #a0a0a0;
+}
+
+label {
+    padding-right: 0.7em;
+}
+
+label.error {
+    display: block;
+    color: red;
+    font-size: 14px;
+    margin-top: 0.8em;
+}
+
+a, legend {
+    color: inherit;
+}
+
+legend {
+    font-weight: 800;
+}
+
+input.number {
+    width: 4em;
+}
+
+input.text {
+    width: 33em;
+    margin-top: 0.5em;
+}
+
+input, select {
+    margin-top: 0.8em;
+}
+
+input[disabled='disabled'], select[disabled='disabled'] {
+    color: #808080;
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-weight: 600;
+}
+
+input[type='radio'] {
+    margin-left: 1em;
+    margin-right: 0.1em;
+}
+input[type='checkbox'] {
+    margin-left: 1em;
+    margin-right: 0.3em;
+}
+
+.info {
+    padding: 1em 0 0 5em;
+    font-size: 13px;
+}
+.help {
+    padding: 0.5em 0 0 5em;
+    font-size: 13px;
+}
+.help ul, .info ul {
+    padding-left: 2em;
+}
+.help li, .info li {
+    list-style: disc;
+}
+
+#progressLabel {
+    position: absolute;
+    display: block;
+    width: 480px;
+    text-align: center;
+    color: #404040;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 3px 0 0 0;
+}
+
+progress {
+    width: 480px;
+    height: 1.3em;
+    border-radius: 7px;
+    border: 1px solid #a0a0a0;
+    margin-bottom: 0.5em;
+}
+
+progress::-moz-progress-bar {
+    background: -moz-linear-gradient(to bottom, #80dd80, #80aa80, #80dd80);
+    border-radius: 6px;
+}
+
+.results {
+    padding: 2em 1.5em 2em 1.5em;
+    margin: 2em 2em 0 2em;
+}
+
+.results button {
+    margin-top: 1em;
+    float: right;
+}
+
+#ineligible {
+    background-color: #f8f8f8;
+    border: 2px solid #a00000;
+    color: #202020;
+}
+#ineligible p {
+    margin-bottom: 0.7em;
+}
+
+#eligible {
+    background-color: #f8f8f8;
+    border: 2px solid #00a000;
+    color: #404040;
+    font-size: 15px;
+}
+
+#eligible h2 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 2em 0 1em 0;
+}
+#eligible h2:first-child {
+    margin-top: 0;
+}
+
+#eligible .benefitName {
+    font-weight: 600;
+}
+
+.clearer {
+    clear: both;
+}
