@@ -1,3 +1,10 @@
+/**
+ * General rules to document:
+ *
+ * Checkboxes should each have their own names, even within the same group. Value
+ * should always be "true", ie. they're treated as booleans.
+ */
+
 var engine;
 var debugConditions = true;
 
@@ -348,7 +355,7 @@ engine = {
      * a string if not valid and 0 if blank. (The latter is important for
      * calculations involving questions which have not needed to be answered.)
      *
-     * For radio buttons, "true" and "false" are converted to their
+     * For radio buttons and checkboxes, "true" and "false" are converted to their
      * actual boolean values.
      *
      * @param fieldName - eg. age
@@ -358,7 +365,7 @@ engine = {
         var element = $(":input[name=" + fieldName + "]");
         var val = engine.getAnswerAsText(fieldName);
 
-        if (element.attr("type") == "radio") {
+        if (element.attr("type") == "radio" || element.attr("type") == "checkbox") {
             if (val == "true")
                 val = true;
             else if (val == "false")
@@ -401,7 +408,11 @@ engine = {
             val = checkedElt.val();
         }
 
-        // If we were to use checkboxes we'd need to handle them separately too
+        // Checkboxes - note we assume each has its own name - we don't handle multiple checkboxes
+        // with the same name
+        else if (element.attr("type") == "checkbox") {
+            val = element.attr("checked")? element.val() : undefined;
+        }
 
         // Text fields and selects
         else {
