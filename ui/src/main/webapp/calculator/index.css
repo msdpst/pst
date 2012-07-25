@@ -196,9 +196,12 @@ input[type='checkbox'] {
     margin: 2em 2em 0 2em;
 }
 
+/* floating the button right causes problems in IE */
+.resultsButtonBox {
+    text-align: right;
+}
 .results button {
     margin-top: 1em;
-    float: right;
 }
 
 #ineligible {

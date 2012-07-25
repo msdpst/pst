@@ -32,7 +32,7 @@ var definitions = {
 
     // -------- Main benefit eligibility --------
 
-    potentialDPBSoleParent:true, // TODO"($resident || $refugeeOtherWithPermanentResidence) && $workingAge && $single && $dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < 570 && !$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit",
+    potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && $workingAge && $single && $dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < 570 && !$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit",
     potentialInvalidsBenefit: false,    // TODO
     potentialDPBCareOrSickOrInfirm: false,    // TODO
     potentialWidowsBenefit: false,    // TODO
