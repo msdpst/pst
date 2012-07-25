@@ -87,9 +87,13 @@ engine = {
         var ok = true;
         $(engine.groupSel(engine.currentGroupNum) + " :input:visible").each(function () {
             var fieldName = $(this).attr("name");
-            if (fieldName && !engine.isAnswered(fieldName)) {
-                ok = false;
-                debug(fieldName + " not answered")
+
+            // Don't worry about checkboxes or unnamed fields
+            if (fieldName && $(this).attr("type") != "checkbox") {
+                if (!engine.isAnswered($(this))) {
+                    ok = false;
+                    debug(fieldName + " not answered")
+                }
             }
         });
         if (!ok) {
@@ -395,16 +399,18 @@ engine = {
      */
     getAnswerAsText:function (fieldName) {
         var element = $(":input[name=" + fieldName + "]");
-
         if (element.length == 0) {
             throw "No such field name (have you forgotten to define a rule?): " + fieldName;
         }
+        return engine.getInputValueAsText(element);
+    },
 
+    getInputValueAsText:function (element) {
         var val;
 
-        // Radio button
+        // Radio button - look for a checked element with the same name
         if (element.attr("type") == "radio") {
-            var checkedElt = $("input[name=" + fieldName + "]:checked");
+            var checkedElt = $("input[name=" + element.attr("name") + "]:checked");
             val = checkedElt.val();
         }
 
@@ -427,11 +433,11 @@ engine = {
     },
 
     /**
-     * @param fieldName - eg. age
+     * @param input - a jQuery element
      * @return {Boolean} whether an answer has been provided for this field
      */
-    isAnswered:function (fieldName) {
-        return engine.getAnswerAsText(fieldName) !== undefined;
+    isAnswered:function (input) {
+        return engine.getInputValueAsText(input) !== undefined;
     },
 
     /**
@@ -462,9 +468,13 @@ engine = {
                     $(this).find(".question").each(function () {
                         if (engine.shouldShow($(this))) {
                             count++;
-                            var name = $(this).find(":input").attr("name");
-                            if (name && !engine.isAnswered(name)) {
-                                unanswered++;
+
+                            // Just look at the first input in each question, and ignore checkboxes.
+                            // Not entirely accurate, but that's ok.
+                            var inp = $(this).find(":input").first();
+                            if (inp.attr("name") && inp.attr("type") != "checkbox") {
+                                if (!engine.isAnswered(inp))
+                                    unanswered++;
                             }
                         }
                     })
