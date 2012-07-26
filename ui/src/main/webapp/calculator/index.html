@@ -33,11 +33,11 @@ NOTES:
 -->
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css">
+    <link rel="stylesheet" type="text/css" href="../thirdparty/cssreset-min.css">
     <link rel="stylesheet" href="index.css" type="text/css" />
     <script src="../thirdparty/jquery-1.7.2.js" type="text/javascript"></script>
     <script src="../thirdparty/jquery.validate.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="../thirdparty/jquery-ui.min.js"></script>
     <script src="../engine/debugHelper.js" type="text/javascript"></script>
     <script src="../engine/engine.js" type="text/javascript"></script>
     <script src="rules.js" type="text/javascript"></script>
@@ -432,10 +432,13 @@ NOTES:
                     <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSNo" value="false"> <label for="partnerReceivingNZSNo">No</label>
                 </fieldset>
             </div>
+        </fieldset>
 
-            <!-- TODO There are several questions which we need to repeat -->
 
-	        <div class="question">
+
+
+        <fieldset class="group">
+            <div class="question">
                 <fieldset>
                     <div>Do you or your partner expect to get other income in the next 52 weeks?</div>
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
@@ -446,7 +449,7 @@ NOTES:
                     <a href="#" class="helpButton">More information</a></p>
 
                 <div class="help">
-					Examples of income from other sources:
+                    Examples of income from other sources:
                     <ul>
                         <li>wages or salary</li>
                         <li>accident compensation</li>
@@ -462,11 +465,43 @@ NOTES:
                         <li>Student Allowance, scholarship or Student Loan living cost payments</li>
                         <li>any other income, for example family trusts, overseas payments.</li>
                     </ul>
-				</div>
+                </div>
+            </div>
+
+            <div class="question" data-visible="$expectIncome">
+                <h3>Please provide details of your or your partner's expected income:</h3>
+
+                <!-- They can add multiple income sources, but need to enter at least one -->
+                <div class="incomeSource">
+                    <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
+                    <div class="clearfix">
+                        <label>How much do you and/or your partner receive before tax?</label>
+                        <div>$&nbsp;<input type="text" name="incomeAmount" class="number"/></div>
+                    </div>
+                    <div class="clearfix">
+                        <label>How often do you / your partner receive these payments?</label>
+                        <div>
+                            <select name="incomeFrequency">
+                                <option value="">-- Choose an option --</option>
+                                <option>Weekly</option>
+                                <option>Fortnightly</option>
+                                <option>Monthly</option>
+                                <option>2 Monthly</option>
+                                <option>Quarterly</option>
+                                <option>6 Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <label>What is the source of this income?</label>
+                        <div><input type="text" name="incomeDescription" /></div>
+                    </div>
+                </div>
+                <a href="#" onclick="calculator.addIncomeSource()" class="addIncomeSource">Add another source of income</a>
             </div>
 
         </fieldset>
-
 
 
         <!-- =============== Your circumstances ============== -->
@@ -590,7 +625,7 @@ NOTES:
             <div class="question">
                 <fieldset>
                     <div>
-                        <b>Has one of the following events taken place after you turned 50 years of age?</b><br><br>
+                        <h3>Has one of the following events taken place after you turned 50 years of age?</h3>
                         Have you stopped caring for a relative who needed full time care and who was not your partner?
                     </div>
                     <input type="radio" name="stoppedCaring" id="stoppedCaringYes" value="true"> <label for="stoppedCaringYes">Yes</label>

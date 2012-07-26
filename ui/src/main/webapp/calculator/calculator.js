@@ -1,3 +1,5 @@
+
+
 engine.onStart = function () {
     engine.autoNext = false;
 };
@@ -50,6 +52,20 @@ engine.displayResults = function () {
 };
 
 var calculator = {
+    addIncomeSource: function() {
+        var last = $(".incomeSource").last();
+        var nnew = last.clone();
+        last.after(nnew);
+        engine.clearAllControlsIn(nnew);
+
+        // Show the close button. These are hidden by default so it doesn't show on the first one.
+        nnew.find("a").show();
+    },
+
+    removeIncomeSource: function(domElement) {
+        $(domElement).closest(".incomeSource").remove();
+    },
+
     /** They clicked the back button in the results section */
     onBackFromResults:function () {
         $(".results").hide();
