@@ -85,6 +85,37 @@ var calculator = {
         }
         //debug("age: " + age);
         return age;
+    },
+
+    calculateTotalOtherIncome: function() {
+        var total = 0;
+        var amounts = $('input[name="incomeAmount"]:visible');
+        var freqs = $('select[name="incomeFrequency"]:visible');
+        //debug(amounts.length + " other income sources");
+        for (var i = 0; i < amounts.length; i++) {
+            var amount = parseFloat($(amounts[i]).val());
+            var freq = $(freqs[i]).val();
+            if (freq == 'Weekly')
+                total += amount;
+            else if (freq == 'Fortnightly')
+                total += amount / 2;
+            else if (freq == 'Monthly')
+                total += amount * 12 / 52;
+            else if (freq == '2 Monthly')
+                total += amount * 6 / 52;
+            else if (freq == 'Quarterly')
+                total += amount * 4 / 52;
+            else if (freq == '6 Monthly')
+                total += amount * 2 / 52;
+            else if (freq == 'Yearly')
+                total += amount / 52;
+            /*
+            else
+                debug("ignoring income '" + amount + "' with invalid frequency '" + freq + "'");
+            */
+        }
+        debug("calculateTotalOtherIncome: " + total);
+        return total;
     }
 };
 

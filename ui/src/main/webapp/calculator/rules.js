@@ -26,7 +26,7 @@ var definitions = {
 
     // -------- Calculations --------
     totalFamilyGrossWeeklyWage: "$applicantGrossWeeklyWage + $partnerGrossWeeklyWage",
-    totalOtherIncomeCalculation: 0, // TODO
+    totalOtherIncomeCalculation: "calculator.calculateTotalOtherIncome()",
     familyTotalGrossWeeklyIncome: "$totalFamilyGrossWeeklyWage + $totalOtherIncomeCalculation",
 
 
