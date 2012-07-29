@@ -1,7 +1,7 @@
 
 
 engine.onStart = function () {
-    engine.autoNext = false;
+    engine.autoNext = true; // TODO false?
 };
 
 /**

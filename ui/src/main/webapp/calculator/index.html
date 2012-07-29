@@ -3,29 +3,27 @@
 TODO now:
 - CHANGE SCROLL STYLE TO HAVE SWITCH TO ALLOW FOR BOTH TYPES (PST)
 - SKIPPING age ranges
-- handle checkboxes
-- enforce at lease one childAgeRange selected
+- enforce at lease one childAgeRange selected(?)
 - scroll position on back to first group
 
 TODO:
 - moz-specific css
 - Not sure that auto-next is desirable - make it a switch
     - in any case, it shouldn't do anything if there are unanswered questions in the group (this happens when
-      they answer questions out of order, but also when the answer to the last question reveals a new question)
-- Make header, including progress bar, fixed so that it always displays
-- Make it work in all browsers!
+      they answer questions out of order, but also when the answer to the last question reveals a new question).
+      Currently displays "answer all questions" alert
+  - in any case, do nothing if last q is checkboxes
+- IE6
 - Navigate directly back to particular sections (worth it?)
 - Or, what happens if past sections not disabled?
 - Date parsing (and validation): we're relying on the built-in parsing which won't be reliable
 - Towns and their areas
 - section labels? These are on the left in Terri's word doc
-- Loop! (Indicate if you or your partner expect to get any other income in the next 52 weeks)
 - change next button back to submit?
-- replace clearer with clearfix
 - disable function-interception debugging!
 - <details> and <summary> for expandable help
 - make sure got all help
-- local copies of all js and css
+- animation is jumpy
 
 NOTES:
 - final text for specific benefits is in Success Text tab of Rules and Defs spreadsheet
@@ -907,7 +905,6 @@ NOTES:
         <div class="resultsButtonBox">
             <button onclick="calculator.onBackFromResults()">Back</button>
         </div>
-        <div class="clearer"></div>
     </div>
 
     <div id="ineligible" class="results">
@@ -926,7 +923,6 @@ NOTES:
         <div class="resultsButtonBox">
             <button onclick="calculator.onBackFromResults()">Back</button>
         </div>
-        <div class="clearer"></div>
     </div>
 </div>
 </body>
