@@ -64,8 +64,12 @@ engine = {
             // If this is the last question in the group, go to the next group automatically
             // unless this is an input field (which would be confusing).
             if (engine.autoNext) {
-                if ($(this).attr("type") != "text" && $(this).closest(".question").nextAll(".question:visible").length == 0) {
-                    engine.onNext();
+                if (
+                        $(this).attr("type") != "text" &&
+                        $(this).attr("type") != "checkbox" &&
+                        $(this).closest(".question").nextAll(".question:visible").length == 0
+                        ) {
+                    engine.onNext(true);
                 }
             }
         });
@@ -79,7 +83,7 @@ engine = {
     },
 
     /** They clicked the Next button */
-    onNext:function () {
+    onNext:function(automatic) {
         // They might have just answered a question in a way that reveals a new question
         engine.showOrHideQuestionsInGroup($(engine.groupSel(engine.currentGroupNum)));
 
@@ -97,7 +101,9 @@ engine = {
             }
         });
         if (!ok) {
-            alert("Please answer all questions");
+            // Don't alert on auto-next (ie. when they answer last question in group)
+            if (!automatic)
+                alert("Please answer all questions");
             return;
         }
 
@@ -205,8 +211,9 @@ engine = {
         elt.fadeIn(engine.SLIDE_TIME);
 
         var y = elt.offset().top - 250;//$("#buffer").offset().top - $("#buffer").height() - 10;
-        if (y >= 0)
-            $('html,body').animate({scrollTop:y}, {duration:engine.SLIDE_TIME, queue:false});
+        if (y < 0)
+            y = 0;
+        $('html,body').animate({scrollTop:y}, {duration:engine.SLIDE_TIME, queue:false});
 
         /*
          // Scroll the page so the group is centered vertically (if it fits)

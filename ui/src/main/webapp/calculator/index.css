@@ -9,7 +9,6 @@ body {
     font-size: 16px;
     color: #666666;
     text-shadow: 0 1px 0 #FFFFFF;
-    /*background-image: -moz-linear-gradient(to bottom, rgb(208, 29, 32) 176px, white 200px);*/
     background-color: #f0f0f0;
 }
 
@@ -88,6 +87,7 @@ h1 {
     height: 40px;
     padding: 0 1em 0 1em;
     background: -moz-linear-gradient(to bottom, rgba(255,255,255,255), rgba(255,255,255,0));
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,255)), to(rgba(255,255,255,0)));
 }
 
 #outer {
@@ -272,10 +272,6 @@ input[type='checkbox'] {
 
 #eligible .benefitName {
     font-weight: 600;
-}
-
-.clearer {
-    clear: both;
 }
 
 
