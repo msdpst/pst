@@ -1,11 +1,12 @@
 <!doctype html>
 <!--
 TODO:
+- help (116, 117)
+- Next when setting deps to > 1 still not right
+- todo question below
 - enforce at lease one childAgeRange selected(?)
 - IE9
 - IE6
-- Towns and their areas
-- make sure got all help
 - animation is jumpy
 
 TODO, probably later:
@@ -433,8 +434,8 @@ NOTES:
                     <input type="radio" name="expectIncome" id="expectIncomeNo" value="false"> <label for="expectIncomeNo">No</label>
                 </fieldset>
                 <p class="info">
-                    Other income might be from things such as ACC payments, dividends, overseas payments or child support. For more examples click on Help.
-                    <a href="#" class="helpButton">More information</a></p>
+                    Other income might be from things such as ACC payments, dividends, overseas payments or child support. 
+                    <a href="#" class="helpButton">For more examples click here.</a></p>
 
                 <div class="help">
                     Examples of income from other sources:
@@ -456,9 +457,31 @@ NOTES:
                 </div>
             </div>
 
-            <div class="question" data-visible="$expectIncome">
+            <div class="question incomeSources" data-visible="$expectIncome">
                 <h3>Please provide details of your or your partner's expected income:</h3>
+                <p class="info">
+                    Other sources might be things such as ACC payments, dividends, overseas payments or child support. 
+                    <a href="#" class="helpButton">For more examples click here.</a></p>
 
+                <div class="help">
+                    Examples of income from other sources:
+                    <ul>
+                        <li>wages or salary</li>
+                        <li>accident compensation</li>
+                        <li>farm or business income (include drawings)</li>
+                        <li>self employment</li>
+                        <li>interest from savings or investments</li>
+                        <li>dividends from shares</li>
+                        <li>income from rents</li>
+                        <li>redundancy or termination type payments</li>
+                        <li>Child Support</li>
+                        <li>maintenance payments</li>
+                        <li>boarders</li>
+                        <li>Student Allowance, scholarship or Student Loan living cost payments</li>
+                        <li>any other income, for example family trusts, overseas payments.</li>
+                    </ul>
+                </div>
+                
                 <!-- They can add multiple income sources, but need to enter at least one -->
                 <div class="incomeSource">
                     <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
@@ -536,7 +559,6 @@ NOTES:
                 </div>
             </div>
 
-            <!-- TODO this precondition is dodgy-->
             <div class="question" data-visible="$healthDisability && $gender == 'Female'">
                 <fieldset>
                     <div>Are you pregnant?</div>
@@ -825,8 +847,27 @@ NOTES:
             </div>
 
             <div class="question" data-visible="$notMeetingLivingCosts || $accomodationCosts">
-                <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label>
-                $&nbsp;<input type="text" name="cashAssets" id="cashAssets" class="number">
+                <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
+                $ <input type="text" name="cashAssets" id="cashAssets" class="number">
+                
+                <p class="info">
+                    <a href="#" class="helpButton">Click here for examples of cash assets.</a>
+                </p>
+
+                <div class="help">
+                    Cash assets include:<br>
+                    <ul>
+                        <li>money in bank or savings organisation</li>
+                        <li>money lent to other people or organisations</li>
+                        <li>money in Bonus Bonds, shares, debentures or government stock.</li>
+                    </ul>
+                    <br>
+                    Cash assets don’t include motor, caravan, boat or other vehicles with a market value of less than $2,000, 
+                    or which you or your family privately use.
+                    <br><br>
+                    If you’re unsure if something counts as a cash asset, talk to us about it when you meet with us.
+                </div>
+
             </div>
         </fieldset>
 

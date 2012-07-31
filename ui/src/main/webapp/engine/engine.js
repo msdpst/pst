@@ -53,8 +53,6 @@ engine = {
         });
         $(".help").hide();
 
-        // TODO $('html,body').attr("scrollTop", 0);
-
         if ($("#progress").length)
             $("#progress").progressbar({value:5});
 

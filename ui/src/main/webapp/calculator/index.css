@@ -191,8 +191,17 @@ input[type='checkbox'] {
     list-style: disc;
 }
 
-.incomeSource {
+.incomeSources {
     font-size: 90%;
+}
+.incomeSources .info {
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+.incomeSources .help {
+    margin-bottom: 1em;
+}
+.incomeSource {
     margin: 0 1em 1em 1em;
     border: 1px solid #c0c0c0;
 }
