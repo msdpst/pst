@@ -31,8 +31,8 @@ engine = {
         // do it here too just in case.
         $(".group, .results").hide();
 
-        // Field validation
-
+        // Field validation. Use our own date parsing - validator uses JS's built-in stuff by
+        // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
         $.validator.addMethod("nzdate", validateNzDate, "Please enter a date in the format dd/mm/yyyy");
         engine.validator = $("form").validate();
 
