@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<title>Generate</title>
+
+	<script src="area1.js" language="javascript"></script>
+	<script src="area2.js" language="javascript"></script>
+	<script src="area3.js" language="javascript"></script>
+	<script src="allareas.js" language="javascript"></script>
+	<script src="../../thirdparty/jquery-1.7.2.js" language="javascript"></script>
+	
+
+	
+</head>
+
+<body>
+
+<h1>List of towns with correct area as value.</h1>
+
+<script language="javascript">
+
+	
+
+	document.write("<select>");
+	$.each(allareas,function(index,value){
+	
+		var found1 = 0;
+		var found2 = 0;
+		var found3 = 0;
+		if ($.inArray(value,area1) != -1){
+			document.write("<option value='1'>" + value + "</option><br>");
+			found1=1;
+		}
+		
+		if ($.inArray(value,area2)!= -1){
+			document.write("<option value='2'>" + value + "</option><br>");
+			found2=1;
+		}
+		if ($.inArray(value,area3)!= -1){
+			document.write("<option value='3'>" + value + "</option><br>");
+			found3=1;
+		}
+		
+		
+		
+		
+		if (found1+found2+found3==0){
+			document.write("<option value='4'>" + value + "</option><br>");
+		}
+		
+		if (found1+found2+found3 > 1){
+			document.write("<br><br>**DUPLICATE AREA:" + value + "<br><br>");
+		}
+		
+	
+	
+	});
+	document.write("</select>");
+	
+	
+	
+	
+
+
+</script>
+
+</body>
+
+
+</html>
+
