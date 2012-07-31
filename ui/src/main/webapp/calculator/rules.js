@@ -169,6 +169,6 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialDPBWomanAlone",
                     	"potentialHealthRelatedBenefit"
                    ];
-
+var allObligations = [  ];
 
 var allPBAs = [ "createCV" ];
