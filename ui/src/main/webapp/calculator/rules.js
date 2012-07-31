@@ -32,14 +32,42 @@ var definitions = {
 
     // -------- Main benefit eligibility --------
 
-    potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && $workingAge && $single && $dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < 570 && !$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit",
-    potentialInvalidsBenefit: false,    // TODO
-    potentialDPBCareOrSickOrInfirm: false,    // TODO
-    potentialWidowsBenefit: false,    // TODO
 
+    // -------- Main benefit eligibility --------
+
+    potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && $workingAge && $single && $dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < 570 && !$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit",
+    potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && ($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..??
+    potentialDPBCareOfSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && ($caringFullTime && $carerRelationship != 'Partner')  && $workingAge && $single && $dependentChildren <= 1 && ($familyTotalGrossWeeklyIncome < 570)",    // TODO
+    potentialWidowsBenefit: false,    // TODO
+    potentialDPBWomanAlone: false,
+    potentialHealthRelatedBenefit:false,
+    potentialYouthPayment:false,
+    potentialYoungParentPayment:false,
+    potentialUnemploymentBenefitTraining:false,
+    potentialUnemploymentBenefit:false,
+    potentialNewZealandSuperannuationSingle:false,
+    potentialNewZealandSuperannuationNonQualifiedSpouse:false,
+    potentialNewZealandSupperannuationPartnerNotIncluded:false,
+    
+    // -------- Supplements (e.g., not main benefits) ------- //
+    
+    potentialAccomodationSupplement:false,
+    potentialDisabilityAllowance:false,
+    potentialChildcareSubsidy:false,
+    potentialGuaranteedChildcareAssistancePayment:false,
+    potentialOSCARSubsidy:false,
+    potentialTemporaryAdditionalSupport:false,
+    potentialChildDisabilityAllowance:false,
+    
+    potentialLivingAlonePayment:false,
+    
+    potentialOtherAssistance:true,
+    
 
     // -------- Main benefit amounts --------
 
+    // benefit rates are complex.  How accurate do we need to be??
+    
     dpbSoleParentAmount: 543.21,
 
 
