@@ -17,7 +17,7 @@ engine = {
     validator:undefined,
     autoNext:true,
     currentGroupNum:0,
-    SLIDE_TIME:300,
+    SLIDE_TIME:500,
 
     onReady:function () {
         debug("====== hello ======");
@@ -537,7 +537,7 @@ function validateNzDate(str) {
     // parseDate is lenient about the number of digits in a year. We don't want that.
     if (!str.match(/[/ ]\d\d\d\d$/))
         return false;
-    
+
     // 31/1/1970
     var ok = false;
     try {
@@ -545,7 +545,7 @@ function validateNzDate(str) {
         ok = true;
     }
     catch(ex) {}
-    
+
     // 31 Jan 1970
     if (!ok) {
         try {
@@ -555,7 +555,7 @@ function validateNzDate(str) {
         catch (ex) {
         }
     }
-    
+
     return ok;
 }
 
