@@ -84,12 +84,18 @@ engine = {
 
     /** They clicked the Next button */
     onNext:function(automatic) {
-        // They might have just answered a question in a way that reveals a new question
+        var inputSelector = engine.groupSel(engine.currentGroupNum) + " :input:visible";
+
+        // They might have just answered a question in a way that reveals a new question.
+        // If so, reveal the new question and don't move to the next group.
+        var before = $(inputSelector).length;
         engine.showOrHideQuestionsInGroup($(engine.groupSel(engine.currentGroupNum)));
+        if ($(inputSelector).length > before)
+            return;
 
         // Make sure everything is filled in
         var ok = true;
-        $(engine.groupSel(engine.currentGroupNum) + " :input:visible").each(function () {
+        $(inputSelector).each(function () {
             var fieldName = $(this).attr("name");
 
             // Don't worry about checkboxes or unnamed fields
@@ -109,7 +115,7 @@ engine = {
 
         // Validation
         ok = true;
-        $(engine.groupSel(engine.currentGroupNum) + " :input:visible").each(function () {
+        $(inputSelector).each(function () {
             if (!engine.validator.element($(this)))
                 ok = false;
         });

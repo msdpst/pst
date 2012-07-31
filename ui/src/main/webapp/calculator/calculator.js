@@ -1,7 +1,7 @@
 
 
 engine.onStart = function () {
-    engine.autoNext = true; // TODO false?
+    engine.autoNext = true;
 };
 
 /**
@@ -22,6 +22,32 @@ engine.displayResults = function () {
     }
     debug("benefits: " + benefitPageUrls);
 
+
+
+    // PBAs - these work in the same way as benefits.
+    var PBAPageUrls = [];
+    for (var i = 0; i < allPBAs.length; i++) {
+        if (engine.evaluate("$" + allPBAs[i]))
+            PBAPageUrls.push("PBAs/" + allPBAs[i] + ".html");
+    }
+    debug("PBAs: " + PBAPageUrls);
+
+
+/*
+    // They're eligible for something. Assemble the information - there's a page
+    // fragment (ie. an html file) for each benefit and for each PBA.
+    // Load the appropriate fragments from the server and insert them into the page.
+    if (PBAPageUrls.length > 0) {
+        engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
+            engine.loadPageFragmentsAndReplaceVariables($("#PBAs"), PBAPageUrls, function () {
+                $("#eligible").slideDown(engine.SLIDE_TIME);
+                $("form").hide();
+                $('html,body').scrollTop(0);
+            });
+        });
+    }
+*/
+
     // Obligations - these work in the same way as benefits.
     var obligationPageUrls = [];
     for (var i = 0; i < allObligations.length; i++) {
@@ -30,16 +56,20 @@ engine.displayResults = function () {
     }
     debug("obligations: " + obligationPageUrls);
 
+
+
     // They're eligible for something. Assemble the information - there's a page
     // fragment (ie. an html file) for each benefit and for each obligation.
     // Load the appropriate fragments from the server and insert them into the page.
     if (benefitPageUrls.length > 0) {
         engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
+          engine.loadPageFragmentsAndReplaceVariables($("#PBAs"), PBAPageUrls, function () {
             engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
                 $("#eligible").slideDown(engine.SLIDE_TIME);
                 $("form").hide();
                 $('html,body').scrollTop(0);
             });
+          });
         });
     }
 

@@ -144,63 +144,11 @@ var definitions = {
 
     // -------- Main benefit amounts --------
 
-    // 
-    /**
-     * probably won't need these:
-     * 
-    ubsbSingle18to19LivingAtHome:136.64,
-    ubsbSingle18to19LivingAwayFromHome:170.80,
-    ubsbSingle20to24:170.80,
-    ubsbOver25:204.96,
-    ubsbRelationshipWithoutChildren:341.60,
-    ubsbRelationshipWithoutChildrenEach:170.80,
-    
-    dpbWomanAloneSingleWithChildren:213.49,
-    dpbWidowSoleParent:293.58,
-    dpbCsiSingle18:256.19,
-    dpbSoleParent:336.55,
-    dpbHalfMarriedRate:213.49,
-    
-    ibSingle16to17:207.32,
-    ibSingleOver18:256.19,
-    ibRelationshipNoChildren:426.98,
-    ibRelationshipNoChildrenEach:213.49,
-    ibSoleParent:338.55,
-    ibRelationshipWithChildren:426.98,
-    ibRelationshipWithChildrenEach:213.49,
-    
-    
-    UB SB - single 18-19 living at home
-    UB SB - single 18-19 living away from home
-    UB SB - single 20-24
-    UB SB over 25 
-    UB SB - relationship without children
-    UB SB - relationship without children (each) 
-    UB SB Sole Parent
-    UB SB - relationship withchildren
-    UB SB - relationship with children (each)
-    Youth Payment
-    Youth Payment - relationship without children
-    Young Parent Payment - Sole Parent
-    Young Parent Payment - relationship with children
-    DPB Widows Woman Alone - Single no children
-    DPB Widows  - Sole Parent
-    DPBCSI - Single 18 and over
-    DPBCSI - Sole Parent
-    DPBCSI - Half Married rate
-    IB Single 16-17
-    IB Single over 18
-    IB Relationship without children
-    IB Relationship without children (each)
-    IB Sole Parent 
-    IB Relationship with children
-    IB Relationship with children (each)*/
 
-    
-    // -- pre-benefit activities 
-    
-    
-    
+    // -------- Pre-Benefit Activities--------
+    createCV: "$potentialDPBSoleParent",
+
+
 
     // -------- Obligations --------
 
@@ -212,6 +160,7 @@ var definitions = {
     age: "calculator.calculateAge($dateOfBirth)"
 };
 
+
 var allBenefits = [ /* This is all the variables that we want to be checked as potential benefits */
                     	"potentialDPBSoleParent", 
                     	"potentialInvalidsBenefit", 
@@ -221,4 +170,5 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialHealthRelatedBenefit"
                    ];
 
-var allObligations = [ "testObligation" ];
+
+var allPBAs = [ "createCV" ];
