@@ -20,7 +20,7 @@ engine = {
     SLIDE_TIME:300,
 
     onReady:function () {
-        debug("====== hellooo ======");
+        debug("====== hello ======");
 
         // The instance can define this
         if (this.onStart)
@@ -32,6 +32,8 @@ engine = {
         $(".group, .results").hide();
 
         // Field validation
+
+        $.validator.addMethod("nzdate", validateNzDate, "Please enter a date in the format dd/mm/yyyy");
         engine.validator = $("form").validate();
 
 
@@ -531,6 +533,33 @@ engine = {
         return ".group:eq(" + groupNum + ")";
     }
 };
+
+/** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
+function validateNzDate(str) {
+    // parseDate is lenient about the number of digits in a year. We don't want that.
+    if (!str.match(/[/ ]\d\d\d\d$/))
+        return false;
+    
+    // 31/1/1970
+    var ok = false;
+    try {
+        $.datepicker.parseDate("d/m/yy", str);
+        ok = true;
+    }
+    catch(ex) {}
+    
+    // 31 Jan 1970
+    if (!ok) {
+        try {
+            $.datepicker.parseDate("d M yy", str);
+            ok = true;
+        }
+        catch (ex) {
+        }
+    }
+    
+    return ok;
+}
 
 function debugIf(condition, msg) {
     if (condition)
