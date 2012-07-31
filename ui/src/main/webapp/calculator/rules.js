@@ -72,6 +72,11 @@ var definitions = {
     dpbSoleParentAmount: 543.21,
 
 
+    // -------- Pre-Benefit Activities--------
+    createCV: "$potentialDPBSoleParent",
+
+
+
     // -------- Obligations --------
 
     testObligation: "$potentialDPBSoleParent",
@@ -83,4 +88,5 @@ var definitions = {
 };
 
 var allBenefits = [ "potentialDPBSoleParent", "potentialInvalidsBenefit", "potentialDPBCareOrSickOrInfirm", "potentialWidowsBenefit"];
+var allPBAs = [ "createCV" ];
 var allObligations = [ "testObligation" ];
