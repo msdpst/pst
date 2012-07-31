@@ -35,10 +35,11 @@ var definitions = {
 
     // -------- Main benefit eligibility --------
 
+    potentialWidowsBenefit: false,
     potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && $workingAge && $single && $dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < 570 && !$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit",
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && ($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..??
-    potentialDPBCareOfSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && ($caringFullTime && $carerRelationship != 'Partner')  && $workingAge && $single && $dependentChildren <= 1 && ($familyTotalGrossWeeklyIncome < 570)",    // TODO
-    potentialWidowsBenefit: false,    // TODO
+    potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && ($caringFullTime && $carerRelationship != 'Partner')  && $workingAge && $single && $dependentChildren <= 1 && ($familyTotalGrossWeeklyIncome < 570)",    // TODO
+        // TODO
     potentialDPBWomanAlone: false,
     potentialHealthRelatedBenefit:false,
     potentialYouthPayment:false,
