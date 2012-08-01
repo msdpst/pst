@@ -1,10 +1,9 @@
 ﻿<!doctype html>
 <!--
 TODO:
-- noscript
+- changes raised by Andrew
 - todo question below
 - enforce at lease one childAgeRange selected(?)
-- IE9
 - IE6
 
 TODO, probably later:
@@ -21,7 +20,7 @@ NOTES:
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../thirdparty/cssreset-min.css">
-    <link rel="stylesheet" href="index.css?dummy=1" type="text/css" />
+    <link rel="stylesheet" href="index.css?dummy=2" type="text/css" />
     <script src="../thirdparty/jquery-1.7.2.js" type="text/javascript"></script>
     <script src="../thirdparty/jquery.validate.js" type="text/javascript"></script>
     <script src="../thirdparty/jquery-ui.min.js"></script>
@@ -51,7 +50,16 @@ NOTES:
 
 
 <noscript>
-
+    <div class="noscript">
+        <div class="noscriptInner">
+            <h2>You cannot use this web page because you have turned off JavaScript.</h2>
+            <p>
+                You can fix this:
+                <a href="http://www.enable-javascript.com/" target="_blank"> click here and
+                    follow these instructions that tell you how to turn JavaScript back on again.</a>
+            </p>
+        </div>
+    </div>
 </noscript>
 
 
