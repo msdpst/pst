@@ -50,7 +50,7 @@ header img {
     /*box-shadow: 0 0 1em #d0d0d0;*/
 }
 
-noscript {
+.noscript {
     z-index: 20;
     position: absolute;
     top: 0;
@@ -59,19 +59,19 @@ noscript {
     height: 100%;
     background: #303030;
 }
-noscript div {
+.noscriptInner {
     background-color: #f0f0f0;
     width: 34em;
     padding: 2em;
     margin-left: -19em;
-    margin-top: 20%;
+    margin-top: 5em;
     left: 50%;
     position: relative;
 }
-noscript, noscript a {
+.noscript, .noscript a {
     color: #303030;
 }
-noscript h2 {
+.noscript h2 {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 1em;
