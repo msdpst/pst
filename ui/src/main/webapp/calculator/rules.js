@@ -18,7 +18,7 @@ var definitions = {
     residencyResident: "$residency == 'NZ Citizen (by birth)' || $residency == 'NZ Citizen (Other)' || $residency == 'Permanent Resident' || $residency == 'Refugee - Quota' || $residency == 'Australian' || $residencyRefugeePermanent",
     residencyRefugeePermanent: "$residency == 'Refugee - Other with Permanent Residence'",
 
-    deceasedPartner: "$relationshipStatusSingle=='Widowed' || relationshipStatusSingle=='Defacto Partner Deceased' || relationshipStatusSingle=='Civil Union Partner Deceased'",
+    deceasedPartner: "$relationshipStatusSingle=='Widowed' || $relationshipStatusSingle =='Defacto Partner Deceased' || $relationshipStatusSingle=='Civil Union Partner Deceased'",
 
     // -------- Benefit definitions --------
 
@@ -140,19 +140,17 @@ var definitions = {
     
     potentialYouthPayment:
     		"	$resident && " +
-    		"	$youth && " +
-    		"	$single && " +
-    		"	(	(" +
-    		"			$youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
-    		"		) " +
-    		"		||	" +
-    		"		(" +
-    		"			!$single && ($partnerAge<=17 && $partnerAge>=16)" +
-    		"			" +
-    		"		)	" +
-    		"	) && $familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit &&" +
-    		"	$dependentChildren == 0 && " +
-    		"	!$potentialInvalidsBenefit ",
+    		"	$youth  ",// +
+//    		"	(	" +
+//    		"		(" +
+//    		"			$single && $youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
+//    		"		) " +
+//    		"		||	" +
+//    		"		(" +
+//    		"			!$single && ($partnerAge<=17 && $partnerAge>=16)" +
+//    		"		)	" +
+//    		"	) && ($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit) &&" +
+//    		"	$dependentChildren == 0 ", //&& !$potentialInvalidsBenefit 
     
     
     potentialYoungParentPayment:false,
