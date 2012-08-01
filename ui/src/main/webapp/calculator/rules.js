@@ -7,6 +7,9 @@ var definitions = {
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     under20: "$age < 20",
     age16to17: "$age >= 16 && $age < 18",
+    age18to19: "$age >= 18 && $age < 20",
+    age20to24: "$age >= 20 && $age < 25",
+    age25Plus:"$age >= 25",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
     parent: "$dependentChildren != 0",
     youngParent: "$age16to17 && $parent",
@@ -40,10 +43,17 @@ var definitions = {
     		")",
     
 
+	single18to19uBSBAtHomeIncomeLimit:"$single && $age18to19 && $livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AtHomeGWILimit)",
+		
+	single18to19uBSBAwayFromHomeIncomeLimit:"$single && $age18to19 && !$livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AwayGWILimit)",
+
+	single20to24uBSBIncomeLimit:"$single && $age20to24 && ($familyTotalGrossWeeklyIncome<$ubSingle2024GWILimit)",
+	
+	single25uBSBIncomeLimit:"$single && $age25Plus && ($familyTotalGrossWeeklyIncome<$ubSingle25GWILimit)",
+
     		
     		
-    		
-    // -- Values -- //
+    // -- Limits -- //
     
     widowsSoleParentGWILimit : 570,
     dpbCsiSoleParentGWILimit : 570,
@@ -52,6 +62,10 @@ var definitions = {
     ibRelationshipGWILimit : 300,
     yppSingleGWILimit : 300,
     yppRelationshipGWILimit:300,
+    ubSingle1819AtHomeGWILimit:272,
+    ubSingle1819AwayGWILimit:320,
+    ubSingle2024GWILimit:320,
+    ubSingle25GWILimit:368,
     
     
     // -- Rates -- //
@@ -184,6 +198,7 @@ var definitions = {
     		"			|| " +
     		"		($stillWorking && $weeklyHours <30 )" +
     		" ) && " +
+    		//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefit && " +
@@ -192,7 +207,25 @@ var definitions = {
     		"	!$potentialHealthRelatedBenefit",
     
     
-    potentialUnemploymentBenefit:false,
+    potentialUnemploymentBenefit:"($resident || $refugeeOtherWithPermanentResidence) && " +
+			"	$workingAge && " +
+			" ( " +
+			"		!$haveWorked " +
+			"			|| " +
+			"		($haveWorked && !$stillWorking) " +
+			"			|| " +
+			"		($stillWorking && $weeklyHours <30 )" +
+			" ) && " +
+			//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
+			"	!$potentialInvalidsBenefit && " +
+			"	!$potentialDPBCareOrSickOrInfirm && " +
+			"	!$potentialWidowsBenefit && " +
+			"	!$potentialDPBSoleParent && " +
+			"	!$potentialDPBWomanAlone &&" +
+			"	!$potentialUnemploymentBenefitTraining &&" +
+			"	!$potentialHealthRelatedBenefit",
+	
+	
     potentialNewZealandSuperannuationSingle:false,
     potentialNewZealandSuperannuationNonQualifiedSpouse:false,
     potentialNewZealandSupperannuationPartnerNotIncluded:false,
@@ -240,7 +273,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialHealthRelatedBenefit",
                     	"potentialYouthPayment",
                     	"potentialYoungParentPayment",
-                    	"potentialUnemploymentBenefitTraining"
+                    	"potentialUnemploymentBenefitTraining",
+                    	"potentialUnemploymentBenefit"
                    ];
 var allObligations = [  ];
 
