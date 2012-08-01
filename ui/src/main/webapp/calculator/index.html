@@ -689,33 +689,30 @@ NOTES:
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="!$visitorStaying">
+	        <div class="question" data-visible="!$liveAlone && !$visitorStaying">
                 <fieldset>
                     <div>Do you live with anyone aged 18 years or over?</div>
                     <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
                     <input type="radio" name="liveWithAdult" id="liveWithAdultNo" value="false"> <label for="liveWithAdultNo">No</label>
                 </fieldset>
             </div>
-        </fieldset>
 
-        <!-- TODO precondition. Error in spreadsheet? Seems to refer to itself. -->
-        <!--
-        <div class="group" data-visible="$seniorOk && $livingAlonePartnerInCare && !$visitorStaying">
-	        <div class="question">
+	        <div class="question" data-visible="!$liveAlone">
                 <fieldset>
-                    <div>Do you live with anyone, who is not a dependent child attending school or a tertiary institution?</div>
-                    <input type="radio" name="mystery" id="mysteryYes" value="true"> <label for="mysteryYes">Yes</label>
-                    <input type="radio" name="mystery" id="mysteryNo" value="false"> <label for="mysteryNo">No</label>
+                    <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentNo" value="false"> <label for="liveWithNonDependentNo">No</label>
                 </fieldset>
 
-                <p class="info">"Do not include children under 18 years of age in this answer.
-                    <a href="#" class="helpButton">More information</a></p>
+                <p class="info">
+                    Do not include children under 18 years of age in this answer.
+                    <a href="#" class="helpButton">More information</a>
+                </p>
                 <div class="help">
                     A dependent child is a child who is financially supported by you and is living with you as a member of your family.  This includes stepchildren, children at boarding school, adopted children, grandchildren and mokopuna.
                 </div>
             </div>
-        </div>
-        -->
+        </fieldset>
 
 
 
