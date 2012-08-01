@@ -7,6 +7,9 @@ var definitions = {
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     under20: "$age < 20",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
+    age16to17: "$age >= 16 && $age < 18",
+    parent: "$dependentChildren != 0",
+    youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
     
     
@@ -155,7 +158,19 @@ var definitions = {
     		"	$dependentChildren == 0 && !$potentialInvalidsBenefit ", //
     
     
-    potentialYoungParentPayment:false,
+    potentialYoungParentPayment:
+    	"	$resident && $youngParent && !$potentialInvalidsBenefit && " +
+    	"	(" +
+    	"		$single && $youthLivingCircs && " +
+    	"		($familyTotalGrossWeeklyIncome < $yppSingleGWILimit)" +
+    	"	) " +
+    	"		|| " +
+	"		(" +
+	"			!$single && ($partnerAge<=17 && $partnerAge>=16) &&" +
+	"			($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
+	"		)	" ,
+    	
+    	
     potentialUnemploymentBenefitTraining:false,
     potentialUnemploymentBenefit:false,
     potentialNewZealandSuperannuationSingle:false,
@@ -203,7 +218,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialWidowsBenefit" , 
                     	"potentialDPBWomanAlone",
                     	"potentialHealthRelatedBenefit",
-                    	"potentialYouthPayment"
+                    	"potentialYouthPayment",
+                    	"potentialYoungParentPayment"
                    ];
 var allObligations = [  ];
 
