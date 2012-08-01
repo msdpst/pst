@@ -30,10 +30,10 @@ var definitions = {
 
     youthLivingCircs : "!$livingAtHome && !$parentSupport && " +
     		"(" +
-    		"	$reasonNotLivingAtHome == 'Relationship breakdown with parents' || " +
-    		"	$reasonNotLivingAtHome == 'Parents are absent' || " +
-    		"	$reasonNotLivingAtHome == 'Other good and sufficient reason' || " +
-    		"	$reasonNotLivingAtHome == 'No longer in Child, Youth and Family care' " +
+    		"	$reasonNotLivingAtHome == 'relationshipBreakdown' || " +
+    		"	$reasonNotLivingAtHome == 'absent' || " +
+    		"	$reasonNotLivingAtHome == 'other' || " +
+    		"	$reasonNotLivingAtHome == 'noLongerCyf' " +
     		")",
     
     
@@ -140,17 +140,19 @@ var definitions = {
     
     potentialYouthPayment:
     		"	$resident && " +
-    		"	$youth  ",// +
-//    		"	(	" +
-//    		"		(" +
-//    		"			$single && $youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
-//    		"		) " +
-//    		"		||	" +
-//    		"		(" +
-//    		"			!$single && ($partnerAge<=17 && $partnerAge>=16)" +
-//    		"		)	" +
-//    		"	) && ($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit) &&" +
-//    		"	$dependentChildren == 0 ", //&& !$potentialInvalidsBenefit 
+    		"	$youth  &&" +// +
+    		"	(	" +
+    		"		(" +
+    		"			$single  && $youthLivingCircs &&" + //&& $
+    		"			($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
+    		"		) " +
+    		"		||	" +
+    		"		(" +
+    		"			!$single && ($partnerAge<=17 && $partnerAge>=16) &&" +
+    		"			($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
+    		"		)	" +
+    		"	) && " +
+    		"	$dependentChildren == 0 && !$potentialInvalidsBenefit ", //
     
     
     potentialYoungParentPayment:false,
