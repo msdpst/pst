@@ -230,6 +230,14 @@ var definitions = {
     potentialNewZealandSuperannuationNonQualifiedSpouse:false,
     potentialNewZealandSupperannuationPartnerNotIncluded:false,
     
+    // TODO what are these?
+    undeterminedYouthPayment: false,
+    undeterminedYoungParentPayment: false,
+    
+    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
+    potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $undeterminedYouthPayment || $undeterminedYoungParentPayment",
+    potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSupperannuationPartnerNotIncluded",
+    
     // -------- Supplements (e.g., not main benefits) ------- //
     
     potentialAccomodationSupplement:false,
@@ -242,7 +250,7 @@ var definitions = {
     
     potentialLivingAlonePayment:false,
     
-    potentialOtherAssistance:true,
+    potentialExtraHelp:false,
     
 
     // -------- Main benefit amounts --------

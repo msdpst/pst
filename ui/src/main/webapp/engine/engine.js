@@ -290,7 +290,9 @@ engine = {
             if (fragmentUrls.length) {
                 var url = fragmentUrls.shift();
                 debug("fetching " + url);
-                intoElement.load(url, null, fetch);
+                var newbox = $("<div></div>");
+                newbox.appendTo(intoElement);
+                newbox.load(url, null, fetch);
             }
             else {
                 intoElement.html(engine.replaceVariablesInText(intoElement.html()));
