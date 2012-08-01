@@ -353,15 +353,12 @@ NOTES:
             </div>
 
 	        <div class="question" data-visible="$stillWorking">
-                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label>
-                $&nbsp;<input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="number">
+                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label><br>
+                $ <input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="currency">
 
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
-                </p>
-                <p class="info">
-                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
                 </p>
             </div>
 
@@ -408,13 +405,10 @@ NOTES:
 
 	        <div class="question" data-visible="$partnerStillWorking">
                 <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label>
-                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="number">
+                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency">
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
-                </p>
-                <p class="info">
-                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
                 </p>
             </div>
 
@@ -499,7 +493,7 @@ NOTES:
                     <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
-                        <div>$&nbsp;<input type="text" name="incomeAmount" class="number"/></div>
+                        <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
                     </div>
                     <div class="clearfix">
                         <label>How often do you / your partner receive these payments?</label>
@@ -737,7 +731,7 @@ NOTES:
 
 	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren > 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label>
-                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="number">
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency">
             </div>
 
             <div class="question" data-visible="$youth && !$livingAtHome">
@@ -790,17 +784,17 @@ NOTES:
 
             <div class="question" data-visible="$accomodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
-                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="number">
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency">
             </div>
 
             <div class="question" data-visible="$accomodationType == 'Board'">
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
-                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="number">
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
             </div>
 
             <div class="question" data-visible="$accomodationType == 'Own Home'">
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
-                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="number">
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
             </div>
 
         </fieldset>
@@ -860,7 +854,7 @@ NOTES:
 
             <div class="question" data-visible="$notMeetingLivingCosts || $accomodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
-                $ <input type="text" name="cashAssets" id="cashAssets" class="number">
+                $ <input type="text" name="cashAssets" id="cashAssets" class="currency">
 
                 <p class="info">
                     <a href="#" class="helpButton">Click here for examples of cash assets.</a>

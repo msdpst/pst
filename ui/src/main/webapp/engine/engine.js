@@ -33,7 +33,8 @@ engine = {
 
         // Field validation. Use our own date parsing - validator uses JS's built-in stuff by
         // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
-        $.validator.addMethod("nzdate", validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("nzdate", engine.validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         engine.validator = $("form").validate();
 
 
@@ -398,6 +399,23 @@ engine = {
             }
         }
 
+        else if (element.hasClass("currency")) {
+            if (val === undefined) {
+                val = 0;
+            }
+            else {
+                var v2 = val;
+                
+                // Remove leading $ sign
+                if (v2.length > 0 && v2.charAt(0) == '$')
+                    v2 = v2.substr(1);
+                
+                if (!isNaN(Number(v2))) {
+                    val = Number(v2);
+                }
+            }
+        }
+
         return val;
     },
 
@@ -535,35 +553,40 @@ engine = {
      */
     groupSel:function (groupNum) {
         return ".group:eq(" + groupNum + ")";
-    }
-};
+    },
 
-/** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
-function validateNzDate(str) {
-    // parseDate is lenient about the number of digits in a year. We don't want that.
-    if (!str.match(/[/ ]\d\d\d\d$/))
-        return false;
-
-    // 31/1/1970
-    var ok = false;
-    try {
-        $.datepicker.parseDate("d/m/yy", str);
-        ok = true;
-    }
-    catch(ex) {}
-
-    // 31 Jan 1970
-    if (!ok) {
+    /** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
+    validateNzDate: function(str) {
+        // parseDate is lenient about the number of digits in a year. We don't want that.
+        if (!str.match(/[/ ]\d\d\d\d$/))
+            return false;
+    
+        // 31/1/1970
+        var ok = false;
         try {
-            $.datepicker.parseDate("d M yy", str);
+            $.datepicker.parseDate("d/m/yy", str);
             ok = true;
         }
-        catch (ex) {
+        catch(ex) {}
+    
+        // 31 Jan 1970
+        if (!ok) {
+            try {
+                $.datepicker.parseDate("d M yy", str);
+                ok = true;
+            }
+            catch (ex) {
+            }
         }
+    
+        return ok;
+    },
+    
+    validateCurrency: function (str) {
+        str = $.trim(str);
+        return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
     }
-
-    return ok;
-}
+};
 
 function debugIf(condition, msg) {
     if (condition)
