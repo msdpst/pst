@@ -47,6 +47,12 @@ var definitions = {
     yppSingleGWILimit : 300,
     yppRelationshipGWILimit:300,
     
+    
+    // -- Rates -- //
+    
+    dpbSoleParentAmount : 400, //NOT THE RIGHJT AMOUNT!
+    
+    
 
     // -------- Calculations --------
     totalFamilyGrossWeeklyWage: "$applicantGrossWeeklyWage + $partnerGrossWeeklyWage",
