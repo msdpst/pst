@@ -319,8 +319,12 @@ li {
     margin-top: 0;
 }
 
-#eligible .benefitName {
+#eligible .benefitName{
     font-weight: 600;
+}
+
+#PBAs .preBenefitActivityName{
+	 font-weight: 600;
 }
 
 
