@@ -37,6 +37,11 @@ header {
     background-image: url("images/bg-page-gradient2.jpg");
     z-index: 10;
     /*box-shadow: 0 0 1em #d0d0d0;*/
+
+    /* Make fixed positioning work in IE6: */
+    _position: absolute;
+    _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+
 }
 header img {
     position: relative;
@@ -117,6 +122,9 @@ h1 {
     padding: 0 1em 0 1em;
     background: -moz-linear-gradient(to bottom, rgba(255,255,255,255), rgba(255,255,255,0));
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,255)), to(rgba(255,255,255,0)));
+
+    /* hide in IE6 */
+    _display: none;
 }
 
 #outer {
