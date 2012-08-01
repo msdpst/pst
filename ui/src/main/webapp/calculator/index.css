@@ -134,6 +134,9 @@ h1 {
     margin: 0 7em 0 6em;
 }
 
+form p, form ul {
+    margin-bottom: 0.7em;
+}
 .question {
     background-color: #eeeeee;
     padding: 0.8em 1em 0.9em 1em;
@@ -213,10 +216,10 @@ input[type='checkbox'] {
     padding: 0.5em 0 0 5em;
     font-size: 13px;
 }
-.help ul, .info ul {
+ul {
     padding-left: 2em;
 }
-.help li, .info li {
+li {
     list-style: disc;
 }
 
