@@ -8,6 +8,9 @@ var definitions = {
     under20: "$age < 20",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
     oscarAgedChild: "$childAged513",
+    
+    
+    
 
     // -------- Shortcuts for questions --------
 
@@ -25,6 +28,14 @@ var definitions = {
     age50to64: "($age >= 50 && $age <= 64)",
     single: "!$partner", // spreadsheet also lists all values of relationshipStatusSingle; not sure why
 
+    youthLivingCircs : "!$livingAtHome && !$parentSupport && " +
+    		"(" +
+    		"	$reasonNotLivingAtHome == 'Relationship breakdown with parents' || " +
+    		"	$reasonNotLivingAtHome == 'Parents are absent' || " +
+    		"	$reasonNotLivingAtHome == 'Other good and sufficient reason' || " +
+    		"	$reasonNotLivingAtHome == 'No longer in Child, Youth and Family care' " +
+    		")",
+    
     
     // -- Values -- //
     
@@ -33,6 +44,8 @@ var definitions = {
     ibSingle18GWILimit : 300,
     ibSoleParentGWILimit : 300,
     ibRelationshipGWILimit : 300,
+    yppSingleGWILimit : 300,
+    yppRelationshipGWILimit:300,
     
 
     // -------- Calculations --------
@@ -119,7 +132,23 @@ var definitions = {
     		"	!$potentialDPBWomanAlone" ,
     
     
-    potentialYouthPayment:false,
+    potentialYouthPayment:
+    		"	$resident && " +
+    		"	$youth && " +
+    		"	$single && " +
+    		"	(	(" +
+    		"			$youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
+    		"		) " +
+    		"		||	" +
+    		"		(" +
+    		"			!$single && ($partnerAge<=17 && $partnerAge>=16)" +
+    		"			" +
+    		"		)	" +
+    		"	) && $familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit &&" +
+    		"	$dependentChildren == 0 && " +
+    		"	!$potentialInvalidsBenefit ",
+    
+    
     potentialYoungParentPayment:false,
     potentialUnemploymentBenefitTraining:false,
     potentialUnemploymentBenefit:false,
@@ -167,7 +196,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialDPBCareOrSickOrInfirm", 
                     	"potentialWidowsBenefit" , 
                     	"potentialDPBWomanAlone",
-                    	"potentialHealthRelatedBenefit"
+                    	"potentialHealthRelatedBenefit",
+                    	"potentialYouthPayment"
                    ];
 var allObligations = [  ];
 
