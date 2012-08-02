@@ -6,9 +6,15 @@ var definitions = {
     livingAlonePartnerInCare: "!$liveTogether && ($partnerLives == 'Rest home' || $partnerLives == 'Private hospital' || $partnerLives == 'Other')",
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     under20: "$age < 20",
+    age16to17: "$age >= 16 && $age < 18",
+    age18to19: "$age >= 18 && $age < 20",
+    age20to24: "$age >= 20 && $age < 25",
+    age25Plus:"$age >= 25",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
+    parent: "$dependentChildren > 0",
+    youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
-    
+    partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
     
     
 
@@ -30,14 +36,24 @@ var definitions = {
 
     youthLivingCircs : "!$livingAtHome && !$parentSupport && " +
     		"(" +
-    		"	$reasonNotLivingAtHome == 'Relationship breakdown with parents' || " +
-    		"	$reasonNotLivingAtHome == 'Parents are absent' || " +
-    		"	$reasonNotLivingAtHome == 'Other good and sufficient reason' || " +
-    		"	$reasonNotLivingAtHome == 'No longer in Child, Youth and Family care' " +
+    		"	$reasonNotLivingAtHome == 'relationshipBreakdown' || " +
+    		"	$reasonNotLivingAtHome == 'absent' || " +
+    		"	$reasonNotLivingAtHome == 'other' || " +
+    		"	$reasonNotLivingAtHome == 'noLongerCyf' " +
     		")",
     
-    
-    // -- Values -- //
+
+	single18to19uBSBAtHomeIncomeLimit:"$single && $age18to19 && $livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AtHomeGWILimit)",
+		
+	single18to19uBSBAwayFromHomeIncomeLimit:"$single && $age18to19 && !$livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AwayGWILimit)",
+
+	single20to24uBSBIncomeLimit:"$single && $age20to24 && ($familyTotalGrossWeeklyIncome<$ubSingle2024GWILimit)",
+	
+	single25uBSBIncomeLimit:"$single && $age25Plus && ($familyTotalGrossWeeklyIncome<$ubSingle25GWILimit)",
+
+    		
+    		
+    // -- Limits -- //
     
     widowsSoleParentGWILimit : 570,
     dpbCsiSoleParentGWILimit : 570,
@@ -46,12 +62,61 @@ var definitions = {
     ibRelationshipGWILimit : 300,
     yppSingleGWILimit : 300,
     yppRelationshipGWILimit:300,
+    ubSingle1819AtHomeGWILimit:272,
+    ubSingle1819AwayGWILimit:320,
+    ubSingle2024GWILimit:320,
+    ubSingle25GWILimit:368,
+    nonQualifiedPartnerIncludedLimit:860,
+    
+    daGWILimits: {
+        "$workingAge && !$partner && $dependentChildren == 0": 575.48,
+        "$workingAge && !$partner && $dependentChildren == 1": 693.45,
+        "$workingAge && !$partner && $dependentChildren > 1": 730.60,
+        "$workingAge && $partner": 851.83,
+        "$youth && !$partner && $dependentChildren == 0": 497.27,
+        "$youth && $partner && $dependentChildren == 0": 851.83,
+        "$youngParent && !$partner": 497.27,
+        "$youngParent && $partner && $partnerAge >= 18": 851.83, // TODO what about young parents with partners under 18?
+        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58,
+        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45,
+        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,
+        "$seniorsAge && $partner": 851.83
+    },
+    daGWILimit: "engine.evalMap(definitions.daGWILimits, 'daGWILimits')",
     
     
     // -- Rates -- //
     
-    dpbSoleParentAmount : 400, //NOT THE RIGHJT AMOUNT!
+    dpbSoleParentAmount : 400, //TODO NOT THE RIGHT AMOUNT!
     
+    // Accommodation supplement maximums - each has a rate for each area
+    accSuppSingle: [145, 100, 65, 45],
+    accSuppCouple: [160, 125, 75, 55],
+    accSuppCoupleWithChildren: [225, 165, 120, 75],
+    accSuppSoleParent1Child: [160, 125, 75, 55],
+    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75],
+    accSuppMax: "calculator.calculateAccSuppMax()",
+    
+    ratesUB : { 
+    	"$age<20 && $age>=18 && $livingAtHome": 136.64, 
+    	"$age<20 && $age>=18 && !$livingAtHome": 170.80,
+    	"$age<25 && $age>19 && $single": 170.80,
+    	"$partner && $dependentChildren == 0": 170.80,
+    	"$partner && $dependentChildren > 0": 170.80,
+    	"!$partner && $dependentChildren > 0": 293.58,
+    	"$age>=25": 204.96
+    },
+    
+    ratesIB : { 
+    	"$single && ($age==16 || $age==17)":207.32,
+    	"$single && $age>=18":256.19,
+    	"$partner && $dependentChildren == 0":213.49,
+    	"$partner && $dependentChildren >= 0":213.49,
+    	"$single && $dependentChildren > 0":336.55
+    },
+    	
+    ubRate: "engine.evalMap(definitions.ratesUB)",
+    ibRate: "engine.evalMap(definitions.ratesIB)",
     
 
     // -------- Calculations --------
@@ -140,29 +205,102 @@ var definitions = {
     
     potentialYouthPayment:
     		"	$resident && " +
-    		"	$youth  ",// +
-//    		"	(	" +
-//    		"		(" +
-//    		"			$single && $youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
-//    		"		) " +
-//    		"		||	" +
-//    		"		(" +
-//    		"			!$single && ($partnerAge<=17 && $partnerAge>=16)" +
-//    		"		)	" +
-//    		"	) && ($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit) &&" +
-//    		"	$dependentChildren == 0 ", //&& !$potentialInvalidsBenefit 
+    		"	$youth  &&" +// +
+    		"	(	" +
+    		"		(" +
+    		"			$single  && $youthLivingCircs &&" + //&& $
+    		"			($familyTotalGrossWeeklyIncome < $yppSingleGWILimit) " +
+    		"		) " +
+    		"		||	" +
+    		"		(" +
+    		"			!$single && ($partnerAge<=17 && $partnerAge>=16) &&" +
+    		"			($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
+    		"		)	" +
+    		"	) && " +
+    		"	$dependentChildren == 0 && !$potentialInvalidsBenefit ", //
     
     
-    potentialYoungParentPayment:false,
-    potentialUnemploymentBenefitTraining:false,
-    potentialUnemploymentBenefit:false,
-    potentialNewZealandSuperannuationSingle:false,
-    potentialNewZealandSuperannuationNonQualifiedSpouse:false,
-    potentialNewZealandSupperannuationPartnerNotIncluded:false,
+    potentialYoungParentPayment:
+    	"	$resident && $youngParent && !$potentialInvalidsBenefit && " +
+    	"		(" +
+    	"			$single && $youthLivingCircs && " +
+    	"			($familyTotalGrossWeeklyIncome < $yppSingleGWILimit)" +
+    	"		) " +
+    	"			|| " +
+		"		(" +
+		"			!$single && ($partnerAge<=17 && $partnerAge>=16) &&" +
+		"			($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
+		"		)	" ,
+    	
+    	
+    potentialUnemploymentBenefitTraining:"($resident || $refugeeOtherWithPermanentResidence) && " +
+    		"	$workingAge && " +
+    		"	$topCourse && " +
+    		" ( " +
+    		"		!$haveWorked " +
+    		"			|| " +
+    		"		($haveWorked && !$stillWorking) " +
+    		"			|| " +
+    		"		($stillWorking && $weeklyHours <30 )" +
+    		" ) && " +
+    		//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
+    		"	!$potentialInvalidsBenefit && " +
+    		"	!$potentialDPBCareOrSickOrInfirm && " +
+    		"	!$potentialWidowsBenefit && " +
+    		"	!$potentialDPBSoleParent && " +
+    		"	!$potentialDPBWomanAlone &&" +
+    		"	!$potentialHealthRelatedBenefit",
+    
+    
+    potentialUnemploymentBenefit:"($resident || $refugeeOtherWithPermanentResidence) && " +
+			"	$workingAge && " +
+			" ( " +
+			"		!$haveWorked " +
+			"			|| " +
+			"		($haveWorked && !$stillWorking) " +
+			"			|| " +
+			"		($stillWorking && $weeklyHours <30 )" +
+			" ) && " +
+			//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
+			"	!$potentialInvalidsBenefit && " +
+			"	!$potentialDPBCareOrSickOrInfirm && " +
+			"	!$potentialWidowsBenefit && " +
+			"	!$potentialDPBSoleParent && " +
+			"	!$potentialDPBWomanAlone &&" +
+			"	!$potentialUnemploymentBenefitTraining &&" +
+			"	!$potentialHealthRelatedBenefit",
+	
+	
+    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //ACC stuff not required
+    
+    
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single && " +
+    		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
+    		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
+    		"			$partnerAge >= 16 && $partnerResident",
+    		
+    		
+    potentialNewZealandSupperannuationPartnerNotIncluded:"$seniorsAge && $resident && !$single && " +
+    "			((!$includePartnerInNZS || $partnerReceivingNZS) || " + //i don't think this is right.
+	"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
+    		"	!$potentialNewZealandSuperannuationNonQualifiedSpouse " , 
+    
+    // TODO what are these?
+    undeterminedYouthPayment: false,
+    undeterminedYoungParentPayment: false,
+    
+    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
+    potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $undeterminedYouthPayment || $undeterminedYoungParentPayment",
+    potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSupperannuationPartnerNotIncluded",
     
     // -------- Supplements (e.g., not main benefits) ------- //
     
-    potentialAccomodationSupplement:false,
+    // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
+    potentialAccommodationSupplement:
+        "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
+        "   !($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
+    ,
+    
     potentialDisabilityAllowance:false,
     potentialChildcareSubsidy:false,
     potentialGuaranteedChildcareAssistancePayment:false,
@@ -172,15 +310,12 @@ var definitions = {
     
     potentialLivingAlonePayment:false,
     
-    potentialOtherAssistance:true,
+    potentialExtraHelp:false,
     
 
-    // -------- Main benefit amounts --------
-
-
     // -------- Pre-Benefit Activities--------
-    createCV: "$potentialDPBSoleParent",
-
+    createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
+    attendPAM: "$potentialUnemploymentBenefit",
 
 
     // -------- Obligations --------
@@ -201,8 +336,24 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialWidowsBenefit" , 
                     	"potentialDPBWomanAlone",
                     	"potentialHealthRelatedBenefit",
-                    	"potentialYouthPayment"
+                    	"potentialYouthPayment",
+                    	"potentialYoungParentPayment",
+                    	"potentialUnemploymentBenefitTraining",
+                    	"potentialUnemploymentBenefit",
+                    	"potentialNewZealandSuperannuationSingle",
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
+                    	"potentialNewZealandSupperannuationPartnerNotIncluded",
+    
+                        "potentialAccommodationSupplement",
+                        "potentialDisabilityAllowance",
+                        "potentialChildcareSubsidy",
+                        "potentialGuaranteedChildcareAssistancePayment",
+                        "potentialOSCARSubsidy",
+                        "potentialTemporaryAdditionalSupport",
+                        "potentialChildDisabilityAllowance",
+                        "potentialLivingAlonePayment",
+                        "potentialExtraHelp"
                    ];
 var allObligations = [  ];
 
-var allPBAs = [ "createCV" ];
+var allPBAs = [ "createCV", "attendPAM" ];

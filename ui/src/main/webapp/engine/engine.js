@@ -33,7 +33,8 @@ engine = {
 
         // Field validation. Use our own date parsing - validator uses JS's built-in stuff by
         // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
-        $.validator.addMethod("nzdate", validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("nzdate", engine.validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         engine.validator = $("form").validate();
 
 
@@ -288,8 +289,14 @@ engine = {
         var fetch = function () {
             if (fragmentUrls.length) {
                 var url = fragmentUrls.shift();
+
+                // avoid caching
+                url += (url.match(/\?/) ? "&" : "?") + "dummy=" + $.now();
+                
                 debug("fetching " + url);
-                intoElement.load(url, null, fetch);
+                var newbox = $("<div class='pageFragment'></div>");
+                newbox.appendTo(intoElement);
+                newbox.load(url, null, fetch);
             }
             else {
                 intoElement.html(engine.replaceVariablesInText(intoElement.html()));
@@ -338,6 +345,18 @@ engine = {
         eval("window.evaluationResult = " + cond2);
         debugIf(debugConditions, " -> " + window.evaluationResult);
         return window.evaluationResult;
+    },
+    
+    
+    evalMap:function (map, description) {
+    	for (var exp in map){
+    		if (engine.evaluate(exp)){
+                debug(description + ": " + map[exp]);
+    			return map[exp];
+    		}
+    	}
+    	debug("evalMap - no match found for " + description);
+    	return undefined;
     },
 
     /**
@@ -395,6 +414,23 @@ engine = {
             }
             else if (!isNaN(Number(val))) {
                 val = Number(val);
+            }
+        }
+
+        else if (element.hasClass("currency")) {
+            if (val === undefined) {
+                val = 0;
+            }
+            else {
+                var v2 = val;
+                
+                // Remove leading $ sign
+                if (v2.length > 0 && v2.charAt(0) == '$')
+                    v2 = v2.substr(1);
+                
+                if (!isNaN(Number(v2))) {
+                    val = Number(v2);
+                }
             }
         }
 
@@ -535,35 +571,40 @@ engine = {
      */
     groupSel:function (groupNum) {
         return ".group:eq(" + groupNum + ")";
-    }
-};
-
-/** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
-function validateNzDate(str) {
-    // parseDate is lenient about the number of digits in a year. We don't want that.
-    if (!str.match(/[/ ]\d\d\d\d$/))
-        return false;
-
-    // 31/1/1970
-    var ok = false;
-    try {
-        $.datepicker.parseDate("d/m/yy", str);
-        ok = true;
-    }
-    catch(ex) {}
-
-    // 31 Jan 1970
-    if (!ok) {
+    },
+    
+    /** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
+    validateNzDate: function(str) {
+        // parseDate is lenient about the number of digits in a year. We don't want that.
+        if (!str.match(/[/ ]\d\d\d\d$/))
+            return false;
+    
+        // 31/1/1970
+        var ok = false;
         try {
-            $.datepicker.parseDate("d M yy", str);
+            $.datepicker.parseDate("d/m/yy", str);
             ok = true;
         }
-        catch (ex) {
+        catch(ex) {}
+    
+        // 31 Jan 1970
+        if (!ok) {
+            try {
+                $.datepicker.parseDate("d M yy", str);
+                ok = true;
+            }
+            catch (ex) {
+            }
         }
+    
+        return ok;
+    },
+    
+    validateCurrency: function (str) {
+        str = $.trim(str);
+        return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
     }
-
-    return ok;
-}
+};
 
 function debugIf(condition, msg) {
     if (condition)

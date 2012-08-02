@@ -37,6 +37,11 @@ header {
     background-image: url("images/bg-page-gradient2.jpg");
     z-index: 10;
     /*box-shadow: 0 0 1em #d0d0d0;*/
+
+    /* Make fixed positioning work in IE6: */
+    _position: absolute;
+    _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+
 }
 header img {
     position: relative;
@@ -49,6 +54,35 @@ header img {
     padding: 1em 1em 0.7em 1em;
     /*box-shadow: 0 0 1em #d0d0d0;*/
 }
+
+.noscript {
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #303030;
+}
+.noscriptInner {
+    background-color: #f0f0f0;
+    width: 34em;
+    padding: 2em;
+    margin-left: -19em;
+    margin-top: 5em;
+    left: 50%;
+    position: relative;
+}
+.noscript, .noscript a {
+    color: #303030;
+}
+.noscript h2 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 1em;
+}
+
+
 h1 {
     color: #CE3436;
     text-shadow: 0 1px 0 #ffcccc;
@@ -88,6 +122,9 @@ h1 {
     padding: 0 1em 0 1em;
     background: -moz-linear-gradient(to bottom, rgba(255,255,255,255), rgba(255,255,255,0));
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,255)), to(rgba(255,255,255,0)));
+
+    /* hide in IE6 */
+    _display: none;
 }
 
 #outer {
@@ -105,6 +142,13 @@ h1 {
     margin: 0 7em 0 6em;
 }
 
+p {
+    margin-bottom: 0.7em;
+}
+
+form ul {
+    margin-bottom: 0.7em;
+}
 .question {
     background-color: #eeeeee;
     padding: 0.8em 1em 0.9em 1em;
@@ -184,10 +228,10 @@ input[type='checkbox'] {
     padding: 0.5em 0 0 5em;
     font-size: 13px;
 }
-.help ul, .info ul {
+ul {
     padding-left: 2em;
 }
-.help li, .info li {
+li {
     list-style: disc;
 }
 
@@ -259,15 +303,16 @@ input[type='checkbox'] {
     border: 2px solid #a00000;
     color: #202020;
 }
-#ineligible p {
-    margin-bottom: 0.7em;
-}
 
 #eligible {
     background-color: #f8f8f8;
     border: 2px solid #00a000;
     color: #404040;
     font-size: 15px;
+}
+
+#eligible .pageFragment {
+    margin-bottom: 1em;
 }
 
 #eligible h2 {
@@ -279,8 +324,12 @@ input[type='checkbox'] {
     margin-top: 0;
 }
 
-#eligible .benefitName {
+#eligible .benefitName{
     font-weight: 600;
+}
+
+#PBAs .preBenefitActivityName{
+	 font-weight: 600;
 }
 
 

@@ -1,11 +1,7 @@
 ﻿<!doctype html>
 <!--
 TODO:
-- noscript
-- todo question below
-- enforce at lease one childAgeRange selected(?)
-- IE9
-- IE6
+- DA rate(s)
 
 TODO, probably later:
 - Navigate directly back to particular sections (worth it?)
@@ -21,14 +17,14 @@ NOTES:
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../thirdparty/cssreset-min.css">
-    <link rel="stylesheet" href="index.css?dummy=1" type="text/css" />
+    <link rel="stylesheet" href="index.css?dummy=2" type="text/css" />
     <script src="../thirdparty/jquery-1.7.2.js" type="text/javascript"></script>
     <script src="../thirdparty/jquery.validate.js" type="text/javascript"></script>
     <script src="../thirdparty/jquery-ui.min.js"></script>
     <script src="../engine/debugHelper.js" type="text/javascript"></script>
-    <script src="../engine/engine.js?dummy=1" type="text/javascript"></script>
-    <script src="rules.js?dummy=1" type="text/javascript"></script>
-    <script src="calculator.js?dummy=1" type="text/javascript"></script>
+    <script src="../engine/engine.js?dummy=2" type="text/javascript"></script>
+    <script src="rules.js?dummy=2" type="text/javascript"></script>
+    <script src="calculator.js?dummy=2" type="text/javascript"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <!--[if (gte IE 6)&(lte IE 8)]>
@@ -51,7 +47,16 @@ NOTES:
 
 
 <noscript>
-
+    <div class="noscript">
+        <div class="noscriptInner">
+            <h2>You cannot use this web page because you have turned off JavaScript.</h2>
+            <p>
+                You can fix this:
+                <a href="http://www.enable-javascript.com/" target="_blank"> click here and
+                    follow these instructions that tell you how to turn JavaScript back on again.</a>
+            </p>
+        </div>
+    </div>
 </noscript>
 
 
@@ -78,6 +83,8 @@ NOTES:
 	        <div class="question" data-ineligible="$age < 16">
                 <label for="dateOfBirth">What is your date of birth?</label>
                 <input type="text" name="dateOfBirth" id="dateOfBirth" class="nzdate">
+
+                <p class="info">like this: 2/10/1970 or 2 Oct 1970</p>
             </div>
 
             <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
@@ -125,7 +132,7 @@ NOTES:
 
             <div class="question">
                 <label for="area">What town or city do you live in?</label>
-                <select name="area" id="area">
+                <select name="area" id="area" class="number">
                     <!-- These values are area numbers 1-4, not town identifiers -->
                     <option value="" selected="selected">-- Choose an option --</option>
                     <!-- This list obtained -->
@@ -345,15 +352,12 @@ NOTES:
             </div>
 
 	        <div class="question" data-visible="$stillWorking">
-                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label>
-                $&nbsp;<input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="number">
+                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label><br>
+                $ <input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="currency">
 
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
-                </p>
-                <p class="info">
-                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
                 </p>
             </div>
 
@@ -373,11 +377,14 @@ NOTES:
             </div>
 
 	        <div class="question" data-visible="$acc">
-                <fieldset>
-                    <div>Has ACC confirmed that you can receive both weekly compensation from ACC and New Zealand Superannuation for 12 months?</div>
-                    <input type="radio" name="accNZS" id="accNZSYes" value="true"> <label for="accNZSYes">Yes</label>
-                    <input type="radio" name="accNZS" id="accNZSNo" value="false"> <label for="accNZSNo">No</label>
-                </fieldset>
+                <p>Weekly compensation is paid by ACC to compensate for the loss of earnings as a result of injury.</p>
+                <p>If you receive weekly compensation payments through ACC, you cannot receive New Zealand Superannuation
+                unless ACC have confirmed:</p>
+                <ul>
+                    <li>that you can get both New Zealand Superannuation and ACC payments for a period of time, OR</li>
+                    <li>the date your ACC payments will stop.</li>
+                </ul>
+                <p>You will need to contact ACC to discuss this.</p>
             </div>
         </fieldset>
 
@@ -400,13 +407,10 @@ NOTES:
 
 	        <div class="question" data-visible="$partnerStillWorking">
                 <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label>
-                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="number">
+                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency">
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
-                </p>
-                <p class="info">
-                    Don’t include the $ sign when you enter the amount. For example, enter 40.50 if you earn 40 dollars and 50 cents per week.
                 </p>
             </div>
 
@@ -491,7 +495,7 @@ NOTES:
                     <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
-                        <div>$&nbsp;<input type="text" name="incomeAmount" class="number"/></div>
+                        <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
                     </div>
                     <div class="clearfix">
                         <label>How often do you / your partner receive these payments?</label>
@@ -535,12 +539,12 @@ NOTES:
 
             <div class="question" data-visible="$trainingCourse">
                 <fieldset>
-                    <div>Is the training a Training Opportunities (TOP) course?</div>
+                    <div>Is the training a Foundation Focused Training course?</div>
                     <input type="radio" name="topCourse" id="topCourseYes" value="true"> <label for="topCourseYes">Yes</label>
                     <input type="radio" name="topCourse" id="topCourseNo" value="false"> <label for="topCourseNo">No</label>
                 </fieldset>
 				<p class="info">
-                    Training Opportunities Programmes (TOP) are funded by the Tertiary Education Commission. If you're not sure if your course is a TOP course, talk to your Training Provider.
+                    Foundation Focused Training cources are funded by the Tertiary Education Commission. If you're not sure, talk to your Training Provider.
 				</p>
             </div>
         </fieldset>
@@ -685,33 +689,30 @@ NOTES:
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="!$visitorStaying">
+	        <div class="question" data-visible="!$liveAlone && !$visitorStaying">
                 <fieldset>
                     <div>Do you live with anyone aged 18 years or over?</div>
                     <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
                     <input type="radio" name="liveWithAdult" id="liveWithAdultNo" value="false"> <label for="liveWithAdultNo">No</label>
                 </fieldset>
             </div>
-        </fieldset>
 
-        <!-- TODO precondition. Error in spreadsheet? Seems to refer to itself. -->
-        <!--
-        <div class="group" data-visible="$seniorOk && $livingAlonePartnerInCare && !$visitorStaying">
-	        <div class="question">
+	        <div class="question" data-visible="!$liveAlone">
                 <fieldset>
-                    <div>Do you live with anyone, who is not a dependent child attending school or a tertiary institution?</div>
-                    <input type="radio" name="mystery" id="mysteryYes" value="true"> <label for="mysteryYes">Yes</label>
-                    <input type="radio" name="mystery" id="mysteryNo" value="false"> <label for="mysteryNo">No</label>
+                    <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentNo" value="false"> <label for="liveWithNonDependentNo">No</label>
                 </fieldset>
 
-                <p class="info">"Do not include children under 18 years of age in this answer.
-                    <a href="#" class="helpButton">More information</a></p>
+                <p class="info">
+                    Do not include children under 18 years of age in this answer.
+                    <a href="#" class="helpButton">More information</a>
+                </p>
                 <div class="help">
                     A dependent child is a child who is financially supported by you and is living with you as a member of your family.  This includes stepchildren, children at boarding school, adopted children, grandchildren and mokopuna.
                 </div>
             </div>
-        </div>
-        -->
+        </fieldset>
 
 
 
@@ -729,7 +730,7 @@ NOTES:
 
 	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren > 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label>
-                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="number">
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency">
             </div>
 
             <div class="question" data-visible="$youth && !$livingAtHome">
@@ -782,17 +783,17 @@ NOTES:
 
             <div class="question" data-visible="$accomodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
-                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="number">
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency">
             </div>
 
             <div class="question" data-visible="$accomodationType == 'Board'">
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
-                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="number">
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
             </div>
 
             <div class="question" data-visible="$accomodationType == 'Own Home'">
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
-                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="number">
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
             </div>
 
         </fieldset>
@@ -852,7 +853,7 @@ NOTES:
 
             <div class="question" data-visible="$notMeetingLivingCosts || $accomodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
-                $ <input type="text" name="cashAssets" id="cashAssets" class="number">
+                $ <input type="text" name="cashAssets" id="cashAssets" class="currency">
 
                 <p class="info">
                     <a href="#" class="helpButton">Click here for examples of cash assets.</a>
