@@ -66,6 +66,7 @@ var definitions = {
     ubSingle1819AwayGWILimit:320,
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
+    nonQualifiedPartnerIncludedLimit:860,
     
     
     // -- Rates -- //
@@ -229,13 +230,16 @@ var definitions = {
     potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //ACC stuff not required
     
     
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single &&" +
-    		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
-    		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single && " +
+    		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
+    		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
     		"			$partnerAge >= 16 && $partnerResident",
     		
     		
-    potentialNewZealandSupperannuationPartnerNotIncluded:false,
+    potentialNewZealandSupperannuationPartnerNotIncluded:"$seniorsAge && $resident && !$single && " +
+    "			((!$includePartnerInNZS || $partnerReceivingNZS) || " + //i don't think this is right.
+	"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
+    		"	!$potentialNewZealandSuperannuationNonQualifiedSpouse " , 
     
     // TODO what are these?
     undeterminedYouthPayment: false,
@@ -293,7 +297,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
                     	"potentialNewZealandSuperannuationSingle",
-                    	"potentialNewZealandSuperannuationNonQualifiedSpouse"
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
+                    	"potentialNewZealandSupperannuationPartnerNotIncluded"
                    ];
 var allObligations = [  ];
 
