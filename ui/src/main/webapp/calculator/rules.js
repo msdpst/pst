@@ -70,9 +70,7 @@ var definitions = {
     
     
     // -- Rates -- //
-    
-    dpbSoleParentAmount : 400, //TODO NOT THE RIGHT AMOUNT!
-    
+
     // Accommodation supplement maximums - each has a rate for each area
     accSuppSingle: [145, 100, 65, 45],
     accSuppCouple: [160, 125, 75, 55],
@@ -98,9 +96,20 @@ var definitions = {
     	"$partner && $dependentChildren >= 0":213.49,
     	"$single && $dependentChildren > 0":336.55
     },
+    
+    ratesDPB : {
+    	"($potentialWidowsBenefit || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":213.49,
+    	"$potentialWidowsBenefit && $single && $dependentChildren >=1 ":293.58,
+    	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":256.19,
+    	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":336.55
+    },
     	
     ubRate: "engine.evalMap(definitions.ratesUB)",
     ibRate: "engine.evalMap(definitions.ratesIB)",
+    dpbRate : "engine.evalMap(definitions.ratesDPB)",
+    
+    dpbSoleParentAmount : 336.58,
+    
     
 
     // -------- Calculations --------
