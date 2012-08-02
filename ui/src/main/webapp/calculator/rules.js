@@ -226,7 +226,7 @@ var definitions = {
 			"	!$potentialHealthRelatedBenefit",
 	
 	
-    potentialNewZealandSuperannuationSingle:false,
+    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //TODO ACC questions
     potentialNewZealandSuperannuationNonQualifiedSpouse:false,
     potentialNewZealandSupperannuationPartnerNotIncluded:false,
     
@@ -259,8 +259,8 @@ var definitions = {
     
 
     // -------- Pre-Benefit Activities--------
-    createCV: "$potentialDPBSoleParent",
-
+    createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
+    attendPAM: "$potentialUnemploymentBenefit",
 
 
     // -------- Obligations --------
@@ -284,8 +284,9 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialYouthPayment",
                     	"potentialYoungParentPayment",
                     	"potentialUnemploymentBenefitTraining",
-                    	"potentialUnemploymentBenefit"
+                    	"potentialUnemploymentBenefit",
+                    	"potentialNewZealandSuperannuationSingle"
                    ];
 var allObligations = [  ];
 
-var allPBAs = [ "createCV" ];
+var allPBAs = [ "createCV", "attendPAM" ];
