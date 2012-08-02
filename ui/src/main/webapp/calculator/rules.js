@@ -14,7 +14,7 @@ var definitions = {
     parent: "$dependentChildren != 0",
     youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
-    
+    partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
     
     
 
@@ -66,6 +66,7 @@ var definitions = {
     ubSingle1819AwayGWILimit:320,
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
+    nonQualifiedPartnerIncludedLimit:860,
     
     
     // -- Rates -- //
@@ -233,9 +234,19 @@ var definitions = {
 			"	!$potentialHealthRelatedBenefit",
 	
 	
-    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //TODO ACC questions
-    potentialNewZealandSuperannuationNonQualifiedSpouse:false,
-    potentialNewZealandSupperannuationPartnerNotIncluded:false,
+    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //ACC stuff not required
+    
+    
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single && " +
+    		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
+    		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
+    		"			$partnerAge >= 16 && $partnerResident",
+    		
+    		
+    potentialNewZealandSupperannuationPartnerNotIncluded:"$seniorsAge && $resident && !$single && " +
+    "			((!$includePartnerInNZS || $partnerReceivingNZS) || " + //i don't think this is right.
+	"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
+    		"	!$potentialNewZealandSuperannuationNonQualifiedSpouse " , 
     
     // TODO what are these?
     undeterminedYouthPayment: false,
@@ -293,6 +304,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
                     	"potentialNewZealandSuperannuationSingle",
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
+                    	"potentialNewZealandSupperannuationPartnerNotIncluded",
     
                         "potentialAccommodationSupplement",
                         "potentialDisabilityAllowance",
