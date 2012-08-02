@@ -348,13 +348,14 @@ engine = {
     },
     
     
-    evalMap:function (map) {
+    evalMap:function (map, description) {
     	for (var exp in map){
     		if (engine.evaluate(exp)){
+                debug(description + ": " + map[exp]);
     			return map[exp];
     		}
     	}
-    	debug("evalMap - no match found");
+    	debug("evalMap - no match found for " + description);
     	return undefined;
     },
 

@@ -11,7 +11,7 @@ var definitions = {
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
-    parent: "$dependentChildren != 0",
+    parent: "$dependentChildren > 0",
     youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
     partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
@@ -68,6 +68,22 @@ var definitions = {
     ubSingle25GWILimit:368,
     nonQualifiedPartnerIncludedLimit:860,
     
+    daGWILimits: {
+        "$workingAge && !$partner && $dependentChildren == 0": 575.48,
+        "$workingAge && !$partner && $dependentChildren == 1": 693.45,
+        "$workingAge && !$partner && $dependentChildren > 1": 730.60,
+        "$workingAge && $partner": 851.83,
+        "$youth && !$partner && $dependentChildren == 0": 497.27,
+        "$youth && $partner && $dependentChildren == 0": 851.83,
+        "$youngParent && !$partner": 497.27,
+        "$youngParent && $partner && $partnerAge >= 18": 851.83, // TODO what about young parents with partners under 18?
+        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58,
+        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45,
+        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,
+        "$seniorsAge && $partner": 851.83
+    },
+    daGWILimit: "engine.evalMap(definitions.daGWILimits, 'daGWILimits')",
+    
     
     // -- Rates -- //
     
@@ -92,7 +108,7 @@ var definitions = {
     	
     },
     	
-    ubRate: "engine.evalMap(definitions.ratesUB)",
+    ubRate: "engine.evalMap(definitions.ratesUB, 'ratesUB')",
     
 
     // -------- Calculations --------
@@ -274,10 +290,13 @@ var definitions = {
     // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
     potentialAccommodationSupplement:
         "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
-        "   !($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
-    ,
+        "   !($accomodationType == 'Rent' && $housingNz)", // a simpler equivalent of the spreadsheet condition
     
-    potentialDisabilityAllowance:false,
+    potentialDisabilityAllowance:
+        "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
+        "   $disabilityCosts &&" +
+        "   $familyTotalGrossWeeklyIncome < $daGWILimit",
+    
     potentialChildcareSubsidy:false,
     potentialGuaranteedChildcareAssistancePayment:false,
     potentialOSCARSubsidy:false,
