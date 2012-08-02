@@ -70,7 +70,7 @@ var definitions = {
     
     // -- Rates -- //
     
-    dpbSoleParentAmount : 400, //NOT THE RIGHJT AMOUNT!
+    dpbSoleParentAmount : 400, //TODO NOT THE RIGHT AMOUNT!
     
     
 
@@ -247,7 +247,12 @@ var definitions = {
     
     // -------- Supplements (e.g., not main benefits) ------- //
     
-    potentialAccomodationSupplement:false,
+    // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
+    potentialAccomodationSupplement:
+        "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
+        "   !($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
+    ,
+    
     potentialDisabilityAllowance:false,
     potentialChildcareSubsidy:false,
     potentialGuaranteedChildcareAssistancePayment:false,
@@ -259,9 +264,6 @@ var definitions = {
     
     potentialExtraHelp:false,
     
-
-    // -------- Main benefit amounts --------
-
 
     // -------- Pre-Benefit Activities--------
     createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
