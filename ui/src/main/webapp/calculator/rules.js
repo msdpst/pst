@@ -89,10 +89,18 @@ var definitions = {
     	"$partner && $dependentChildren > 0": 170.80,
     	"!$partner && $dependentChildren > 0": 293.58,
     	"$age>=25": 204.96
-    	
+    },
+    
+    ratesIB : { 
+    	"$single && ($age==16 || $age==17)":207.32,
+    	"$single && $age>=18":256.19,
+    	"$partner && $dependentChildren == 0":213.49,
+    	"$partner && $dependentChildren >= 0":213.49,
+    	"$single && $dependentChildren > 0":336.55
     },
     	
     ubRate: "engine.evalMap(definitions.ratesUB)",
+    ibRate: "engine.evalMap(definitions.ratesIB)",
     
 
     // -------- Calculations --------
