@@ -14,7 +14,7 @@ var definitions = {
     parent: "$dependentChildren != 0",
     youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
-    
+    partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
     
     
 
@@ -226,8 +226,15 @@ var definitions = {
 			"	!$potentialHealthRelatedBenefit",
 	
 	
-    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //TODO ACC questions
-    potentialNewZealandSuperannuationNonQualifiedSpouse:false,
+    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //ACC stuff not required
+    
+    
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single &&" +
+    		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
+    		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
+    		"			$partnerAge >= 16 && $partnerResident",
+    		
+    		
     potentialNewZealandSupperannuationPartnerNotIncluded:false,
     
     // TODO what are these?
@@ -283,7 +290,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialYoungParentPayment",
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
-                    	"potentialNewZealandSuperannuationSingle"
+                    	"potentialNewZealandSuperannuationSingle",
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse"
                    ];
 var allObligations = [  ];
 
