@@ -346,6 +346,17 @@ engine = {
         debugIf(debugConditions, " -> " + window.evaluationResult);
         return window.evaluationResult;
     },
+    
+    
+    evalMap:function (map) {
+    	for (var exp in map){
+    		if (engine.evaluate(exp)){
+    			return map[exp];
+    		}
+    	}
+    	debug("evalMap - no match found");
+    	return undefined;
+    },
 
     /**
      * Converts a condition string to a JS string we can eval, by expanding $variables to

@@ -81,6 +81,19 @@ var definitions = {
     accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75],
     accSuppMax: "calculator.calculateAccSuppMax()",
     
+    ratesUB : { 
+    	"$age<20 && $age>=18 && $livingAtHome": 136.64, 
+    	"$age<20 && $age>=18 && !$livingAtHome": 170.80,
+    	"$age<25 && $age>19 && $single": 170.80,
+    	"$partner && $dependentChildren == 0": 170.80,
+    	"$partner && $dependentChildren > 0": 170.80,
+    	"!$partner && $dependentChildren > 0": 293.58,
+    	"$age>=25": 204.96
+    	
+    },
+    	
+    ubRate: "engine.evalMap(definitions.ratesUB)",
+    
 
     // -------- Calculations --------
     totalFamilyGrossWeeklyWage: "$applicantGrossWeeklyWage + $partnerGrossWeeklyWage",
