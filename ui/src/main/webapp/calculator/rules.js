@@ -11,7 +11,7 @@ var definitions = {
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
-    parent: "$dependentChildren != 0",
+    parent: "$dependentChildren > 0",
     youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
     partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
@@ -67,6 +67,22 @@ var definitions = {
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
     nonQualifiedPartnerIncludedLimit:860,
+    
+    daGWILimits: {
+        "$workingAge && !$partner && $dependentChildren == 0": 575.48,
+        "$workingAge && !$partner && $dependentChildren == 1": 693.45,
+        "$workingAge && !$partner && $dependentChildren > 1": 730.60,
+        "$workingAge && $partner": 851.83,
+        "$youth && !$partner && $dependentChildren == 0": 497.27,
+        "$youth && $partner && $dependentChildren == 0": 851.83,
+        "$youngParent && !$partner": 497.27,
+        "$youngParent && $partner && $partnerAge >= 18": 851.83, // TODO what about young parents with partners under 18?
+        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58,
+        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45,
+        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,
+        "$seniorsAge && $partner": 851.83
+    },
+    daGWILimit: "engine.evalMap(definitions.daGWILimits, 'daGWILimits')",
     
     
     // -- Rates -- //
