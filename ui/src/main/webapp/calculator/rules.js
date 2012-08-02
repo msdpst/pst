@@ -72,6 +72,13 @@ var definitions = {
     
     dpbSoleParentAmount : 400, //TODO NOT THE RIGHT AMOUNT!
     
+    // Accommodation supplement maximums - each has a rate for each area
+    accSuppSingle: [145, 100, 65, 45],
+    accSuppCouple: [160, 125, 75, 55],
+    accSuppCoupleWithChildren: [225, 165, 120, 75],
+    accSuppSoleParent1Child: [160, 125, 75, 55],
+    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75],
+    accSuppMax: "calculator.calculateAccSuppMax()",
     
 
     // -------- Calculations --------
@@ -241,7 +248,7 @@ var definitions = {
     // -------- Supplements (e.g., not main benefits) ------- //
     
     // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
-    potentialAccomodationSupplement:
+    potentialAccommodationSupplement:
         "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
         "   !($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
     ,
@@ -285,7 +292,17 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialYoungParentPayment",
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
-                    	"potentialNewZealandSuperannuationSingle"
+                    	"potentialNewZealandSuperannuationSingle",
+    
+                        "potentialAccommodationSupplement",
+                        "potentialDisabilityAllowance",
+                        "potentialChildcareSubsidy",
+                        "potentialGuaranteedChildcareAssistancePayment",
+                        "potentialOSCARSubsidy",
+                        "potentialTemporaryAdditionalSupport",
+                        "potentialChildDisabilityAllowance",
+                        "potentialLivingAlonePayment",
+                        "potentialExtraHelp"
                    ];
 var allObligations = [  ];
 

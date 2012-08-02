@@ -142,7 +142,11 @@ h1 {
     margin: 0 7em 0 6em;
 }
 
-form p, form ul {
+p {
+    margin-bottom: 0.7em;
+}
+
+form ul {
     margin-bottom: 0.7em;
 }
 .question {
@@ -299,15 +303,16 @@ li {
     border: 2px solid #a00000;
     color: #202020;
 }
-#ineligible p {
-    margin-bottom: 0.7em;
-}
 
 #eligible {
     background-color: #f8f8f8;
     border: 2px solid #00a000;
     color: #404040;
     font-size: 15px;
+}
+
+#eligible .pageFragment {
+    margin-bottom: 1em;
 }
 
 #eligible h2 {

@@ -146,6 +146,37 @@ var calculator = {
         }
         debug("calculateTotalOtherIncome: " + total);
         return total;
+    },
+    
+    
+    
+    calculateAccSuppMax: function() {
+        var partner = engine.getAnswer("partner");
+        var dependentChildren = engine.getAnswer("dependentChildren");
+        var area = engine.getAnswer("area");
+        
+        // If area's not set yet, don't cause a scripting error
+        if (!(area >= 1 && area <= 4)) {
+            debug("calculateAccSuppMax exiting because of invalid area: " + area);
+            return 0;
+        }
+
+        area--; // convert to array index
+        
+        if (partner) {
+            if (dependentChildren > 0)
+                return definitions.accSuppCoupleWithChildren[area];
+            else
+                return definitions.accSuppCouple[area];
+        }
+        else {
+            if (dependentChildren > 1)
+                return definitions.accSuppSoleParent2OrMoreChildren[area];
+            else if (dependentChildren == 1)
+                return definitions.accSuppSoleParent1Child[area];
+            else
+                return definitions.accSuppSingle[area];
+        }
     }
 };
 

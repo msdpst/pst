@@ -289,8 +289,12 @@ engine = {
         var fetch = function () {
             if (fragmentUrls.length) {
                 var url = fragmentUrls.shift();
+
+                // avoid caching
+                url += (url.match(/\?/) ? "&" : "?") + "dummy=" + $.now();
+                
                 debug("fetching " + url);
-                var newbox = $("<div></div>");
+                var newbox = $("<div class='pageFragment'></div>");
                 newbox.appendTo(intoElement);
                 newbox.load(url, null, fetch);
             }
