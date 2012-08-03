@@ -110,12 +110,14 @@ engine = {
         if (!ok) {
             // Don't alert on auto-next (ie. when they answer last question in group)
             if (!automatic)
-                alert("Please answer all questions");
+                //alert("Please answer all questions");
+            	$('#answerAllMessage').show('slow');
             return;
         }
 
         // Validation
         ok = true;
+        $('#answerAllMessage').hide();
         $(inputSelector).each(function () {
             if (!engine.validator.element($(this)))
                 ok = false;

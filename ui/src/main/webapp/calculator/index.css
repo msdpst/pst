@@ -21,6 +21,13 @@ header img, #headerInner, #buffer, #outer {
 #progress, #progressLabel, form {
     width: 36em;
 }
+
+#answerAllMessage{
+	display: none;
+	color: red;
+	
+}
+
 form, #progressLabel, #progress {
     margin-left: 4em !important;
 }
