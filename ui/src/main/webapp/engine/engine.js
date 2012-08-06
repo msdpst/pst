@@ -294,7 +294,7 @@ engine = {
 
                 // avoid caching
                 url += (url.match(/\?/) ? "&" : "?") + "dummy=" + $.now();
-                
+
                 debug("fetching " + url);
                 var newbox = $("<div class='pageFragment'></div>");
                 newbox.appendTo(intoElement);
@@ -348,8 +348,8 @@ engine = {
         debugIf(debugConditions, " -> " + window.evaluationResult);
         return window.evaluationResult;
     },
-    
-    
+
+
     evalMap:function (map, description) {
     	for (var exp in map){
     		if (engine.evaluate(exp)){
@@ -369,16 +369,19 @@ engine = {
      */
     processVariables:function (expression) {
         return expression.replace(/\$(\w+)/g, function (s) {
+            var result;
             var name = s.substring(1);
             if (definitions[name] !== undefined) {
                 if (jQuery.type(definitions[name]) == "string")
-                    return "(" + engine.processVariables(definitions[name]) + ")";
+                    result = "(" + engine.processVariables(definitions[name]) + ")";
                 else
-                    return "(" + definitions[name] + ")";
+                    result = "(" + definitions[name] + ")";
             }
             else {
-                return "engine.getAnswer('" + name + "')";
+                result = "engine.getAnswer('" + name + "')";
             }
+            //debug("'" + s + "' => '" + result + "'");
+            return result;
         });
     },
 
@@ -425,11 +428,11 @@ engine = {
             }
             else {
                 var v2 = val;
-                
+
                 // Remove leading $ sign
                 if (v2.length > 0 && v2.charAt(0) == '$')
                     v2 = v2.substr(1);
-                
+
                 if (!isNaN(Number(v2))) {
                     val = Number(v2);
                 }
@@ -574,13 +577,13 @@ engine = {
     groupSel:function (groupNum) {
         return ".group:eq(" + groupNum + ")";
     },
-    
+
     /** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
     validateNzDate: function(str) {
         // parseDate is lenient about the number of digits in a year. We don't want that.
         if (!str.match(/[/ ]\d\d\d\d$/))
             return false;
-    
+
         // 31/1/1970
         var ok = false;
         try {
@@ -588,7 +591,7 @@ engine = {
             ok = true;
         }
         catch(ex) {}
-    
+
         // 31 Jan 1970
         if (!ok) {
             try {
@@ -598,10 +601,10 @@ engine = {
             catch (ex) {
             }
         }
-    
+
         return ok;
     },
-    
+
     validateCurrency: function (str) {
         str = $.trim(str);
         return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
