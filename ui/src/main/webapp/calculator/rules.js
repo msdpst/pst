@@ -33,6 +33,7 @@ var definitions = {
     workingAge: "($age == 18 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
     age50to64: "($age >= 50 && $age <= 64)",
     partner16or17: "$partnerAge == 16 || $partnerAge == 17",
+    partner16to18: "$partnerAge >= 16 && $partnerAge <= 18",
     single: "!$partner", // spreadsheet also lists all values of relationshipStatusSingle; not sure why
 
     youthLivingCircs : "!$livingAtHome && !$parentSupport && " +
@@ -62,15 +63,25 @@ var definitions = {
     
     widowsSoleParentGWILimit : 570,
     dpbCsiSoleParentGWILimit : 570,
-    ibSingle18GWILimit : 300,
-    ibSoleParentGWILimit : 300,
-    ibRelationshipGWILimit : 300,
-    yppSingleGWILimit : 300,
-    yppRelationshipGWILimit:300,
+    
+    ibSingle18GWILimit : 517,
+    ibSoleParentGWILimit : 630,
+    ibRelationshipGWILimit : 757,
+    
+    yppSingleGWILimit : 257,
+    yppRelationshipGWILimit:307,
+    yppParentalIncomeGWILimit:2652,
+    
     ubSingle1819AtHomeGWILimit:272,
     ubSingle1819AwayGWILimit:320,
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
+    
+//    daSingle18Plus:575.48,
+//    daMarriednoChildren:851.83,
+//    daSoleParentSingleChild:693.45,
+//    daSoleParentMuilitipleChildren:730.60,
+    
     nonQualifiedPartnerIncludedLimit:860,
     
     daGWILimits: {
@@ -323,7 +334,17 @@ var definitions = {
    
     
     
-    potentialUndeterminedYoungParentPayment: false,
+    potentialUndeterminedYoungParentPayment: 
+    	"	$youngParent &&" +
+    	"	!$potentialInvalidsBenefit && " +
+		"	$youthResidentLessThan2YearsResidence &&" +
+		"	(" +
+		"			($single && ($youthLivingCircs || ($livingAtHome && ($familyTotalGrossWeeklyIncome < $yppParentalIncomeGWILimit)))) " +
+		"					|| " +
+		"			(!$single && $partner16to18 && ($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit))" +
+		"	) ",
+		
+	
     
     potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
     potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $potentialUndeterminedYouthPayment || $potentialUndeterminedYoungParentPayment",
@@ -333,15 +354,28 @@ var definitions = {
     
     // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
     potentialAccommodationSupplement:
-        "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) &&" +
-        "   !($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
+        "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+        "   && " +
+        "	!($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
     ,
     
-    potentialDisabilityAllowance:false,
-    potentialChildcareSubsidy:false,
+    potentialDisabilityAllowance:
+    	"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+    	"	&& $disabilityCosts " +
+    	"	&& $workingAge " +
+    	"	&& $familyTotalGrossWeeklyIncome < $daGWILimit" ,
+    
+    
+    
+    potentialChildcareSubsidy:
+    	false,
+    
     potentialGuaranteedChildcareAssistancePayment:false,
+    
     potentialOSCARSubsidy:false,
+    
     potentialTemporaryAdditionalSupport:false,
+    
     potentialChildDisabilityAllowance:false,
     
     potentialLivingAlonePayment:false,
@@ -380,6 +414,7 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
                     	"potentialNewZealandSupperannuationPartnerNotIncluded",
     
+                    	//these are actually supplements but we treat them the same way.
                         "potentialAccommodationSupplement",
                         "potentialDisabilityAllowance",
                         "potentialChildcareSubsidy",
