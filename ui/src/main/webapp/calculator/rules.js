@@ -82,6 +82,11 @@ var definitions = {
     ccs2ChildrenLimit: 1600,
     ccs3ChildrenLimit: 1800,
     
+    OSCAR1ChildLimit:1400.00,
+    OSCAR2ChildrenLimit:1600.00,
+    OSCAR3ChildrenLimit:1800.00,
+
+    
     nonQualifiedPartnerIncludedLimit:860,
     
     daGWILimits: {
@@ -379,7 +384,15 @@ var definitions = {
     
     potentialGuaranteedChildcareAssistancePayment:false,
     
-    potentialOSCARSubsidy:false,
+    potentialOSCARSubsidy:"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+    		"&& (($childAged513 || ($childAged1418 && $childDisabilityAllowance)))" +
+    		"&& $oscar" +
+    		"&& ($single || (!$single && !$partnerProvideChildcare))" +
+    		"&& (" +
+	    	"		($dependentChildren == 1 && $familyTotalGrossWeeklyIncome < $OSCAR1ChildLimit) || " +
+	    	"		($dependentChildren == 2 && $familyTotalGrossWeeklyIncome < $OSCAR2ChildrenLimit) || " +
+	    	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $OSCAR3ChildrenLimit) " +
+	    	"		)" ,
     
     potentialTemporaryAdditionalSupport:false,
     
