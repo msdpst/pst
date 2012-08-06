@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 engine = {
     validator:undefined,
-    autoNext:false,
+    autoNext:true,
     currentGroupNum:0,
     SLIDE_TIME:500,
 
