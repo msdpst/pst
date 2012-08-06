@@ -86,6 +86,12 @@ var definitions = {
     OSCAR1ChildLimit:1400.00,
     OSCAR2ChildrenLimit:1600.00,
     OSCAR3ChildrenLimit:1800.00,
+    
+    TASSingleCashAssetLimit:1007.28,
+    TASRelationshipCashAssetLimit:1678.39,
+    TASSoleParent1ChildCashAssetLimit:1678.39,
+    TASanyotherSoleParentCashAssetLimit:1678.39,
+
 
     
     nonQualifiedPartnerIncludedLimit:860,
@@ -372,7 +378,7 @@ var definitions = {
     	"	&& $familyTotalGrossWeeklyIncome < $daGWILimit" ,
     
     
-    //TODO child subsidy
+    
     potentialChildcareSubsidy:
     	"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     	"	&& ($childAged04 || $childAged5NotAtSchool)" +
@@ -383,6 +389,7 @@ var definitions = {
     	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimit) " +
     	"		)" ,
     
+    	//the rules for this dion't match the description - we don't refer to education or training in the rules..?
     potentialGuaranteedChildcareAssistancePayment:
     	"	   ($partner16to18 || $age16to18) " +
     	"	&& ($childAged04 || $childAged5NotAtSchool) " +
@@ -398,7 +405,18 @@ var definitions = {
 	    	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $OSCAR3ChildrenLimit) " +
 	    	"		)" ,
     
-    potentialTemporaryAdditionalSupport:false,
+	    	//TODO temp ass
+    potentialTemporaryAdditionalSupport:"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+    		"&& $notMeetingLivingCosts " +
+    		"&& (" +
+    		"	($single && $dependentChildren == 0 && $cashAssets < $TASSingleCashAssetLimit)" +
+    		"	||" +
+    		"	($single && $dependentChildren == 1 && $cashAssets < $TASSoleParent1ChildCashAssetLimit)" +
+    		"	||" +
+    		"	($single && $dependentChildren >= 2 && $cashAssets < $TASanyotherSoleParentCashAssetLimit)" +
+    		"	||" +
+    		"	(!$single && $cashAssets < $TASRelationshipCashAssetLimit)" +
+    		"	)" ,
     
     potentialChildDisabilityAllowance:false,
     
