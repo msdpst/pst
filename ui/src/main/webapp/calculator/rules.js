@@ -7,6 +7,7 @@ var definitions = {
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     under20: "$age < 20",
     age16to17: "$age >= 16 && $age < 18",
+    age16to18: "$age >= 16 && $age <= 18",
     age18to19: "$age >= 18 && $age < 20",
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
@@ -382,7 +383,10 @@ var definitions = {
     	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimit) " +
     	"		)" ,
     
-    potentialGuaranteedChildcareAssistancePayment:false,
+    potentialGuaranteedChildcareAssistancePayment:
+    	"	   ($partner16to18 || $age16to18) " +
+    	"	&& ($childAged04 || $childAged5NotAtSchool) " +
+    	"	&& $oscar" ,
     
     potentialOSCARSubsidy:"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     		"&& (($childAged513 || ($childAged1418 && $childDisabilityAllowance)))" +
