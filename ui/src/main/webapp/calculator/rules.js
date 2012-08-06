@@ -77,10 +77,10 @@ var definitions = {
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
     
-//    daSingle18Plus:575.48,
-//    daMarriednoChildren:851.83,
-//    daSoleParentSingleChild:693.45,
-//    daSoleParentMuilitipleChildren:730.60,
+    //TODO limits here
+    ccs1ChildLimit: 1400,
+    ccs2ChildrenLimit: 1600,
+    ccs3ChildrenLimit: 1800,
     
     nonQualifiedPartnerIncludedLimit:860,
     
@@ -366,9 +366,16 @@ var definitions = {
     	"	&& $familyTotalGrossWeeklyIncome < $daGWILimit" ,
     
     
-    
+    //TODO child subsidy
     potentialChildcareSubsidy:
-    	false,
+    	"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+    	"	&& ($childAged04 || $childAged5NotAtSchool)" +
+    	"	&& $oscar " +
+    	"	&& (" +
+    	"		($dependentChildren == 1 && $familyTotalGrossWeeklyIncome < $ccs1ChildLimit) || " +
+    	"		($dependentChildren == 2 && $familyTotalGrossWeeklyIncome < $ccs2ChildrenLimit) || " +
+    	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimit) " +
+    	"		)" ,
     
     potentialGuaranteedChildcareAssistancePayment:false,
     
