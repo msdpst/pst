@@ -405,7 +405,7 @@ var definitions = {
 	    	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $OSCAR3ChildrenLimit) " +
 	    	"		)" ,
     
-	    	//TODO temp ass
+	    	
     potentialTemporaryAdditionalSupport:"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     		"&& $notMeetingLivingCosts " +
     		"&& (" +
@@ -418,7 +418,13 @@ var definitions = {
     		"	(!$single && $cashAssets < $TASRelationshipCashAssetLimit)" +
     		"	)" ,
     
-    potentialChildDisabilityAllowance:false,
+    potentialChildDisabilityAllowance:
+    		"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
+    		"	&& ($youth || $workingAge || $seniorsAge)	" +
+    		"	&& $caringForChild " +
+    		"	&& ($childAged04 || $childAged513 || $childAged1418 )" +
+    		"	&& $childStayingInNz " +
+    		"	&& ($childLivingSituation=='Living at home' || ($childLivingSituation=='Residential Home or Hostel' && $supportChildInHostel))" ,
     
     potentialLivingAlonePayment:false,
     
