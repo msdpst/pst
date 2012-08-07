@@ -93,7 +93,6 @@ var definitions = {
     ubSingle2024GWILimit:320,
     ubSingle25GWILimit:368,
 
-    //TODO limits here
     ccs1ChildLimit: 1400,
     ccs2ChildrenLimit: 1600,
     ccs3ChildrenLimit: 1800,
@@ -196,7 +195,7 @@ var definitions = {
     		"	!$potentialWidowsBenefit",
 
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
-    		"	($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..??
+    		"	($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..?? //TODO FINSH THIS
 
     potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
@@ -496,6 +495,6 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                         "potentialUndeterminedWorkingAgeFinancialAssistance",
                         "potentialUndeterminedYouthPayment"
                    ];
-var allObligations = [  ];
+var allObligations = [ ];
 
 var allPBAs = [ "createCV", "attendPAM" ];
