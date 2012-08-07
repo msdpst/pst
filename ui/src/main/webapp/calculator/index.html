@@ -929,11 +929,11 @@ NOTES:
 
 
         <div id="controlBox"> <span id="answerAllMessage">Please Answer all Questions!</span>
-            <button id="backButton" type="button" onclick="engine.onBack()">Back</button>
-            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;">Next</button>
-            
-           
-            
+        	<button id="exitButton" type="button" onclick="engine.exit()"><span id="exitText">Exit</span></button>
+        
+            <button id="backButton" type="button" onclick="engine.onBack()"><span id="backText">Back</span></button>
+            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span id="nextText">Next</span></button>
+
         </div>
 
     </form>
