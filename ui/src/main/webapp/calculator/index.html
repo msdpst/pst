@@ -929,7 +929,7 @@ NOTES:
 
 
         <div id="controlBox"> <span id="answerAllMessage">Please Answer all Questions!</span>
-        	<button id="exitButton" type="button" onclick="engine.exit()"><span id="exitText">Exit</span></button>
+        	<button id="exitButton" type="button" onclick="engine.exitWI()"><span id="exitText">Exit</span></button>
         
             <button id="backButton" type="button" onclick="engine.onBack()"><span id="backText">Back</span></button>
             <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span id="nextText">Next</span></button>
@@ -958,9 +958,24 @@ NOTES:
         <div id="obligations">
            
         </div>
+        
+        <div>
+		  <h2>Apply now</h2>
+		  	<ul>
+		  	<li>If you're not already getting assistance from us, please complete an online application form.</li>
+		  	<li>If you're already getting a benefit from us and want to see what else you might get, call us on <b>0800 559 009</b>.</li>
+		  	<li>If you're deaf, hearing-impaired or find it hard to communicate by phone you can contact 
+		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or <a href="mailto:MSD_Deaf_Services@msd.govt.nz">email <b>MSD_Deaf_Services@msd.govt.nz</b></a>.</li>
+		  	</ul>
+		</div>
+        
 
         <div class="resultsButtonBox">
-            <button onclick="calculator.onBackFromResults()">Back</button>
+        	<button id="exitButton" type="button" onclick="engine.exitWI()"><span id="exitText">Exit</span></button>
+        	<button id="restartButton" onclick="engine.restart()"><span id="restartText">Start Over</span></button>
+        	
+            <button id="backButton" onclick="calculator.onBackFromResults()"><span id="backFromResultsText">Back</span></button>
+            <button id="applyButton" onclick="engine.applyNow()"><span id="applyText">Apply for financial assistance</span></button>
         </div>
     </div>
 

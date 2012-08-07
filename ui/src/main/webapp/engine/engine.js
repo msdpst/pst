@@ -273,6 +273,25 @@ engine = {
             $(this).attr("disabled", "disabled");
         });
     },
+    
+    applyNow:function(){
+    	
+    	window.location="http://www.workandincome.govt.nz/online-services/";
+    	
+    },
+    
+    exitWI:function(){
+    	
+    	//window.location="http://www.workandincome.govt.nz/online-services/";
+    	alert ("back to work and income");
+    	
+    },
+    
+    restart:function(){
+    	
+    	window.location.reload();
+    	
+    },
 
 
 // ------------------- Nuts and bolts --------------------

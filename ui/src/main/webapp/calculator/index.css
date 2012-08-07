@@ -89,6 +89,10 @@ button:active {
 	float:left;
 }
 
+#restartButton{
+	float:left;
+}
+
 
 #exitText{
 	padding-left: 20px;
@@ -96,14 +100,29 @@ button:active {
 	
 }
 
+#restartText{
+	padding-left: 20px;
+	background: url("images/arrow_rotate_anticlockwise.png") no-repeat scroll transparent left;
+	
+}
+
 #backText{
 	padding-left: 20px;
 	background: url("images/arrow_up.png") no-repeat scroll transparent left;
+}
+#backFromResultsText{
+	padding-left: 20px;
+	background: url("images/arrow_left.png") no-repeat scroll transparent left;
 }
 
 #nextText{
 	padding-right: 20px;
 	background: url("images/arrow_down.png") no-repeat scroll transparent right;
+}
+
+#applyText{
+	padding-right: 20px;
+	background: url("images/arrow_right.png") no-repeat scroll transparent right;
 }
 
 
