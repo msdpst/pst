@@ -77,38 +77,36 @@ var definitions = {
 
     // -- Limits -- //
 
-    widowsSoleParentGWILimit : 570,
-    dpbCsiSoleParentGWILimit : 570,
+    widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
+    dpbCsiSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
 
-    ibSingle18GWILimit : 517,
-    ibSoleParentGWILimit : 630,
-    ibRelationshipGWILimit : 757,
+    ibSingle18GWILimit : 524,//IB Single 18+ GWI Limit
+    ibSoleParentGWILimit : 638,//IB Sole Parent GWI Limit
+    ibRelationshipGWILimit : 768,//IB Relationship GWI Limit
 
-    yppSingleGWILimit : 257,
-    yppRelationshipGWILimit:307,
-    yppParentalIncomeGWILimit:2652,
+    yppSingleGWILimit : 307,//YPP single GWI Limit
+    yppRelationshipGWILimit:534,//YPP Relationship GWI Limit
+    yppParentalIncomeGWILimit:1000,//YPP Parental Income GWI Limit
 
-    ubSingle1819AtHomeGWILimit:272,
-    ubSingle1819AwayGWILimit:320,
-    ubSingle2024GWILimit:320,
-    ubSingle25GWILimit:368,
+    ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
+    ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
+    ubSingle2024GWILimit:324, //UB Single 20-24 GWI Limit
+    ubSingle25GWILimit:373, //UB Single 25+ GWI Limit
 
-    ccs1ChildLimit: 1400,
-    ccs2ChildrenLimit: 1600,
-    ccs3ChildrenLimit: 1800,
+    ccs1ChildLimit: 1400,//CCS 1 Child GWI Limit
+    ccs2ChildrenLimit: 1600,//CCS 2 Children GWI Limit 
+    ccs3ChildrenLimit: 1800,//CCS 3 or more Children GWI Limit
 
-    OSCAR1ChildLimit:1400.00,
-    OSCAR2ChildrenLimit:1600.00,
-    OSCAR3ChildrenLimit:1800.00,
+    OSCAR1ChildLimit:1400.00,//OSCAR 1 Child GWI Limit 
+    OSCAR2ChildrenLimit:1600.00,//OSCAR 2 Children GWI Limit
+    OSCAR3ChildrenLimit:1800.00,//OSCAR 3 or more Children GWI Limit
 
-    TASSingleCashAssetLimit:1007.28,
-    TASRelationshipCashAssetLimit:1678.39,
-    TASSoleParent1ChildCashAssetLimit:1678.39,
-    TASanyotherSoleParentCashAssetLimit:1678.39,
+    TASSingleCashAssetLimit:1025.11, //TAS Single Cash Asset Limit
+    TASRelationshipCashAssetLimit:1708.10,//TAS Relationship Cash Asset Limit
+    TASSoleParent1ChildCashAssetLimit:1346.00,//TAS Sole Parent 1 Child Cash Asset Limit
+    TASanyotherSoleParentCashAssetLimit:1445.89,//TAS any other Sole Parent Cash Asset Limit
 
-
-
-    nonQualifiedPartnerIncludedLimit:860,
+    nonQualifiedPartnerIncludedLimit:918,//Non-qualified partner included
 
     daGWILimits: {
         "$workingAge && !$partner && $dependentChildren == 0": 575.48,
@@ -130,11 +128,11 @@ var definitions = {
     // -- Rates -- //
 
     // Accommodation supplement maximums - each has a rate for each area
-    accSuppSingle: [145, 100, 65, 45],
-    accSuppCouple: [160, 125, 75, 55],
-    accSuppCoupleWithChildren: [225, 165, 120, 75],
-    accSuppSoleParent1Child: [160, 125, 75, 55],
-    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75],
+    accSuppSingle: [145, 100, 65, 45], //UB SB YP Single Working Age 
+    accSuppCouple: [160, 125, 75, 55], //UB SB YP relationship without children
+    accSuppCoupleWithChildren: [225, 165, 120, 75], //UB SB YPP - relationship with children
+    accSuppSoleParent1Child: [160, 125, 75, 55], //Sole Parent with one child
+    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75], //Sole Parent with two or more children
     accSuppMax: "calculator.calculateAccSuppMax()",
 
     ratesUB : {
