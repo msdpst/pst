@@ -33,7 +33,7 @@ engine = {
 
         // Field validation. Use our own date parsing - validator uses JS's built-in stuff by
         // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
-        $.validator.addMethod("nzdate", engine.validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a date in the format dd/mm/yyyy");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         engine.validator = $("form").validate();
 
@@ -578,38 +578,82 @@ engine = {
         return ".group:eq(" + groupNum + ")";
     },
 
-    /** Validate that a date is in the format "31/1/1970" or "31 Jan 1970" */
-    validateNzDate: function(str) {
-        // parseDate is lenient about the number of digits in a year. We don't want that.
-        if (!str.match(/[/ ]\d\d\d\d$/))
-            return false;
-
-        // 31/1/1970
-        var ok = false;
-        try {
-            $.datepicker.parseDate("d/m/yy", str);
-            ok = true;
-        }
-        catch(ex) {}
-
-        // 31 Jan 1970
-        if (!ok) {
-            try {
-                $.datepicker.parseDate("d M yy", str);
-                ok = true;
-            }
-            catch (ex) {
-            }
-        }
-
-        return ok;
-    },
-
     validateCurrency: function (str) {
         str = $.trim(str);
         return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
     }
 };
+
+/* ----------- Date extensions ------------ */
+
+/**
+ * Validate that a date is in the format "31/1/1970" or "31 Jan 1970"
+ * @param str
+ * @return {Boolean}
+ */
+Date.validateNzDate = function(str) {
+    return Date.parseNzDate(str) != undefined;
+};
+
+/**
+ * Parse a date in the format "31/1/1970" or "31 Jan 1970".
+ * @param str Date string
+ * @return Date (not millis!), or undefined if the string is invalid
+ */
+Date.parseNzDate = function(str) {
+    var date = undefined;
+
+    // parseDate is lenient about the number of digits in a year. We don't want that.
+    if (str.match(/[/ ]\d\d\d\d$/)) {
+
+        // 31/1/1970
+        date = Date.parseWithFormat(str, "d/m/yy");
+
+        // 31 Jan 1970
+        if (date == undefined)
+            date = Date.parseWithFormat(str, "d M yy");
+    }
+    return date;
+};
+
+/**
+ * Parses a date in the specified format. Currently implemented using JQuery UI's $.datepicker.parseDate().
+ * Note it is lenient about the number of digits in a year.
+ * 
+ * @param dateStr
+ * @param format
+ * @return Date (not millis!) or undefined if the date string (or format string) is invalid
+ */
+Date.parseWithFormat = function(dateStr, format) {
+    try {
+        return $.datepicker.parseDate(format, dateStr);
+    }
+    catch (ex) {
+        return undefined;
+    }
+};
+
+/**
+ * The number of years otherDate is after this date. Time of day is ignored.
+ * 
+ * @param otherDate
+ * @return years - possibly fractional, possibly negative
+ */
+Date.prototype.yearsBefore = function(otherDate) {
+    // We deal with one component at a time - this ensures the number we produce
+    // is intuitively correct, producing a better result than simply calculating
+    // the different in millis and dividing by the appropriate number.
+    var years = otherDate.getYear() - this.getYear();
+    var copy = new Date(this.getTime());
+    copy.setYear(otherDate.getYear());
+    years += (otherDate.getMonth() - copy.getMonth()) / 12;
+    copy.setMonth(otherDate.getMonth());
+    years += (otherDate.getDate() - copy.getDate()) / 365.4;
+    return years;
+};
+
+
+/* ----------- Debugging ------------ */
 
 function debugIf(condition, msg) {
     if (condition)

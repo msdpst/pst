@@ -105,15 +105,15 @@ var calculator = {
     },
 
     calculateAge:function (dateOfBirthString) {
-        var millis = Date.parse(dateOfBirthString);
+        var dob = Date.parseNzDate(dateOfBirthString);
         var age;
-        if (millis) {
-            age = (new Date().getTime() - millis) / (1000 * 60 * 60 * 24 * 365.4);
+        if (dob) {
+            age = dob.yearsBefore(new Date());
         }
         else {
             age = undefined;
         }
-        //debug("age: " + age);
+        debug("age: " + age + " (" + dob + " " + new Date() + ")");
         return age;
     },
 
