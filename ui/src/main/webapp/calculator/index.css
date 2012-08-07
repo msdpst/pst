@@ -89,38 +89,47 @@ button:active {
 	float:left;
 }
 
+#finalExitButton{
+	
+	float:left;
+}
+
+
 #restartButton{
 	float:left;
 }
 
 
-#exitText{
+.exitText{
 	padding-left: 20px;
 	background: url("images/arrow_left.png") no-repeat scroll transparent left;
-	
 }
 
-#restartText{
+
+.restartText{
 	padding-left: 20px;
 	background: url("images/arrow_rotate_anticlockwise.png") no-repeat scroll transparent left;
 	
 }
 
-#backText{
+.backText{
 	padding-left: 20px;
 	background: url("images/arrow_up.png") no-repeat scroll transparent left;
 }
-#backFromResultsText{
+
+
+
+.backFromResultsText{
 	padding-left: 20px;
 	background: url("images/arrow_left.png") no-repeat scroll transparent left;
 }
 
-#nextText{
+.nextText{
 	padding-right: 20px;
 	background: url("images/arrow_down.png") no-repeat scroll transparent right;
 }
 
-#applyText{
+.applyText{
 	padding-right: 20px;
 	background: url("images/arrow_right.png") no-repeat scroll transparent right;
 }
