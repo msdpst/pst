@@ -344,6 +344,10 @@ li {
     list-style: disc;
 }
 
+#dateOfBirth {
+    width: 6em;
+}
+
 .incomeSources {
     font-size: 90%;
 }
