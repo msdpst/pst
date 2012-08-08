@@ -21,6 +21,12 @@ NOTES:
     <link rel="stylesheet" href="../thirdparty/cssreset-min.css" type="text/css"/>	
 	<link rel="stylesheet" href="index.css" type="text/css"/>
 	
+    <script src="../thirdparty/jquery-1.7.2.js"></script>
+    <script src="../thirdparty/jquery.validate.js"></script>
+    <script src="../thirdparty/jquery-ui.min.js"></script>
+    <script src="../engine/engine.js"></script>
+    <script src="rules.js"></script>
+    <script src="calculator.js"></script>
     
     <!--[if (gte IE 6)&(lte IE 8)]>
     	<script src="../thirdparty/selectivizr-min.js"></script>
@@ -986,29 +992,4 @@ NOTES:
     </div>
 </div>
 </body>
-
-<script>
-	
-	function importScript(path){
-		var random=Math.floor(Math.random()*10001);
-		var scr  = document.createElement('script'),
-	    head = document.head || document.getElementsByTagName('head')[0];
-	    scr.src = path+"?dummy="+random;
-	    scr.async = false; // optionally
-		head.insertBefore(scr, head.firstChild);
-	} 
-
-
-	importScript("../thirdparty/jquery-1.7.2.js");
-	importScript("../thirdparty/jquery.validate.js");
-	importScript("../thirdparty/jquery-ui.min.js");
-	importScript("../engine/engine.js?");
-	importScript("rules.js");
-	importScript("calculator.js");
-	
-
-
-</script>
-
-
 </html>
