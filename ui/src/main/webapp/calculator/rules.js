@@ -18,6 +18,7 @@ var definitions = {
     oscarAgedChild: "$childAged513",
     partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
 
+    hasYoungest14Plus:"!$childAged04 && !$childAged5NotAtSchool && !$childAged513 && $childAged1418",
 
 
     // -------- Shortcuts for questions --------
@@ -155,7 +156,7 @@ var definitions = {
     },
 
     ratesDPB : {
-    	"($potentialWidowsBenefit || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":213.49,
+    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":213.49,
     	"$potentialWidowsBenefit && $single && $dependentChildren >=1 ":293.58,
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":256.19,
     	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":336.55,
@@ -175,14 +176,20 @@ var definitions = {
 
     // -------- Main benefit eligibility --------
 
-    potentialWidowsBenefit: "(($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialWidows: "(($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"(	" +
     		"	($workingAge && " +
-    		"	($familyTotalGrossWeeklyIncome < $windowsSoleParentGWILimit) " +
+    		"	($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
     		"		|| " +
-    		"	($age50to64 && $dependentChildren == 0 && ($familyTotalGrossWeeklyIncome < $windowsSoleParentGWILimit)))" +
+    		"	($age50to64 && $dependentChildren == 0 && ($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit)))" +
     		")",
+    		
+    		
+    //TODO here		
+    potentialWidowsBenefitPBA: "$potentialWidows && ($dependentChildren == 0 || $hasYoungest14Plus)",		
+    		
+    potentialWidowsBenefit : "$potentialWidows && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
 
     potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
@@ -191,6 +198,7 @@ var definitions = {
     		"	$familyTotalGrossWeeklyIncome < $dpbCsiSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
+    		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialWidowsBenefit",
 
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
@@ -211,6 +219,7 @@ var definitions = {
     		"	!$potentialDPBSoleParent && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialWidowsBenefit && " +
+    		"	!$potentialWidowsBenefitPBA && " +
     		"	(" +
     		"		$noSpouseSupport " +
     		"	|| " +
@@ -247,6 +256,7 @@ var definitions = {
 	    	"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefit && " +
+    		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialDPBSoleParent && " +
     		"	!$potentialDPBWomanAlone" ,
 
@@ -299,6 +309,7 @@ var definitions = {
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefit && " +
+    		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialDPBSoleParent && " +
     		"	!$potentialDPBWomanAlone &&" +
     		"	!$potentialHealthRelatedBenefit",
@@ -317,6 +328,7 @@ var definitions = {
 			"	!$potentialInvalidsBenefit && " +
 			"	!$potentialDPBCareOrSickOrInfirm && " +
 			"	!$potentialWidowsBenefit && " +
+			"	!$potentialWidowsBenefitPBA && " +
 			"	!$potentialDPBSoleParent && " +
 			"	!$potentialDPBWomanAlone &&" +
 			"	!$potentialUnemploymentBenefitTraining &&" +
@@ -342,6 +354,8 @@ var definitions = {
    potentialUndeterminedWorkingAgeFinancialAssistance:
 	   "	($workingAge || $seniorsAge ) && " +
 	   "	!$potentialBenefit && " +
+	   "	!$potentialWidowsBenefitPBA && " +
+	   "	!$potentialWidowsBenefit && " +
 	   "	!$potentialSuper",
 
 
@@ -470,6 +484,7 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialDPBSoleParent",
                     	"potentialInvalidsBenefit",
                     	"potentialDPBCareOrSickOrInfirm",
+                    	"potentialWidowsBenefitPBA" ,
                     	"potentialWidowsBenefit" ,
                     	"potentialDPBWomanAlone",
                     	"potentialHealthRelatedBenefit",
@@ -496,4 +511,4 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                    ];
 var allObligations = [ ];
 
-var allPBAs = [ "createCV", "attendPAM" ];
+var allPBAs = [ ];
