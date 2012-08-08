@@ -929,10 +929,10 @@ NOTES:
 
 
         <div id="controlBox"> <span id="answerAllMessage">Please Answer all Questions!</span>
-        	<button id="exitButton" type="button" onclick="engine.exitWI()"><span id="exitText">Exit</span></button>
+        	<button id="exitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
         
-            <button id="backButton" type="button" onclick="engine.onBack()"><span id="backText">Back</span></button>
-            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span id="nextText">Next</span></button>
+            <button id="backButton" type="button" onclick="engine.onBack()"><span class="backText">Back</span></button>
+            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span class="nextText">Next</span></button>
 
         </div>
 
@@ -971,11 +971,11 @@ NOTES:
         
 
         <div class="resultsButtonBox">
-        	<button id="exitButton" type="button" onclick="engine.exitWI()"><span id="exitText">Exit</span></button>
-        	<button id="restartButton" onclick="engine.restart()"><span id="restartText">Start Over</span></button>
+        	<button id="finalExitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
+        	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
         	
-            <button id="backButton" onclick="calculator.onBackFromResults()"><span id="backFromResultsText">Back</span></button>
-            <button id="applyButton" onclick="engine.applyNow()"><span id="applyText">Apply for financial assistance</span></button>
+            <button id="finalBackButton" onclick="calculator.onBackFromResults()"><span class="backText">Back</span></button>
+            <button id="applyButton" onclick="engine.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
         </div>
     </div>
 
