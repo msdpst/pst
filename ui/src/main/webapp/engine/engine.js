@@ -107,6 +107,13 @@ engine = {
                 }
             }
         });
+        
+        // data-required-checkbox-group: a group of checkboxes in which at least one must be ticked
+        $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
+            if ($(this).find("input[type='checkbox']:checked").length == 0)
+                ok = false;
+        });
+        
         if (!ok) {
             // Don't alert on auto-next (ie. when they answer last question in group)
             if (!automatic)

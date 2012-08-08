@@ -257,9 +257,12 @@ NOTES:
                     </ul>
                 </div>
             </div>
+        </fieldset>
 
+        <!-- interaction works better if this is in its own group -->
+        <fieldset class="group">
 	        <div class="question" data-visible="$dependentChildren > 0">
-                <fieldset>
+                <fieldset data-required-checkbox-group="true">
                     <div>Please select the age ranges of your dependent child / children.</div>
                     <input type="checkbox" name="childAged04" value="true" id="childAged04"/><label for="childAged04">Aged 0 to 4 years old</label><br/>
                     <input type="checkbox" name="childAged5NotAtSchool" value="true" id="childAged5NotAtSchool"/><label for="childAged5NotAtSchool">Aged 5 years old and not at school</label><br/>
