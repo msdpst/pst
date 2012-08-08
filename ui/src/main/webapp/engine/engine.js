@@ -33,7 +33,7 @@ engine = {
 
         // Field validation. Use our own date parsing - validator uses JS's built-in stuff by
         // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
-        $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a date in the format dd/mm/yyyy");
+        $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         engine.validator = $("form").validate();
 
@@ -99,7 +99,7 @@ engine = {
         $(inputSelector).each(function () {
             var fieldName = $(this).attr("name");
 
-            // Don't worry about checkboxes or unnamed fields
+            // Don't worry about checkboxes (see below) or unnamed fields
             if (fieldName && $(this).attr("type") != "checkbox") {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
@@ -623,7 +623,7 @@ Date.parseNzDate = function(str) {
     var date = undefined;
 
     // parseDate is lenient about the number of digits in a year. We don't want that.
-    if (str.match(/[/ ]\d\d\d\d$/)) {
+    if (str != undefined && str.match(/[/ ]\d\d\d\d$/)) {
 
         // 31/1/1970
         date = Date.parseWithFormat(str, "d/m/yy");
