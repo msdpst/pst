@@ -1,7 +1,6 @@
 
 
 engine.onStart = function () {
-    engine.autoNext = true;
 };
 
 /**
