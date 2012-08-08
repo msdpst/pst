@@ -16,34 +16,18 @@ NOTES:
 -->
 <html>
 <head>
-
-	<script>
-	
-		function importScript(path){
-			var randomnumber=Math.floor(Math.random()*10001)
-		    document.write("<" + "script src=\"" + path + "?dummy=" + randomnumber + "\"></" + "script>");
-		} 
-		
-		importScript("../thirdparty/jquery-1.7.2.js");
-		importScript("../thirdparty/jquery.validate.js");
-		importScript("../thirdparty/jquery-ui.min.js");
-		importScript("../engine/debugHelper.js");
-		importScript("../engine/engine.js?");
-		importScript("rules.js");
-		importScript("calculator.js");
-
-	</script>
-
-    <link rel="stylesheet" type="text/css" href="../thirdparty/cssreset-min.css">
-    <link rel="stylesheet" href="index.css?dummy=4" type="text/css" />
-   
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    	
+    <link rel="stylesheet" href="../thirdparty/cssreset-min.css" type="text/css"/>	
+	<link rel="stylesheet" href="index.css" type="text/css"/>
+	
+    
     <!--[if (gte IE 6)&(lte IE 8)]>
-    <script src="../thirdparty/selectivizr-min.js"></script>
-    <script src="../thirdparty/html5shiv.js"></script>
+    	<script src="../thirdparty/selectivizr-min.js"></script>
+    	<script src="../thirdparty/html5shiv.js"></script>
     <![endif]-->
 
+    
     <!--
     Hide content until everything's loaded. We do this here in the html so that content isn't visible
     while we're waiting for JS and/or CSS to load.
@@ -53,12 +37,12 @@ NOTES:
             display: none;
         }
     </style>
-
     <title>Check what you might get</title>
 </head>
 
 
 <noscript>
+	
     <div class="noscript">
         <div class="noscriptInner">
             <h2>You cannot use this web page because you have turned off JavaScript.</h2>
@@ -1010,4 +994,35 @@ NOTES:
     </div>
 </div>
 </body>
+
+<script>
+	
+	function importScript(path){
+		var random=Math.floor(Math.random()*10001);
+		var scr  = document.createElement('script'),
+	    head = document.head || document.getElementsByTagName('head')[0];
+	    scr.src = path+"?dummy="+random;
+	    scr.async = false; // optionally
+		head.insertBefore(scr, head.firstChild);
+	} 
+
+
+	importScript("../thirdparty/jquery-1.7.2.js");
+	importScript("../thirdparty/jquery.validate.js");
+	importScript("../thirdparty/jquery-ui.min.js");
+	//importScript("../engine/debugHelper.js");
+	importScript("../engine/engine.js?");
+	importScript("rules.js");
+	importScript("calculator.js");
+	
+	  <!--[if (gte IE 6)&(lte IE 8)]>
+
+  		importScript("../thirdparty/selectivizr-min.js");
+		importScript("../thirdparty/html5shiv.js");
+ 	 <![endif]-->
+	
+
+</script>
+
+
 </html>
