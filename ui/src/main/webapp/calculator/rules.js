@@ -5,6 +5,7 @@ var definitions = {
     seniorsAge: "$age >= 64.75",
     livingAlonePartnerInCare: "!$liveTogether && ($partnerLives == 'Rest home' || $partnerLives == 'Private hospital' || $partnerLives == 'Other')",
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
+    relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
     under20: "$age < 20",
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age <= 18",

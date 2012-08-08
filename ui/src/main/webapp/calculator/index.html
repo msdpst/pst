@@ -672,7 +672,7 @@ NOTES:
         <!-- =============== Super ============== -->
 
         <!-- Living Alone Details -->
-        <fieldset class="group" data-visible="$seniorOk && $livingAlonePartnerInCare">
+        <fieldset class="group" data-visible="$seniorOk && ($relationshipSituation || ($relationshipSituationPartner && $livingAlonePartnerInCare))">
 	        <div class="question">
                 <fieldset>
                     <div>Do you live alone?</div>
