@@ -16,15 +16,27 @@ NOTES:
 -->
 <html>
 <head>
+
+	<script>
+	
+		function importScript(path){
+			var randomnumber=Math.floor(Math.random()*10001)
+		    document.write("<" + "script src=\"" + path + "?dummy=" + randomnumber + "\"></" + "script>");
+		} 
+		
+		importScript("../thirdparty/jquery-1.7.2.js");
+		importScript("../thirdparty/jquery.validate.js");
+		importScript("../thirdparty/jquery-ui.min.js");
+		importScript("../engine/debugHelper.js");
+		importScript("../engine/engine.js?");
+		importScript("rules.js");
+		importScript("calculator.js");
+
+	</script>
+
     <link rel="stylesheet" type="text/css" href="../thirdparty/cssreset-min.css">
     <link rel="stylesheet" href="index.css?dummy=4" type="text/css" />
-    <script src="../thirdparty/jquery-1.7.2.js" type="text/javascript"></script>
-    <script src="../thirdparty/jquery.validate.js" type="text/javascript"></script>
-    <script src="../thirdparty/jquery-ui.min.js"></script>
-    <script src="../engine/debugHelper.js" type="text/javascript"></script>
-    <script src="../engine/engine.js?dummy=4" type="text/javascript"></script>
-    <script src="rules.js?dummy=5" type="text/javascript"></script>
-    <script src="calculator.js?dummy=4" type="text/javascript"></script>
+   
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <!--[if (gte IE 6)&(lte IE 8)]>
