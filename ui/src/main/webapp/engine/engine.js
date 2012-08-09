@@ -107,6 +107,13 @@ engine = {
                 }
             }
         });
+        
+        // data-required-checkbox-group: a group of checkboxes in which at least one must be ticked
+        $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
+            if ($(this).find("input[type='checkbox']:checked").length == 0)
+                ok = false;
+        });
+        
         if (!ok) {
             // Don't alert on auto-next (ie. when they answer last question in group)
             if (!automatic)
@@ -663,9 +670,9 @@ Date.prototype.yearsBefore = function(otherDate) {
     // We deal with one component at a time - this ensures the number we produce
     // is intuitively correct, producing a better result than simply calculating
     // the different in millis and dividing by the appropriate number.
-    var years = otherDate.getYear() - this.getYear();
+    var years = otherDate.getFullYear() - this.getFullYear();
     var copy = new Date(this.getTime());
-    copy.setYear(otherDate.getYear());
+    copy.setFullYear(otherDate.getFullYear());
     years += (otherDate.getMonth() - copy.getMonth()) / 12;
     copy.setMonth(otherDate.getMonth());
     years += (otherDate.getDate() - copy.getDate()) / 365.4;
@@ -678,6 +685,15 @@ Date.prototype.yearsBefore = function(otherDate) {
 function debugIf(condition, msg) {
     if (condition)
         debug(msg);
+}
+
+function debugAlertOnce(key, msg) {
+    if (!window.debugAlerts)
+        window.debugAlerts = {};
+    if (!window.debugAlerts[key]) {
+        window.debugAlerts[key] = true;
+        alert(msg);
+    }
 }
 
 if (!window.debug) {
