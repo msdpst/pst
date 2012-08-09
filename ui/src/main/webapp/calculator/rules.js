@@ -157,7 +157,7 @@ var definitions = {
 
     ratesDPB : {
     	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":213.49,
-    	"$potentialWidowsBenefit && $single && $dependentChildren >=1 ":293.58,
+    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA) && $single && $dependentChildren >=1 ":293.58,
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":256.19,
     	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":336.55,
     	"$potentialDPBSoleParent":336.55
@@ -385,7 +385,7 @@ var definitions = {
 
 
 
-    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
+    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit ||  $potentialWidowsBenefitPBA || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
     potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $potentialUndeterminedYouthPayment || $potentialUndeterminedYoungParentPayment",
     potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSupperannuationPartnerNotIncluded",
 
@@ -495,8 +495,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialNewZealandSuperannuationSingle",
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
                     	"potentialNewZealandSupperannuationPartnerNotIncluded",
-
-                    	//these are actually supplements but we treat them the same way.
+];
+var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
                         "potentialAccommodationSupplement",
                         "potentialDisabilityAllowance",
                         "potentialChildcareSubsidy",

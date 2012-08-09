@@ -335,6 +335,7 @@ engine = {
      * @return processed text
      */
     replaceVariablesInText:function (text) {
+    	if (null==text){return "";}
         return text.replace(/(\$[a-z,A-Z]+)\b/g, engine.evaluate);
     },
 

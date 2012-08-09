@@ -940,9 +940,18 @@ NOTES:
 
     <div id="eligible" class="results">
        
+       	<b>What you might get</b><br>
         <div id="benefits">
             
         </div>
+        
+        <b>Other Support</b>
+        <div id="otherBenefits">
+            
+        </div>
+        <span class="benefitName">Other assistance</span><br>
+		When you apply we'll ensure that you get all the assistance that you're entitled to from us.
+        
 
         <div>
 		  <h2>Apply now</h2>
@@ -950,11 +959,11 @@ NOTES:
 		  	<li>If you're not already getting assistance from us, please complete an online application form.</li>
 		  	<li>If you're already getting a benefit from us and want to see what else you might get, call us on <b>0800 559 009</b>.</li>
 		  	<li>If you're deaf, hearing-impaired or find it hard to communicate by phone you can contact 
-		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or <a href="mailto:MSD_Deaf_Services@msd.govt.nz">email <b>MSD_Deaf_Services@msd.govt.nz</b></a>.</li>
+		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or email <a href="mailto:MSD_Deaf_Services@msd.govt.nz">MSD_Deaf_Services@msd.govt.nz</a>.</li>
 		  	</ul>
 		</div>
         
-
+		<br><br>
         <div class="resultsButtonBox">
         	<button id="finalExitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
         	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
@@ -977,8 +986,12 @@ NOTES:
 
         <p>Remember, we're here to help if you need it, whether or not you receive financial assistance from us.</p>
 
-        <div class="resultsButtonBox">
-            <button onclick="calculator.onBackFromResults()">Back</button>
+       <div class="resultsButtonBox">
+        	<button id="finalExitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
+        	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
+        	
+            <button id="finalBackButton" onclick="calculator.onBackFromResults()"><span class="backText">Back</span></button>
+            <button id="applyButton" onclick="engine.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
         </div>
     </div>
 </div>
