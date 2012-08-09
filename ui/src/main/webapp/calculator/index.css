@@ -201,6 +201,21 @@ h1 {
     text-align: center;
 }
 
+h3 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    text-align: left;
+}
+
+.apply {
+    color: blue;
+   
+}
+
 #progressLabel {
     position: absolute;
     width: 100%;

@@ -509,6 +509,4 @@ var allOtherBenefits = [   //these are actually supplements but we treat them th
                         "potentialUndeterminedWorkingAgeFinancialAssistance",
                         "potentialUndeterminedYouthPayment"
                    ];
-var allObligations = [ ];
 
-var allPBAs = [ ];
