@@ -60,13 +60,14 @@ engine.displayResults = function () {
     // They're eligible for something. Assemble the information - there's a page
     // fragment (ie. an html file) for each benefit and for each obligation.
     // Load the appropriate fragments from the server and insert them into the page.
-    if (benefitPageUrls.length > 0) {
+    if (benefitPageUrls.length > 0 || otherBenefitUrls > 0) {
         engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
           engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), otherBenefitUrls, function () {
             //engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
                 $("#eligible").slideDown(engine.SLIDE_TIME);
                 $("form").hide();
                 $('html,body').scrollTop(0);
+                //$("#headerInner").hide("slow");
             //});
           });
         });
@@ -77,6 +78,7 @@ engine.displayResults = function () {
         $("#ineligible").slideDown(engine.SLIDE_TIME);
         $("form").hide();
         $('html,body').scrollTop(0);
+        //$("#headerInner").hide("slow");
     }
 };
 

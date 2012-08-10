@@ -19,7 +19,8 @@ var definitions = {
     partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
 
     hasYoungest14Plus:"!$childAged04 && !$childAged5NotAtSchool && !$childAged513 && $childAged1418",
-
+    hasYoungest5to13:"!$childAged04 && !$childAged5NotAtSchool && $childAged513",
+    
 
     // -------- Shortcuts for questions --------
 
@@ -160,7 +161,7 @@ var definitions = {
     	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA) && $single && $dependentChildren >=1 ":293.58,
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":256.19,
     	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":336.55,
-    	"$potentialDPBSoleParent":336.55
+    	"$potentialDPBSoleParent || $potentialDPBSoleParentPBAWithTeen || $potentialDPBSoleParentPBAWithYoungChild":336.55
     },
 
     ubRate: "engine.evalMap(definitions.ratesUB)",
@@ -191,7 +192,7 @@ var definitions = {
     		
     potentialWidowsBenefit : "$potentialWidows && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
 
-    potentialDPBSoleParent: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBSoleParentCalc: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
     		"	$single && " +
     		"	$dependentChildren >= 1 && " +
@@ -200,6 +201,14 @@ var definitions = {
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialWidowsBenefit",
+    		
+    		
+    potentialDPBSoleParentPBAWithTeen:"$potentialDPBSoleParentCalc && ($dependentChildren != 0 && $hasYoungest14Plus)",		
+    potentialDPBSoleParentPBAWithYoungChild:"$potentialDPBSoleParentCalc && ($dependentChildren != 0 && $hasYoungest5to13)",
+    
+    potentialDPBSoleParent:"$potentialDPBSoleParentCalc && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
+    
+    
 
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..?? //TODO FINSH THIS
@@ -217,6 +226,8 @@ var definitions = {
     		"   $dependentChildren == 0 && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialDPBSoleParent && " +
+    		"	!$potentialDPBSoleParentPBAWithTeen && " +
+    		"	!$potentialDPBSoleParentPBAWithYoungChild && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialWidowsBenefit && " +
     		"	!$potentialWidowsBenefitPBA && " +
@@ -258,6 +269,8 @@ var definitions = {
     		"	!$potentialWidowsBenefit && " +
     		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialDPBSoleParent && " +
+    		"	!$potentialDPBSoleParentPBAWithTeen && " +
+    		"	!$potentialDPBSoleParentPBAWithYoungChild && " +
     		"	!$potentialDPBWomanAlone" ,
 
 
@@ -311,6 +324,8 @@ var definitions = {
     		"	!$potentialWidowsBenefit && " +
     		"	!$potentialWidowsBenefitPBA && " +
     		"	!$potentialDPBSoleParent && " +
+    		"	!$potentialDPBSoleParentPBAWithTeen && " +
+    		"	!$potentialDPBSoleParentPBAWithYoungChild && " +
     		"	!$potentialDPBWomanAlone &&" +
     		"	!$potentialHealthRelatedBenefit",
 
@@ -330,6 +345,8 @@ var definitions = {
 			"	!$potentialWidowsBenefit && " +
 			"	!$potentialWidowsBenefitPBA && " +
 			"	!$potentialDPBSoleParent && " +
+			"	!$potentialDPBSoleParentPBAWithTeen && " +
+    		"	!$potentialDPBSoleParentPBAWithYoungChild && " +
 			"	!$potentialDPBWomanAlone &&" +
 			"	!$potentialUnemploymentBenefitTraining &&" +
 			"	!$potentialHealthRelatedBenefit",
@@ -385,7 +402,7 @@ var definitions = {
 
 
 
-    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit ||  $potentialWidowsBenefitPBA || $potentialDPBSoleParent || $potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
+    potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefit ||  $potentialWidowsBenefitPBA || $potentialDPBSoleParent || $potentialDPBSoleParentPBAWithTeen || $potentialDPBSoleParentPBAWithYoungChild ||$potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
     potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $potentialUndeterminedYouthPayment || $potentialUndeterminedYoungParentPayment",
     potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSupperannuationPartnerNotIncluded",
 
@@ -465,13 +482,13 @@ var definitions = {
 
 
     // -------- Pre-Benefit Activities--------
-    createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
-    attendPAM: "$potentialUnemploymentBenefit",
+    //createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
+    //attendPAM: "$potentialUnemploymentBenefit",
 
 
     // -------- Obligations --------
 
-    testObligation: "$potentialDPBSoleParent",
+    //testObligation: "$potentialDPBSoleParent",
 
 
     // -------- Other --------
@@ -482,6 +499,8 @@ var definitions = {
 
 var allBenefits = [ /* This is all the variables that we want to be checked as potential benefits */
                     	"potentialDPBSoleParent",
+                    	"potentialDPBSoleParentPBAWithTeen",
+                    	"potentialDPBSoleParentPBAWithYoungChild",
                     	"potentialInvalidsBenefit",
                     	"potentialDPBCareOrSickOrInfirm",
                     	"potentialWidowsBenefitPBA" ,
@@ -495,6 +514,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialNewZealandSuperannuationSingle",
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
                     	"potentialNewZealandSupperannuationPartnerNotIncluded",
+                    	"potentialUndeterminedWorkingAgeFinancialAssistance",
+                        "potentialUndeterminedYouthPayment"
 ];
 var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
                         "potentialAccommodationSupplement",
@@ -505,8 +526,6 @@ var allOtherBenefits = [   //these are actually supplements but we treat them th
                         "potentialTemporaryAdditionalSupport",
                         "potentialChildDisabilityAllowance",
                         "potentialLivingAlonePayment",
-                        "potentialExtraHelp",
-                        "potentialUndeterminedWorkingAgeFinancialAssistance",
-                        "potentialUndeterminedYouthPayment"
+                        "potentialExtraHelp"
                    ];
 
