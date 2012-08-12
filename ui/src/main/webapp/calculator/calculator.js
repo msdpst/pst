@@ -23,13 +23,13 @@ engine.displayResults = function () {
 
 
 
-    // PBAs - these work in the same way as benefits.
-    var PBAPageUrls = [];
-    for (var i = 0; i < allPBAs.length; i++) {
-        if (engine.evaluate("$" + allPBAs[i]))
-            PBAPageUrls.push("PBAs/" + allPBAs[i] + ".html");
+   //  PBAs - these work in the same way as benefits.
+    var otherBenefitUrls = [];
+    for (var i = 0; i < allOtherBenefits.length; i++) {
+        if (engine.evaluate("$" + allOtherBenefits[i]))
+        	otherBenefitUrls.push("benefits/" + allOtherBenefits[i] + ".html");
     }
-    debug("PBAs: " + PBAPageUrls);
+    debug("Others: " + otherBenefitUrls);
 
 
 /*
@@ -48,26 +48,27 @@ engine.displayResults = function () {
 */
 
     // Obligations - these work in the same way as benefits.
-    var obligationPageUrls = [];
-    for (var i = 0; i < allObligations.length; i++) {
-        if (engine.evaluate("$" + allObligations[i]))
-            obligationPageUrls.push("obligations/" + allObligations[i] + ".html");
-    }
-    debug("obligations: " + obligationPageUrls);
+//    var obligationPageUrls = [];
+//    for (var i = 0; i < allObligations.length; i++) {
+//        if (engine.evaluate("$" + allObligations[i]))
+//            obligationPageUrls.push("obligations/" + allObligations[i] + ".html");
+//    }
+//    debug("obligations: " + obligationPageUrls);
 
 
 
     // They're eligible for something. Assemble the information - there's a page
     // fragment (ie. an html file) for each benefit and for each obligation.
     // Load the appropriate fragments from the server and insert them into the page.
-    if (benefitPageUrls.length > 0) {
+    if (benefitPageUrls.length > 0 || otherBenefitUrls > 0) {
         engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
-          engine.loadPageFragmentsAndReplaceVariables($("#PBAs"), PBAPageUrls, function () {
-            engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
+          engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), otherBenefitUrls, function () {
+            //engine.loadPageFragmentsAndReplaceVariables($("#obligations"), obligationPageUrls, function () {
                 $("#eligible").slideDown(engine.SLIDE_TIME);
                 $("form").hide();
                 $('html,body').scrollTop(0);
-            });
+                //$("#headerInner").hide("slow");
+            //});
           });
         });
     }
@@ -77,6 +78,7 @@ engine.displayResults = function () {
         $("#ineligible").slideDown(engine.SLIDE_TIME);
         $("form").hide();
         $('html,body').scrollTop(0);
+        //$("#headerInner").hide("slow");
     }
 };
 
