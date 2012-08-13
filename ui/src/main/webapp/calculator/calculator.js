@@ -1,7 +1,6 @@
 
-
-engine.onStart = function () {
-};
+// Allow for our fixed-position header.
+engine.groupScrollYPosition = 250;
 
 /**
  * We've reached the end. Work out what they're entitled to and display it.

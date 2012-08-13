@@ -14,17 +14,33 @@ $(document).ready(function () {
 });
 
 engine = {
-    validator:undefined,
+    /** 
+     * When the last question in a group is answered, go to the next question automatically. 
+     * Convenient, but potentially confusing for users.
+     * (Set this from the client if desired.)
+     */
     autoNext:false,
+
+    /**
+     * When the current group changes it is scrolled into view, this far (in pixels)
+     * from the top of the window. The client should adjust this if necessary, eg. if
+     * (like EC) it has a fixed header at the top of the window.
+     */
+    groupScrollYPosition: 20,
+    
+    validator:undefined,
     currentGroupNum:0,
     SLIDE_TIME:500,
+
+    /**
+     * Called before initialisation. The client can override this, eg. to modify the default settings above
+     */
+    onStart: function() {},
 
     onReady:function () {
         debug("====== hello ======");
 
-        // The instance can define this
-        if (this.onStart)
-            this.onStart();
+        this.onStart();
 
         // Make sure everything's hidden to start off with. The html page should do this in a
         // style block in the head so that content isn't shown while waiting for this JS, but
@@ -226,14 +242,14 @@ engine = {
     revealAndScroll:function (elt) {
         elt.fadeIn(engine.SLIDE_TIME);
 
-        var y = elt.offset().top - 250;//$("#buffer").offset().top - $("#buffer").height() - 10;
+        var y = elt.offset().top - engine.groupScrollYPosition;
         if (y < 0)
             y = 0;
         $('html,body').animate({scrollTop:y}, {duration:engine.SLIDE_TIME, queue:false});
 
         /*
-         // Scroll the page so the group is centered vertically (if it fits)
-         // Would need to be modified to take account of the fixed position header.
+         // This code scrolls the page so the group is centered vertically (if it fits).
+         // Might be userful. Would need to be modified to take account of the fixed position header.
          //
          var y = elt.offset().top - (window.innerHeight - elt.height()) / 2;
          // It's one of the first questions - scroll to top of page if not there already
