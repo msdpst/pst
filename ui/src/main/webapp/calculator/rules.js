@@ -480,18 +480,8 @@ var definitions = {
 
     potentialExtraHelp:false,
 
-
-    // -------- Pre-Benefit Activities--------
-    //createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
-    //attendPAM: "$potentialUnemploymentBenefit",
-
-
-    // -------- Obligations --------
-
-    //testObligation: "$potentialDPBSoleParent",
-
-
-    // -------- Other --------
+    
+    
 
     age: "calculator.calculateAge($dateOfBirth)"
 };

@@ -92,6 +92,28 @@ var calculator = {
         // Show the close button. These are hidden by default so it doesn't show on the first one.
         nnew.find("a").show();
     },
+    
+    applyNow:function(){
+    	
+    	//we can decide where to send them for their on-line application.
+    	
+    	if (		engine.evaluate("$potentialNewZealandSuperannuationSingle")
+    			||  engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
+    			||  engine.evaluate("$potentialNewZealandSupperannuationPartnerNotIncluded")){
+    		window.location="http://www.workandincome.govt.nz/online-services/superannuation/"; 	
+    		return;
+    	}else{
+    		window.location="http://www.workandincome.govt.nz/online-services/";
+    		return;
+    	}
+    	
+    	
+    },
+    
+    exitWI:function(){
+    	
+    	window.location="http://www.workandincome.govt.nz/online-services/";
+    },
 
     removeIncomeSource: function(domElement) {
         $(domElement).closest(".incomeSource").remove();
