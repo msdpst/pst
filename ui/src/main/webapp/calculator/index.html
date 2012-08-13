@@ -342,6 +342,50 @@ TODO, probably later:
         </fieldset>
 
 
+        <!-- =============== Super ============== -->
+        <fieldset class="group" data-visible="$seniorOk && ($relationshipSituation || ($relationshipSituationPartner && $livingAlonePartnerInCare))">
+	        <div class="question">
+                <fieldset>
+                    <div>Do you live alone?</div>
+                    <input type="radio" name="liveAlone" id="liveAloneYes" value="true"> <label for="liveAloneYes">Yes</label>
+                    <input type="radio" name="liveAlone" id="liveAloneNo" value="false"> <label for="liveAloneNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question">
+                <fieldset>
+                    <div>Do you have a visitor(s) aged 18 years or older who will staying with you for 13 weeks or longer?</div>
+                    <input type="radio" name="visitorStaying" id="visitorStayingYes" value="true"> <label for="visitorStayingYes">Yes</label>
+                    <input type="radio" name="visitorStaying" id="visitorStayingNo" value="false"> <label for="visitorStayingNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="!$visitorStaying">
+                <fieldset>
+                    <div>Do you live with anyone aged 18 years or over?</div>
+                    <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
+                    <input type="radio" name="liveWithAdult" id="liveWithAdultNo" value="false"> <label for="liveWithAdultNo">No</label>
+                </fieldset>
+            </div>
+
+	        <div class="question" data-visible="$liveWithAdult">
+                <fieldset>
+                    <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
+                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentNo" value="false"> <label for="liveWithNonDependentNo">No</label>
+                </fieldset>
+
+                <p class="info">
+                    Do not include children under 18 years of age in this answer.
+                    <a href="#" class="helpButton">More information</a>
+                </p>
+                <div class="help">
+                    A dependent child is a child who is financially supported by you and is living with you as a member of your family.  This includes stepchildren, children at boarding school, adopted children, grandchildren and mokopuna.
+                </div>
+            </div>
+        </fieldset>
+
+
         <!-- ======== Your Income ========= -->
 
         <fieldset class="group">
@@ -661,52 +705,6 @@ TODO, probably later:
                     <input type="radio" name="noSpouseSupport" id="noSpouseSupportYes" value="true"> <label for="noSpouseSupportYes">Yes</label>
                     <input type="radio" name="noSpouseSupport" id="noSpouseSupportNo" value="false"> <label for="noSpouseSupportNo">No</label>
                 </fieldset>
-            </div>
-        </fieldset>
-
-
-        <!-- =============== Super ============== -->
-
-        <!-- Living Alone Details -->
-        <fieldset class="group" data-visible="$seniorOk && ($relationshipSituation || ($relationshipSituationPartner && $livingAlonePartnerInCare))">
-	        <div class="question">
-                <fieldset>
-                    <div>Do you live alone?</div>
-                    <input type="radio" name="liveAlone" id="liveAloneYes" value="true"> <label for="liveAloneYes">Yes</label>
-                    <input type="radio" name="liveAlone" id="liveAloneNo" value="false"> <label for="liveAloneNo">No</label>
-                </fieldset>
-            </div>
-
-	        <div class="question">
-                <fieldset>
-                    <div>Do you have a visitor(s) aged 18 years or older who will staying with you for 13 weeks or longer?</div>
-                    <input type="radio" name="visitorStaying" id="visitorStayingYes" value="true"> <label for="visitorStayingYes">Yes</label>
-                    <input type="radio" name="visitorStaying" id="visitorStayingNo" value="false"> <label for="visitorStayingNo">No</label>
-                </fieldset>
-            </div>
-
-	        <div class="question" data-visible="!$visitorStaying">
-                <fieldset>
-                    <div>Do you live with anyone aged 18 years or over?</div>
-                    <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
-                    <input type="radio" name="liveWithAdult" id="liveWithAdultNo" value="false"> <label for="liveWithAdultNo">No</label>
-                </fieldset>
-            </div>
-
-	        <div class="question" data-visible="$liveWithAdult">
-                <fieldset>
-                    <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
-                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
-                    <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentNo" value="false"> <label for="liveWithNonDependentNo">No</label>
-                </fieldset>
-
-                <p class="info">
-                    Do not include children under 18 years of age in this answer.
-                    <a href="#" class="helpButton">More information</a>
-                </p>
-                <div class="help">
-                    A dependent child is a child who is financially supported by you and is living with you as a member of your family.  This includes stepchildren, children at boarding school, adopted children, grandchildren and mokopuna.
-                </div>
             </div>
         </fieldset>
 
