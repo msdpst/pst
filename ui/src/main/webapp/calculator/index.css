@@ -324,6 +324,10 @@ input.text {
     margin-top: 0.5em;
 }
 
+input.currency {
+    width: 6em;
+}
+
 input, select {
     margin-top: 0.8em;
 }
