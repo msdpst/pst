@@ -275,7 +275,23 @@ TODO, probably later:
 
         <!-- New Zealand Superannuation partner living details -->
         <fieldset class="group" data-visible="$seniorOk && $partner">
+            <div class="question">
+                <fieldset>
+                    <div>Do you want to include your partner in your New Zealand Superannuation?</div>
+                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSYes" value="true"> <label for="includePartnerInNZSYes">Yes</label>
+                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSNo" value="false"> <label for="includePartnerInNZSNo">No</label>
+                </fieldset>
+            </div>
+
 	        <div class="question">
+                <fieldset>
+                    <div>Is your partner receiving New Zealand Superannuation or a Veterans Pension?</div>
+                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSYes" value="true"> <label for="partnerReceivingNZSYes">Yes</label>
+                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSNo" value="false"> <label for="partnerReceivingNZSNo">No</label>
+                </fieldset>
+            </div>
+            
+	        <div class="question" data-visible="$includePartnerInNZS && !$partnerReceivingNZS">
                 <fieldset>
                     <div>Does your partner usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="partnerNZ" id="partnerNZYes" value="true"> <label for="partnerNZYes">Yes</label>
@@ -283,7 +299,7 @@ TODO, probably later:
                 </fieldset>
             </div>
 
-            <div class="question">
+            <div class="question" data-visible="$includePartnerInNZS && !$partnerReceivingNZS">
                 <label for="partnerResidency">What is your partner’s residency status?</label>
                 <select name="partnerResidency" id="partnerResidency">
                     <option value="">-- Choose an option --</option>
@@ -408,22 +424,6 @@ TODO, probably later:
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
                 </p>
-            </div>
-
-            <div class="question" data-visible="$seniorOk && $partner">
-                <fieldset>
-                    <div>Do you want to include your partner in your New Zealand Superannuation?</div>
-                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSYes" value="true"> <label for="includePartnerInNZSYes">Yes</label>
-                    <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSNo" value="false"> <label for="includePartnerInNZSNo">No</label>
-                </fieldset>
-            </div>
-
-	        <div class="question" data-visible="$seniorOk && $partner">
-                <fieldset>
-                    <div>Is your partner receiving New Zealand Superannuation or a Veterans Pension?</div>
-                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSYes" value="true"> <label for="partnerReceivingNZSYes">Yes</label>
-                    <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSNo" value="false"> <label for="partnerReceivingNZSNo">No</label>
-                </fieldset>
             </div>
         </fieldset>
 
@@ -572,7 +572,7 @@ TODO, probably later:
             </div>
 
 	        <div class="question" data-visible="$healthDisability">
-                <fieldset>
+                <fieldset data-required-checkbox-group="true">
                     <div>Select one or more from the following list:</div>
                     <input type="checkbox" name="illness" value="true" id="illness"/><label for="illness">Illness / Sickness</label><br/>
                     <input type="checkbox" name="disability" value="true" id="disability"/><label for="disability">Disability</label><br/>
@@ -581,7 +581,7 @@ TODO, probably later:
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$healthDisability">
+            <div class="question" data-visible="$pregnant || $illness || $disability || $injury">
                 <fieldset>
                     <div>Does this health condition or disability affect your ability to work?</div>
                     <input type="radio" name="healthDisabilityAffectsWork" id="healthDisabilityAffectsWorkYes" value="true"> <label for="healthDisabilityAffectsWorkYes">Yes</label>
@@ -685,7 +685,7 @@ TODO, probably later:
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="!$liveAlone && !$visitorStaying">
+	        <div class="question" data-visible="!$visitorStaying">
                 <fieldset>
                     <div>Do you live with anyone aged 18 years or over?</div>
                     <input type="radio" name="liveWithAdult" id="liveWithAdultYes" value="true"> <label for="liveWithAdultYes">Yes</label>
@@ -693,7 +693,7 @@ TODO, probably later:
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="!$liveAlone">
+	        <div class="question" data-visible="$liveWithAdult">
                 <fieldset>
                     <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
                     <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
