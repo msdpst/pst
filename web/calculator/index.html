@@ -766,7 +766,7 @@
                     <div>What type of accommodation are you in?</div>
                     <input type="radio" name="accommodationType" id="accommodationType1" value="Rent"> <label for="accommodationType1">Rent</label>
                     <input type="radio" name="accommodationType" id="accommodationType2" value="Board"> <label for="accommodationType2">Board</label>
-                    <input type="radio" name="accommodationType" id="accommodationType3" value="Own Home"> <label for="accommodationType3">Own Home</label>
+                    <input type="radio" name="accommodationType" id="accommodationType3" value="Home Owner"> <label for="accommodationType3">Home Owner</label>
                 </fieldset>
             </div>
 
@@ -788,8 +788,8 @@
                 $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
             </div>
 
-            <div class="question" data-visible="$accommodationType == 'Own Home'">
-                <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
+            <div class="question" data-visible="$accommodationType == 'Home Owner'">
+                <label for="outgoingsPerWeek">What is the total amount of costs for your own home that you pay per week?</label>
                 $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
             </div>
 
