@@ -1,0 +1,537 @@
+@media speech {
+	.dontRead { display: none !important; }
+}
+@media aural {
+	.dontRead { display: none !important; }
+}
+
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #666666;
+    text-shadow: 0 1px 0 #FFFFFF;
+    background-color: #f0f0f0;
+}
+
+#headerInner, #buffer, #outer {
+    width: 44em;
+}
+header img, #headerInner, #buffer, #outer {
+    margin-left: -23em;
+}
+#progress, form {
+    width: 36em;
+}
+
+form, #progress {
+    margin-left: 4em !important;
+}
+
+#answerAllMessage{
+	display: none;
+	color: red;
+	visibility: hidden;
+
+}
+
+button {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #CCCCCC;
+    background-image: -moz-linear-gradient(center top , #EEEEEE, #CCCCCC);
+    border-color: #CCCCCC #CCCCCC #BBBBBB;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    text-shadow: 0 1px 0 #EEEEEE;
+   
+}
+button:hover {
+	background: #dddddd;
+	background-color: #dddddd;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd),
+		color-stop(100%, #bbbbbb) );
+	background-image: -webkit-linear-gradient(top, #dddddd, #bbbbbb);
+	background-image: -moz-linear-gradient(top, #dddddd, #bbbbbb);
+	background-image: -ms-linear-gradient(top, #dddddd, #bbbbbb);
+	background-image: -o-linear-gradient(top, #dddddd, #bbbbbb);
+	background-image: linear-gradient(top, #dddddd, #bbbbbb);
+	border: 1px solid #bbb;
+	border-bottom: 1px solid #999;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #ddd;
+	cursor: pointer;
+}
+
+button:active {
+	border: 1px solid #aaa;
+	border-bottom: 1px solid #888;
+	-webkit-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+	-moz-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+	-ms-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+	-o-box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+	box-shadow: inset 0 0 5px 2px #aaaaaa, 0 1px 0 0 #eeeeee;
+	cursor: pointer;
+}
+
+#exitButton{
+	float:left;
+	width:50px;
+}
+
+#nextButton{
+	width:50px;
+}
+
+#finalNextButton{
+	width:50px;
+}
+
+#finalBackButton{
+	width:60px;
+}
+
+#backButton{
+	width:60px;
+}
+
+#finalExitButton{
+	width:50px;
+	float:left;
+}
+
+#applyButton{
+	width:200px;
+}
+
+
+#restartButton{
+	width:100px;
+	float:left;
+}
+
+
+.exitText{
+	padding-left: 20px;
+	background: url("images/arrow-left.png") no-repeat scroll transparent left;
+}
+
+
+.restartText{
+	padding-left: 20px;
+	background: url("images/arrow-rotate-anticlockwise.png") no-repeat scroll transparent left;
+	
+}
+
+.backText{
+	padding-left: 20px;
+	background: url("images/arrow-up.png") no-repeat scroll transparent left;
+}
+
+
+
+.backFromResultsText{
+	padding-left: 20px;
+	background: url("images/arrow-left.png") no-repeat scroll transparent left;
+}
+
+.nextText{
+	padding-right: 20px;
+	background: url("images/arrow-down.png") no-repeat scroll transparent right;
+}
+
+.applyText{
+	padding-right: 20px;
+	background: url("images/arrow-right.png") no-repeat scroll transparent right;
+}
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 176px;
+    width: 100%;
+    background-image: url("images/bg-page-gradient2.jpg");
+    z-index: 10;
+    /*box-shadow: 0 0 1em #d0d0d0;*/
+
+    /* Make fixed positioning work in IE6: */
+    _position: absolute;
+    _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+
+}
+header img {
+    position: relative;
+    left: 50%;
+}
+#headerInner {
+    position: relative;
+    left: 50%;
+    background-color: white;
+    padding: 1em 1em 0.7em 1em;
+    /*box-shadow: 0 0 1em #d0d0d0;*/
+}
+
+.noscript {
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #303030;
+}
+.noscriptInner {
+    background-color: #f0f0f0;
+    width: 34em;
+    padding: 2em;
+    margin-left: -19em;
+    margin-top: 5em;
+    left: 50%;
+    position: relative;
+}
+.noscript, .noscript a {
+    color: #303030;
+}
+.noscript h2 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 1em;
+}
+
+
+h1 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    text-align: center;
+}
+
+h3 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    text-align: left;
+}
+
+.apply {
+    color: blue;
+   
+}
+
+#progressLabel {
+    position: absolute;
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: #404040;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 3px;
+    margin-left: -2em;
+}
+
+#progress {
+    height: 1.3em;
+    border-radius: 7px;
+    border: 1px solid #a0a0a0;
+}
+.ui-widget-header {
+    border-radius: 5px;
+    height: 1.3em;
+    background-image: none !important;
+    background-color: #80c080 !important;
+}
+
+#buffer {
+    position: relative;
+    left: 50%;
+    height: 30px;
+    padding: 0 1em 0 1em;
+    background: -moz-linear-gradient(to bottom, rgba(255,255,255,255), rgba(255,255,255,0));
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,255)), to(rgba(255,255,255,0)));
+
+    /* hide in IE6 */
+    _display: none;
+}
+
+#outer {
+    left: 50%;
+    padding: 200px 1em 100% 1em; /* bottom padding necessary so that we can scroll questions to the top of the window */
+    position: relative;
+    background-color: white;
+    box-shadow: 0 0 1em #d0d0d0;
+    z-index: 1;
+}
+
+#blurb {
+    font-size: 14px;
+    margin: 0 7em 0 6em;
+}
+
+p {
+    margin-bottom: 0.7em;
+}
+
+form ul {
+    margin-bottom: 0.7em;
+}
+.question {
+    background-color: #eeeeee;
+    padding: 0.8em 1em 0.9em 1em;
+    border: 1px solid #d0d0d0;
+    border-bottom-width: 0;
+    color: #888888;
+}
+
+.question h3 {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.current .question {
+    background-color: #FCE5D3 /*#ffffee*/;
+    color: #444444;
+    font-weight: 500;
+    border-color: #a0a0a0;
+}
+
+.current {
+    border-bottom: 1px solid #a0a0a0;
+}
+
+label {
+    padding-right: 0.7em;
+}
+
+label.error {
+    display: block;
+    color: red;
+    font-size: 14px;
+    margin-top: 0.8em;
+}
+
+.question a {
+    color: inherit;
+}
+
+
+
+input.number {
+    width: 4em;
+}
+
+input.text {
+    width: 33em;
+    margin-top: 0.5em;
+}
+
+input.currency {
+    width: 6em;
+}
+
+input, select {
+    margin-top: 0.8em;
+}
+
+input[disabled='disabled'], select[disabled='disabled'] {
+    color: #808080;
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-weight: 600;
+}
+
+input[type='radio'] {
+    margin-left: 1em;
+    margin-right: 0.1em;
+}
+input[type='checkbox'] {
+    margin-left: 1em;
+    margin-right: 0.3em;
+}
+
+.info {
+    padding: 1em 0 0 5em;
+    font-size: 13px;
+}
+.help {
+    padding: 0.5em 0 0 5em;
+    font-size: 13px;
+}
+ul {
+    padding-left: 2em;
+}
+li {
+    list-style: disc;
+}
+
+#dateOfBirth {
+    width: 6em;
+}
+
+.incomeSources {
+    font-size: 90%;
+}
+.incomeSources .info {
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+.incomeSources .help {
+    margin-bottom: 1em;
+}
+.incomeSource {
+    margin: 0 1em 1em 1em;
+    border: 1px solid #c0c0c0;
+}
+.incomeSource a {
+    display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid #c0c0c0;
+    padding: 2px 5px 1px 4px;
+    font-weight: bold;
+}
+.incomeSource img {
+    display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid #c0c0c0;
+    padding: 2px 5px 1px 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.addIncomeSource{
+	padding-left:20px;
+	background: url("images/add.png") no-repeat scroll transparent left;
+}
+.addIncomeSource:hover{
+	background: url("images/add.png") no-repeat scroll transparent left;
+}
+
+.removeIncomeSource{
+	display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    padding-left:20px;
+    background: url("images/cancel.png") no-repeat scroll transparent left;
+}
+.removeIncomeSource:hover{
+	display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    padding-left:20px;
+    background: url("images/cancel.png") no-repeat scroll transparent left;
+}
+
+.incomeSource > div {
+    background-color: #f0f0f0;
+    padding: 6px 6px 6px 40px;
+}
+.incomeSource > div:nth-child(3) {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.incomeSource label {
+    float: left;
+    width: 15em;
+}
+.incomeSource > div > div {
+    float: left;
+    width: 14em;
+}
+.incomeSource input, .incomeSource select {
+    margin-top: 5px;
+}
+
+#controlBox {
+    display: block;
+    text-align: right;
+    margin-top: 0.5em;
+}
+
+.results {
+    padding: 2em 1.5em 2em 1.5em;
+    margin: 2em 2em 0 2em;
+}
+
+/* floating the button right causes problems in IE */
+.resultsButtonBox {
+    text-align: right;
+}
+.results button {
+    margin-top: 1em;
+}
+
+#ineligible {
+    background-color: #f8f8f8;
+    border: 2px solid #a00000;
+    color: #202020;
+}
+
+#eligible {
+    background-color: #f8f8f8;
+    border: 2px solid #00a000;
+    color: #404040;
+    font-size: 15px;
+}
+
+#eligible .pageFragment {
+    margin-bottom: 1em;
+}
+
+#eligible h2 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 2em 0 1em 0;
+}
+#eligible h2:first-child {
+    margin-top: 0;
+}
+
+#eligible .benefitName{
+    font-weight: 600;
+}
+
+#PBAs .preBenefitActivityName{
+	 font-weight: 600;
+}
+
+
+/* From http://html5boilerplate.com/ */
+/* >> The Magnificent CLEARFIX << */
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; } /* Hides from IE-mac \*/
+.clearfix { display: block; }
