@@ -101,13 +101,15 @@ var definitions = {
     // -- Limits -- //
 
     widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
-    dpbCsiSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
+    dpbSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
+    dpbCsiSoleParentGWILimit : 638,//DPB CSI Sole Parent GWI Limit
 
     ibSingle18GWILimit : 524,//IB Single 18+ GWI Limit
     ibSingleYouthGWILimit : 454,//IB Single Youth GWI Limit
     ibSoleParentGWILimit : 638,//IB Sole Parent GWI Limit
     ibRelationshipGWILimit : 768,//IB Relationship GWI Limit
 
+    // TODO According to the spreadsheet these are mock rates!
     yppSingleGWILimit : 307,//YPP single GWI Limit
     yppRelationshipGWILimit:534,//YPP Relationship GWI Limit
     yppParentalIncomeGWILimit:1000,//YPP Parental Income GWI Limit
@@ -115,7 +117,7 @@ var definitions = {
     ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
     ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
     ubSingle2024GWILimit:324, //UB Single 20-24 GWI Limit
-    ubSingle25GWILimit:373, //UB Single 25+ GWI Limit
+    ubSingle25GWILimit:568, //UB Single 25+ GWI Limit
 
     ccs1ChildLimit: 1400,//CCS 1 Child GWI Limit
     ccs2ChildrenLimit: 1600,//CCS 2 Children GWI Limit 
@@ -125,28 +127,39 @@ var definitions = {
     OSCAR2ChildrenLimit:1600.00,//OSCAR 2 Children GWI Limit
     OSCAR3ChildrenLimit:1800.00,//OSCAR 3 or more Children GWI Limit
 
-    TASSingleCashAssetLimit:1025.11, //TAS Single Cash Asset Limit
-    TASRelationshipCashAssetLimit:1708.10,//TAS Relationship Cash Asset Limit
-    TASSoleParent1ChildCashAssetLimit:1346.00,//TAS Sole Parent 1 Child Cash Asset Limit
-    TASanyotherSoleParentCashAssetLimit:1445.89,//TAS any other Sole Parent Cash Asset Limit
+    TASSingleCashAssetLimit:1007.28, //TAS Single Cash Asset Limit
+    TASRelationshipCashAssetLimit:1678.39,//TAS Relationship Cash Asset Limit
+    TASSoleParent1ChildCashAssetLimit:1322.59,//TAS Sole Parent 1 Child Cash Asset Limit
+    TASanyotherSoleParentCashAssetLimit:1420.74,//TAS any other Sole Parent Cash Asset Limit
 
-    nonQualifiedPartnerIncludedLimit:918,//Non-qualified partner included
+    nonQualifiedPartnerIncludedLimit:860,//Non-qualified partner included
 
     daGWILimits: {
-        "$workingAge && !$partner && $dependentChildren == 0": 575.48,
-        "$workingAge && !$partner && $dependentChildren == 1": 693.45,
-        "$workingAge && !$partner && $dependentChildren > 1": 730.60,
-        "$workingAge && $partner": 851.83,
-        "$youth && !$partner && $dependentChildren == 0": 497.27,
-        "$youth && $partner && $dependentChildren == 0": 851.83,
-        "$youngParent && !$partner": 497.27,
-        "$youngParent && $partner && $partnerAge >= 18": 851.83, // TODO what about young parents with partners under 18?
-        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58,
-        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45,
-        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,
-        "$seniorsAge && $partner": 851.83
+        "$workingAge && !$partner && $dependentChildren == 0": 585.67, // DA Single Working Age GWI Limit
+        "$workingAge && !$partner && $dependentChildren == 1": 705.72, // DA Sole Parent 1 Child GWI Limit
+        "$workingAge && !$partner && $dependentChildren > 1": 743.53,  // DA Sole Parent 2+ Children GWI Limit
+        "($workingAge || $youth) && $partner": 866.91, // DA Relationship GWI Limit
+        "$youth && !$partner && $dependentChildren == 0": 506.01, // DA Single Youth GWI Limit
+        "$youngParent && !$partner": 506.01, // DA Single Youth GWI Limit
+        // TODO what about young parents with partners over 18?
+        "$youngParent && $partner && $partnerAge < 18": 866.91, // DA Relationship GWI Limit
+        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58, // NZS DA Siingle 18+ years
+        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45, // NZS DA Sole Parent 1 child
+        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
+        "$seniorsAge && $partner": 851.83 // NZS DA Married, civil union or defacto couple (with or without children)
     },
     daGWILimit: "engine.evalMap(definitions.daGWILimits, 'daGWILimits')",
+    
+    
+    extraHelpGWILimits: {
+        "($workingAge || $youth) && $single && $dependentChildren == 0": 948.00, // ASUP Single Working Age GWI Limit Area 1
+        "($workingAge || $youth) && $single && $dependentChildren == 1": 1133.00, // ASUP Sole Parent 1 Child GWI Limit Area 1
+        "($workingAge || $youth) && $single && $dependentChildren > 1": 1393.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
+        "($workingAge || $youth) && !$single && $dependentChildren == 0": 1200.00, // ASUP Relationship Without Children GWI Limit Area 1
+        "($workingAge || $youth) && !$single && $dependentChildren > 0": 1460.00, // ASUP Relationship With Children GWI Limit Area 1
+        true: -1 // disallow by default
+    },
+    extraHelpGWILimit: "engine.evalMap(definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
 
 
     // -- Rates -- //
@@ -217,7 +230,7 @@ var definitions = {
     		"	$workingAge && " +
     		"	$single && " +
     		"	$dependentChildren >= 1 && " +
-    		"	$familyTotalGrossWeeklyIncome < $dpbCsiSoleParentGWILimit && " +
+    		"	$familyTotalGrossWeeklyIncome < $dpbSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefitPBA && " +
@@ -499,7 +512,14 @@ var definitions = {
             "($singleLivingAlone || $singleNotLivingAlone || $relationshipLivingAlone || $relationshipNotLivingAlone || $relationshipPartnerInPublicHospital)",
 
 
-    potentialExtraHelp:false,
+    potentialExtraHelp:
+            "$residencyResident && " +
+            "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
+            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit && " +
+            "!$potentialDPBSoleParent && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
+            "!$potentialYouthPayment && !$potentialYoungParentPayment && !$potentialUndeterminedYouthPayment && " +
+            "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
+    ,
 
     
     
@@ -526,7 +546,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
                     	"potentialNewZealandSupperannuationPartnerNotIncluded",
                     	"potentialUndeterminedWorkingAgeFinancialAssistance",
-                        "potentialUndeterminedYouthPayment"
+                        "potentialUndeterminedYouthPayment",
+                        "potentialExtraHelp"
 ];
 var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
                         "potentialAccommodationSupplement",
@@ -536,7 +557,6 @@ var allOtherBenefits = [   //these are actually supplements but we treat them th
                         "potentialOSCARSubsidy",
                         "potentialTemporaryAdditionalSupport",
                         "potentialChildDisabilityAllowance",
-                        "potentialLivingAlonePayment",
-                        "potentialExtraHelp"
+                        "potentialLivingAlonePayment"
                    ];
 
