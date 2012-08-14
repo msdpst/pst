@@ -284,7 +284,7 @@ h3 {
 
 #outer {
     left: 50%;
-    padding: 200px 1em 100% 1em;
+    padding: 200px 1em 100% 1em; /* bottom padding necessary so that we can scroll questions to the top of the window */
     position: relative;
     background-color: white;
     box-shadow: 0 0 1em #d0d0d0;
