@@ -66,7 +66,7 @@ engine = {
                 while (elt.length == 0);
                 elt.slideToggle(engine.SLIDE_TIME);
                 return false;
-            })
+            });
         });
         $(".help").hide();
 
@@ -97,6 +97,8 @@ engine = {
     /** They clicked the Back button */
     onBack:function () {
         engine.changeGroup(-1);
+        $('#answerAllMessage').hide();
+        $('#answerAllMessage').css('visibility','hidden');
     },
 
     /** They clicked the Next button */
@@ -119,7 +121,7 @@ engine = {
             if (fieldName && $(this).attr("type") != "checkbox") {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
-                    debug(fieldName + " not answered")
+                    debug(fieldName + " not answered");
                 }
             }
         });
@@ -135,12 +137,14 @@ engine = {
             if (!automatic)
                 //alert("Please answer all questions");
             	$('#answerAllMessage').show('slow');
+            	$('#answerAllMessage').css('visibility','visible');
             return;
         }
 
         // Validation
         ok = true;
         $('#answerAllMessage').hide();
+        $('#answerAllMessage').css('visibility','hidden');
         $(inputSelector).each(function () {
             if (!engine.validator.element($(this)))
                 ok = false;
@@ -205,6 +209,7 @@ engine = {
         // Enable controls in the new group
         $(engine.groupSel(newGroupNum) + " :input").each(function () {
             $(this).removeAttr("disabled");
+            $(this).removeClass("dontRead");
         });
 
         // Highlight the new group
@@ -294,9 +299,10 @@ engine = {
     /** Unhighlight the current group and disable its controls */
     disableCurrentGroup:function () {
         $(engine.groupSel(engine.currentGroupNum)).removeClass("current");
+        $(engine.groupSel(engine.currentGroupNum)).addClass("dontRead");
 
         $(engine.groupSel(engine.currentGroupNum) + " :input").each(function () {
-            $(this).attr("disabled", "disabled");
+            $(this).attr("disabled", "disabled");    
         });
     },
     
