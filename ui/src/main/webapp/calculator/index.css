@@ -1,3 +1,11 @@
+@media speech {
+	.dontRead { display: none !important; }
+}
+@media aural {
+	.dontRead { display: none !important; }
+}
+
+
 html {
     min-height: 100%;
 }
@@ -29,6 +37,7 @@ form, #progress {
 #answerAllMessage{
 	display: none;
 	color: red;
+	visibility: hidden;
 
 }
 
@@ -421,7 +430,26 @@ li {
 }
 
 .addIncomeSource{
-	 cursor: pointer;
+	padding-left:20px;
+	background: url("images/add.png") no-repeat scroll transparent left;
+}
+.addIncomeSource:hover{
+	background: url("images/add.png") no-repeat scroll transparent left;
+}
+
+.removeIncomeSource{
+	display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    padding-left:20px;
+    background: url("images/cancel.png") no-repeat scroll transparent left;
+}
+.removeIncomeSource:hover{
+	display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    padding-left:20px;
+    background: url("images/cancel.png") no-repeat scroll transparent left;
 }
 
 .incomeSource > div {

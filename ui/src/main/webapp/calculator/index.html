@@ -532,11 +532,13 @@ TODO, probably later:
 
                 <!-- They can add multiple income sources, but need to enter at least one -->
                 <div class="incomeSource">
-                 	<img 	
-                 		src="images/cancel.png" 
-                 		alt="remove this source of income" 
-                 		onclick="calculator.removeIncomeSource(this)"
-                 		class="removeIncomeSource"/>
+                 	<button class="removeIncomeSource"
+                 		onclick="calculator.removeIncomeSource(this);return false;">
+                 		</button>
+                 	<div class="clearfix">
+                        <label>What is the source of this income?</label>
+                        <div><input type="text" name="incomeDescription" /></div>
+                    </div>	
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
                         <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
@@ -556,15 +558,12 @@ TODO, probably later:
                             </select>
                         </div>
                     </div>
-                    <div class="clearfix">
-                        <label>What is the source of this income?</label>
-                        <div><input type="text" name="incomeDescription" /></div>
-                    </div>
+                   
                 </div>
-                <span class="addIncomeSource"  onclick="calculator.addIncomeSource()" >
-                	<img 
-                	src="images/add.png" 
-                	alt="add another source of income"/>Add another source of income</span>
+                <button 
+                	onclick="calculator.addIncomeSource();return false;" 
+                	class="addIncomeSource" >
+                	Add another source of income</button>
             </div>
 
         </fieldset>
@@ -931,10 +930,8 @@ TODO, probably later:
 
         <div id="controlBox"> <span id="answerAllMessage">Please Answer all Questions!</span>
         	<button id="exitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
-        
             <button id="backButton" type="button" onclick="engine.onBack()"><span class="backText">Back</span></button>
             <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span class="nextText">Next</span></button>
-
         </div>
 
     </form>
