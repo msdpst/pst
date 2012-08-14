@@ -446,7 +446,7 @@ var definitions = {
     potentialAccommodationSupplement:
         "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
         "   && " +
-        "	!($accomodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
+        "	!($accommodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
     ,
 
     potentialDisabilityAllowance:

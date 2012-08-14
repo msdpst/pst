@@ -3,7 +3,6 @@
 <!--
 TODO
 - disable debug (switch?)
-- "accomodation"
 - last page styles
 - there's not enought whitespace at the bottom of the page for the questions to scroll to the right place
 -->
@@ -762,21 +761,21 @@ TODO
             <div class="question">
                 <fieldset>
                     <div>Do you pay rent, board or have costs from owning a home?</div>
-                    <input type="radio" name="accomodationCosts" id="accomodationCostsYes" value="true"> <label for="accomodationCostsYes">Yes</label>
-                    <input type="radio" name="accomodationCosts" id="accomodationCostsNo" value="false"> <label for="accomodationCostsNo">No</label>
+                    <input type="radio" name="accommodationCosts" id="accommodationCostsYes" value="true"> <label for="accommodationCostsYes">Yes</label>
+                    <input type="radio" name="accommodationCosts" id="accommodationCostsNo" value="false"> <label for="accommodationCostsNo">No</label>
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$accomodationCosts">
+            <div class="question" data-visible="$accommodationCosts">
                 <fieldset>
                     <div>What type of accommodation are you in?</div>
-                    <input type="radio" name="accomodationType" id="accomodationType1" value="Rent"> <label for="accomodationType1">Rent</label>
-                    <input type="radio" name="accomodationType" id="accomodationType2" value="Board"> <label for="accomodationType2">Board</label>
-                    <input type="radio" name="accomodationType" id="accomodationType3" value="Own Home"> <label for="accomodationType3">Own Home</label>
+                    <input type="radio" name="accommodationType" id="accommodationType1" value="Rent"> <label for="accommodationType1">Rent</label>
+                    <input type="radio" name="accommodationType" id="accommodationType2" value="Board"> <label for="accommodationType2">Board</label>
+                    <input type="radio" name="accommodationType" id="accommodationType3" value="Own Home"> <label for="accommodationType3">Own Home</label>
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$accomodationType == 'Rent'">
+            <div class="question" data-visible="$accommodationType == 'Rent'">
                 <fieldset>
                     <div>Do you live in a property owned or managed by Housing New Zealand?</div>
                     <input type="radio" name="housingNz" id="housingNzYes" value="true"> <label for="housingNzYes">Yes</label>
@@ -784,17 +783,17 @@ TODO
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$accomodationType == 'Rent'">
+            <div class="question" data-visible="$accommodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
                 $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency">
             </div>
 
-            <div class="question" data-visible="$accomodationType == 'Board'">
+            <div class="question" data-visible="$accommodationType == 'Board'">
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
                 $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
             </div>
 
-            <div class="question" data-visible="$accomodationType == 'Own Home'">
+            <div class="question" data-visible="$accommodationType == 'Own Home'">
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
                 $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
             </div>
@@ -854,7 +853,7 @@ TODO
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$notMeetingLivingCosts || $accomodationCosts">
+            <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
                 $ <input type="text" name="cashAssets" id="cashAssets" class="currency">
 
