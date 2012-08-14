@@ -97,13 +97,20 @@ var calculator = {
     applyNow:function(){
     	
     	//we can decide where to send them for their on-line application.
-    	
-    	if (		engine.evaluate("$potentialNewZealandSuperannuationSingle")
+    	if (		
+    			engine.evaluate("$potentialNewZealandSuperannuationSingle")
     			||  engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
     			||  engine.evaluate("$potentialNewZealandSupperannuationPartnerNotIncluded")){
     		window.location="http://www.workandincome.govt.nz/online-services/superannuation/"; 	
     		return;
+    	}else if (engine.evaluate("$age16to17 && $single" )){
+    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
+    	}else if (engine.evaluate("$youngParent" )){	
+    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
+    	}else if (engine.evaluate("$workingAge" )){	
+    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
     	}else{
+    		//fall back
     		window.location="http://www.workandincome.govt.nz/online-services/";
     		return;
     	}
