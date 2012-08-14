@@ -157,7 +157,7 @@ var definitions = {
         "($workingAge || $youth) && $single && $dependentChildren > 1": 1393.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
         "($workingAge || $youth) && !$single && $dependentChildren == 0": 1200.00, // ASUP Relationship Without Children GWI Limit Area 1
         "($workingAge || $youth) && !$single && $dependentChildren > 0": 1460.00, // ASUP Relationship With Children GWI Limit Area 1
-        true: -1 // disallow by default
+        "true": -1 // disallow by default
     },
     extraHelpGWILimit: "engine.evalMap(definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
 
