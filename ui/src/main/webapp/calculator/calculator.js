@@ -90,7 +90,8 @@ var calculator = {
         engine.clearAllControlsIn(nnew);
 
         // Show the close button. These are hidden by default so it doesn't show on the first one.
-        nnew.find("a").show();
+        nnew.find("img").show();
+        
     },
     
     applyNow:function(){

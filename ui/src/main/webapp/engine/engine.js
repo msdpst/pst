@@ -224,6 +224,9 @@ engine = {
 
     /** Reveal the question group and scroll the page so the group is centered vertically (if it fits)*/
     revealAndScroll:function (elt) {
+    	
+    	
+    	
         elt.fadeIn(engine.SLIDE_TIME);
 
         var y = elt.offset().top - 250;//$("#buffer").offset().top - $("#buffer").height() - 10;

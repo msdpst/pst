@@ -506,7 +506,7 @@ TODO, probably later:
             </div>
 
             <div class="question incomeSources" data-visible="$expectIncome">
-                <h3>Please provide details of your or your partner's expected income:</h3>
+                <h2>Please provide details of your or your partner's expected income:</h2>
                 <p class="info">
                     Other sources might be things such as ACC payments, dividends, overseas payments or child support.
                     <a href="#" class="helpButton">For more examples click here.</a></p>
@@ -532,7 +532,11 @@ TODO, probably later:
 
                 <!-- They can add multiple income sources, but need to enter at least one -->
                 <div class="incomeSource">
-                    <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
+                 	<img 	
+                 		src="images/cancel.png" 
+                 		alt="remove this source of income" 
+                 		onclick="calculator.removeIncomeSource(this)"
+                 		class="removeIncomeSource"/>
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
                         <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
@@ -557,7 +561,11 @@ TODO, probably later:
                         <div><input type="text" name="incomeDescription" /></div>
                     </div>
                 </div>
-                <a href="#" onclick="calculator.addIncomeSource()" class="addIncomeSource">Add another source of income</a>
+                <span class="addIncomeSource"  onclick="calculator.addIncomeSource()" >
+                	<img 
+                	
+                	src="images/add.png" 
+                	alt="add another source of income"/>Add another source of income</span>
             </div>
 
         </fieldset>
