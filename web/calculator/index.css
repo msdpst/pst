@@ -231,21 +231,6 @@ h1 {
     text-align: center;
 }
 
-h3 {
-    color: #CE3436;
-    text-shadow: 0 1px 0 #ffcccc;
-    font-size: 12px;
-    font-weight: 600;
-    margin: 0 0 0.5em 0;
-    padding: 0;
-    text-align: left;
-}
-
-.apply {
-    color: blue;
-   
-}
-
 #progressLabel {
     position: absolute;
     width: 100%;
@@ -312,8 +297,11 @@ form ul {
 }
 
 .question h3 {
+    font-size: 14px;
+    margin: 0 0 1em 0;
+    padding: 0;
+    text-align: left;
     font-weight: bold;
-    margin-bottom: 1em;
 }
 
 .current .question {
@@ -518,6 +506,24 @@ li {
 }
 #eligible h2:first-child {
     margin-top: 0;
+}
+
+#eligible h3 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 2em 0 0.5em 0;
+    padding: 0;
+    text-align: left;
+}
+#eligible h3:first-child {
+    margin-top: 0;
+}
+
+#eligible .apply {
+    color: blue;
+    margin-top: 2em !important;
 }
 
 #eligible .benefitName{
