@@ -85,17 +85,38 @@ button:active {
 }
 
 #exitButton{
-	
 	float:left;
+	width:50px;
+}
+
+#nextButton{
+	width:50px;
+}
+
+#finalNextButton{
+	width:50px;
+}
+
+#finalBackButton{
+	width:60px;
+}
+
+#backButton{
+	width:60px;
 }
 
 #finalExitButton{
-	
+	width:50px;
 	float:left;
+}
+
+#applyButton{
+	width:200px;
 }
 
 
 #restartButton{
+	width:100px;
 	float:left;
 }
 
@@ -391,6 +412,22 @@ li {
     padding: 2px 5px 1px 4px;
     font-weight: bold;
 }
+.incomeSource img {
+    display: none;
+    position: absolute;
+    margin: -1px 0 0 -1px;
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid #c0c0c0;
+    padding: 2px 5px 1px 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.addIncomeSource{
+	 cursor: pointer;
+}
+
 .incomeSource > div {
     background-color: #f0f0f0;
     padding: 6px 6px 6px 40px;

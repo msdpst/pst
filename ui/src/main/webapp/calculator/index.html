@@ -501,7 +501,7 @@
             </div>
 
             <div class="question incomeSources" data-visible="$expectIncome">
-                <h3>Please provide details of your or your partner's expected income:</h3>
+                <h2>Please provide details of your or your partner's expected income:</h2>
                 <p class="info">
                     Other sources might be things such as ACC payments, dividends, overseas payments or child support.
                     <a href="#" class="helpButton">For more examples click here.</a></p>
@@ -527,7 +527,11 @@
 
                 <!-- They can add multiple income sources, but need to enter at least one -->
                 <div class="incomeSource">
-                    <a href="#" onclick="calculator.removeIncomeSource(this)" class="removeIncomeSource">X</a>
+                 	<img 	
+                 		src="images/cancel.png" 
+                 		alt="remove this source of income" 
+                 		onclick="calculator.removeIncomeSource(this)"
+                 		class="removeIncomeSource"/>
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
                         <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
@@ -552,7 +556,10 @@
                         <div><input type="text" name="incomeDescription" /></div>
                     </div>
                 </div>
-                <a href="#" onclick="calculator.addIncomeSource()" class="addIncomeSource">Add another source of income</a>
+                <span class="addIncomeSource"  onclick="calculator.addIncomeSource()" >
+                	<img 
+                	src="images/add.png" 
+                	alt="add another source of income"/>Add another source of income</span>
             </div>
 
         </fieldset>
@@ -960,11 +967,11 @@
         
 		<br><br>
         <div class="resultsButtonBox">
-        	<button id="finalExitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
+        	<button id="finalExitButton" type="button" onclick="calculator.exitWI()"><span class="exitText">Exit</span></button>
         	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
         	
             <button id="finalBackButton" onclick="calculator.onBackFromResults()"><span class="exitText">Back</span></button>
-            <button id="applyButton" onclick="engine.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
+            <button id="applyButton" onclick="calculator.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
         </div>
     </div>
 
@@ -982,10 +989,10 @@
         <p>Remember, we're here to help if you need it, whether or not you receive financial assistance from us.</p>
 
        <div class="resultsButtonBox">
-        	<button id="finalExitButton" type="button" onclick="engine.exitWI()"><span class="exitText">Exit</span></button>
-        	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
+        	<button id="rejectExitButton" type="button" onclick="calculator.exitWI()"><span class="exitText">Exit</span></button>
+        	<button id="rejectRestartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
         	
-            <button id="finalBackButton" onclick="calculator.onBackFromResults()"><span class="backText">Back</span></button>            
+            <button id="rejectFinalBackButton" onclick="calculator.onBackFromResults()"><span class="backText">Back</span></button>            
         </div>
     </div>
 </div>

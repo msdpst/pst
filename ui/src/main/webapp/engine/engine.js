@@ -240,6 +240,9 @@ engine = {
 
     /** Reveal the question group and scroll the page so the group is centered vertically (if it fits)*/
     revealAndScroll:function (elt) {
+    	
+    	
+    	
         elt.fadeIn(engine.SLIDE_TIME);
 
         var y = elt.offset().top - engine.groupScrollYPosition;
@@ -297,19 +300,7 @@ engine = {
         });
     },
     
-    applyNow:function(){
-    	
-    	window.location="http://www.workandincome.govt.nz/online-services/";
-    	
-    },
-    
-    exitWI:function(){
-    	
-    	//window.location="http://www.workandincome.govt.nz/online-services/";
-    	alert ("back to work and income");
-    	
-    },
-    
+
     restart:function(){
     	
     	window.location.reload();

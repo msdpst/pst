@@ -13,6 +13,7 @@ var definitions = {
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
     youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
+    ibYouth: "$age16to17",
     parent: "$dependentChildren > 0",
     youngParent: "$age16to17 && $parent",
     oscarAgedChild: "$childAged513",
@@ -35,6 +36,7 @@ var definitions = {
     resident: "$stayingInNz && $twoYears && $residencyResident",
     refugeeOtherWithPermanentResidence: "$stayingInNz && $twoYears && $residencyRefugeePermanent",
     workingAge: "($age == 18 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
+    ibWorkingAge : "($age >= 18 && $age <= 64)",
     age50to64: "($age >= 50 && $age <= 64)",
     partner16or17: "$partnerAge == 16 || $partnerAge == 17",
     partner16to18: "$partnerAge >= 16 && $partnerAge <= 18",
@@ -78,12 +80,31 @@ var definitions = {
     relationshipPartnerInPublicHospital: "$partner && $partnerLives == 'Public hospital'",
 
 
+    blindSingle:"$single && $totallyBlind && $dependentChildren == 0 && " +
+    		" (" +
+    		"	($ibWorkingAge && $totalOtherIncomeCalculation < $ibSingle18GWILimit)" +
+    		"	||" +
+    		"	($ibYouth && $totalOtherIncomeCalculation < $ibSingleYouthGWILimit)" +
+    		")",
+    
+    
+    blindRelationship:"!$single && $totallyBlind && $totalOtherIncomeCalculation < $ibRelationshipGWILimit" +
+	" (" +
+	"	$ibWorkingAge || $ibYouth" +
+	" )",
+	
+	
+    blindSoleParent:"($ibWorkingAge || $ibYouth) && $totallyBlind && $single && $dependentChildren > 0 &&" +
+    		"$totalOtherIncomeCalculation < $ibSoleParentGWILimit",
+    
+    
     // -- Limits -- //
 
     widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
     dpbCsiSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
 
     ibSingle18GWILimit : 524,//IB Single 18+ GWI Limit
+    ibSingleYouthGWILimit : 454,//IB Single Youth GWI Limit
     ibSoleParentGWILimit : 638,//IB Sole Parent GWI Limit
     ibRelationshipGWILimit : 768,//IB Relationship GWI Limit
 
@@ -211,7 +232,7 @@ var definitions = {
     
 
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
-    		"	($totallyBlind)",  //TODO blindRelationship && blindSoleparent ..?? //TODO FINSH THIS
+    		"	($totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
 
     potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
@@ -480,18 +501,8 @@ var definitions = {
 
     potentialExtraHelp:false,
 
-
-    // -------- Pre-Benefit Activities--------
-    //createCV: "$potentialDPBSoleParent || $potentialUnemploymentBenefit",
-    //attendPAM: "$potentialUnemploymentBenefit",
-
-
-    // -------- Obligations --------
-
-    //testObligation: "$potentialDPBSoleParent",
-
-
-    // -------- Other --------
+    
+    
 
     age: "calculator.calculateAge($dateOfBirth)"
 };
