@@ -515,8 +515,8 @@ var definitions = {
     potentialExtraHelp:
             "$residencyResident && " +
             "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
-            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit && " +
-            "!$potentialDPBSoleParent && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
+            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidows && " +
+            "!$potentialDPBSoleParentCalc && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
             "!$potentialYouthPayment && !$potentialYoungParentPayment && !$potentialUndeterminedYouthPayment && " +
             "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
     ,
