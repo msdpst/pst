@@ -691,28 +691,3 @@ Date.prototype.yearsBefore = function(otherDate) {
     years += (otherDate.getDate() - copy.getDate()) / 365.4;
     return years;
 };
-
-
-/* ----------- Debugging ------------ */
-
-function debugIf(condition, msg) {
-    if (condition)
-        debug(msg);
-}
-
-function debugAlertOnce(key, msg) {
-    if (!window.debugAlerts)
-        window.debugAlerts = {};
-    if (!window.debugAlerts[key]) {
-        window.debugAlerts[key] = true;
-        alert(msg);
-    }
-}
-
-if (!window.debug) {
-    window.debug = function (msg) {
-        if (window.console) {
-            console.log(msg);
-        }
-    };
-}

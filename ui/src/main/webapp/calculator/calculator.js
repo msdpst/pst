@@ -1,4 +1,8 @@
 
+// Uncomment this to enable debugging. Don't leave it that way though because it's
+// a performance hit.
+// enableDebugging();
+
 // Allow for our fixed-position header.
 engine.groupScrollYPosition = 250;
 
