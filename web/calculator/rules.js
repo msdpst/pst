@@ -198,9 +198,9 @@ var definitions = {
     	"$potentialDPBSoleParent || $potentialDPBSoleParentPBAWithTeen || $potentialDPBSoleParentPBAWithYoungChild":336.55
     },
 
-    ubRate: "engine.evalMap(definitions.ratesUB)",
-    ibRate: "engine.evalMap(definitions.ratesIB)",
-    dpbRate : "engine.evalMap(definitions.ratesDPB)",
+    ubRate: "engine.evalMap(definitions.ratesUB).toFixed(2)",
+    ibRate: "engine.evalMap(definitions.ratesIB).toFixed(2)",
+    dpbRate : "engine.evalMap(definitions.ratesDPB).toFixed(2)",
 
 
     // -------- Calculations --------
@@ -515,8 +515,8 @@ var definitions = {
     potentialExtraHelp:
             "$residencyResident && " +
             "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
-            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidows && " +
-            "!$potentialDPBSoleParentCalc && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
+            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit && " +
+            "!$potentialDPBSoleParent && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
             "!$potentialYouthPayment && !$potentialYoungParentPayment && !$potentialUndeterminedYouthPayment && " +
             "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
     ,
