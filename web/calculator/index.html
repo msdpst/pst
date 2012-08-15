@@ -1,23 +1,19 @@
 ﻿<!doctype html>
-<!-- Eligibility calculator v. 0.1.1 -->
-<!--
-TODO
-- last page styles
--->
+<!-- Eligibility calculator v. 0.1.2 -->
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     	
     <link rel="stylesheet" href="../thirdparty/cssreset-min.css" type="text/css"/>	
-	<link rel="stylesheet" href="index.css" type="text/css"/>
+	<link rel="stylesheet" href="index.css?dummy=5" type="text/css"/>
 	
     <script src="../thirdparty/jquery-1.7.2.js"></script>
     <script src="../thirdparty/jquery.validate.js"></script>
     <script src="../thirdparty/jquery-ui.min.js"></script>
-    <script src="rules.js"></script>
-    <script src="../engine/debug.js"></script>
-    <script src="../engine/engine.js"></script>
-    <script src="calculator.js"></script>
+    <script src="rules.js?dummy=5"></script>
+    <script src="../engine/debug.js?dummy=5"></script>
+    <script src="../engine/engine.js?dummy=5"></script>
+    <script src="calculator.js?dummy=5"></script>
     
     <!--[if (gte IE 6)&(lte IE 8)]>
     	<script src="../thirdparty/selectivizr-min.js"></script>
@@ -506,7 +502,7 @@ TODO
             </div>
 
             <div class="question incomeSources" data-visible="$expectIncome">
-                <h2>Please provide details of your or your partner's expected income:</h2>
+                <h3>Please provide details of your or your partner's expected income:</h3>
                 <p class="info">
                     Other sources might be things such as ACC payments, dividends, overseas payments or child support.
                     <a href="#" class="helpButton">For more examples click here.</a></p>
@@ -770,7 +766,7 @@ TODO
                     <div>What type of accommodation are you in?</div>
                     <input type="radio" name="accommodationType" id="accommodationType1" value="Rent"> <label for="accommodationType1">Rent</label>
                     <input type="radio" name="accommodationType" id="accommodationType2" value="Board"> <label for="accommodationType2">Board</label>
-                    <input type="radio" name="accommodationType" id="accommodationType3" value="Own Home"> <label for="accommodationType3">Own Home</label>
+                    <input type="radio" name="accommodationType" id="accommodationType3" value="Home Owner"> <label for="accommodationType3">Home Owner</label>
                 </fieldset>
             </div>
 
@@ -792,8 +788,8 @@ TODO
                 $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
             </div>
 
-            <div class="question" data-visible="$accommodationType == 'Own Home'">
-                <label for="outgoingsPerWeek">What is the total amount of costs for your own home do you pay per week?</label>
+            <div class="question" data-visible="$accommodationType == 'Home Owner'">
+                <label for="outgoingsPerWeek">What is the total amount of costs for your own home that you pay per week?</label>
                 $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
             </div>
 
@@ -932,7 +928,7 @@ TODO
         <div id="controlBox"> <span id="answerAllMessage">Please Answer all Questions!</span>
         	<button id="exitButton" type="button" onclick="calculator.exitWI()"><span class="exitText">Exit</span></button>
             <button id="backButton" type="button" onclick="engine.onBack()"><span class="backText">Back</span></button>
-            <button id="nextButton" type="submit" onclick="engine.onNext(); return false;"><span class="nextText">Next</span></button>
+            <button id="nextButton" type="button" onclick="engine.onNext()"><span class="nextText">Next</span></button>
         </div>
 
     </form>

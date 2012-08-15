@@ -32,15 +32,8 @@ engine = {
     currentGroupNum:0,
     SLIDE_TIME:500,
 
-    /**
-     * Called before initialisation. The client can override this, eg. to modify the default settings above
-     */
-    onStart: function() {},
-
     onReady:function () {
         debug("====== hello ======");
-
-        this.onStart();
 
         // Make sure everything's hidden to start off with. The html page should do this in a
         // style block in the head so that content isn't shown while waiting for this JS, but
@@ -52,6 +45,18 @@ engine = {
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         engine.validator = $("form").validate();
+        
+        
+        // make pressing return be the same as clicking next
+        $(".question :input").keypress(function (e) {
+            if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                engine.onNext();
+                return false;
+            } 
+            else {
+                return true;
+            }
+        });
 
 
         // Expandable help sections
@@ -70,6 +75,7 @@ engine = {
         });
         $(".help").hide();
 
+        // Progress bar - default to 5% (0 looks funny)
         if ($("#progress").length)
             $("#progress").progressbar({value:5});
 
