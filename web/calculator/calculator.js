@@ -128,19 +128,13 @@ var calculator = {
     
     
     confirmExit:function(){
+    	$('#outer').hide();
     	$('#confirmExit').show();
-    	$('#controlBox').hide();
-    	$('.resultsButtonBox').hide();
-    	$("form").hide();
-    	
     },
     
     cancelExit:function(){
     	$('#confirmExit').hide();
-    	$('#controlBox').show();
-    	$('.resultsButtonBox').show();
-    	$("form").show();
-    	
+    	$('#outer').show();
     },
 
     removeIncomeSource: function(domElement) {
