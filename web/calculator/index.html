@@ -223,7 +223,7 @@
 
             <div class="question" data-visible="!$partner">
                 <label for="relationshipStatusSingle">What best describes your relationship status?</label>
-                <select name="relationshipStatusSingle" id="relationshipStatusSingle">
+                <select name="relationshipStatusSingle" id="relationshipStatusSingle" class="required">
                     <option value="">Please Select</option>
                     <option>Civil Union Dissolved</option>
                     <option>Civil Union Partner Deceased</option>
@@ -239,7 +239,7 @@
 
 	        <div class="question">
                 <label for="dependentChildren">How many dependent children do you have?</label>
-                <input type="text" name="dependentChildren" id="dependentChildren" class="number" min="0">
+                <input type="text" name="dependentChildren" id="dependentChildren" class="required digits" min="0" value="0">
                 <div class="info">
                     A child (whether your own, stepchild, adopted, grandchild or mokopuna)
                     is considered dependent if they are:
@@ -458,7 +458,7 @@
             </div>
 
 	        <div class="question" data-visible="$partnerStillWorking">
-                <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label>
+                <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label><br>
                 $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency">
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any

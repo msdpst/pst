@@ -44,6 +44,7 @@ engine = {
         // default, which is (a) too lenient and (b) dependent on the client computer's region settings.
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
+        
         engine.validator = $("form").validate();
         
         
@@ -124,18 +125,35 @@ engine = {
             var fieldName = $(this).attr("name");
 
             // Don't worry about checkboxes (see below) or unnamed fields
-            if (fieldName && $(this).attr("type") != "checkbox") {
+            if (fieldName && $(this).attr("type") != "checkbox" ) {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
                     debug(fieldName + " not answered");
+                    if($(this).attr("type") == "radio"){
+                    	$(this).closest('fieldset').addClass('borked');
+                	}else{
+                		$(this).addClass('borked');
+                	}
+                }
+                else{
+                	
+                	if($(this).attr("type") == "radio"){
+                    	$(this).closest('fieldset').removeClass('borked');
+                	}else{
+                		$(this).removeClass('borked');
+                	}
                 }
             }
         });
         
         // data-required-checkbox-group: a group of checkboxes in which at least one must be ticked
         $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
-            if ($(this).find("input[type='checkbox']:checked").length == 0)
+            if ($(this).find("input[type='checkbox']:checked").length == 0){
                 ok = false;
+                $(this).closest('fieldset').addClass('borked');
+            }else{    	
+            	$(this).closest('fieldset').removeClass('borked');
+            }
         });
         
         if (!ok) {
@@ -467,6 +485,15 @@ engine = {
                 val = Number(val);
             }
         }
+        
+        else if (element.hasClass("digit")) {
+            if (val === undefined) {
+                val = 0;
+            }
+            else if (!isNaN(Number(val))) {
+                val = Number(val);
+            }
+        }
 
         else if (element.hasClass("currency")) {
             if (val === undefined) {
@@ -628,6 +655,7 @@ engine = {
         str = $.trim(str);
         return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
     }
+    
 };
 
 /* ----------- Date extensions ------------ */

@@ -38,8 +38,19 @@ form, #progress {
 	display: none;
 	color: red;
 	visibility: hidden;
+	width:100px;
+	float:none;
 
 }
+
+.borked{
+	
+	border: 3px solid red;
+	border-radius: 5px 5px 5px 5px;
+	padding:3px;
+	
+}
+
 
 button {
     -moz-border-bottom-colors: none;
