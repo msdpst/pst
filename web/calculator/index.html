@@ -270,7 +270,7 @@
         <!-- ======== Your Partner's Details (Super) ========= -->
 
         <!-- New Zealand Superannuation partner living details -->
-        <fieldset class="group" data-visible="$seniorOk && $partner">
+        <fieldset class="group" data-visible="$seniorOk && $relationshipSituationPartner">
             <div class="question">
                 <fieldset>
                     <div>Do you want to include your partner in your New Zealand Superannuation?</div>
@@ -441,7 +441,7 @@
         </fieldset>
 
         <fieldset class="group">
-	        <div class="question" data-visible="$partner">
+	        <div class="question" data-visible="$relationshipSituationPartner">
                 <fieldset>
                     <div>Has your partner worked in the last 52 weeks?</div>
                     <input type="radio" name="partnerWorked" id="partnerWorkedYes" value="true"> <label for="partnerWorkedYes">Yes</label>

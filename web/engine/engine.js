@@ -45,7 +45,10 @@ engine = {
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
-        engine.validator = $("form").validate();
+        
+        engine.validator = $("form").validate({messages:{
+        	dependentChildren:"Please enter a whole number between 0 and 127"
+        }});
         
         
         
