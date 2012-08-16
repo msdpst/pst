@@ -98,6 +98,26 @@ button:active {
 	width:50px;
 }
 
+#exitButtonYes{
+	
+	width:50px;
+}
+
+
+#exitButtonNo{
+	
+	width:50px;
+}
+
+#confirmExit{
+	display:none;
+	width:36em;
+	border: 2px solid #aaa;
+	padding: 2em 1.5em 2em 1.5em;
+    margin: 2em 2em 0 2em;
+}
+
+
 #nextButton{
 	width:50px;
 }
@@ -133,6 +153,16 @@ button:active {
 .exitText{
 	padding-left: 20px;
 	background: url("images/arrow-left.png") no-repeat scroll transparent left;
+}
+
+.noText{
+	padding-left: 20px;
+	background: url("images/cancel.png") no-repeat scroll transparent left;
+}
+
+.yesText{
+	padding-left: 20px;
+	background: url("images/tick.png") no-repeat scroll transparent left;
 }
 
 

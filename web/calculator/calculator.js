@@ -125,6 +125,21 @@ var calculator = {
     	
     	window.location="http://www.workandincome.govt.nz/online-services/";
     },
+    
+    
+    confirmExit:function(){
+    	$('#confirmExit').show();
+    	$('#controlBox').hide();
+    	$('.resultsButtonBox').hide();
+    	
+    },
+    
+    cancelExit:function(){
+    	$('#confirmExit').hide();
+    	$('#controlBox').show();
+    	$('.resultsButtonBox').show();
+    	
+    },
 
     removeIncomeSource: function(domElement) {
         $(domElement).closest(".incomeSource").remove();
