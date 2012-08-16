@@ -48,6 +48,8 @@ engine = {
         engine.validator = $("form").validate();
         
         
+        
+        
         // make pressing return be the same as clicking next
         $(".question :input").keypress(function (e) {
             if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
