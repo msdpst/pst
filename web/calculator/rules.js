@@ -29,6 +29,17 @@ var definitions = {
     residencyResident: "$residency == 'NZ Citizen (by birth)' || $residency == 'NZ Citizen (Other)' || $residency == 'Permanent Resident' || $residency == 'Refugee - Quota' || $residency == 'Australian' || $residencyRefugeePermanent",
     residencyRefugeePermanent: "$residency == 'Refugee - Other with Permanent Residence'",
 
+    
+    unlawfulResident: "!$under20 && !$seniorsAge && " +
+    		"($residency == 'Limited Purpose Permit' || " +
+    		" $residency == 'Living In Other Countries' || " +
+    		" $residency == 'No Current Permit' || " +
+    		" $residency == 'Refugee - other without Permanent Residence' || " +
+    		" $residency == 'Student Permit' || " +
+    		" $residency == 'Temporary Work Permit' || " +
+    		" $residency == 'Visitor Permit' || " +
+    		" $residency == 'Working Holiday' )",
+    
     deceasedPartner: "$relationshipStatusSingle=='Widowed' || $relationshipStatusSingle =='Defacto Partner Deceased' || $relationshipStatusSingle=='Civil Union Partner Deceased'",
 
     // -------- Benefit definitions --------
@@ -211,7 +222,7 @@ var definitions = {
 
     // -------- Main benefit eligibility --------
 
-    potentialWidows: "(($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialWidows: "!$unlawfulResident && (($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"(	" +
     		"	($workingAge && " +
@@ -222,11 +233,11 @@ var definitions = {
     		
     		
     //TODO here		
-    potentialWidowsBenefitPBA: "$potentialWidows && ($dependentChildren == 0 || $hasYoungest14Plus)",		
+    potentialWidowsBenefitPBA: "!$unlawfulResident && $potentialWidows && ($dependentChildren == 0 || $hasYoungest14Plus)",		
     		
-    potentialWidowsBenefit : "$potentialWidows && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
+    potentialWidowsBenefit : "!$unlawfulResident && $potentialWidows && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
 
-    potentialDPBSoleParentCalc: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBSoleParentCalc: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
     		"	$single && " +
     		"	$dependentChildren >= 1 && " +
@@ -244,17 +255,17 @@ var definitions = {
     
     
 
-    potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialInvalidsBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
 
-    potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBCareOrSickOrInfirm: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
     		"	$workingAge && " +
     		"	$single && " +
     		"	$dependentChildren <= 1 && " +
     		"	($familyTotalGrossWeeklyIncome < $dpbCsiSoleParentGWILimit)",
 
-    potentialDPBWomanAlone: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBWomanAlone: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$gender == 'Female' && " +
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
@@ -275,7 +286,7 @@ var definitions = {
     		"	) "
     		,
 
-    potentialHealthRelatedBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialHealthRelatedBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$healthDisabilityAffectsWork && " +
     		"	( " +
     		"		!$haveWorked " +
@@ -309,7 +320,8 @@ var definitions = {
 
 
     potentialYouthPayment:
-    		"	$resident && " +
+    		"	!$unlawfulResident && " +
+    		"   $resident && " +
     		"	$youth  &&" +// +
     		"	(	" +
     		"		(" +
@@ -326,7 +338,8 @@ var definitions = {
 
 
     potentialYoungParentPayment:
-    	"	$resident && " +
+    	"	!$unlawfulResident && " +
+    	"   $resident && " +
     	"	$youngParent && " +
     	"	!$potentialInvalidsBenefit && " +
     	"		(" +
@@ -342,7 +355,7 @@ var definitions = {
 		"		)	",
 
 
-    potentialUnemploymentBenefitTraining:"($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialUnemploymentBenefitTraining:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
     		"	$topCourse && " +
     		" ( " +
@@ -364,7 +377,7 @@ var definitions = {
     		"	!$potentialHealthRelatedBenefit",
 
 
-    potentialUnemploymentBenefit:"($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialUnemploymentBenefit:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
 			"	$workingAge && " +
 			" ( " +
 			"		!$haveWorked " +
@@ -386,16 +399,16 @@ var definitions = {
 			"	!$potentialHealthRelatedBenefit",
 
 
-    potentialNewZealandSuperannuationSingle:"$seniorsAge && $resident && $single ", //ACC stuff not required
+    potentialNewZealandSuperannuationSingle:"!$unlawfulResident && $seniorsAge && $resident && $single ", //ACC stuff not required
 
 
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $resident && !$single && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
     		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
     		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
     		"			$partnerAge >= 16 && $partnerResident",
 
 
-    potentialNewZealandSupperannuationPartnerNotIncluded:"$seniorsAge && $resident && !$single && " +
+    potentialNewZealandSupperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
@@ -403,7 +416,7 @@ var definitions = {
 
    //potentialUndeterminedWorkingAgeFinancialAssistance:false,
    potentialUndeterminedWorkingAgeFinancialAssistance:
-	   "	($workingAge || $seniorsAge ) && " +
+	   "	!$unlawfulResident && ($workingAge || $seniorsAge ) && " +
 	   "	!$potentialBenefit && " +
 	   "	!$potentialWidowsBenefitPBA && " +
 	   "	!$potentialWidowsBenefit && " +

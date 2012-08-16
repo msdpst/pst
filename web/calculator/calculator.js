@@ -131,6 +131,7 @@ var calculator = {
     	$('#confirmExit').show();
     	$('#controlBox').hide();
     	$('.resultsButtonBox').hide();
+    	$("form").hide();
     	
     },
     
@@ -138,6 +139,7 @@ var calculator = {
     	$('#confirmExit').hide();
     	$('#controlBox').show();
     	$('.resultsButtonBox').show();
+    	$("form").show();
     	
     },
 
