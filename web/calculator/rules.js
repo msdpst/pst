@@ -526,7 +526,7 @@ var definitions = {
 
 
     potentialExtraHelp:
-            "$residencyResident && " +
+            "!$unlawfulResident && $residencyResident && " +
             "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
             "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefit && " +
             "!$potentialDPBSoleParent && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
