@@ -416,7 +416,7 @@
 
 	        <div class="question" data-visible="$stillWorking">
                 <label for="weeklyHours">What is the total number of hours you work per week?</label>
-                <input type="text" name="weeklyHours" id="weeklyHours" class="number">
+                <input type="text" name="weeklyHours" id="weeklyHours" class="number" min="0">
             </div>
 
             <!-- ACC Details (Seniors only) -->
@@ -460,7 +460,7 @@
 
 	        <div class="question" data-visible="$partnerStillWorking">
                 <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label><br>
-                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency">
+                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency" min="0">
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
@@ -538,7 +538,7 @@
                     </div>	
                     <div class="clearfix">
                         <label>How much do you and/or your partner receive before tax?</label>
-                        <div>$&nbsp;<input type="text" name="incomeAmount" class="currency"/></div>
+                        <div>$&nbsp;<input type="text" name="incomeAmount" class="currency" min="0"/></div>
                     </div>
                     <div class="clearfix">
                         <label>How often do you / your partner receive these payments?</label>
@@ -782,17 +782,17 @@
 
             <div class="question" data-visible="$accommodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
-                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency">
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency" min="0" max="500000">
             </div>
 
-            <div class="question" data-visible="$accommodationType == 'Board'">
+            <div class="question" data-visible="$accommodationType == 'Board'" >
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
-                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency">
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency"  min="0" max="500000">
             </div>
 
-            <div class="question" data-visible="$accommodationType == 'Home Owner'">
+            <div class="question" data-visible="$accommodationType == 'Home Owner'" >
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home that you pay per week?</label>
-                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency">
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency"  min="0" max="500000">
             </div>
 
         </fieldset>
