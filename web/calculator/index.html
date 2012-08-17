@@ -728,7 +728,7 @@
 
 	        <div class="question" data-visible="$under20 && $partner==false && $livingAtHome && $dependentChildren > 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label>
-                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency">
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="0" max="500000">
             </div>
 
             <div class="question" data-visible="$youth && $livingAtHome==false">
