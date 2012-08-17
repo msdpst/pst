@@ -428,7 +428,7 @@
 
 	        <div class="question" data-visible="$seniorOk">
                 <fieldset>
-                    <div>Are you currently receiving weekly compensation payments from ACC? (ACC is the Accident Compensation Corporation)</div>
+                    <div>Are you currently receiving weekly compensation payments from the Accident Compensation Corporation (ACC)?</div>
                     <input type="radio" name="acc" id="accYes" value="true"> <label for="accYes">Yes</label>
                     <input type="radio" name="acc" id="accNo" value="false"> <label for="accNo">No</label>
                 </fieldset>
@@ -508,29 +508,8 @@
             </div>
 
             <div class="question incomeSources" data-visible="$expectIncome">
-                <h3>Please provide details of your or your partner's expected income:</h3>
-                <p class="info">
-                    Other sources might be things such as ACC payments, dividends, overseas payments or child support.
-                    <a href="#" class="helpButton">For more examples click here.</a></p>
-
-                <div class="help">
-                    Examples of income from other sources:
-                    <ul>
-                        <li>wages or salary</li>
-                        <li>accident compensation</li>
-                        <li>farm or business income (include drawings)</li>
-                        <li>self employment</li>
-                        <li>interest from savings or investments</li>
-                        <li>dividends from shares</li>
-                        <li>income from rents</li>
-                        <li>redundancy or termination type payments</li>
-                        <li>Child Support</li>
-                        <li>maintenance payments</li>
-                        <li>boarders</li>
-                        <li>Student Allowance, scholarship or Student Loan living cost payments</li>
-                        <li>any other income, for example family trusts, overseas payments.</li>
-                    </ul>
-                </div>
+             	 <fieldset>
+                <div>Please provide details of your or your partner's expected income</div><br>
 
                 <!-- They can add multiple income sources, but need to enter at least one -->
                 <div class="incomeSource">
@@ -566,6 +545,7 @@
                 	onclick="calculator.addIncomeSource();return false;" 
                 	class="addIncomeSource" >
                 	Add another source of income</button>
+                 <fieldset>	
             </div>
 
         </fieldset>
