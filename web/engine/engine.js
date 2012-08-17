@@ -47,7 +47,8 @@ engine = {
         
         
         engine.validator = $("form").validate({messages:{
-        	dependentChildren:"Please enter a whole number between 0 and 127"
+        	dependentChildren:"Please enter a whole number between 0 and 127",
+        	cashAssets:"Please enter a valid amount between $0 and $1,000,000"
         }});
         
         

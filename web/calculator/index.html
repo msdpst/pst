@@ -76,7 +76,7 @@
                 <p class="info">Use the format 04/09/1989 or 04 Sep 1989</p>
             </div>
 
-            <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
+            <div class="question" data-ineligible="$residencyResident==false && $residencyRefugeePermanent==false">
                 <label for="residency">What is your residency status?</label>
                 <select name="residency" id="residency">
                     <option value="">Please Select</option>
@@ -108,7 +108,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-ineligible="!$stayingInNz">
+            <div class="question" data-ineligible="$stayingInNz==false">
                 <fieldset>
                     <div>Do you usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="stayingInNz" id="stayingInNzYes" value="true"> <label for="stayingInNzYes">Yes</label>
@@ -222,7 +222,7 @@
                 </select>
             </div>
 
-            <div class="question" data-visible="!$partner">
+            <div class="question" data-visible="$partner==false">
                 <label for="relationshipStatusSingle">What best describes your relationship status?</label>
                 <select name="relationshipStatusSingle" id="relationshipStatusSingle" class="required">
                     <option value="">Please Select</option>
@@ -288,7 +288,7 @@
                 </fieldset>
             </div>
             
-	        <div class="question" data-visible="$includePartnerInNZS && !$partnerReceivingNZS">
+	        <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false">
                 <fieldset>
                     <div>Does your partner usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="partnerNZ" id="partnerNZYes" value="true"> <label for="partnerNZYes">Yes</label>
@@ -296,7 +296,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$includePartnerInNZS && !$partnerReceivingNZS">
+            <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false">
                 <label for="partnerResidency">What is your partner’s residency status?</label>
                 <select name="partnerResidency" id="partnerResidency">
                     <option value="">Please Select</option>
@@ -325,7 +325,7 @@
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="!$liveTogether">
+	        <div class="question" data-visible="$liveTogether == false">
                 <label for="partnerLives">Where does your partner live?</label>
                 <select name="partnerLives" id="partnerLives">
                     <option value="">Please Select</option>
@@ -718,7 +718,7 @@
 
         <fieldset class="group">
 
-            <div class="question" data-visible="$under20 || ($youth && !$totallyBlind)">
+            <div class="question" data-visible="$under20 || ($youth && $totallyBlind==false)">
                 <fieldset>
                     <div>Are you living at your parent’s/step-parent’s/guardian’s home?</div>
                     <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
@@ -726,12 +726,12 @@
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren > 0">
+	        <div class="question" data-visible="$under20 && $partner==false && $livingAtHome && $dependentChildren > 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label>
                 $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency">
             </div>
 
-            <div class="question" data-visible="$youth && !$livingAtHome">
+            <div class="question" data-visible="$youth && $livingAtHome==false">
                 <fieldset>
                     <div>Are you receiving any financial support from your parents or any other person?</div>
                     <input type="radio" name="parentSupport" id="parentSupportYes" value="true"> <label for="parentSupportYes">Yes</label>
@@ -739,13 +739,14 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$youth && !$livingAtHome && !$parentSupport">
+            <div class="question" data-visible="$youth && $livingAtHome==false && $parentSupport==false">
                 <fieldset>
                     <div>Please select the reason why you are not living with them:</div>
                     <input type="radio" name="reasonNotLivingAtHome" id="relationshipBreakdown" value="relationshipBreakdown"> <label for="relationshipBreakdown">Relationship breakdown with parents</label><br>
                     <input type="radio" name="reasonNotLivingAtHome" id="absent" value="absent"> <label for="absent">Parents are absent</label><br>
+                    <input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label>
                     <input type="radio" name="reasonNotLivingAtHome" id="otherNotLivingAtHome" value="other"> <label for="otherNotLivingAtHome">Other good and sufficient reason</label><br>
-                    <!-- input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label-->
+                    
                 </fieldset>
             </div>
         </fieldset>
@@ -851,7 +852,7 @@
 
             <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
-                $ <input type="text" name="cashAssets" id="cashAssets" class="currency">
+                $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" max="1000000">
 
                 <p class="info">
                     <a href="#" class="helpButton">Click here for examples of cash assets.</a>
