@@ -139,19 +139,25 @@ engine = {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
                     debug(fieldName + " not answered");
+                    $(this).closest('.question').addClass('borked');
+                    /*
                     if($(this).attr("type") == "radio"){
                     	$(this).closest('fieldset').addClass('borked');
                 	}else{
                 		$(this).addClass('borked');
                 	}
+                    */
                 }
-                else{
-                	
-                	if($(this).attr("type") == "radio"){
+                else {                	
+                    $(this).closest('.question').removeClass('borked');
+                    /*
+                	if ($(this).attr("type") == "radio"){
                     	$(this).closest('fieldset').removeClass('borked');
-                	}else{
+                	}
+                    else {
                 		$(this).removeClass('borked');
                 	}
+                    */
                 }
             }
         });
@@ -160,9 +166,9 @@ engine = {
         $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
             if ($(this).find("input[type='checkbox']:checked").length == 0){
                 ok = false;
-                $(this).closest('fieldset').addClass('borked');
+                $(this).closest('.question').addClass('borked');
             }else{    	
-            	$(this).closest('fieldset').removeClass('borked');
+            	$(this).closest('.question').removeClass('borked');
             }
         });
         
