@@ -38,10 +38,7 @@ form, #progress {
 	display: none;
 	color: #CE3436;
     font-weight: bold;
-	visibility: hidden;
-	width:100px;
-	float:none;
-
+    margin-bottom: 8px; /* for IE */
 }
 
 button {
