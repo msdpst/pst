@@ -256,7 +256,7 @@ var definitions = {
     
 
     potentialInvalidsBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
-    		"	($totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
+    		"	($healthDisability && $totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
 
     potentialDPBCareOrSickOrInfirm: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
