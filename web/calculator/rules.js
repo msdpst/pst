@@ -542,6 +542,10 @@ var definitions = {
 
 
 var allBenefits = [ /* This is all the variables that we want to be checked as potential benefits */
+                    	"potentialNewZealandSuperannuationSingle",
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
+                    	"potentialNewZealandSupperannuationPartnerNotIncluded",
+                    	"potentialUndeterminedWorkingAgeFinancialAssistance",
                     	"potentialDPBSoleParent",
                     	"potentialDPBSoleParentPBAWithTeen",
                     	"potentialDPBSoleParentPBAWithYoungChild",
@@ -555,10 +559,6 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialYoungParentPayment",
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
-                    	"potentialNewZealandSuperannuationSingle",
-                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
-                    	"potentialNewZealandSupperannuationPartnerNotIncluded",
-                    	"potentialUndeterminedWorkingAgeFinancialAssistance",
                         "potentialUndeterminedYouthPayment",
                         "potentialExtraHelp"
 ];
