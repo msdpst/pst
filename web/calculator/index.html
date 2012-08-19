@@ -508,44 +508,50 @@
             </div>
 
             <div class="question incomeSources" data-visible="$expectIncome">
-             	 <fieldset>
-                <div>Please provide details of your or your partner's expected income</div><br>
+                <fieldset>
+                    <div>Please provide details of your or your partner's expected income</div>
+                    <br>
 
-                <!-- They can add multiple income sources, but need to enter at least one -->
-                <div class="incomeSource">
-                 	<button class="removeIncomeSource"
-                 		onclick="calculator.removeIncomeSource(this);return false;">
-                 		</button>
-                 	<div class="clearfix">
-                        <label>What is the source of this income?</label>
-                        <div><input type="text" name="incomeDescription"  size="30" /></div>
-                    </div>	
-                    <div class="clearfix">
-                        <label>How much do you and/or your partner receive before tax?</label>
-                        <div>$&nbsp;<input type="text" name="incomeAmount" class="currency" min="0" max="500000"/></div>
-                    </div>
-                    <div class="clearfix">
-                        <label>How often do you / your partner receive these payments?</label>
-                        <div>
-                            <select name="incomeFrequency">
-                                <option value="">Please Select</option>
-                                <option>Weekly</option>
-                                <option>Fortnightly</option>
-                                <option>Monthly</option>
-                                <option>2 Monthly</option>
-                                <option>Quarterly</option>
-                                <option>6 Monthly</option>
-                                <option>Yearly</option>
-                            </select>
+                    <!-- They can add multiple income sources, but need to enter at least one -->
+                    <div class="incomeSource">
+                        <button class="removeIncomeSource"
+                                onclick="calculator.removeIncomeSource(this);return false;">
+                        </button>
+                        <div class="clearfix">
+                            <label>What is the source of this income?</label>
+
+                            <div><input type="text" name="incomeDescription" size="30"/></div>
                         </div>
+                        <div class="clearfix">
+                            <label>How much do you and/or your partner receive before tax?</label>
+
+                            <div>$&nbsp;<input type="text" name="incomeAmount" class="currency" min="0" max="500000"/>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <label>How often do you / your partner receive these payments?</label>
+
+                            <div>
+                                <select name="incomeFrequency">
+                                    <option value="">Please Select</option>
+                                    <option>Weekly</option>
+                                    <option>Fortnightly</option>
+                                    <option>Monthly</option>
+                                    <option>2 Monthly</option>
+                                    <option>Quarterly</option>
+                                    <option>6 Monthly</option>
+                                    <option>Yearly</option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
-                   
-                </div>
-                <button 
-                	onclick="calculator.addIncomeSource();return false;" 
-                	class="addIncomeSource" >
-                	Add another source of income</button>
-                 <fieldset>	
+                    <button
+                            onclick="calculator.addIncomeSource();return false;"
+                            class="addIncomeSource">
+                        Add another source of income
+                    </button>
+                </fieldset>
             </div>
 
         </fieldset>
@@ -901,9 +907,11 @@
                 </fieldset>
 
                 <div class="info">
-                    Childcare Assistance is a non-taxable payment that aims to assist clients with dependent
-                    children to undertake and remain in employment, education and training.  There are two
-                    types of assistance: Childcare Subsidy and OSCAR.
+                    <p>Childcare Assistance is a non-taxable payment that aims to assist clients with dependent 
+                    children to undertake and remain in employment, education and training.</p>
+                    <p>There are two types of assistance: Childcare Subsidy and OSCAR (Out of School Care and Recreational) 
+                    Subsidy. Work and Income administer the payments directly to childcare providers.</p>
+                    <p>Childcare Assistance also assists client's pre-school care if they or their child is seriously ill.</p>
                 </div>
             </div>
 
