@@ -36,21 +36,10 @@ form, #progress {
 
 #answerAllMessage{
 	display: none;
-	color: red;
-	visibility: hidden;
-	width:100px;
-	float:none;
-
+	color: #CE3436;
+    font-weight: bold;
+    margin-bottom: 8px; /* for IE */
 }
-
-.borked{
-	
-	border: 3px solid red;
-	border-radius: 5px 5px 5px 5px;
-	padding:3px;
-	
-}
-
 
 button {
     -moz-border-bottom-colors: none;
@@ -359,6 +348,17 @@ form ul {
     border-color: #a0a0a0;
 }
 
+.borked {
+    color: #CE3436 !important;
+    font-weight: bold !important;
+}
+.borked select, .borked input {
+    font-weight: normal !important;
+}
+.borked .info {
+    font-weight: normal !important;
+}
+
 .current {
     border-bottom: 1px solid #a0a0a0;
 }
@@ -369,7 +369,7 @@ label {
 
 label.error {
     display: block;
-    color: red;
+    color: #CE3436;
     font-size: 14px;
     margin-top: 0.8em;
 }
