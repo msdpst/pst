@@ -2,4 +2,6 @@ JSEC-19:  Scroll bar is "longer" than the entry area (useability issue - not bro
 JSEC-78:  How old is your partner (Q68)  has an unexpected limit of 120
 JSEC-8:   Default option on drop down lists not 'Please select"
 JSEC-9:   In Residency status the option "Refugee - Other without Permanent Residence" is missing the last word
+JSEC-18:  Should the wording of the help / "More information"  link change when selected - or otherwise help to know how to close
+
 

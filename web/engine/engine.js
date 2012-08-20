@@ -81,6 +81,12 @@ engine = {
                     start = start.parent();
                 }
                 while (elt.length == 0);
+                //modify text depending on help text status
+                if (elt.is(':hidden')){
+                	$(this).html('Hide help text');
+                }else{
+                	$(this).html('More information');
+                }
                 elt.slideToggle(engine.SLIDE_TIME);
                 return false;
             });
@@ -193,7 +199,11 @@ engine = {
             return;
         }
 
-        // Display the next group of questions
+        // hide all help text, change help toggle message & Display the next group of questions
+        
+        $('.help').hide();
+        $('.helpButton').html('More information');
+        
         engine.changeGroup(1);
         return false;
     },
