@@ -189,15 +189,15 @@ var definitions = {
     	"$age<25 && $age>19 && $single": "170.80",
     	"$partner && $dependentChildren == 0": "170.80 each",
     	"$partner && $dependentChildren > 0": "170.80 each",
-    	"!$partner && $dependentChildren > 0": "293.58",
+    	"$single && $dependentChildren > 0": "293.58",
     	"$age>=25": "204.96"
     },
 
     ratesIB : {
     	"$single && ($age==16 || $age==17)":"207.32",
     	"$single && $age>=18":"256.19",
-    	"$partner && $dependentChildren == 0":"213.49",
-    	"$partner && $dependentChildren >= 0":"213.49",
+    	"$partner && $dependentChildren == 0":"213.49 each",
+    	"$partner && $dependentChildren > 0":"213.49 each",
     	"$single && $dependentChildren > 0":"336.55"
     },
 
