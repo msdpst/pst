@@ -256,11 +256,11 @@ engine = {
          });
          */
 
+        // Hide all question groups after this one
+        $(engine.groupSel(newGroupNum)).nextAll(".group").hide(/*engine.SLIDE_TIME*/);
+
         engine.revealAndScroll($(engine.groupSel(newGroupNum)));
         engine.currentGroupNum = newGroupNum;
-
-        // Hide all question groups after this one
-        $(engine.groupSel(newGroupNum)).nextAll(".group").slideUp(engine.SLIDE_TIME);
 
         // Focus on the first field in the group
         $(engine.groupSel(newGroupNum) + " :input:first").focus();
@@ -271,14 +271,21 @@ engine = {
 
     /** Reveal the question group and scroll the page so the group is centered vertically (if it fits)*/
     revealAndScroll:function (elt) {
-    	
-    	
-    	
-        elt.fadeIn(engine.SLIDE_TIME);
+        elt.show(/*engine.SLIDE_TIME*/);
 
         var y = elt.offset().top - engine.groupScrollYPosition;
         if (y < 0)
             y = 0;
+        
+        var bb = $("#bottomBuffer");
+        if (bb.length) {
+            var h = $(window).height() - (bb.offset().top - y);
+            if (h < 0)
+                h = 0;
+            bb.height(h);
+            //alert("y: " + y + " t: " + bb.offset().top + ", h: " + $(window).height());
+        }
+
         $('html,body').animate({scrollTop:y}, {duration:engine.SLIDE_TIME, queue:false});
 
         /*

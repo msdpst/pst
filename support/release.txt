@@ -1,0 +1,1 @@
+JS-19:  Scroll bar is "longer" than the entry area (useability issue - not browser specific)
