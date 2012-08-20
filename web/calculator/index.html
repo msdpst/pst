@@ -13,7 +13,7 @@
     <script src="rules.js?dummy=5"></script>
     <script src="../engine/debug.js?dummy=5"></script>
     <script src="../engine/engine.js?dummy=5"></script>
-    <script src="calculator.js?dummy=5"></script>
+    <script src="calculator.js?dummy=5"></script>  
     
     <!--[if (gte IE 6)&(lte IE 8)]>
     	<script src="../thirdparty/selectivizr-min.js"></script>
@@ -372,7 +372,7 @@
 
 	        <div class="question" data-visible="$liveWithAdult">
                 <fieldset>
-                    <div>Do you live with anyone who is not a dependent child attending school or a tertiary institution?</div>
+                    <div>Do you live with anyone, who is not a dependent child attending school or a tertiary institution?</div>
                     <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentYes" value="true"> <label for="liveWithNonDependentYes">Yes</label>
                     <input type="radio" name="liveWithNonDependent" id="liveWithNonDependentNo" value="false"> <label for="liveWithNonDependentNo">No</label>
                 </fieldset>
@@ -420,7 +420,7 @@
             </div>
 
 	        <div class="question" data-visible="$stillWorking">
-                <label for="weeklyHours">What is the total number of hours you work per week?</label>
+                <label for="weeklyHours">What are the total number of hours you work per week?</label>
                 <input type="text" name="weeklyHours" id="weeklyHours" class="number" min="1" max="168">
             </div>
 
@@ -821,13 +821,13 @@
 
             <div class="question" data-visible="$caringForChild">
                 <fieldset>
-                    <div>Does the child or young person usually live in New Zealand and intend to stay here?</div>
+                    <div>Does the child or young person usually live in New Zealand and intend to stay here?</div><!-- Q42 -->
                     <input type="radio" name="childStayingInNz" id="childStayingInNzYes" value="true"> <label for="childStayingInNzYes">Yes</label>
                     <input type="radio" name="childStayingInNz" id="childStayingInNzNo" value="false"> <label for="childStayingInNzNo">No</label>
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$caringForChild">
+            <div class="question" data-visible="$caringForChild && $childStayingInNz">
                 <fieldset>
                     <div>What is the child or young person's living situation?</div>
                     <input type="radio" name="childLivingSituation" id="childLivingSituation1" value="Living at home"> <label for="childLivingSituation1">Living at home</label>
@@ -837,7 +837,7 @@
 
             <div class="question" data-visible="$childLivingSituation == 'Residential Home or Hostel'">
                 <fieldset>
-                    <div>Do you provide financial support while the child or young person lives in the residential home or hostel?</div>
+                    <div>Do you provide financial support while the child or young person lives in the residential home or hostel?</div><!-- Q44 -->
                     <input type="radio" name="supportChildInHostel" id="supportChildInHostelYes" value="true"> <label for="supportChildInHostelYes">Yes</label>
                     <input type="radio" name="supportChildInHostel" id="supportChildInHostelNo" value="false"> <label for="supportChildInHostelNo">No</label>
                 </fieldset>
