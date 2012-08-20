@@ -211,7 +211,7 @@
 
 			<div class="question" data-visible="$partner">
                 <label for="partnerAge">How old is your partner?</label>
-                <input type="text" name="partnerAge" id="partnerAge" class="number" min="0" max="120">
+                <input type="text" name="partnerAge" id="partnerAge" class="digits" min="0" max="120">
             </div>
 
             <div class="question" data-visible="$partner">
@@ -640,7 +640,7 @@
                     <input type="radio" name="caringFullTime" id="caringFullTimeNo" value="false"> <label for="caringFullTimeNo">No</label>
                 </fieldset>
                 <div class="info">
-                    Answer 'Yes' to this question if you are providing full time care and attention to a person (other then your spouse or partner) at home who would otherwise need:
+                    Answer 'Yes' to this question if you are providing full time care and attention to a person (other than your spouse or partner) at home who would otherwise need:
                     <ul>
                         <li>hospital care</li>
                         <li>rest home care</li>
@@ -802,10 +802,14 @@
         </fieldset>
 
 	
+	
+	
+	<!-- //TODO  HERE HERE HRE -->
+	
         <fieldset class="group">
             <div class="question">
                 <fieldset>
-                    <div>Do you or any member of your family have ongoing costs because of a disability which is likely to last at least six months?</div>
+                    <div>Do you or any member of your family have ongoing costs because of a disability which is likely to last at least six months?</div> <!-- Q34 -->
                     <input type="radio" name="disabilityCosts" id="disabilityCostsYes" value="true"> <label for="disabilityCostsYes">Yes</label>
                     <input type="radio" name="disabilityCosts" id="disabilityCostsNo" value="false"> <label for="disabilityCostsNo">No</label>
                 </fieldset>
@@ -813,7 +817,7 @@
 
             <div class="question" data-visible="$dependentChildren > 0">
                 <fieldset>
-                    <div>Do you have a child or young person who needs constant care and attention for at least 12 months because of a serious disability?</div>
+                    <div>Do you have a child or young person who needs constant care and attention for at least 12 months because of a serious disability?</div> <!-- Q41 -->
                     <input type="radio" name="caringForChild" id="caringForChildYes" value="true"> <label for="caringForChildYes">Yes</label>
                     <input type="radio" name="caringForChild" id="caringForChildNo" value="false"> <label for="caringForChildNo">No</label>
                 </fieldset>
@@ -848,7 +852,7 @@
         <fieldset class="group">
             <div class="question">
                 <fieldset>
-                    <div>Are you struggling to meet your essential living costs from what income you earn or from other sources?</div>
+                    <div>Are you struggling to meet your essential living costs from what income you earn or from other sources?</div> <!-- Q35 -->
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsYes" value="true"> <label for="livingCostsYes">Yes</label>
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsNo" value="false"> <label for="livingCostsNo">No</label>
                 </fieldset>
@@ -856,7 +860,7 @@
 
             <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
-                $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" max="1000000">
+                $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" max="1000000"> <!-- Q36 -->
 
                 <p class="info">
                     <a href="#" class="helpButton">Click here for examples of cash assets.</a>
@@ -879,7 +883,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="group">
+        <fieldset class="group"> <!-- GROUP 19 -->
 
             <div class="question" data-visible="$dependentChildren > 0">
                 <fieldset>
