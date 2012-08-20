@@ -391,7 +391,7 @@
         <!-- ======== Your Income ========= -->
 
         <fieldset class="group">
-	        <div class="question">
+	        <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Have you worked in the last 52 weeks?</div>
                     <input type="radio" name="haveWorked" id="haveWorkedYes" value="true"> <label for="haveWorkedYes">Yes</label>
@@ -477,7 +477,7 @@
 
 
         <fieldset class="group">
-            <div class="question">
+            <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Do you or your partner expect to get other income in the next 52 weeks?</div>
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
@@ -560,7 +560,7 @@
         <!-- =============== Your circumstances ============== -->
 
         <fieldset class="group">
-	        <div class="question">
+	        <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Are you already on or plan to start a training course?</div>
                     <input type="radio" name="trainingCourse" id="trainingCourseYes" value="true"> <label for="trainingCourseYes">Yes</label>
@@ -586,7 +586,7 @@
 
 
         <fieldset class="group">
-            <div class="question">
+            <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Do you have a health condition or disability?</div>
                     <input type="radio" name="healthDisability" id="healthDisabilityYes" value="true"> <label for="healthDisabilityYes">Yes</label>
