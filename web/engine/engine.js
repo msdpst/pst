@@ -140,24 +140,9 @@ engine = {
                     ok = false;
                     debug(fieldName + " not answered");
                     $(this).closest('.question').addClass('borked');
-                    /*
-                    if($(this).attr("type") == "radio"){
-                    	$(this).closest('fieldset').addClass('borked');
-                	}else{
-                		$(this).addClass('borked');
-                	}
-                    */
                 }
                 else {                	
                     $(this).closest('.question').removeClass('borked');
-                    /*
-                	if ($(this).attr("type") == "radio"){
-                    	$(this).closest('fieldset').removeClass('borked');
-                	}
-                    else {
-                		$(this).removeClass('borked');
-                	}
-                    */
                 }
             }
         });
@@ -408,6 +393,17 @@ engine = {
     shouldShow:function (element) {
         var cond = element.attr("data-visible");
         return !cond || engine.evaluate(cond);
+    },
+    
+    applyVisibilityToChildren: function(element) {
+        element.find("*[data-visible]").each(function () {
+            if (engine.shouldShow($(this))) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
     },
 
     /**

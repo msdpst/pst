@@ -239,7 +239,7 @@ var definitions = {
     //TODO here		
     potentialWidowsBenefitPBA: "!$unlawfulResident && $potentialWidows && ($dependentChildren == 0 || $hasYoungest14Plus)",		
     		
-    potentialWidowsBenefit : "!$unlawfulResident && $potentialWidows && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool))",		
+    potentialWidowsBenefit : "!$unlawfulResident && $potentialWidows && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
 
     potentialDPBSoleParentCalc: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
@@ -538,10 +538,18 @@ var definitions = {
             "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
     ,
 
-    
+    hasObligations: 
+        "$potentialWidowsBenefitPBA || " +
+        "$potentialDPBSoleParentPBAWithTeen || " +
+        "$potentialDPBSoleParentPBAWithYoungChild || " +
+        "$potentialDPBWomanAlone || " +
+        "$potentialUnemploymentBenefitTraining || " +
+        "$potentialUnemploymentBenefit",
     
 
     age: "calculator.calculateAge($dateOfBirth)"
+    
+    
 };
 
 
