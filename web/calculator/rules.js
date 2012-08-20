@@ -184,34 +184,38 @@ var definitions = {
     accSuppMax: "calculator.calculateAccSuppMax()",
 
     ratesUB : {
-    	"$age<20 && $age>=18 && $livingAtHome": 136.64,
-    	"$age<20 && $age>=18 && !$livingAtHome": 170.80,
-    	"$age<25 && $age>19 && $single": 170.80,
-    	"$partner && $dependentChildren == 0": 170.80,
-    	"$partner && $dependentChildren > 0": 170.80,
-    	"!$partner && $dependentChildren > 0": 293.58,
-    	"$age>=25": 204.96
+    	"$age<20 && $age>=18 && $livingAtHome": "136.64",
+    	"$age<20 && $age>=18 && !$livingAtHome": "170.80",
+    	"$age<25 && $age>19 && $single": "170.80",
+    	"$partner && $dependentChildren == 0": "170.80 each",
+    	"$partner && $dependentChildren > 0": "170.80 each",
+    	"!$partner && $dependentChildren > 0": "293.58",
+    	"$age>=25": "204.96"
     },
 
     ratesIB : {
-    	"$single && ($age==16 || $age==17)":207.32,
-    	"$single && $age>=18":256.19,
-    	"$partner && $dependentChildren == 0":213.49,
-    	"$partner && $dependentChildren >= 0":213.49,
-    	"$single && $dependentChildren > 0":336.55
+    	"$single && ($age==16 || $age==17)":"207.32",
+    	"$single && $age>=18":"256.19",
+    	"$partner && $dependentChildren == 0":"213.49",
+    	"$partner && $dependentChildren >= 0":"213.49",
+    	"$single && $dependentChildren > 0":"336.55"
     },
 
     ratesDPB : {
-    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":213.49,
-    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA) && $single && $dependentChildren >=1 ":293.58,
-    	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":256.19,
-    	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":336.55,
-    	"$potentialDPBSoleParent || $potentialDPBSoleParentPBAWithTeen || $potentialDPBSoleParentPBAWithYoungChild":336.55
+    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":"213.49",
+    	"($potentialWidowsBenefit || $potentialWidowsBenefitPBA) && $single && $dependentChildren >=1 ":"293.58",
+    	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":"256.19",
+    	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":"336.55",
+    	"$potentialDPBSoleParent || $potentialDPBSoleParentPBAWithTeen || $potentialDPBSoleParentPBAWithYoungChild":"336.55"
     },
 
-    ubRate: "engine.evalMap(definitions.ratesUB).toFixed(2)",
-    ibRate: "engine.evalMap(definitions.ratesIB).toFixed(2)",
-    dpbRate : "engine.evalMap(definitions.ratesDPB).toFixed(2)",
+//    ubRate: "engine.evalMap(definitions.ratesUB).toFixed(2)",
+//    ibRate: "engine.evalMap(definitions.ratesIB).toFixed(2)",
+//    dpbRate : "engine.evalMap(definitions.ratesDPB).toFixed(2)",
+    
+	  ubRate: "engine.evalMap(definitions.ratesUB)",
+	  ibRate: "engine.evalMap(definitions.ratesIB)",
+	  dpbRate : "engine.evalMap(definitions.ratesDPB)",
 
 
     // -------- Calculations --------
