@@ -276,10 +276,10 @@
         <!-- ======== Your Partner's Details (Super) ========= -->
 
         <!-- New Zealand Superannuation partner living details -->
-        <fieldset class="group" data-visible="$seniorOk && $relationshipSituationPartner">
+        <fieldset class="group" data-visible="$seniorOk && $relationshipSituationPartner"><!-- GROUP 6 -->
             <div class="question">
                 <fieldset>
-                    <div>Do you want to include your partner in your New Zealand Superannuation?</div>
+                    <div>Do you want to include your partner in your New Zealand Superannuation?</div><!-- Q49 -->
                     <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSYes" value="true"> <label for="includePartnerInNZSYes">Yes</label>
                     <input type="radio" name="includePartnerInNZS" id="includePartnerInNZSNo" value="false"> <label for="includePartnerInNZSNo">No</label>
                 </fieldset>
@@ -287,7 +287,7 @@
 
 	        <div class="question">
                 <fieldset>
-                    <div>Is your partner receiving New Zealand Superannuation or a Veterans Pension?</div>
+                    <div>Is your partner receiving New Zealand Superannuation or a Veterans Pension?</div><!-- Q50 -->
                     <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSYes" value="true"> <label for="partnerReceivingNZSYes">Yes</label>
                     <input type="radio" name="partnerReceivingNZS" id="partnerReceivingNZSNo" value="false"> <label for="partnerReceivingNZSNo">No</label>
                 </fieldset>
@@ -295,13 +295,13 @@
             
 	        <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false">
                 <fieldset>
-                    <div>Does your partner usually live in New Zealand and intend to stay here?</div>
+                    <div>Does your partner usually live in New Zealand and intend to stay here?</div><!-- Q54 -->
                     <input type="radio" name="partnerNZ" id="partnerNZYes" value="true"> <label for="partnerNZYes">Yes</label>
                     <input type="radio" name="partnerNZ" id="partnerNZNo" value="false"> <label for="partnerNZNo">No</label>
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false">
+            <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false"><!-- Q55 -->
                 <label for="partnerResidency">What is your partner’s residency status?</label>
                 <select name="partnerResidency" id="partnerResidency">
                     <option value="">Please select</option>
@@ -322,16 +322,16 @@
                 </select>
             </div>
 
-	        <div class="question">
+	        <div class="question" data-visible="$includePartnerInNZS && $partnerReceivingNZS == false">
                 <fieldset>
-                    <div>Do you and your partner live at the same address?</div>
+                    <div>Do you and your partner live at the same address?</div><!-- Q56 -->
                     <input type="radio" name="liveTogether" id="liveTogetherYes" value="true"> <label for="liveTogetherYes">Yes</label>
                     <input type="radio" name="liveTogether" id="liveTogetherNo" value="false"> <label for="liveTogetherNo">No</label>
                 </fieldset>
             </div>
 
 	        <div class="question" data-visible="$liveTogether == false">
-                <label for="partnerLives">Where does your partner live?</label>
+                <label for="partnerLives">Where does your partner live?</label><!-- Q57 -->
                 <select name="partnerLives" id="partnerLives">
                     <option value="">Please select</option>
                     <option>Rest home</option>
@@ -748,7 +748,7 @@
                     <div>Please select the reason why you are not living with them:</div>
                     <input type="radio" name="reasonNotLivingAtHome" id="relationshipBreakdown" value="relationshipBreakdown"> <label for="relationshipBreakdown">Relationship breakdown with parents</label><br>
                     <input type="radio" name="reasonNotLivingAtHome" id="absent" value="absent"> <label for="absent">Parents are absent</label><br>
-                    <input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label>
+                    <input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label><br>  
                     <input type="radio" name="reasonNotLivingAtHome" id="otherNotLivingAtHome" value="other"> <label for="otherNotLivingAtHome">Other good and sufficient reason</label><br>
                     
                 </fieldset>
