@@ -604,6 +604,7 @@ engine = {
     clearAllControlsIn:function (elt) {
         elt.find(":text").val("");
         elt.find(":radio").attr("checked", false);
+        elt.find(":checkbox").attr("checked", false);
 
         // select the first option in every select - we assume this is the "unselected" option
         elt.find("select :nth-child(1)").attr("selected", "selected");
