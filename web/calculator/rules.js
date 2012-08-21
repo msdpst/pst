@@ -64,8 +64,6 @@ var definitions = {
 
 	youthResidentLessThan2YearsResidence : "$youth && $stayingInNz && !$twoYears && $residencyResident",
 
-
-
 	single18to19uBSBAtHomeIncomeLimit:"$single && $age18to19 && $livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AtHomeGWILimit)",
 
 	single18to19uBSBAwayFromHomeIncomeLimit:"$single && $age18to19 && !$livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AwayGWILimit)",
@@ -74,6 +72,10 @@ var definitions = {
 
 	single25uBSBIncomeLimit:"$single && $age25Plus && ($familyTotalGrossWeeklyIncome<$ubSingle25GWILimit)",
 
+	uBSBrelationshipIncomeLimit:"!$single && ($familyTotalGrossWeeklyIncome < $ubSoleParentGWILimit )",
+	uBSBsoleParentIncomeLimit:"!$single && $dependentChildren >= 1 && ($familyTotalGrossWeeklyIncome < $ubSoleParentGWILimit )",
+	
+	
     singleLivingAlone: "$single && $liveAlone && !$visitorStaying",
     singleNotLivingAlone:
             "$single && !$liveAlone && !$visitorStaying && " +
@@ -121,14 +123,16 @@ var definitions = {
     ibRelationshipGWILimit : 768,//IB Relationship GWI Limit
 
     // TODO According to the spreadsheet these are mock rates!
-    yppSingleGWILimit : 307,//YPP single GWI Limit
-    yppRelationshipGWILimit:534,//YPP Relationship GWI Limit
-    yppParentalIncomeGWILimit:1000,//YPP Parental Income GWI Limit
+    yppSingleGWILimit : 257,//YPP single GWI Limit
+    yppRelationshipGWILimit:307,//YPP Relationship GWI Limit
+    yppParentalIncomeGWILimit:534,//YPP Parental Income GWI Limit
 
     ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
     ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
     ubSingle2024GWILimit:324, //UB Single 20-24 GWI Limit
     ubSingle25GWILimit:568, //UB Single 25+ GWI Limit
+    ubSoleParentGWILimit:543, //UB Sole Parent Limit
+    ubRelationshipGWILimit:478, //UB Relationship Limit
 
     ccs1ChildLimit: 1400,//CCS 1 Child GWI Limit
     ccs2ChildrenLimit: 1600,//CCS 2 Children GWI Limit 
@@ -362,7 +366,13 @@ var definitions = {
     		"			|| " +
     		"		($stillWorking && $weeklyHours <30 )" +
     		" ) && " +
-    		//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
+			"   ( $single18to19uBSBAtHomeIncomeLimit || " +
+			"	  $single18to19uBSBAwayFromHomeIncomeLimit ||" +
+			"	  $single20to24uBSBIncomeLimit ||" +
+			"	  $single25uBSBIncomeLimit ||" +
+			"	  $uBSBrelationshipIncomeLimit ||" +
+			"	  $uBSBsoleParentIncomeLimit" +
+			"	) && " + 	
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefitAny && " +
@@ -371,6 +381,7 @@ var definitions = {
     		"	!$potentialHealthRelatedBenefit",
 
 
+    		
     potentialUnemploymentBenefit:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
 			"	$workingAge && " +
 			" ( " +
@@ -380,7 +391,13 @@ var definitions = {
 			"			|| " +
 			"		($stillWorking && $weeklyHours <30 )" +
 			" ) && " +
-			//"	($single18to19uBSBAtHomeIncomeLimit ||  ) &&" +
+			"   ( $single18to19uBSBAtHomeIncomeLimit || " +
+			"	  $single18to19uBSBAwayFromHomeIncomeLimit ||" +
+			"	  $single20to24uBSBIncomeLimit ||" +
+			"	  $single25uBSBIncomeLimit ||" +
+			"	  $uBSBrelationshipIncomeLimit ||" +
+			"	  $uBSBsoleParentIncomeLimit" +
+			"	) && " +
 			"	!$potentialInvalidsBenefit && " +
 			"	!$potentialDPBCareOrSickOrInfirm && " +
 			"	!$potentialWidowsBenefitAny && " +
@@ -389,6 +406,9 @@ var definitions = {
 			"	!$potentialUnemploymentBenefitTraining &&" +
 			"	!$potentialHealthRelatedBenefit",
 
+			
+	
+			
 
     potentialNewZealandSuperannuationSingle:"!$unlawfulResident && $seniorsAge && $resident && $single ", //ACC stuff not required
 
