@@ -45,19 +45,15 @@ engine = {
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
+        // Can specify a custom error message on the validated field with the "data-error" attribute. Nice to keep the content in the html.
+        var customValidationMessages = { };
+        $("*[data-error]").each(function () {
+            customValidationMessages[$(this).attr("name")] = $(this).attr("data-error");
+        });
         
         engine.validator = $("form").validate({
             onkeyup: false,
-            messages:{
-                dependentChildren:"Please enter a whole number between 0 and 127",
-                cashAssets:"Please enter a valid amount between $0 and $1,000,000",
-                rentPerWeek:"Please enter a valid amount between $1 and $500,000",
-                boardPerWeek:"Please enter a valid amount between $1 and $500,000",
-                outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
-                parentsIncome:"Please enter a valid amount between $1 and $500,000",
-                incomeAmount:"Please enter a valid amount between $1 and $500,000",
-                partnerAge:"Please enter a whole number"
-            }
+            messages: customValidationMessages
         });
         
         
