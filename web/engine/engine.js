@@ -55,6 +55,7 @@ engine = {
                 boardPerWeek:"Please enter a valid amount between $1 and $500,000",
                 outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
                 parentsIncome:"Please enter a valid amount between $1 and $500,000",
+                incomeAmount:"Please enter a valid amount between $1 and $500,000",
                 partnerAge:"Please enter a whole number"
             }
         });
