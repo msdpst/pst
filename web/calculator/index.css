@@ -348,17 +348,6 @@ form ul {
     border-color: #a0a0a0;
 }
 
-.borked {
-    color: #CE3436 !important;
-    font-weight: bold !important;
-}
-.borked select, .borked input {
-    font-weight: normal !important;
-}
-.borked .info {
-    font-weight: normal !important;
-}
-
 .current {
     border-bottom: 1px solid #a0a0a0;
 }

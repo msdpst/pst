@@ -138,6 +138,7 @@ engine = {
 
         // Make sure everything is filled in
         var ok = true;
+        engine.unmarkAllAsUnanswered();
         $(inputSelector).each(function () {
             var fieldName = $(this).attr("name");
 
@@ -146,10 +147,7 @@ engine = {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
                     debug(fieldName + " not answered");
-                    $(this).closest('.question').addClass('borked');
-                }
-                else {                	
-                    $(this).closest('.question').removeClass('borked');
+                    engine.markAsUnanswered($(this));
                 }
             }
         });
@@ -158,18 +156,16 @@ engine = {
         $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
             if ($(this).find("input[type='checkbox']:checked").length == 0){
                 ok = false;
-                $(this).closest('.question').addClass('borked');
-            }else{    	
-            	$(this).closest('.question').removeClass('borked');
+                engine.markAsUnanswered($(this));
             }
         });
         
         if (!ok) {
-            // Don't alert on auto-next (ie. when they answer last question in group)
-            if (!automatic)
-                //alert("Please answer all questions");
+            // Don't display error on auto-next (ie. when they answer last question in group)
+            if (!automatic) {
             	$('#answerAllMessage').show('slow');
             	$('#answerAllMessage').css('visibility','visible');
+            }
             return;
         }
 
@@ -206,6 +202,12 @@ engine = {
         
         engine.changeGroup(1);
         return false;
+    },
+    
+    markAsUnanswered: function(input) {
+        
+    },
+    unmarkAllAsUnanswered: function() {
     },
 
     /**
