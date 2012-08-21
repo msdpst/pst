@@ -46,15 +46,18 @@ engine = {
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
         
-        engine.validator = $("form").validate({messages:{
-        	dependentChildren:"Please enter a whole number between 0 and 127",
-        	cashAssets:"Please enter a valid amount between $0 and $1,000,000",
-        	rentPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	boardPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	parentsIncome:"Please enter a valid amount between $1 and $500,000",
-        	partnerAge:"Please enter a whole number"
-        }});
+        engine.validator = $("form").validate({
+            onkeyup: false,
+            messages:{
+                dependentChildren:"Please enter a whole number between 0 and 127",
+                cashAssets:"Please enter a valid amount between $0 and $1,000,000",
+                rentPerWeek:"Please enter a valid amount between $1 and $500,000",
+                boardPerWeek:"Please enter a valid amount between $1 and $500,000",
+                outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
+                parentsIncome:"Please enter a valid amount between $1 and $500,000",
+                partnerAge:"Please enter a whole number"
+            }
+        });
         
         
         
@@ -604,6 +607,7 @@ engine = {
     clearAllControlsIn:function (elt) {
         elt.find(":text").val("");
         elt.find(":radio").attr("checked", false);
+        elt.find(":checkbox").attr("checked", false);
 
         // select the first option in every select - we assume this is the "unselected" option
         elt.find("select :nth-child(1)").attr("selected", "selected");
