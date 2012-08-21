@@ -46,15 +46,18 @@ engine = {
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
         
-        engine.validator = $("form").validate({messages:{
-        	dependentChildren:"Please enter a whole number between 0 and 127",
-        	cashAssets:"Please enter a valid amount between $0 and $1,000,000",
-        	rentPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	boardPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
-        	parentsIncome:"Please enter a valid amount between $1 and $500,000",
-        	partnerAge:"Please enter a whole number"
-        }});
+        engine.validator = $("form").validate({
+            onkeyup: false,
+            messages:{
+                dependentChildren:"Please enter a whole number between 0 and 127",
+                cashAssets:"Please enter a valid amount between $0 and $1,000,000",
+                rentPerWeek:"Please enter a valid amount between $1 and $500,000",
+                boardPerWeek:"Please enter a valid amount between $1 and $500,000",
+                outgoingsPerWeek:"Please enter a valid amount between $1 and $500,000",
+                parentsIncome:"Please enter a valid amount between $1 and $500,000",
+                partnerAge:"Please enter a whole number"
+            }
+        });
         
         
         
