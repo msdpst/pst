@@ -16,4 +16,5 @@ JSEC-100: change radio buttons for woman alone to checkboxes.
 JSEC-100: reworded the new woman alone checkboxes
 JSEC-90: Pregnant
 JSEC-77: UB and Super
+JSEC-94: open success links in new tab
 
