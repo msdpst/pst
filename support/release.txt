@@ -20,7 +20,6 @@ JSEC-103: HRB limits
 JSEC-90: Pregnant
 JSEC-77: UB and Super
 JSEC-94: open success links in new tab
-JSEC-77: UB and Super
 JSEC-97: Living at your parents (Q28) prompt correct to spreadsheet but not the same as existing EC and inconsistent with Q29
 JSEC-76:  In Firefox (3.0.13) entry fields which are near the top of the visiable page ate not selectable
 JSEC-30 : errors for weekly wage
@@ -28,3 +27,5 @@ JSEC-30 : errors for weekly wage
 
 Version 01.01.04
 JSEC-99 : reason not living with parents hint text
+JSEC-96 : boundry testing for SDole parent
+JSEC-66 : Groups Medical / Living costs (group 17) and Caring for a child with a disability (group 18)  need to be...

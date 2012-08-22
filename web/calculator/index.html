@@ -791,7 +791,7 @@
 	
 	<!-- //TODO  HERE HERE HRE -->
 	
-        <fieldset class="group">
+        <fieldset class="group"><!-- GROUP 17 -->
             <div class="question">
                 <fieldset>
                     <div>Do you or any member of your family have ongoing costs because of a disability which is likely to last at least six months?</div> <!-- Q34 -->
@@ -799,51 +799,16 @@
                     <input type="radio" name="disabilityCosts" id="disabilityCostsNo" value="false"> <label for="disabilityCostsNo">No</label>
                 </fieldset>
             </div>
-
-            <div class="question" data-visible="$dependentChildren > 0">
-                <fieldset>
-                    <div>Do you have a child or young person who needs constant care and attention for at least 12 months because of a serious disability?</div> <!-- Q41 -->
-                    <input type="radio" name="caringForChild" id="caringForChildYes" value="true"> <label for="caringForChildYes">Yes</label>
-                    <input type="radio" name="caringForChild" id="caringForChildNo" value="false"> <label for="caringForChildNo">No</label>
-                </fieldset>
-            </div>
-
-            <div class="question" data-visible="$caringForChild">
-                <fieldset>
-                    <div>Does the child or young person usually live in New Zealand and intend to stay here?</div><!-- Q42 -->
-                    <input type="radio" name="childStayingInNz" id="childStayingInNzYes" value="true"> <label for="childStayingInNzYes">Yes</label>
-                    <input type="radio" name="childStayingInNz" id="childStayingInNzNo" value="false"> <label for="childStayingInNzNo">No</label>
-                </fieldset>
-            </div>
-
-            <div class="question" data-visible="$caringForChild && $childStayingInNz">
-                <fieldset>
-                    <div>What is the child or young person's living situation?</div>
-                    <input type="radio" name="childLivingSituation" id="childLivingSituation1" value="Living at home"> <label for="childLivingSituation1">Living at home</label>
-                    <input type="radio" name="childLivingSituation" id="childLivingSituation2" value="Residential Home or Hostel"> <label for="childLivingSituation2">Residential Home or Hostel</label>
-                </fieldset>
-            </div>
-
-            <div class="question" data-visible="$childLivingSituation == 'Residential Home or Hostel'">
-                <fieldset>
-                    <div>Do you provide financial support while the child or young person lives in the residential home or hostel?</div><!-- Q44 -->
-                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelYes" value="true"> <label for="supportChildInHostelYes">Yes</label>
-                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelNo" value="false"> <label for="supportChildInHostelNo">No</label>
-                </fieldset>
-            </div>
-        </fieldset>
-
-
-        <fieldset class="group">
-            <div class="question">
+            
+             <div class="question">
                 <fieldset>
                     <div>Are you struggling to meet your essential living costs from what income you earn or from other sources?</div> <!-- Q35 -->
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsYes" value="true"> <label for="livingCostsYes">Yes</label>
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsNo" value="false"> <label for="livingCostsNo">No</label>
                 </fieldset>
             </div>
-
-            <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
+            
+             <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
                 $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" max="1000000" data-error="Please enter a valid amount between $0 and $1,000,000"> <!-- Q36 -->
 
@@ -866,12 +831,53 @@
                 </div>
 
             </div>
+            
+            
+
+         
+        </fieldset>
+
+
+        <fieldset class="group"><!-- GROUP 18 -->
+              <div class="question" data-visible="$dependentChildren > 0">
+                <fieldset>
+                    <div>Do you have a child or young person who needs constant care and attention for at least 12 months because of a serious disability?</div> <!-- Q41 -->
+                    <input type="radio" name="caringForChild" id="caringForChildYes" value="true"> <label for="caringForChildYes">Yes</label>
+                    <input type="radio" name="caringForChild" id="caringForChildNo" value="false"> <label for="caringForChildNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$caringForChild">
+                <fieldset>
+                    <div>Does the child or young person usually live in New Zealand and intend to stay here?</div><!-- Q42 -->
+                    <input type="radio" name="childStayingInNz" id="childStayingInNzYes" value="true"> <label for="childStayingInNzYes">Yes</label>
+                    <input type="radio" name="childStayingInNz" id="childStayingInNzNo" value="false"> <label for="childStayingInNzNo">No</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$caringForChild && $childStayingInNz">
+                <fieldset>
+                    <div>What is the child or young person's living situation?</div><!-- Q43 -->
+                    <input type="radio" name="childLivingSituation" id="childLivingSituation1" value="Living at home"> <label for="childLivingSituation1">Living at home</label>
+                    <input type="radio" name="childLivingSituation" id="childLivingSituation2" value="Residential Home or Hostel"> <label for="childLivingSituation2">Residential Home or Hostel</label>
+                </fieldset>
+            </div>
+
+            <div class="question" data-visible="$childLivingSituation == 'Residential Home or Hostel'">
+                <fieldset>
+                    <div>Do you provide financial support while the child or young person lives in the residential home or hostel?</div><!-- Q44 -->
+                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelYes" value="true"> <label for="supportChildInHostelYes">Yes</label>
+                    <input type="radio" name="supportChildInHostel" id="supportChildInHostelNo" value="false"> <label for="supportChildInHostelNo">No</label>
+                </fieldset>
+            </div>
+
+           
         </fieldset>
 
         <fieldset class="group"> <!-- GROUP 19 -->
 
             <div class="question" data-visible="$dependentChildren > 0">
-                <fieldset>
+                <fieldset><!-- Q37 -->
                     <div>Do you have a dependent child attending an approved Out of School (OSCAR) or pre-school childcare service for at least three hours a week?</div>
                     <input type="radio" name="oscar" id="oscarYes" value="true"> <label for="oscarYes">Yes</label>
                     <input type="radio" name="oscar" id="oscarNo" value="false"> <label for="oscarNo">No</label>
@@ -889,7 +895,7 @@
             </div>
 
             <div class="question" data-visible="$oscar">
-                <fieldset>
+                <fieldset><!-- Q65 -->
                     <div>Have you or your partner received Childcare Assistance at any time from 28 September 2009 up to, and including, 26 September 2010?</div>
                     <input type="radio" name="receivedChildcare" id="receivedChildcareYes" value="true"> <label for="receivedChildcareYes">Yes</label>
                     <input type="radio" name="receivedChildcare" id="receivedChildcareNo" value="false"> <label for="receivedChildcareNo">No</label>
@@ -905,7 +911,7 @@
             </div>
 
             <div class="question" data-visible="$childAged1418">
-                <fieldset>
+                <fieldset><!-- Q39 -->
                     <div>Is the child or young person who is Aged 14 to 18 getting a Child Disability Allowance?</div>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceYes" value="true"> <label for="childDisabilityAllowanceYes">Yes</label>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceNo" value="false"> <label for="childDisabilityAllowanceNo">No</label>
@@ -913,7 +919,7 @@
             </div>
 
             <div class="question" data-visible="$partner && ($oscarAgedChild || $childDisabilityAllowance)">
-                <fieldset>
+                <fieldset><!-- Q40 -->
                     <div>Can your partner provide childcare?</div>
                     <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareYes" value="true"> <label for="partnerProvideChildcareYes">Yes</label>
                     <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareNo" value="false"> <label for="partnerProvideChildcareNo">No</label>
