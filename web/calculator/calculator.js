@@ -18,16 +18,23 @@ engine.displayResults = function () {
     // Work out which benefits they get. It's just a case of evaluating the rule
     // for each benefit.
     var benefitPageUrls = [];
+    var otherBenefitUrls = [];
+    var ub = engine.evaluate("$potentialUnemploymentBenefit");
     for (var i = 0; i < allBenefits.length; i++) {
-        if (engine.evaluate("$" + allBenefits[i]))
-            benefitPageUrls.push("benefits/" + allBenefits[i] + ".html");
+        if (engine.evaluate("$" + allBenefits[i])) {
+            // Special handling for when they're entitled to both UB and super
+            // (aged between 64.75 and 65) - super goes in "other" section. JSEC-77.
+            if (ub && /^potentialNewZealandSuperannuation/.test(allBenefits[i]))
+                otherBenefitUrls.push("benefits/" + allBenefits[i] + ".html");
+            else    
+                benefitPageUrls.push("benefits/" + allBenefits[i] + ".html");
+        }
     }
     debug("benefits: " + benefitPageUrls);
 
 
 
    //  PBAs - these work in the same way as benefits.
-    var otherBenefitUrls = [];
     for (var i = 0; i < allOtherBenefits.length; i++) {
         if (engine.evaluate("$" + allOtherBenefits[i]))
         	otherBenefitUrls.push("benefits/" + allOtherBenefits[i] + ".html");
