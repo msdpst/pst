@@ -8,5 +8,5 @@ JSEC-83: Extra Help should only be displayed if no main benefit is displayed
 JSEC-92:  Disability affects work (Q23) still appears when Q20 set back to No
 JSEC-6:  Error message displayed while editing date 
 JSEC-46: Other income - How much (Q16b)  not validated to >= 1.00 and <= 500,000.00
-
+JSEC-48:  Work hours per week (Q11) not validated for maximum or minimum
 

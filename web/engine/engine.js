@@ -45,6 +45,17 @@ engine = {
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
+        // Min and max that allow for leading $ and commas
+        $.validator.addMethod("min", function(val, elt, param) {
+            val = val.replace(/^\$/, "").replace(/,/g, "").trim();
+            return val == "" || Number(val) >= Number(param);
+        }, "Please enter a value greater than or equal to {0}");
+        
+        $.validator.addMethod("max", function(val, elt, param) {
+            val = val.replace(/^\$/, "").replace(/,/g, "").trim();
+            return val == "" || Number(val) <= Number(param);
+        }, "Please enter a value less than or equal to {0}");
+        
         // Can specify a custom error message on the validated field with the "data-error" attribute. Nice to keep the content in the html.
         var customValidationMessages = { };
         $("*[data-error]").each(function () {
@@ -535,8 +546,10 @@ engine = {
                 var v2 = val;
 
                 // Remove leading $ sign
-                if (v2.length > 0 && v2.charAt(0) == '$')
-                    v2 = v2.substr(1);
+                v2 = v2.replace(/^\$/, "");
+                
+                // Remove commas
+                v2 = v2.replace(/,/g, "");
 
                 if (!isNaN(Number(v2))) {
                     val = Number(v2);
@@ -684,9 +697,56 @@ engine = {
         return ".group:eq(" + groupNum + ")";
     },
 
+    /**
+     * A number with
+     * - optional leading $
+     * - optional cents (ie 2 decimal places)
+     * - options commas (see validateIntegerWithOptionalCommas() below)
+     * 
+     * The string is trimmed before validation. Blanks are valid.
+     * 
+     * @param str
+     * @return {Boolean}
+     */
     validateCurrency: function (str) {
         str = $.trim(str);
-        return str.length == 0 || str.match(/^\$?\d+$/) || str.match(/^\$?\d+\.\d\d$/);
+        
+        if (str == "")
+            return true;
+        
+        // remove cents if present
+        str = str.replace(/\.\d\d$/, "");
+        
+        // remove leading $ if present
+        str = str.replace(/^\$/, "");
+        
+        return engine.validateIntegerWithOptionalCommas(str);
+    },
+
+    /**
+     * An integer with optional commas. If commas are present at all, they must
+     * all be present and in the correct places.
+     * 
+     * 1000 and 100000 and 1 are valid
+     * 1,000 and 100,000 are valid
+     * 10,00 and 10,000000 are not valid
+     * 
+     * The string is trimmed before validation. Blanks are valid.
+     * 
+     * @param str
+     * @return {Boolean}
+     */
+    validateIntegerWithOptionalCommas: function(str) {
+        str = $.trim(str);
+
+        if (/,/.test(str)) {
+            return /^\d{1,3}(,\d{3})*$/.test(str);
+        }
+        
+        // No commas - must be digits (or blank)
+        else {
+            return /^\d*$/.test(str);
+        }
     }
     
 };
