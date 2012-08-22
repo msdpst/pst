@@ -27,3 +27,4 @@ JSEC-30 : errors for weekly wage
 
 
 Version 01.01.04
+JSEC-99 : reason not living with parents hint text
