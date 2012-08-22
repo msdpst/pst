@@ -676,37 +676,15 @@
             </div>
         </fieldset>
 
-        <!-- Woman alone questions -->
+        <!-- Woman alone questions --><!-- GROUP 14 -->
         <fieldset class="group" data-visible="$gender == 'Female' && $relationshipSituation && $age >= 50 && $dependentChildren == 0">
-            <div class="question">
-                <fieldset>
-                    <div>
-                        <h3>Has one of the following events taken place after you turned 50 years of age?</h3>
-                        Have you stopped caring for a relative who needed full time care and who was not your partner?
-                    </div>
-                    <input type="radio" name="stoppedCaring" id="stoppedCaringYes" value="true"> <label for="stoppedCaringYes">Yes</label>
-                    <input type="radio" name="stoppedCaring" id="stoppedCaringNo" value="false"> <label for="stoppedCaringNo">No</label>
-                </fieldset>
-            </div>
-
-            <div class="question">
-                <fieldset>
-                    <div>Your last dependent child is no longer dependent.</div>
-                    <input type="radio" name="lastChildNoLongerDependent" id="lastChildNoLongerDependentYes" value="true"> <label for="lastChildNoLongerDependentYes">Yes</label>
-                    <input type="radio" name="lastChildNoLongerDependent" id="lastChildNoLongerDependentNo" value="false"> <label for="lastChildNoLongerDependentNo">No</label>
-                </fieldset>
-            </div>
-
-            <div class="question">
-                <fieldset>
-                    <div>You have lost the support of your spouse or partner.</div>
-                    <input type="radio" name="noSpouseSupport" id="noSpouseSupportYes" value="true"> <label for="noSpouseSupportYes">Yes</label>
-                    <input type="radio" name="noSpouseSupport" id="noSpouseSupportNo" value="false"> <label for="noSpouseSupportNo">No</label>
-                </fieldset>
-            </div>
-        </fieldset>
-
-
+	        <fieldset  class="question" >
+	             <div>Has one of the following events taken place after you turned 50 years of age?</div><!-- Q27 -->
+	             <input type="checkbox" name="stoppedCaring" value="true" id="stoppedCaring"/><label for="stoppedCaring">Have you stopped caring for a relative who needed full time care and who was not your partner.</label><br/>
+	             <input type="checkbox" name="lastChildNoLongerDependent" value="true" id="lastChildNoLongerDependent"/><label for="lastChildNoLongerDependent">Your last dependent child is no longer dependent.</label><br/>
+	             <input type="checkbox" name="noSpouseSupport" value="true" id="noSpouseSupport"/><label for="noSpouseSupport">You have lost the support of your spouse or partner.</label><br/>
+	         </fieldset>
+         </fieldset>
 
         <!-- ======== Young person circumstances ========= -->
 
