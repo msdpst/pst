@@ -47,12 +47,12 @@ engine = {
         
         // Min and max that allow for leading $ and commas
         $.validator.addMethod("min", function(val, elt, param) {
-            val = val.replace(/^\$/, "").replace(/,/g, "").trim();
+            val = $.trim(val.replace(/^\$/, "").replace(/,/g, ""));
             return val == "" || Number(val) >= Number(param);
         }, "Please enter a value greater than or equal to {0}");
         
         $.validator.addMethod("max", function(val, elt, param) {
-            val = val.replace(/^\$/, "").replace(/,/g, "").trim();
+            val = $.trim(val.replace(/^\$/, "").replace(/,/g, ""));
             return val == "" || Number(val) <= Number(param);
         }, "Please enter a value less than or equal to {0}");
         
