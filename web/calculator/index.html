@@ -603,21 +603,17 @@
                 </div>
             </div>
 
-            <div class="question" data-visible="$healthDisability && $gender == 'Female'">
-                <fieldset>
-                    <div>Are you pregnant?</div>
-                    <input type="radio" name="pregnant" id="pregnantYes" value="true"> <label for="pregnantYes">Yes</label>
-                    <input type="radio" name="pregnant" id="pregnantNo" value="false"> <label for="pregnantNo">No</label>
-                </fieldset>
-            </div>
-
 	        <div class="question" data-visible="$healthDisability">
                 <fieldset data-required-checkbox-group="true">
                     <div>Select one or more from the following list:</div>
                     <input type="checkbox" name="illness" value="true" id="illness"/><label for="illness">Illness / Sickness</label><br/>
                     <input type="checkbox" name="disability" value="true" id="disability"/><label for="disability">Disability</label><br/>
                     <input type="checkbox" name="injury" value="true" id="injury"/><label for="injury">Injury</label><br/>
-                    <input type="checkbox" name="totallyBlind" value="true" id="totallyBlind"/><label for="totallyBlind">Totally blind</label>
+                    <input type="checkbox" name="totallyBlind" value="true" id="totallyBlind"/><label for="totallyBlind">Totally blind</label><br/>
+                    <span data-visible="$gender == 'Female'">
+                        <input type="checkbox" name="pregnant" value="true" id="pregnant"/>
+                        <label for="pregnant">Pregnant</label>
+                    </span>
                 </fieldset>
             </div>
 

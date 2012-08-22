@@ -16,6 +16,6 @@ JSEC-100: change radio buttons for woman alone to checkboxes.
 JSEC-100: reworded the new woman alone checkboxes
 JSEC-102: Incorrect limit checks for UB 25+ single
 JSEC-103: HRB limits
-
+JSEC-90: Pregnant
 
 

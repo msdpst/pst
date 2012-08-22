@@ -111,7 +111,7 @@ engine = {
         // Update progress and question visibility every time a question's answered
         $(".question :input").change(function () {
             engine.updateProgressBar();
-            engine.showOrHideQuestionsInGroup($(this).closest(".group"));
+            engine.showOrHideElementsInGroup($(this).closest(".group"));
 
             // If this is the last question in the group, go to the next group automatically
             // unless this is an input field (which would be confusing).
@@ -143,7 +143,7 @@ engine = {
         // They might have just answered a question in a way that reveals a new question.
         // If so, reveal the new question and don't move to the next group.
         var before = $(inputSelector).length;
-        engine.showOrHideQuestionsInGroup($(engine.groupSel(engine.currentGroupNum)));
+        engine.showOrHideElementsInGroup($(engine.groupSel(engine.currentGroupNum)));
         if ($(inputSelector).length > before)
             return;
 
@@ -244,7 +244,7 @@ engine = {
             }
 
             if (engine.shouldShow(group)) {
-                if (engine.showOrHideQuestionsInGroup(group) > 0)
+                if (engine.showOrHideElementsInGroup(group) > 0)
                     keepGoing = false;
             }
             else {
@@ -327,11 +327,19 @@ engine = {
     },
 
     /**
-     * Shows or hides questions in the specified group according to their visibility preconditions.
+     * Shows or hides elements in the specified group according to their visibility preconditions -
+     * usually it's questions that have preconditions but it may be other elements too.
+     * 
      * @param group - jquery element
-     * @return {Number} the number of visible elements in the group
+     * @return {Number} the number of visible questions in the group
      */
-    showOrHideQuestionsInGroup:function (group) {
+    showOrHideElementsInGroup:function(group) {
+        // Show/hide non-question elements with visibility conditions
+        group.find("[data-visible]").each(function() {
+            if (!$(this).hasClass("question"))
+                engine.applyVisibility($(this));
+        });
+
         var visible = 0;
         group.find(".question").each(function () {
             if (engine.shouldShow($(this))) {
@@ -349,6 +357,7 @@ engine = {
                 $(this).hide();
             }
         });
+        
         return visible;
     },
 
@@ -428,13 +437,18 @@ engine = {
     
     applyVisibilityToChildren: function(element) {
         element.find("*[data-visible]").each(function () {
-            if (engine.shouldShow($(this))) {
-                $(this).show();
-            }
-            else {
-                $(this).hide();
-            }
+            engine.applyVisibility($(this));
         });
+    },
+    
+    applyVisibility: function(elt) {
+        if (engine.shouldShow(elt)) {
+            elt.show();
+        }
+        else {
+            elt.hide();
+            engine.clearAllControlsIn(elt);
+        }
     },
 
     /**
