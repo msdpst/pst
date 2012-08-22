@@ -13,5 +13,6 @@ JSEC-28: Incorrect text in some benefit screens
 JSEC-48:  Work hours per week (Q11) not validated for maximum or minimum
 JSEC-53:  Money fields do not accept the entry of a comma
 JSEC-100: change radio buttons for woman alone to checkboxes.
+JSEC-100: reworded the new woman alone checkboxes
 
 
