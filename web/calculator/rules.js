@@ -536,7 +536,7 @@ var definitions = {
 
 
     potentialExtraHelp:
-            "!$unlawfulResident && $residencyResident && " +
+            "$stayingInNz && !$unlawfulResident && $residencyResident && " +
             "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
             "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefitAny && " +
             "!$potentialDPBSoleParentAny && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +

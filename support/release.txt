@@ -29,3 +29,4 @@ Version 01.01.04
 JSEC-99 : reason not living with parents hint text
 JSEC-96 : boundry testing for SDole parent
 JSEC-66 : Groups Medical / Living costs (group 17) and Caring for a child with a disability (group 18)  need to be...
+JSEC-17: Wrong text in "What you might get" screen for NZ born not living in NZ client
