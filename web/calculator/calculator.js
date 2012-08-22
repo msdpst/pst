@@ -130,7 +130,7 @@ var calculator = {
         else {
             age = undefined;
         }
-        //debug("age: " + age + " (" + dob + ")");
+        debug("age: " + age + " (" + dob + ")");
         return age;
     },
 
