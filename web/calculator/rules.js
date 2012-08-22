@@ -72,7 +72,7 @@ var definitions = {
 
 	single25uBSBIncomeLimit:"$single && $age25Plus && ($familyTotalGrossWeeklyIncome<$ubSingle25GWILimit)",
 
-	uBSBrelationshipIncomeLimit:"!$single && ($familyTotalGrossWeeklyIncome < $ubSoleParentGWILimit )",
+	uBSBrelationshipIncomeLimit:"!$single && ($familyTotalGrossWeeklyIncome < $ubRelationshipGWILimit )",
 	uBSBsoleParentIncomeLimit:"!$single && $dependentChildren >= 1 && ($familyTotalGrossWeeklyIncome < $ubSoleParentGWILimit )",
 	
 	
@@ -130,7 +130,7 @@ var definitions = {
     ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
     ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
     ubSingle2024GWILimit:324, //UB Single 20-24 GWI Limit
-    ubSingle25GWILimit:568, //UB Single 25+ GWI Limit
+    ubSingle25GWILimit:373, //UB Single 25+ GWI Limit  //TODO proabbly wrong
     ubSoleParentGWILimit:543, //UB Sole Parent Limit
     ubRelationshipGWILimit:478, //UB Relationship Limit
 
