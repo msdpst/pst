@@ -1,0 +1,5 @@
+/* CSS fixes for IE */
+#headerInner {
+    /* Allow for IE not doign box-shadow below the progress bar */
+    padding-bottom: 0.7em;
+}

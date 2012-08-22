@@ -226,8 +226,7 @@ header img {
     position: relative;
     left: 50%;
     background-color: white;
-    padding: 1em 1em 0.7em 1em;
-    /*box-shadow: 0 0 1em #d0d0d0;*/
+    padding: 1.7em 1em 0 1em;
 }
 
 .noscript {
@@ -284,6 +283,7 @@ h1 {
     height: 1.3em;
     border-radius: 7px;
     border: 1px solid #a0a0a0;
+    box-shadow: 0 5px 15px 15px white;
 }
 .ui-widget-header {
     border-radius: 5px;
@@ -292,21 +292,9 @@ h1 {
     background-color: #80c080 !important;
 }
 
-#buffer {
-    position: relative;
-    left: 50%;
-    height: 30px;
-    padding: 0 1em 0 1em;
-    background: -moz-linear-gradient(to bottom, rgba(255,255,255,255), rgba(255,255,255,0));
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,255)), to(rgba(255,255,255,0)));
-
-    /* hide in IE6 */
-    _display: none;
-}
-
 #outer {
     left: 50%;
-    padding: 200px 1em 1em 1em;
+    padding: 220px 1em 1em 1em;
     position: relative;
     background-color: white;
     box-shadow: 0 0 1em #d0d0d0;
