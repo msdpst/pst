@@ -21,3 +21,4 @@ JSEC-94: open success links in new tab
 JSEC-77: UB and Super
 JSEC-97: Living at your parents (Q28) prompt correct to spreadsheet but not the same as existing EC and inconsistent with Q29
 JSEC-76:  In Firefox (3.0.13) entry fields which are near the top of the visiable page ate not selectable
+JSEC-30 : errors for weekly wage
