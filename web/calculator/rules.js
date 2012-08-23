@@ -274,7 +274,7 @@ var definitions = {
 
     potentialDPBCareOrSickOrInfirm: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
-    		"	$workingAge && " +
+    		"	$workingAge && (" +
     		
     		"	(" +
     		"		$single && " +
@@ -289,7 +289,7 @@ var definitions = {
     		"	(" +
     		"		!$single && " +
     		"		$familyTotalGrossWeeklyIncome < $csiHalfRelLimit" +
-    		"	)" ,
+    		"	))" ,
     		
     		
     		
