@@ -133,7 +133,12 @@ var definitions = {
     ubSingle25GWILimit:373, //UB Single 25+ GWI Limit  //TODO proabbly wrong
     ubSoleParentGWILimit:543, //UB Sole Parent Limit
     ubRelationshipGWILimit:478, //UB Relationship Limit
-
+    
+    csiSingleYouthLimit:454.00,
+    csiSingle18Limit:524.00,
+    csiHalfRelLimit:768.00,
+    csiSoleParentLimit:638.00,
+    
     ccs1ChildLimit: 1400,//CCS 1 Child GWI Limit
     ccs2ChildrenLimit: 1600,//CCS 2 Children GWI Limit 
     ccs3ChildrenLimit: 1800,//CCS 3 or more Children GWI Limit
@@ -208,10 +213,11 @@ var definitions = {
 
     ratesDPB : {
     	"($potentialWidowsBenefitAny || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":"213.49",
-    	"$potentialWidowsBenefitAny && $single && $dependentChildren >=1 ":"293.58",
+    	"$potentialWidowsBenefitAny || $potentialDPBSoleParentAny":"293.58",
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":"256.19",
-    	"$potentialDPBCareOrSickOrInfirm && $single && $dependentChildren >=1  ":"336.55",
-    	"$potentialWidowsBenefitAny || $potentialDPBSoleParentAny":"336.55"
+    	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren >= 1 ":"336.55",
+    	"$potentialDPBCareOrSickOrInfirm && !$single && $age>=18 && $dependentChildren >= 1 ":"213.49 each"
+    	
     },
 
 //    ubRate: "engine.evalMap(definitions.ratesUB).toFixed(2)",
@@ -269,9 +275,24 @@ var definitions = {
     potentialDPBCareOrSickOrInfirm: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
     		"	$workingAge && " +
-    		"	$single && " +
-    		"	$dependentChildren <= 1 && " +
-    		"	($familyTotalGrossWeeklyIncome < $dpbCsiSoleParentGWILimit)",
+    		
+    		"	(" +
+    		"		$single && " +
+    		"		$dependentChildren == 0 && " +
+    		"		$familyTotalGrossWeeklyIncome < $csiSingle18Limit" +
+    		"	) ||" +
+    		"	(" +
+    		"		$single && " +
+    		"		$dependentChildren >= 1 && " +
+    		"		$familyTotalGrossWeeklyIncome < $csiSoleParentLimit" +
+    		"	)||" +
+    		"	(" +
+    		"		!$single && " +
+    		"		$familyTotalGrossWeeklyIncome < $csiHalfRelLimit" +
+    		"	)" ,
+    		
+    		
+    		
 
     potentialDPBWomanAlone: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$gender == 'Female' && " +

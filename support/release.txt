@@ -32,3 +32,4 @@ JSEC-66 : Groups Medical / Living costs (group 17) and Caring for a child with a
 JSEC-17: Wrong text in "What you might get" screen for NZ born not living in NZ client
 JSEC-42: For other income details (Q16) why is the group question text so prominant
 JSEC-44: What is the source of the income (Q16a) accepts more than 60 characters
+JSEC-82: Incorrect SP rate on "What you might get" screen
