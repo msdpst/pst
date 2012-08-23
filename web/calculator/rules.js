@@ -188,13 +188,14 @@ var definitions = {
     accSuppMax: "calculator.calculateAccSuppMax()",
 
     ratesUB : {
-    	"$age<20 && $age>=18 && $livingAtHome": "136.64",
-    	"$age<20 && $age>=18 && !$livingAtHome": "170.80",
-    	"$age<25 && $age>19 && $single": "170.80",
-    	"$partner && $dependentChildren == 0": "170.80 each",
+    	"$single && $age<20 && $age>=18 && $livingAtHome": "136.64",
+    	"$single && $age<20 && $age>=18 && !$livingAtHome": "170.80",
+    	"$single && $age<25 && $age>19": "170.80",
+    	"$single && $age>=25": "204.96",
+    	"$partner && $dependentChildren == 0 && (!$partnerWorked || !$partnerStillWorking)": "170.80 each",
     	"$partner && $dependentChildren > 0": "170.80 each",
-    	"$single && $dependentChildren > 0": "293.58",
-    	"$age>=25": "204.96"
+    	"$single && $dependentChildren > 0": "293.58"
+    	
     },
 
     ratesIB : {
