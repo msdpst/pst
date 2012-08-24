@@ -101,7 +101,7 @@ var definitions = {
     		")",
     
     
-    blindRelationship:"!$single && $totallyBlind && $totalOtherIncomeCalculation < $ibRelationshipGWILimit" +
+    blindRelationship:"!$single && $totallyBlind && $totalOtherIncomeCalculation < $ibRelationshipGWILimit && " +
 	" (" +
 	"	$ibWorkingAge || $ibYouth" +
 	" )",

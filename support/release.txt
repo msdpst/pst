@@ -48,3 +48,9 @@ JSEC-118: Value of cash assets (Q36)  hint text not what was expected
 JSEC-117: Do you have a partner (Q45) the text on the help link is not the same as the spreadsheet (update spreadsheet?)
 JSEC-123: Sickness benfit still displayed in "Do you have a health condition or disability " section instead of Health Related Benefit
 JSEC-120: Pregnant (Q21)  the pompt for the implementation as a checkbox looks out of alignment with the other options
+
+Version 01.01.05
+JSEC-131: Unable to move to the "What you might get" screen
+
+
+
