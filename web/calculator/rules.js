@@ -130,9 +130,9 @@ var definitions = {
     ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
     ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
     ubSingle2024GWILimit:324, //UB Single 20-24 GWI Limit
-    ubSingle25GWILimit:373, //UB Single 25+ GWI Limit  //TODO proabbly wrong
-    ubSoleParentGWILimit:543, //UB Sole Parent Limit
-    ubRelationshipGWILimit:478, //UB Relationship Limit
+    ubSingle25GWILimit:373, //UB Single 25+ GWI Limit
+    ubSoleParentGWILimit:500, //UB Sole Parent Limit
+    ubRelationshipGWILimit:568, //UB Relationship Limit
     
     csiSingleYouthLimit:454.00,
     csiSingle18Limit:524.00,

@@ -94,9 +94,10 @@ engine = {
                 while (elt.length == 0);
                 //modify text depending on help text status
                 if (elt.is(':hidden')){
+                	$(this).data("help-text",$(this).html());
                 	$(this).html('Hide help text');
                 }else{
-                	$(this).html('More information');
+                	$(this).html($(this).data("help-text"));
                 }
                 elt.slideToggle(engine.SLIDE_TIME);
                 return false;
@@ -209,7 +210,11 @@ engine = {
         // hide all help text, change help toggle message & Display the next group of questions
         
         $('.help').hide();
-        $('.helpButton').html('More information');
+        //$('.helpButton').html('More information');
+        
+        $('.helpButton').each(function(){   	
+        	$(this).html($(this).data("help-text"));
+        });
         
         engine.changeGroup(1);
         return false;

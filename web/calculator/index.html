@@ -168,7 +168,7 @@
 
                 <p class="info">A partner is your husband or wife, your civil union partner, or a person of the
                 same or opposite sex with whom you have a de facto relationship.
-                <a href="#" class="helpButton">More information</a></p>
+                <a href="#" class="helpButton">For information about how we work out if you're in a relationship click here.</a></p>
 
                 <div class="help">
                     When we work out if you can get income assistance, we will consider you have a partner if you are:
@@ -602,7 +602,7 @@
                     <input type="radio" name="healthDisability" id="healthDisabilityNo" value="false"> <label for="healthDisabilityNo">No</label>
                 </fieldset>
                 <div class="info">
-                    You may get Sickness Benefit if you are sick, injured, disabled or pregnant and you:
+                    You may get Health Related Benefit if you are sick, injured, disabled or pregnant and you:
                     <ul>
                         <li>have had to reduce your hours OR</li>
                         <li>have had to stop working OR</li>
@@ -619,8 +619,7 @@
                     <input type="checkbox" name="injury" value="true" id="injury"/><label for="injury">Injury</label><br/>
                     <input type="checkbox" name="totallyBlind" value="true" id="totallyBlind"/><label for="totallyBlind">Totally blind</label><br/>
                     <span data-visible="$gender == 'Female'">
-                        <input type="checkbox" name="pregnant" value="true" id="pregnant"/>
-                        <label for="pregnant">Pregnant</label>
+                        <input type="checkbox" name="pregnant" value="true" id="pregnant"/><label for="pregnant">Pregnant</label>
                     </span>
                 </fieldset>
             </div>
@@ -683,7 +682,7 @@
         <!-- Woman alone questions --><!-- GROUP 14 -->
         <fieldset class="group" data-visible="$gender == 'Female' && $relationshipSituation && $age >= 50 && $dependentChildren == 0">
 	        <fieldset  class="question" >
-	             <div>Has one of the following events taken place after you turned 50 years of age?</div><!-- Q27 -->
+	             <div>Has one of the following events taken place after you turned 50 years of age?<br>(Optional)</div><!-- Q27 -->
 	             <input type="checkbox" name="stoppedCaring" value="true" id="stoppedCaring"/><label for="stoppedCaring">You stopped caring for a relative who needed full time care and who was not your partner</label><br/>
 	             <input type="checkbox" name="lastChildNoLongerDependent" value="true" id="lastChildNoLongerDependent"/><label for="lastChildNoLongerDependent">Your last dependent child is no longer dependent</label><br/>
 	             <input type="checkbox" name="noSpouseSupport" value="true" id="noSpouseSupport"/><label for="noSpouseSupport">You have lost the support of your spouse or partner</label><br/>
@@ -704,7 +703,7 @@
 
 	        <div class="question" data-visible="$under20 && $partner==false && $livingAtHome && $dependentChildren > 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label><!-- Q69 -->
-                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="0" max="500000" data-error="Please enter a valid amount between $0 and $500,000">
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="1" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
                 
                   <div class="info">
 	                Enter how much your parents/step parents/guardians earn before tax. 
@@ -774,17 +773,20 @@
 
             <div class="question" data-visible="$accommodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
-                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency" min="0" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency" min="1" max="500000" 
+                data-error="Please enter a valid amount between $1 and $500,000">
             </div>
 
             <div class="question" data-visible="$accommodationType == 'Board'" >
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
-                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency"  min="0" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency"  min="1" max="500000" 
+                data-error="Please enter a valid amount between $1 and $500,000">
             </div>
 
             <div class="question" data-visible="$accommodationType == 'Home Owner'" >
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home that you pay per week?</label>
-                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency"  min="0" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency"  min="1" max="500000" 
+                data-error="Please enter a valid amount between $1 and $500,000">
             </div>
 
         </fieldset>
@@ -820,7 +822,7 @@
                 </p>
 
                 <div class="help">
-                    Cash assets include:<br>
+                    <b>Cash assets include:</b><br>
                     <ul>
                         <li>money in bank or savings organisation</li>
                         <li>money lent to other people or organisations</li>
@@ -830,7 +832,7 @@
                     Cash assets don’t include motor, caravan, boat or other vehicles with a market value of less than $2,000,
                     or which you or your family privately use.
                     <br><br>
-                    If you’re unsure if something counts as a cash asset, talk to us about it when you meet with us.
+                    <b>If you’re unsure</b> if something counts as a cash asset, talk to us about it when you meet with us.
                 </div>
 
             </div>
@@ -921,7 +923,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$partner && ($oscarAgedChild || $childDisabilityAllowance)">
+            <div class="question" data-visible="$relationshipSituationPartner && ($oscarAgedChild || $childDisabilityAllowance)">
                 <fieldset><!-- Q40 -->
                     <div>Can your partner provide childcare?</div>
                     <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareYes" value="true"> <label for="partnerProvideChildcareYes">Yes</label>

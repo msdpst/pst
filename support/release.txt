@@ -35,3 +35,16 @@ JSEC-44: What is the source of the income (Q16a) accepts more than 60 characters
 JSEC-82: Incorrect SP rate on "What you might get" screen
 JSEC-54: UB Relationship No Children rate is incorrect
 JSEC-58: Missing text for benefit with no obligation
+JSEC-36: Details about when a payment can start are available here is displayed in the What you might get screen for an IB
+
+Version 01.01.05
+JSEC-60: Reason not living with parents (Q30)  is missing an option and implemented as a radio group rather than a list
+JSEC-64: parents combined income (Q69) does not have max/min values enforced (>= 1.00 and <= 500,000.00)
+JSEC-65: accommodation costs fields (Q60, 61 and 62)  not enforcing maximum or minimum (>= 1.00 and <= 500,000.00)
+JSEC-105: Value of cash assets (Q36) help text does not have bolding of 2 text sections as defined in the spreadsheet
+JSEC-107: Can your partner provide child care (Q40) is being asked when partner is in prison
+JSEC-116: Mandatory indicator required
+JSEC-118: Value of cash assets (Q36)  hint text not what was expected
+JSEC-117: Do you have a partner (Q45) the text on the help link is not the same as the spreadsheet (update spreadsheet?)
+JSEC-123: Sickness benfit still displayed in "Do you have a health condition or disability " section instead of Health Related Benefit
+JSEC-120: Pregnant (Q21)  the pompt for the implementation as a checkbox looks out of alignment with the other options
