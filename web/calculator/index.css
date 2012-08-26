@@ -126,7 +126,7 @@ button:active {
 
 
 #nextButton{
-	width:50px;
+	width:70px;
 }
 
 #finalNextButton{
@@ -195,6 +195,12 @@ button:active {
 	padding-right: 20px;
 	background: url("images/arrow-down.png") no-repeat scroll transparent right;
 }
+
+.nextTextAnimated{
+	
+	background: url("images/ajax-loader.gif") no-repeat scroll transparent right;
+}
+
 
 .applyText{
 	padding-right: 20px;

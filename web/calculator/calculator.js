@@ -12,56 +12,80 @@ engine.groupScrollYPosition = 250;
  * The engine calls this function.
  */
 engine.displayResults = function () {
-    engine.disableCurrentGroup();
-    $("#controlBox").hide();
+	
+	
 
-    // Work out which benefits they get. It's just a case of evaluating the rule
-    // for each benefit.
-    var benefitPageUrls = [];
-    var otherBenefitUrls = [];
-    var ub = engine.evaluate("$potentialUnemploymentBenefit");
-    for (var i = 0; i < allBenefits.length; i++) {
-        if (engine.evaluate("$" + allBenefits[i])) {
-            // Special handling for when they're entitled to both UB and super
-            // (aged between 64.75 and 65) - super goes in "other" section. JSEC-77.
-            if (ub && /^potentialNewZealandSuperannuation/.test(allBenefits[i]))
-                otherBenefitUrls.push("benefits/" + allBenefits[i] + ".html");
-            else    
-                benefitPageUrls.push("benefits/" + allBenefits[i] + ".html");
-        }
-    }
-    debug("benefits: " + benefitPageUrls);
+	//$('.nextText').addClass('nextTextAnimated');
+   
+	
+	$('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
+	$('.nextText').html('Wait..');
+	//
+	//gives the illusion of speed by waiting.. 
+	setTimeout(function(){
+		
+		
+		 engine.disableCurrentGroup();
+		 var benefitPageUrls = [];
+		    var otherBenefitUrls = [];
+		    var ub = engine.evaluate("$potentialUnemploymentBenefit");
+		    for (var i = 0; i < allBenefits.length; i++) {
+		        if (engine.evaluate("$" + allBenefits[i])) {
+		            // Special handling for when they're entitled to both UB and super
+		            // (aged between 64.75 and 65) - super goes in "other" section. JSEC-77.
+		            if (ub && /^potentialNewZealandSuperannuation/.test(allBenefits[i]))
+		                otherBenefitUrls.push("benefits/" + allBenefits[i] + ".html");
+		            else    
+		                benefitPageUrls.push("benefits/" + allBenefits[i] + ".html");
+		        }
+		    }
+		    debug("benefits: " + benefitPageUrls);
 
 
 
-   //  PBAs - these work in the same way as benefits.
-    for (var i = 0; i < allOtherBenefits.length; i++) {
-        if (engine.evaluate("$" + allOtherBenefits[i]))
-        	otherBenefitUrls.push("benefits/" + allOtherBenefits[i] + ".html");
-    }
-    debug("Others: " + otherBenefitUrls);
+		   //  PBAs - these work in the same way as benefits.
+		    for (var i = 0; i < allOtherBenefits.length; i++) {
+		        if (engine.evaluate("$" + allOtherBenefits[i]))
+		        	otherBenefitUrls.push("benefits/" + allOtherBenefits[i] + ".html");
+		    }
+		    debug("Others: " + otherBenefitUrls);
 
 
-    // They're eligible for something. Assemble the information - there's a page
-    // fragment (ie. an html file) for each benefit and for each obligation.
-    // Load the appropriate fragments from the server and insert them into the page.
-    if (benefitPageUrls.length > 0 || otherBenefitUrls > 0) {
-        engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
-            engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), otherBenefitUrls, function () {
-                engine.applyVisibilityToChildren($("#eligible"));
-                $("#eligible").slideDown(engine.SLIDE_TIME);
-                $("form").hide();
-                $('html,body').scrollTop(0);
-            });
-        });
-    }
+		    // They're eligible for something. Assemble the information - there's a page
+		    // fragment (ie. an html file) for each benefit and for each obligation.
+		    // Load the appropriate fragments from the server and insert them into the page.
+		    if (benefitPageUrls.length > 0 || otherBenefitUrls > 0) {
+		        engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
+		            engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), otherBenefitUrls, function () {
+		                engine.applyVisibilityToChildren($("#eligible"));
+		                $("#controlBox").hide();
+		                $("#eligible").slideDown(engine.SLIDE_TIME);
+		                $("form").hide();
+		                $('html,body').scrollTop(0);
+		                $('#loadingAnimation').hide();
+		                $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');	
+		                $('.nextText').html('Next');
+		            });
+		        });
+		    }
 
-    // They're not entitled to anything. Say so.
-    else {
-        $("#ineligible").slideDown(engine.SLIDE_TIME);
-        $("form").hide();
-        $('html,body').scrollTop(0);
-    }
+		    // They're not entitled to anything. Say so.
+		    else {
+		    	$("#controlBox").hide();
+		        $("#ineligible").slideDown(engine.SLIDE_TIME);
+		        $("form").hide();
+		        $('html,body').scrollTop(0);
+		        $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');	
+		        $('.nextText').html('Next');
+		    }
+		
+		
+		
+	},500);
+
+     //Work out which benefits they get. It's just a case of evaluating the rule
+    //for each benefit.
+   
 };
 
 var calculator = {
@@ -125,6 +149,7 @@ var calculator = {
         $(".results").hide();
         $("form").show();
         $("#controlBox").show();
+        $('#nextButton').show();
         engine.changeGroup(0);
     },
 
