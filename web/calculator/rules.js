@@ -147,10 +147,10 @@ var definitions = {
     OSCAR2ChildrenLimit:1600.00,//OSCAR 2 Children GWI Limit
     OSCAR3ChildrenLimit:1800.00,//OSCAR 3 or more Children GWI Limit
 
-    TASSingleCashAssetLimit:1007.28, //TAS Single Cash Asset Limit
-    TASRelationshipCashAssetLimit:1678.39,//TAS Relationship Cash Asset Limit
-    TASSoleParent1ChildCashAssetLimit:1322.59,//TAS Sole Parent 1 Child Cash Asset Limit
-    TASanyotherSoleParentCashAssetLimit:1420.74,//TAS any other Sole Parent Cash Asset Limit
+    TASSingleCashAssetLimit:1025.11, //TAS Single Cash Asset Limit
+    TASRelationshipCashAssetLimit:1708.10,//TAS Relationship Cash Asset Limit
+    TASSoleParent1ChildCashAssetLimit:1346,//TAS Sole Parent 1 Child Cash Asset Limit
+    TASanyotherSoleParentCashAssetLimit:1445.89,//TAS any other Sole Parent Cash Asset Limit
 
     nonQualifiedPartnerIncludedLimit:860,//Non-qualified partner included
 
