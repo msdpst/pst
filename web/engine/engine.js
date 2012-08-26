@@ -45,15 +45,19 @@ engine = {
         $.validator.addMethod("nzdate", Date.validateNzDate, "Please enter a valid date");
         $.validator.addMethod("currency", engine.validateCurrency, "Please enter a valid amount");
         
+        $.validator.messages["digits"] = "Please enter a whole number";
+        
         // Min and max that allow for leading $ and commas
         $.validator.addMethod("min", function(val, elt, param) {
             val = $.trim(val.replace(/^\$/, "").replace(/,/g, ""));
-            return val == "" || Number(val) >= Number(param);
+            var result = val == "" || Number(val) >= Number(param);
+            return result;
         }, "Please enter a value greater than or equal to {0}");
         
         $.validator.addMethod("max", function(val, elt, param) {
             val = $.trim(val.replace(/^\$/, "").replace(/,/g, ""));
-            return val == "" || Number(val) <= Number(param);
+            var result = val == "" || Number(val) <= Number(param);
+            return result;
         }, "Please enter a value less than or equal to {0}");
         
         // Can specify a custom error message on the validated field with the "data-error" attribute. Nice to keep the content in the html.
