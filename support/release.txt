@@ -51,6 +51,6 @@ JSEC-120: Pregnant (Q21)  the pompt for the implementation as a checkbox looks o
 
 Version 01.01.05
 JSEC-131: Unable to move to the "What you might get" screen
-
+JSEC-121:  Women Alone (Q27) prompt for first option needs confirming and the presentation of the first option prompt needs to be tidier
 
 
