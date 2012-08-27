@@ -394,10 +394,10 @@
 
         <!-- ======== Your Income ========= -->
 
-        <fieldset class="group">
-	        <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
+        <fieldset class="group" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))"><!-- GROUP 8    || $workingAge  || ($seniorsAge && (!$tenYears || !$fiveYears))-->
+	        <div class="question" >
                 <fieldset>
-                    <div>Have you worked in the last 52 weeks?</div>
+                    <div>Have you worked in the last 52 weeks?</div><!-- Q8 -->
                     <input type="radio" name="haveWorked" id="haveWorkedYes" value="true"> <label for="haveWorkedYes">Yes</label>
                     <input type="radio" name="haveWorked" id="haveWorkedNo" value="false"> <label for="haveWorkedNo">No</label>
                 </fieldset>
@@ -407,14 +407,14 @@
 
 	        <div class="question" data-visible="$haveWorked">
                 <fieldset>
-                    <div>Are you still working?</div>
+                    <div>Are you still working?</div><!-- Q9 -->
                     <input type="radio" name="stillWorking" id="stillWorkingYes" value="true"> <label for="stillWorkingYes">Yes</label>
                     <input type="radio" name="stillWorking" id="stillWorkingNo" value="false"> <label for="stillWorkingNo">No</label>
                 </fieldset>
             </div>
 
 	        <div class="question" data-visible="$stillWorking">
-                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label><br>
+                <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label><br><!-- Q10 -->
                 $ <input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="currency" min="0" max="20000" 
                 			data-error="Please enter a valid amount between $0 and $20,000">
 
@@ -425,21 +425,21 @@
             </div>
 
 	        <div class="question" data-visible="$stillWorking">
-                <label for="weeklyHours">What are the total number of hours you work per week?</label>
+                <label for="weeklyHours">What are the total number of hours you work per week?</label><!-- Q11  -->
                 <input type="text" name="weeklyHours" id="weeklyHours" class="number" min="1" max="168" data-error="Please enter a valid number between 1 and 168">
             </div>
 
             <!-- ACC Details (Seniors only) -->
 
 	        <div class="question" data-visible="$seniorOk">
-                <fieldset>
+                <fieldset><!-- Q51 -->
                     <div>Are you currently receiving weekly compensation payments from the Accident Compensation Corporation (ACC)?</div>
                     <input type="radio" name="acc" id="accYes" value="true"> <label for="accYes">Yes</label>
                     <input type="radio" name="acc" id="accNo" value="false"> <label for="accNo">No</label>
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="$acc">
+	        <div class="question" data-visible="$acc"><!-- Q52 -->
                 <p>Weekly compensation is paid by ACC to compensate for the loss of earnings as a result of injury.</p>
                 <p>If you receive weekly compensation payments through ACC, you cannot receive New Zealand Superannuation
                 unless ACC have confirmed:</p>
@@ -451,10 +451,10 @@
             </div>
         </fieldset>
 
-        <fieldset class="group">
+        <fieldset class="group"><!-- GROUP 9 -->
 	        <div class="question" data-visible="$relationshipSituationPartner">
                 <fieldset>
-                    <div>Has your partner worked in the last 52 weeks?</div>
+                    <div>Has your partner worked in the last 52 weeks?</div><!-- Q12 -->
                     <input type="radio" name="partnerWorked" id="partnerWorkedYes" value="true"> <label for="partnerWorkedYes">Yes</label>
                     <input type="radio" name="partnerWorked" id="partnerWorkedNo" value="false"> <label for="partnerWorkedNo">No</label>
                 </fieldset>
@@ -462,13 +462,13 @@
 
 	        <div class="question" data-visible="$partnerWorked">
                 <fieldset>
-                    <div>Is your partner still working?</div>
+                    <div>Is your partner still working?</div><!-- Q13 -->
                     <input type="radio" name="partnerStillWorking" id="partnerStillWorkingYes" value="true"> <label for="partnerStillWorkingYes">Yes</label>
                     <input type="radio" name="partnerStillWorking" id="partnerStillWorkingNo" value="false"> <label for="partnerStillWorkingNo">No</label>
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="$partnerStillWorking">
+	        <div class="question" data-visible="$partnerStillWorking"><!-- Q14 -->
                 <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label><br>
                 $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency" min="0" max="20000"
                 	data-error="Please enter a valid amount between $0 and $20,000" >
@@ -482,10 +482,10 @@
 
 
 
-        <fieldset class="group">
+        <fieldset class="group"><!-- GROUP 10 -->
             <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
-                    <div>Do you or your partner expect to get other income in the next 52 weeks?</div>
+                    <div>Do you or your partner expect to get other income in the next 52 weeks?</div><!-- Q15 -->
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
                     <input type="radio" name="expectIncome" id="expectIncomeNo" value="false"> <label for="expectIncomeNo">No</label>
                 </fieldset>
@@ -797,11 +797,7 @@
 
         </fieldset>
 
-	
-	
-	
-	<!-- //TODO  HERE HERE HRE -->
-	
+
         <fieldset class="group"><!-- GROUP 17 -->
             <div class="question">
                 <fieldset>
@@ -969,7 +965,7 @@
         <span class="benefitName">Other assistance</span><br>
 		When you apply we'll ensure that you get all the assistance that you're entitled to from us.
         
-		<br><br>
+		
         <div>
 		  <h3 class="apply">Apply now</h3>
 		  	<ul>
@@ -1013,15 +1009,17 @@
 
 <div id="bottomBuffer"></div>
 
-<span id="confirmExit">	
- 		Are you sure you wish to exit?
- 		<button id="exitButtonNo" type="button" onclick="calculator.cancelExit('exitButton','confirmExit')">
- 			<span class="noText">No</span>
- 		</button>
- 		<button id="exitButtonYes" type="button" onclick="calculator.exitWI()">
- 			<span class="yesText">Yes</span>
- 		</button>
- 	</span>
+<span id="confirmExit" class="noscript">	
+        <div class="noscriptInner">
+        	 <h2>	Are you sure you wish to exit?</h2>
+	 		<button id="exitButtonNo" type="button" onclick="calculator.cancelExit('exitButton','confirmExit')">
+	 			<span class="noText">No</span>
+	 		</button>
+	 		<button id="exitButtonYes" type="button" onclick="calculator.exitWI()">
+	 			<span class="yesText">Yes</span>
+	 		</button>
+        </div>
+</span>
 
 </body>
 </html>
