@@ -139,17 +139,17 @@ var calculator = {
         
         if (partner) {
             if (dependentChildren > 0)
-                return definitions.accSuppCoupleWithChildren[area];
+                return engine.definitions.accSuppCoupleWithChildren[area];
             else
-                return definitions.accSuppCouple[area];
+                return engine.definitions.accSuppCouple[area];
         }
         else {
             if (dependentChildren > 1)
-                return definitions.accSuppSoleParent2OrMoreChildren[area];
+                return engine.definitions.accSuppSoleParent2OrMoreChildren[area];
             else if (dependentChildren == 1)
-                return definitions.accSuppSoleParent1Child[area];
+                return engine.definitions.accSuppSoleParent1Child[area];
             else
-                return definitions.accSuppSingle[area];
+                return engine.definitions.accSuppSingle[area];
         }
     },
     

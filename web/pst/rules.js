@@ -1,4 +1,4 @@
-var definitions = {
+engine.definitions = {
     wrk4uRequired: "!($benefit == 'DPB' && $youngestChildAge != 'over13')",
     cvRequired: "!($benefit == 'DPB' && $youngestChildAge == 'upTo4')",
     jobSearchProfileRequired: "!($benefit == 'DPB' && $youngestChildAge == 'upTo4')",

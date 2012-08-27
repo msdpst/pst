@@ -1,8 +1,24 @@
-/**
- * General rules to document:
- *
- * Checkboxes should each have their own names, even within the same group. Value
- * should always be "true", ie. they're treated as booleans.
+/*
+ ===================== Q U E S T I O N   E N G I N E =====================
+ 
+ Generic engine for displaying a series of questions and evaluating rules.
+ It's generic! It is used by the Eligibility Calculator (EC), but nothing
+ in the engine directory should contain any code that is specific to EC 
+ (or any other implementation).
+ 
+ How to use:
+ 
+ Use the EC code as a guideline. The general structure is:
+ 
+ - calculator/index.html: Content, marked up with certain "magic" classes
+        and cusom attributes (see below). Don't put any Javascript in here.
+ - calculator/rules.js: 
+ 
+ 
+ General rules to document:
+
+ Checkboxes should each have their own names, even within the same group. Value
+ should always be "true", ie. they're treated as booleans.
  */
 var engine;
 var debugConditions = true;
@@ -28,6 +44,13 @@ engine = {
      * (like EC) it has a fixed header at the top of the window.
      */
     groupScrollYPosition: 20,
+
+
+    /**
+     * Rule definitions - a map of names to expressions.
+     * Override this in the client.
+     */
+    definitions: {},
 
 
     /**
@@ -517,11 +540,11 @@ engine = {
         return expression.replace(/\$(\w+)/g, function (s) {
             var result;
             var name = s.substring(1);
-            if (definitions[name] !== undefined) {
-                if (jQuery.type(definitions[name]) == "string")
-                    result = "(" + engine.processVariables(definitions[name]) + ")";
+            if (engine.definitions[name] !== undefined) {
+                if (jQuery.type(engine.definitions[name]) == "string")
+                    result = "(" + engine.processVariables(engine.definitions[name]) + ")";
                 else
-                    result = "(" + definitions[name] + ")";
+                    result = "(" + engine.definitions[name] + ")";
             }
             else {
                 result = "engine.getAnswer('" + name + "')";
