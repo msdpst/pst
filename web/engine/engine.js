@@ -295,8 +295,9 @@ engine = {
         engine.currentGroupNum = newGroupNum;
 
         // Focus on the first field in the group
-        $(engine.groupSel(newGroupNum) + " :input:first").focus();
-        $(engine.groupSel(newGroupNum) + " :input:first").select();
+        var firstInput = $(engine.groupSel(newGroupNum) + " :input:visible:first");
+        firstInput.focus();
+        firstInput.select();
 
         engine.updateProgressBar();
     },

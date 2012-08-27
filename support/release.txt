@@ -53,4 +53,5 @@ Version 01.01.05
 JSEC-131: Unable to move to the "What you might get" screen
 JSEC-121:  Women Alone (Q27) prompt for first option needs confirming and the presentation of the first option prompt needs to be tidier
 JSEC-78: Partner max age = 130
-
+JSEC-109: Employment and income (group 8) first question does not have focus if NZS
+JSEC-110: relationship status group (4) first question does not have focus if no partner
