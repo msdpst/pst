@@ -33,7 +33,7 @@ engine = {
     /**
      * Called when they reach the end of the questions. The client should override this!
      */
-    displayResults: function() {},
+    onFinished: function() {},
 
     /**
      * Called after clearing all inputs within an element, usually because the element
@@ -172,7 +172,6 @@ engine = {
 
         // Make sure everything is filled in
         var ok = true;
-        engine.unmarkAllAsUnanswered();
         $(inputSelector).each(function () {
             var fieldName = $(this).attr("name");
 
@@ -181,7 +180,6 @@ engine = {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
                     debug(fieldName + " not answered");
-                    engine.markAsUnanswered($(this));
                 }
             }
         });
@@ -190,7 +188,6 @@ engine = {
         $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
             if ($(this).find("input[type='checkbox']:checked").length == 0){
                 ok = false;
-                engine.markAsUnanswered($(this));
             }
         });
         
@@ -225,7 +222,7 @@ engine = {
             }
         });
         if (ineligible) {
-            engine.onFinished();
+            engine.finish();
             return;
         }
 
@@ -242,17 +239,12 @@ engine = {
         return false;
     },
     
-    onFinished: function() {
+    /** They've just hit Next in the last group */
+    finish: function() {
         engine.setProgressBarToFinished();
-        engine.displayResults();        
+        engine.onFinished();        
     },
     
-    markAsUnanswered: function(input) {
-        
-    },
-    unmarkAllAsUnanswered: function() {
-    },
-
     /**
      * Move forward or back a group. Groups whose visibility preconditions are not met are skipped.
      *
@@ -271,7 +263,7 @@ engine = {
 
             // Have we reached the end?
             if (group.length == 0) {
-                engine.onFinished();
+                engine.finish();
                 return;
             }
 

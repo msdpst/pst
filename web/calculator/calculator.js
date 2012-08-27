@@ -158,7 +158,7 @@ var calculator = {
      *
      * The engine calls this function.
      */
-    displayResults: function () {
+    onFinished: function () {
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
@@ -229,5 +229,5 @@ var calculator = {
 
 // Allow for our fixed-position header.
 engine.groupScrollYPosition = 250;
-engine.displayResults = calculator.displayResults;
+engine.onFinished = calculator.onFinished;
 engine.onControlsClearedInElement = calculator.onControlsClearedInElement;
