@@ -7,9 +7,17 @@
     <script src="../thirdparty/jquery-1.7.2.js"></script>
     <script src="../thirdparty/jquery.validate.js"></script>
     <script src="../thirdparty/jquery-ui.min.js"></script>
-    <script src="../engine/engine.js"></script>
-    <script src="rules.js" type="text/javascript"></script>
-    <script src="pst.js" type="text/javascript"></script>
+    <script src="rules.js?dummy=5"></script>
+    <script src="../engine/debug.js?dummy=5"></script>
+    <script src="../engine/engine.js?dummy=5"></script>
+    <script src="pst.js?dummy=5"></script>  
+    
+    <!--[if (gte IE 6)&(lte IE 8)]>
+    	<script src="../thirdparty/selectivizr-min.js"></script>
+    	<script src="../thirdparty/html5shiv.js"></script>
+    <![endif]-->
+
+    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Pre-Screening Tool</title>
     
@@ -18,7 +26,7 @@
     while we're waiting for JS and/or CSS to load.
     -->
     <style>
-        .group, #results {
+        .group, .results {
             display: none;
         }
     </style>
@@ -108,5 +116,6 @@
         </fieldset>
     </form>
 </div>
+<div id="bottomBuffer"></div>
 </body>
 </html>

@@ -1,3 +1,5 @@
+engine.autoNext = true;
+engine.groupScrollYPosition = 200;
 
 engine.displayResults = function() {
     $("#wrk4u").attr("checked", engine.evaluate("$wrk4uRequired"));
@@ -8,11 +10,11 @@ engine.displayResults = function() {
 
     $("input[name='exception']").attr("checked", false);
     
-    engine.revealAndScroll($("#results"));
+    engine.revealAndScroll($(".results"));
 };
 
 /** They clicked the back button in the results section */
 function onBackFromResults() {
-    $("#results").hide();
+    $(".results").hide();
     engine.changeGroup(0);
 }

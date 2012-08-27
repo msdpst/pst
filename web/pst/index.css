@@ -37,7 +37,7 @@ h1 {
     left: 50%;
     margin-left: -21em;
     width: 40em;
-    padding: 1em 1em 2000px 1em;
+    padding: 1em 1em 2em 1em;
     position: relative;
     margin-top: -5em;
     background-color: white;
@@ -55,7 +55,7 @@ form {
     margin-left: 5em;
 }
 
-.question, #results > .section {
+.question, .results > .section {
     background-color: #eeeeee;
     padding: 0.8em 1em 0.9em 1em;
     border: 1px solid #d0d0d0;
@@ -63,7 +63,7 @@ form {
     color: #888888;
 }
 
-.current .question, #results > .section  {
+.current .question, .results > .section  {
     background-color: #ffffee;
     color: #444444;
     font-weight: 500;
@@ -165,11 +165,6 @@ progress {
 progress::-moz-progress-bar {
     background: -moz-linear-gradient(to bottom, #80dd80, #80aa80, #80dd80);
     border-radius: 6px;
-}
-
-.results {
-    padding: 2em 1.5em 2em 1.5em;
-    margin: 2em 2em 0 2em;
 }
 
 .results button {
