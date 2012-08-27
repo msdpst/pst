@@ -366,6 +366,7 @@ var definitions = {
     	"   $resident && " +
     	"	$youngParent && " +
     	"	!$potentialInvalidsBenefit && " +
+    	"	(" +
     	"		(" +
     	"			$single && " +
     	"			$youthLivingCircs && " +
@@ -376,7 +377,8 @@ var definitions = {
 		"			!$single && " +
 		"			($partnerAge<18 && $partnerAge>=16) &&" +
 		"			$familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit" +
-		"		)	",
+		"		)" +
+		"	)	",
 
 
     potentialUnemploymentBenefitTraining:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +

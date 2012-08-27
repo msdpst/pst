@@ -61,4 +61,5 @@ JSEC-127: No progress indicator when selecting "Next" to move to the "What you m
 JSEC-10: Exit button not taking you to the exit page
 
 Version 01.01.07
+JSEC-136: YP and YPP displayed on "What you might get" screen for YP Married with no children
 
