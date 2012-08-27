@@ -13,7 +13,7 @@ var definitions = {
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
     youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren >= 1))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
-    workingAge: "($age >= 18 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
+    workingAge: "($age >= 18 && $age < 65 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
     ibYouth: "$age16to17",
     parent: "$dependentChildren >= 1",
     youngParent: "$age16to18 && $parent",
