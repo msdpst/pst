@@ -33,7 +33,7 @@ engine = {
     /**
      * Called when they reach the end of the questions. The client should override this!
      */
-    displayResults: {},
+    displayResults: function() {},
 
     /**
      * Called after clearing all inputs within an element, usually because the element
