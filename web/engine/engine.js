@@ -113,9 +113,9 @@ engine = {
         if ($("#progress").length)
             $("#progress").progressbar({value:5});
 
-        // Update progress and question visibility every time a question's answered
+        // Update question visibility every time a question's answered.
+        // (We used to update progress here too, but now it's just based on groups so there's no need.)
         $(".question :input").change(function () {
-            engine.updateProgressBar();
             engine.showOrHideElementsInGroup($(this).closest(".group"));
 
             // If this is the last question in the group, go to the next group automatically
@@ -207,7 +207,7 @@ engine = {
             }
         });
         if (ineligible) {
-            engine.displayResults();
+            engine.onFinished();
             return;
         }
 
@@ -222,6 +222,11 @@ engine = {
         
         engine.changeGroup(1);
         return false;
+    },
+    
+    onFinished: function() {
+        engine.setProgressBarToFinished();
+        engine.displayResults();        
     },
     
     markAsUnanswered: function(input) {
@@ -248,7 +253,7 @@ engine = {
 
             // Have we reached the end?
             if (group.length == 0) {
-                engine.displayResults();
+                engine.onFinished();
                 return;
             }
 
@@ -650,39 +655,29 @@ engine = {
     },
 
     /**
-     * Update the progress bar to reflect how far through we think they are. It's only
-     * a rough estimate, as the number of questions varies according to how they answer.
+     * Update the progress bar to reflect how far through we think they are.
      *
      * Note we assume the progress bar goes from 0 to 100.
      */
     updateProgressBar:function () {
-        if ($("#progress").length) {
-            debugConditions = false;
-            var count = 0; // number of questions we think they'll have to answer
-            var unanswered = 0; // number of these they've not answered yet
-            $(".group").each(function () {
-                if (engine.shouldShow($(this))) {
-                    $(this).find(".question").each(function () {
-                        if (engine.shouldShow($(this))) {
-                            count++;
-
-                            // Just look at the first input in each question, and ignore checkboxes.
-                            // Not entirely accurate, but that's ok.
-                            var inp = $(this).find(":input").first();
-                            if (inp.attr("name") && inp.attr("type") != "checkbox") {
-                                if (!engine.isAnswered(inp))
-                                    unanswered++;
-                            }
-                        }
-                    });
-                }
-            });
-            debugConditions = true;
-            // Work out the percentage. Never show less than 5 though - it looks nicer.
-            var result = Math.max(5, Math.round((count - unanswered) * 100 / count));
-            debug("unanswered " + unanswered + " / " + count + " = " + result);
-
-            $("#progress").progressbar("option", "value", result);
+        var progressBar = $("#progress");
+        if (progressBar.length) {
+            /*
+             The calculation is simply the current group compared to the total number of groups.
+             (We used to do something more complicated based on the number of questions we thought 
+             they had left, but progress went backwards in some circumstances.)
+             Note with this algorithm they often never reach 100%, so the call to setProgressBarToFinished()
+             is important.
+             */
+            var result = Math.max(5, Math.round((engine.currentGroupNum + 1) * 100 / $(".group").length));
+            progressBar.progressbar("option", "value", result);
+        }
+    },
+    
+    setProgressBarToFinished: function() {
+        var progressBar = $("#progress");
+        if (progressBar.length) {
+            progressBar.progressbar("option", "value", 100);
         }
     },
 
