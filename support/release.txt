@@ -49,9 +49,16 @@ JSEC-117: Do you have a partner (Q45) the text on the help link is not the same 
 JSEC-123: Sickness benfit still displayed in "Do you have a health condition or disability " section instead of Health Related Benefit
 JSEC-120: Pregnant (Q21)  the pompt for the implementation as a checkbox looks out of alignment with the other options
 
-Version 01.01.05
+Version 01.01.06
 JSEC-131: Unable to move to the "What you might get" screen
 JSEC-121:  Women Alone (Q27) prompt for first option needs confirming and the presentation of the first option prompt needs to be tidier
 JSEC-78: Partner max age = 130
 JSEC-109: Employment and income (group 8) first question does not have focus if NZS
 JSEC-110: relationship status group (4) first question does not have focus if no partner
+JSEC-131: Unable to move to the "What you might get" screen
+JSEC-130: Some rates in the spreadsheet still out of date
+JSEC-127: No progress indicator when selecting "Next" to move to the "What you might get" screen
+JSEC-10: Exit button not taking you to the exit page
+
+Version 01.01.07
+
