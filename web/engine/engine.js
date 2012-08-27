@@ -12,10 +12,13 @@ $(document).ready(function () {
 });
 
 engine = {
+    
+    // =============== E X T E R N A L   C O N F I G U R A T I O N ===========
+    
     /** 
      * When the last question in a group is answered, go to the next question automatically. 
      * Convenient, but potentially confusing for users.
-     * (Set this from the client if desired.)
+     * Set this from the client if desired.
      */
     autoNext:false,
 
@@ -25,7 +28,24 @@ engine = {
      * (like EC) it has a fixed header at the top of the window.
      */
     groupScrollYPosition: 20,
+
+
+    /**
+     * Called when they reach the end of the questions. The client should override this!
+     */
+    displayResults: {},
+
+    /**
+     * Called after clearing all inputs within an element, usually because the element
+     * (eg. a question or group) is being hidden.
+     * 
+     * The client can override if they have additional custom tasks to do.
+     */
+    onControlsClearedInElement: function(elt) {},
     
+
+    // =========== E X T E R N A L   C O N F I G U R A T I O N   E N D S ===========
+
     validator:undefined,
     currentGroupNum:0,
     SLIDE_TIME:500,
@@ -650,6 +670,9 @@ engine = {
 
         // select the first option in every select - we assume this is the "unselected" option
         elt.find("select :nth-child(1)").attr("selected", "selected");
+
+        // Custom client code
+        engine.onControlsClearedInElement(elt);
     },
 
     /**
