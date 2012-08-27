@@ -6,7 +6,7 @@ var definitions = {
     livingAlonePartnerInCare: "!$liveTogether && ($partnerLives == 'Rest home' || $partnerLives == 'Private hospital' || $partnerLives == 'Other')",
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
-    under20: "$age < 20",
+    under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
@@ -205,7 +205,7 @@ var definitions = {
     },
 
     ratesIB : {
-    	"$single && ($age==16 || $age==17)":"207.32",
+    	"$single && ($age>=16 && $age<18)":"207.32",
     	"$single && $age>=18":"256.19",
     	"$partner && $dependentChildren == 0":"213.49 each",
     	"$partner && $dependentChildren > 0":"213.49 each",
