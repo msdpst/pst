@@ -4,10 +4,8 @@
  * Checkboxes should each have their own names, even within the same group. Value
  * should always be "true", ie. they're treated as booleans.
  */
-
 var engine;
 var debugConditions = true;
-
 
 $(document).ready(function () {
     engine.onReady();
