@@ -64,4 +64,4 @@ Version 01.01.07
 JSEC-136: YP and YPP displayed on "What you might get" screen for YP Married with no children
 JSEC-126: On the What you might get screen, there is inconsistency with text next to or under headings
 JSEC-55:Under 20 Circumstances (group 15) appears when client totally blind
-
+JSEC-124: Progress bar
