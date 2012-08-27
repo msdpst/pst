@@ -8,14 +8,15 @@ var definitions = {
     relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
     under20: "$age < 20",
     age16to17: "$age >= 16 && $age < 18",
-    age16to18: "$age >= 16 && $age <= 18",
+    age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
-    youth: "$age >= 16 && ($age < 18 || ($age < 19 && $dependentChildren > 0))",
+    youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren >= 1))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
+    workingAge: "($age >= 18 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
     ibYouth: "$age16to17",
-    parent: "$dependentChildren > 0",
-    youngParent: "$age16to17 && $parent",
+    parent: "$dependentChildren >= 1",
+    youngParent: "$age16to18 && $parent",
     oscarAgedChild: "$childAged513",
     partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
 
@@ -46,10 +47,10 @@ var definitions = {
 
     resident: "$stayingInNz && $twoYears && $residencyResident",
     refugeeOtherWithPermanentResidence: "$stayingInNz && $twoYears && $residencyRefugeePermanent",
-    workingAge: "($age == 18 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
+   
     ibWorkingAge : "($age >= 18 && $age <= 64)",
     age50to64: "($age >= 50 && $age <= 64)",
-    partner16or17: "$partnerAge == 16 || $partnerAge == 17",
+    partner16or17: "$partnerAge >= 16 && $partnerAge <= 17",
     partner16to18: "$partnerAge >= 16 && $partnerAge <= 18",
     single: "!$partner", // spreadsheet also lists all values of relationshipStatusSingle; not sure why
 
@@ -373,7 +374,7 @@ var definitions = {
     	"			|| " +
 		"		(" +
 		"			!$single && " +
-		"			($partnerAge==17 || $partnerAge==16) &&" +
+		"			($partnerAge<18 && $partnerAge>=16) &&" +
 		"			$familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit" +
 		"		)	",
 

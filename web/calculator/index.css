@@ -111,17 +111,6 @@ button:active {
 
 #confirmExit{
 	display:none;
-	width:36em;
-	height:2em;
-	border: 2px solid #aaa;
-	padding: 2em 1.5em 2em 1.5em;
-    margin: 2em 2em 0 2em;
-    position: fixed;
-    top: 300px;
-    bottom:300px;
-    left: 300px;
-    z-index: 9999;
-    
 }
 
 
