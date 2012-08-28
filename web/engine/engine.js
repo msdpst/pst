@@ -446,10 +446,8 @@ engine = {
 
         engine.revealAndScroll($(engine.groupSel(newGroupNum)));
         engine.currentGroupNum = newGroupNum;
-
-        // Some css help
-        $(".lastVisibleQuestion").removeClass("lastVisibleQuestion");
-        $(engine.groupSel(newGroupNum) + " .question:visible:last").addClass("lastVisibleQuestion");
+        
+        engine.afterVisibilityChanged($(engine.groupSel(newGroupNum)));
 
         // Focus on the first field in the group
         var firstInput = $(engine.groupSel(newGroupNum) + " :input:visible:first");
@@ -524,8 +522,17 @@ engine = {
                 $(this).hide();
             }
         });
-        
+
+        engine.afterVisibilityChanged(group);
+
         return visible;
+    },
+    
+    afterVisibilityChanged: function(group) {
+        // Some css help
+        $(".lastVisibleQuestion").removeClass("lastVisibleQuestion");
+        var last = group.find(".question:visible:last");
+        last.addClass("lastVisibleQuestion");
     },
 
     /** Unhighlight the current group and disable its controls */
