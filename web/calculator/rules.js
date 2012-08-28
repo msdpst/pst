@@ -173,7 +173,7 @@ engine.definitions = {
         "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
         "$seniorsAge && $partner": 851.83 // NZS DA Married, civil union or defacto couple (with or without children)
     },
-    daGWILimit: "engine.evalMap(definitions.daGWILimits, 'daGWILimits')",
+    daGWILimit: "engine.evalMap(engine.definitions.daGWILimits, 'daGWILimits')",
     
     
     extraHelpGWILimits: {
@@ -184,7 +184,7 @@ engine.definitions = {
         "($workingAge || $youth) && !$single && $dependentChildren > 0": 1460.00, // ASUP Relationship With Children GWI Limit Area 1
         "true": -1 // disallow by default
     },
-    extraHelpGWILimit: "engine.evalMap(definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
+    extraHelpGWILimit: "engine.evalMap(engine.definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
 
 
     // -- Rates -- //
@@ -225,13 +225,10 @@ engine.definitions = {
     	
     },
 
-//    ubRate: "engine.evalMap(definitions.ratesUB).toFixed(2)",
-//    ibRate: "engine.evalMap(definitions.ratesIB).toFixed(2)",
-//    dpbRate : "engine.evalMap(definitions.ratesDPB).toFixed(2)",
     
-	  ubRate: "engine.evalMap(definitions.ratesUB)",
-	  ibRate: "engine.evalMap(definitions.ratesIB)",
-	  dpbRate : "engine.evalMap(definitions.ratesDPB)",
+	  ubRate: "engine.evalMap(engine.definitions.ratesUB)",
+	  ibRate: "engine.evalMap(engine.definitions.ratesIB)",
+	  dpbRate : "engine.evalMap(engine.definitions.ratesDPB)",
 
 
     // -------- Calculations --------
@@ -318,7 +315,9 @@ engine.definitions = {
     		,
 
     potentialHealthRelatedBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    
     		"	$healthDisabilityAffectsWork && " +
+    		"	$workingAge && " +
     		"	( " +
     		"		!$haveWorked " +
     		"			|| " +
@@ -454,7 +453,6 @@ engine.definitions = {
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
 
 
-   //potentialUndeterminedWorkingAgeFinancialAssistance:false,
    potentialUndeterminedWorkingAgeFinancialAssistance:
 	   "	!$unlawfulResident && ($workingAge || $seniorsAge ) && " +
 	   "	!$potentialBenefit && " +
@@ -462,7 +460,7 @@ engine.definitions = {
 	   "	!$potentialSuper",
 
 
-//	  potentialUndeterminedYouthPayment:true,
+
     potentialUndeterminedYouthPayment:
     		"	!$potentialInvalidsBenefit && " +
     		"	$youthResidentLessThan2YearsResidence &&" +
