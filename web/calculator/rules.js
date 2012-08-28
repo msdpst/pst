@@ -18,6 +18,7 @@ engine.definitions = {
     youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren != 0))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
    
     workingAge: "($age >= 18 && $age < 65 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
+    //workingAge:"true",
     ibYouth: "$age16to17",
     parent: "$dependentChildren >= 1",
     youngParent: "$age16to18 && $parent",
@@ -209,11 +210,12 @@ engine.definitions = {
     },
 
     ratesIB : {
+    	"$single && $dependentChildren > 0":"336.55",
     	"$single && ($age>=16 && $age<18)":"207.32",
     	"$single && $age>=18":"256.19",
     	"$partner && $dependentChildren == 0":"213.49 each",
-    	"$partner && $dependentChildren > 0":"213.49 each",
-    	"$single && $dependentChildren > 0":"336.55"
+    	"$partner && $dependentChildren > 0":"213.49 each"
+    	
     },
 
     ratesDPB : {
@@ -250,9 +252,9 @@ engine.definitions = {
     		
     		
     //TODO here		
-    potentialWidowsBenefitPBA: "!$unlawfulResident && $potentialWidowsBenefitAny && ($dependentChildren == 0 || $hasYoungest14Plus)",		
+    potentialWidowsBenefitPBA: "$potentialWidowsBenefitAny && ($dependentChildren == 0 || $hasYoungest14Plus || $hasYoungest5to13)",		
     		
-    potentialWidowsBenefitNoPBA : "!$unlawfulResident && $potentialWidowsBenefitAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
+    potentialWidowsBenefitNoPBA : "$potentialWidowsBenefitAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
 
     potentialDPBSoleParentAny: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
