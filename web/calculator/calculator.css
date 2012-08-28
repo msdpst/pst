@@ -18,6 +18,8 @@ body {
     color: #666666;
     text-shadow: 0 1px 0 #FFFFFF;
     background-color: #f0f0f0;
+    background-image: -moz-linear-gradient(90deg, #ffffff, #eeeeee);
+    background-image: -webkit-linear-gradient(90deg, #f0f0f0, #ffffff 33px);
 }
 
 #headerInner, #buffer, #outer {
@@ -96,6 +98,7 @@ button:active {
 #exitButton{
 	float:left;
 	width:50px;
+    margin-left: 0;
 }
 
 #exitButtonYes{
@@ -116,6 +119,7 @@ button:active {
 
 #nextButton{
 	width:70px;
+    margin-right: 0;
 }
 
 #finalNextButton{
@@ -221,7 +225,10 @@ header img {
     position: relative;
     left: 50%;
     background-color: white;
-    padding: 1.7em 1em 0 1em;
+    margin-top: 5px;
+    padding: 1.2em 1em 0 1em;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .noscript {
@@ -289,11 +296,13 @@ h1 {
 
 #outer {
     left: 50%;
-    padding: 220px 1em 1em 1em;
+    padding: 202px 1em 1.5em 1em;
     position: relative;
     background-color: white;
     box-shadow: 0 0 1em #d0d0d0;
     z-index: 1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #blurb {
@@ -315,6 +324,10 @@ form ul {
     border-bottom-width: 0;
     color: #888888;
 }
+#firstQuestion {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
 
 .question h3 {
     font-size: 14px;
@@ -331,8 +344,10 @@ form ul {
     border-color: #a0a0a0;
 }
 
-.current {
+.lastVisibleQuestion {
     border-bottom: 1px solid #a0a0a0;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 
 label {
@@ -497,7 +512,7 @@ li {
 #controlBox {
     display: block;
     text-align: right;
-    margin-top: 0.5em;
+    margin: 0.8em 0 0 0;
 }
 
 .results {

@@ -447,6 +447,10 @@ engine = {
         engine.revealAndScroll($(engine.groupSel(newGroupNum)));
         engine.currentGroupNum = newGroupNum;
 
+        // Some css help
+        $(".lastVisibleQuestion").removeClass("lastVisibleQuestion");
+        $(engine.groupSel(newGroupNum) + " .question:visible:last").addClass("lastVisibleQuestion");
+
         // Focus on the first field in the group
         var firstInput = $(engine.groupSel(newGroupNum) + " :input:visible:first");
         firstInput.focus();
