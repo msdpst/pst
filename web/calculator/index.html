@@ -697,9 +697,9 @@
 
         <!-- ======== Young person circumstances ========= -->
 
-        <fieldset class="group" data-visible="$under20 || ($youth && $totallyBlind==false)"> <!-- GROUP 15 -->
+        <fieldset class="group"> <!-- GROUP 15 -->
 
-            <div class="question" >
+            <div class="question" data-visible="$under20 || ($youth && !$totallyBlind)"><!-- || ($youth && $totallyBlind==false) -->
                 <fieldset>
                     <div>Are you living at your parent’s / step-parent’s / guardian’s home?</div><!-- Q28 -->
                     <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
