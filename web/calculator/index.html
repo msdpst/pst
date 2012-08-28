@@ -699,7 +699,7 @@
 
         <fieldset class="group"> <!-- GROUP 15 -->
 
-            <div class="question" data-visible="$under20 || ($youth && !$totallyBlind)"><!-- || ($youth && $totallyBlind==false) -->
+            <div class="question" data-visible="$age<20 || ($youth && !$totallyBlind)"><!-- || ($youth && $totallyBlind==false) -->
                 <fieldset>
                     <div>Are you living at your parent’s / step-parent’s / guardian’s home?</div><!-- Q28 -->
                     <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
@@ -707,7 +707,7 @@
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="$under20 && $partner==false && $livingAtHome && $dependentChildren > 0">
+	        <div class="question" data-visible="$age<20 && !$partner && $livingAtHome && $dependentChildren != 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label><!-- Q69 -->
                 $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="1" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
                 

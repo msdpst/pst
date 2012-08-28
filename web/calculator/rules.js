@@ -374,8 +374,9 @@ engine.definitions = {
     	"	(" +
     	"		(" +
     	"			$single && " +
-    	"			$youthLivingCircs && " +
-    	"			($familyTotalGrossWeeklyIncome < $yppSingleGWILimit)" +
+    	"			($youthLivingCircs || " +
+    	"				($livingAtHome && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit)" +
+    	"			)" +
     	"		) " +
     	"			|| " +
 		"		(" +

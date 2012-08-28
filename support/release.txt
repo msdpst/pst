@@ -68,3 +68,4 @@ JSEC-124: Progress bar
 JSEC-113: Other income  (Q16)  if we clear data with more than one group entered we do not go back to one blank entry group
 JSEC-139: No benefit for widow with child aged 5-13
 JSEC-138: Incorrect rate for IB Sole Parent
+JSEC-140: YPP not appearing on What you might get page when living at home
