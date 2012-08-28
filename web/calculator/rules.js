@@ -6,13 +6,17 @@ var definitions = {
     livingAlonePartnerInCare: "!$liveTogether && ($partnerLives == 'Rest home' || $partnerLives == 'Private hospital' || $partnerLives == 'Other')",
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
+   
     under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
+   
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
-    youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren >= 1))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
+    
+    youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren != 0))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
+   
     workingAge: "($age >= 18 && $age < 65 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
     ibYouth: "$age16to17",
     parent: "$dependentChildren >= 1",
