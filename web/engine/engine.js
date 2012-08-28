@@ -1,8 +1,24 @@
-/**
- * General rules to document:
- *
- * Checkboxes should each have their own names, even within the same group. Value
- * should always be "true", ie. they're treated as booleans.
+/*
+ ===================== Q U E S T I O N   E N G I N E =====================
+ 
+ Generic engine for displaying a series of questions and evaluating rules.
+ It's generic! It is used by the Eligibility Calculator (EC), but nothing
+ in the engine directory should contain any code that is specific to EC 
+ (or any other implementation).
+ 
+ How to use:
+ 
+ Use the EC code as a guideline. The general structure is:
+ 
+ - calculator/index.html: Content, marked up with certain "magic" classes
+        and cusom attributes (see below). Don't put any Javascript in here.
+ - calculator/rules.js: 
+ 
+ 
+ General rules to document:
+
+ Checkboxes should each have their own names, even within the same group. Value
+ should always be "true", ie. they're treated as booleans.
  */
 var engine;
 var debugConditions = true;
@@ -12,10 +28,13 @@ $(document).ready(function () {
 });
 
 engine = {
+    
+    // =============== E X T E R N A L   C O N F I G U R A T I O N ===========
+    
     /** 
      * When the last question in a group is answered, go to the next question automatically. 
      * Convenient, but potentially confusing for users.
-     * (Set this from the client if desired.)
+     * Set this from the client if desired.
      */
     autoNext:false,
 
@@ -25,7 +44,31 @@ engine = {
      * (like EC) it has a fixed header at the top of the window.
      */
     groupScrollYPosition: 20,
+
+
+    /**
+     * Rule definitions - a map of names to expressions.
+     * Override this in the client.
+     */
+    definitions: {},
+
+
+    /**
+     * Called when they reach the end of the questions. The client should override this!
+     */
+    onFinished: function() {},
+
+    /**
+     * Called after clearing all inputs within an element, usually because the element
+     * (eg. a question or group) is being hidden.
+     * 
+     * The client can override if they have additional custom tasks to do.
+     */
+    onControlsClearedInElement: function(elt) {},
     
+
+    // =========== E X T E R N A L   C O N F I G U R A T I O N   E N D S ===========
+
     validator:undefined,
     currentGroupNum:0,
     SLIDE_TIME:500,
@@ -152,7 +195,6 @@ engine = {
 
         // Make sure everything is filled in
         var ok = true;
-        engine.unmarkAllAsUnanswered();
         $(inputSelector).each(function () {
             var fieldName = $(this).attr("name");
 
@@ -161,7 +203,6 @@ engine = {
                 if (!engine.isAnswered($(this))) {
                     ok = false;
                     debug(fieldName + " not answered");
-                    engine.markAsUnanswered($(this));
                 }
             }
         });
@@ -170,7 +211,6 @@ engine = {
         $(engine.groupSel(engine.currentGroupNum) + " *[data-required-checkbox-group='true']:visible").each(function() {
             if ($(this).find("input[type='checkbox']:checked").length == 0){
                 ok = false;
-                engine.markAsUnanswered($(this));
             }
         });
         
@@ -205,7 +245,7 @@ engine = {
             }
         });
         if (ineligible) {
-            engine.onFinished();
+            engine.finish();
             return;
         }
 
@@ -222,17 +262,12 @@ engine = {
         return false;
     },
     
-    onFinished: function() {
+    /** They've just hit Next in the last group */
+    finish: function() {
         engine.setProgressBarToFinished();
-        engine.displayResults();        
+        engine.onFinished();        
     },
     
-    markAsUnanswered: function(input) {
-        
-    },
-    unmarkAllAsUnanswered: function() {
-    },
-
     /**
      * Move forward or back a group. Groups whose visibility preconditions are not met are skipped.
      *
@@ -251,7 +286,7 @@ engine = {
 
             // Have we reached the end?
             if (group.length == 0) {
-                engine.onFinished();
+                engine.finish();
                 return;
             }
 
@@ -505,11 +540,11 @@ engine = {
         return expression.replace(/\$(\w+)/g, function (s) {
             var result;
             var name = s.substring(1);
-            if (definitions[name] !== undefined) {
-                if (jQuery.type(definitions[name]) == "string")
-                    result = "(" + engine.processVariables(definitions[name]) + ")";
+            if (engine.definitions[name] !== undefined) {
+                if (jQuery.type(engine.definitions[name]) == "string")
+                    result = "(" + engine.processVariables(engine.definitions[name]) + ")";
                 else
-                    result = "(" + definitions[name] + ")";
+                    result = "(" + engine.definitions[name] + ")";
             }
             else {
                 result = "engine.getAnswer('" + name + "')";
@@ -650,6 +685,9 @@ engine = {
 
         // select the first option in every select - we assume this is the "unselected" option
         elt.find("select :nth-child(1)").attr("selected", "selected");
+
+        // Custom client code
+        engine.onControlsClearedInElement(elt);
     },
 
     /**

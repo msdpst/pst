@@ -1,4 +1,4 @@
-var definitions = {
+engine.definitions = {
 
     // -------- Question preconditions --------
 

@@ -1,7 +1,7 @@
 engine.autoNext = true;
 engine.groupScrollYPosition = 200;
 
-engine.displayResults = function() {
+engine.onFinished = function() {
     $("#wrk4u").attr("checked", engine.evaluate("$wrk4uRequired"));
     $("#cv").attr("checked", engine.evaluate("$cvRequired"));
     $("#jobSearchProfile").attr("checked", engine.evaluate("$jobSearchProfileRequired"));
