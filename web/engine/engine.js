@@ -244,6 +244,7 @@ engine = {
 
         // Expandable help sections
         $(".helpButton").each(function () {
+        	
             $(this).click(function () {
                 var start = $(this);
                 var elt;
@@ -253,11 +254,15 @@ engine = {
                 }
                 while (elt.length == 0);
                 //modify text depending on help text status
-                if (elt.is(':hidden')){
-                	$(this).data("help-text",$(this).html());
+                if (elt.is(':hidden')){//is currently hidden.
+                	$(this).data("helpText",$(this).html());
                 	$(this).html('Hide help text');
+                	elt.data("wasVisible","true");
+                	$(this).data("wasVisible","true");
                 }else{
-                	$(this).html($(this).data("help-text"));
+                	$(this).html($(this).data("helpText"));
+                	$(this).data("wasVisible","false");
+                	elt.data("wasVisible","false");
                 }
                 elt.slideToggle(engine.SLIDE_TIME);
                 return false;
@@ -295,6 +300,25 @@ engine = {
         engine.changeGroup(-1);
         $('#answerAllMessage').hide();
         $('#answerAllMessage').css('visibility','hidden');
+        
+        //if the section contained help areas that were previously visible, we re-activate them
+        
+        $('.lastVisibleQuestion > .help').each(function(){     	
+        	if ($(this).data("wasVisible")=="true"){
+        		$(this).show();
+        	}
+        	
+        });
+        
+        $('.lastVisibleQuestion > * > .helpButton').each(function(){     	
+        	if ($(this).data("wasVisible")=="true"){
+        		$(this).data("helpText",$(this).html());
+        		$(this).html('Hide help text');
+        	}
+        	
+        });
+        
+        
     },
 
     /** They clicked the Next button */
@@ -365,12 +389,18 @@ engine = {
         }
 
         // hide all help text, change help toggle message & Display the next group of questions
-        
-        $('.help').hide();
-        //$('.helpButton').html('More information');
-        
+        $('.help').each(function(){        	
+        	if ($(this).is(':visible')){
+        		$(this).data("wasVisible","true");
+        		$(this).hide();
+        	}        	
+        });
+       
         $('.helpButton').each(function(){   	
-        	$(this).html($(this).data("help-text"));
+        	if ($(this).html() == 'Hide help text'){
+	        	$(this).data("wasVisible","true");
+	        	$(this).html($(this).data("helpText"));
+        	}
         });
         
         engine.changeGroup(1);
