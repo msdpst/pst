@@ -251,7 +251,6 @@ engine.definitions = {
     		")",
     		
     		
-    //TODO here		
     potentialWidowsBenefitPBA: "$potentialWidowsBenefitAny && ($dependentChildren == 0 || $hasYoungest14Plus || $hasYoungest5to13)",		
     		
     potentialWidowsBenefitNoPBA : "$potentialWidowsBenefitAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
@@ -498,7 +497,7 @@ engine.definitions = {
     // Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
     potentialAccommodationSupplement:
         "   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
-        "   && " +
+        "   && ($accommodationCosts) && " +
         "	!($accommodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
     ,
 
@@ -520,7 +519,6 @@ engine.definitions = {
     	"		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimit) " +
     	"		)" ,
 
-    	//the rules for this dion't match the description - we don't refer to education or training in the rules..?
     potentialGuaranteedChildcareAssistancePayment:
     	"	   ($partner16to18 || $age16to18) " +
     	"	&& ($childAged04 || $childAged5NotAtSchool) " +

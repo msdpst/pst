@@ -31,18 +31,34 @@ var calculator = {
     
     applyNow:function(){
     	
+    	
+    	
+    	/*
+    	 *  Aged Under 19 with 1 or more dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html			
+			Aged 16 -17 with no dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html			
+			Aged 18 - 64.75: (18 year old with no dependent children): http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html			
+			Aged between 64.75 and 65: http://www.workandincome.govt.nz/online-services/ (since we can't easily tell if they want to apply for a benefit or NZS)
+			Aged 65 or more: http://www.workandincome.govt.nz/online-services/superannuation/index.html
+    	 * 
+    	 */
+    	
     	//we can decide where to send them for their on-line application.
     	if (		
     			engine.evaluate("$potentialNewZealandSuperannuationSingle")
     			||  engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
     			||  engine.evaluate("$potentialNewZealandSupperannuationPartnerNotIncluded")){
-    		window.location="http://www.workandincome.govt.nz/online-services/superannuation/"; 	
+    		
+    		if (engine.evaluate("$age<65")){
+    			window.location="http://www.workandincome.govt.nz/online-services/";
+    		}else{
+    			window.location="http://www.workandincome.govt.nz/online-services/superannuation/"; 	
+    		}
     		return;
-    	}else if (engine.evaluate("$age16to17 && $single" )){
+    	}else if (engine.evaluate("$age16to17 && $single && $dependantChildren==0" )){
     		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
     	}else if (engine.evaluate("$youngParent" )){	
     		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
-    	}else if (engine.evaluate("$workingAge" )){	
+    	}else if (engine.evaluate("$workingAge && && $dependantChildren==0" )){	
     		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
     	}else{
     		//fall back
