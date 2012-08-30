@@ -501,10 +501,10 @@ engine.definitions = {
         "	!($accommodationType == 'Rent' && $housingNz)" // a simpler equivalent of the spreadsheet condition
     ,
 
+
     potentialDisabilityAllowance:
     	"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     	"	&& $disabilityCosts " +
-    	"	&& $workingAge " +
     	"	&& $familyTotalGrossWeeklyIncome < $daGWILimit" ,
 
 

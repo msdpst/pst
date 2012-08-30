@@ -81,5 +81,6 @@ JSEC-129: NZS candidates should be asked income (and other) questions
 JSEC-134: Incorrect wording for Health Related benefit
 JSEC-142: DPB-SP    What you might get text missing the $ on the rate
 JSEC-144:What you might get contains Accommodation Suppliment when thre are no accommodation costs
+JSEC-155:YP  not getting Disability Allowance when eligible (medium)
 
 
