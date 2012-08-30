@@ -388,7 +388,7 @@ engine.definitions = {
 
     potentialUnemploymentBenefitTraining:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
-    		"	$topCourse && " +
+    		"	$foundationCourse && " +
     		" ( " +
     		"		!$haveWorked " +
     		"			|| " +

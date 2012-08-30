@@ -582,14 +582,16 @@
 
             <div class="question" data-visible="$trainingCourse">
                 <fieldset>
-                    <div>Is the training a Training Opportunities (TOP) course?</div>
-                    <input type="radio" name="topCourse" id="topCourseYes" value="true"> <label for="topCourseYes">Yes</label>
-                    <input type="radio" name="topCourse" id="topCourseNo" value="false"> <label for="topCourseNo">No</label>
-                </fieldset>
-				<p class="info">
-                    Training Opportunities Programmes (TOP) are funded by the Tertiary Education Commission. 
-                    If you're not sure if your course is a TOP course, talk to your Training Provider.
-				</p>
+                    <div>Is the training:<br>
+                    	<ul>
+                    		<li>a Foundation Focused Training Opportunity, or</li>
+                    		<li>a Training for Work course, or </li>
+                    		<li>full-time training (at least 20 hours per week) and less than 12 weeks</li>
+                    	</ul> 
+                    </div>
+                    <input type="radio" name="foundationCourse" id="foundationCourseYes" value="true"> <label for="foundationCourseYes">Yes</label>
+                    <input type="radio" name="foundationCourse" id="foundationCourseNo" value="false"> <label for="foundationCourseNo">No</label>
+                </fieldset>  
             </div>
         </fieldset>
 
@@ -639,7 +641,7 @@
         <fieldset class="group" data-visible="$workingAge">
             <div class="question">
                 <fieldset>
-                    <div>Are you caring full time for someone at home?</div>
+                    <div>Are you caring for a sick or disabled person at home (other than your partner or spouse) on a full-time basis?</div>
                     <input type="radio" name="caringFullTime" id="caringFullTimeYes" value="true"> <label for="caringFullTimeYes">Yes</label>
                     <input type="radio" name="caringFullTime" id="caringFullTimeNo" value="false"> <label for="caringFullTimeNo">No</label>
                 </fieldset>

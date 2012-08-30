@@ -70,3 +70,16 @@ JSEC-137: UB and NZS displayed for 67 year old client
 JSEC-138: Incorrect rate for IB Sole Parent
 JSEC-139: No benefit for widow with child aged 5-13
 JSEC-140: YPP not appearing on What you might get page when living at home
+
+
+Version 01.01.08
+JSEC-149: Update the wording for Question 24 (Caring for the Sick and Infirm)
+JSEC-148: Update the wording of Question 19 (Unemployment Benefit Training)
+JSEC-150: Hint/help text should be hidden when a new group of questions is displayed
+JSEC-75: Query:the "Apply for financial assistance " button, now directs to different sections in the Online services application
+JSEC-129: NZS candidates should be asked income (and other) questions
+JSEC-134: Incorrect wording for Health Related benefit
+JSEC-142: DPB-SP    What you might get text missing the $ on the rate
+JSEC-144:What you might get contains Accommodation Suppliment when thre are no accommodation costs
+
+
