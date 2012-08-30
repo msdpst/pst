@@ -449,7 +449,7 @@ engine.definitions = {
     		"			$partnerAge >= 16 && $partnerResident",
 
 
-    potentialNewZealandSupperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
+    potentialNewZealandSuperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
@@ -490,7 +490,7 @@ engine.definitions = {
 
     potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefitAny || $potentialDPBSoleParentAny ||$potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
     potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $potentialUndeterminedYouthPayment || $potentialUndeterminedYoungParentPayment",
-    potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSupperannuationPartnerNotIncluded",
+    potentialSuper: "$potentialNewZealandSuperannuationSingle || $potentialNewZealandSuperannuationNonQualifiedSpouse || $potentialNewZealandSuperannuationPartnerNotIncluded",
 
     // -------- Supplements (e.g., not main benefits) ------- //
 
@@ -590,7 +590,7 @@ engine.definitions = {
 var allBenefits = [ /* This is all the variables that we want to be checked as potential benefits */
                     	"potentialNewZealandSuperannuationSingle",
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
-                    	"potentialNewZealandSupperannuationPartnerNotIncluded",
+                    	"potentialNewZealandSuperannuationPartnerNotIncluded",
                     	"potentialUndeterminedWorkingAgeFinancialAssistance",
                     	"potentialDPBSoleParentNoPBA",
                     	"potentialDPBSoleParentPBAWithTeen",
