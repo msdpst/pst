@@ -83,4 +83,6 @@ JSEC-142: DPB-SP    What you might get text missing the $ on the rate
 JSEC-144:What you might get contains Accommodation Suppliment when thre are no accommodation costs
 JSEC-155:YP  not getting Disability Allowance when eligible (medium)
 
+Version 01.01.09
+JSEC-143: ) IE text size change does not work
 
