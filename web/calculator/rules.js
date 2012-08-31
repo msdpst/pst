@@ -15,6 +15,7 @@ engine.definitions = {
     age20to24: "$age >= 20 && $age < 25",
     age25Plus:"$age >= 25",
     
+    
     youth: "$age >= 16 && $age < 19 && ($age < 18 || ($age >= 18 && $dependentChildren != 0))", // $age >= 16 && $age < 19 && ($age <= 17 || ($age >= 18 && $dependentChildren != 0))
    
     workingAge: "($age >= 18 && $age < 65 && $dependentChildren == 0) || ($age >= 19 && $age < 65)",
@@ -23,7 +24,7 @@ engine.definitions = {
     parent: "$dependentChildren >= 1",
     youngParent: "$age16to18 && $parent",
     oscarAgedChild: "$childAged513",
-    partnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
+    seniorPartnerResident:"$partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian')",
 
     hasYoungest14Plus:"!$childAged04 && !$childAged5NotAtSchool && !$childAged513 && $childAged1418",
     hasYoungest5to13:"!$childAged04 && !$childAged5NotAtSchool && $childAged513",
@@ -32,7 +33,13 @@ engine.definitions = {
     // -------- Shortcuts for questions --------
 
     seniorOk: "$seniorsAge && $tenYears && $fiveYears",
-    residencyResident: "$residency == 'NZ Citizen (by birth)' || $residency == 'NZ Citizen (Other)' || $residency == 'Permanent Resident' || $residency == 'Refugee - Quota' || $residency == 'Australian' || $residencyRefugeePermanent",
+    residencyResident: "$residency == 'NZ Citizen (by birth)' || " +
+    		"$residency == 'NZ Citizen (Other)' || " +
+    		"$residency == 'Permanent Resident' || " +
+    		"$residency == 'Refugee - Quota' || " +
+    		"$residency == 'Australian' || " +
+    		"$residencyRefugeePermanent",
+    		
     residencyRefugeePermanent: "$residency == 'Refugee - Other with Permanent Residence'",
 
     
@@ -52,6 +59,8 @@ engine.definitions = {
 
     resident: "$stayingInNz && $twoYears && $residencyResident",
     refugeeOtherWithPermanentResidence: "$stayingInNz && $twoYears && $residencyRefugeePermanent",
+    
+    seniorResident:"$residencyResident && $tenYears && $fiveYears",
    
     ibWorkingAge : "($age >= 18 && $age <= 64)",
     age50to64: "($age >= 50 && $age <= 64)",
@@ -131,7 +140,7 @@ engine.definitions = {
     // TODO According to the spreadsheet these are mock rates!
     yppSingleGWILimit : 257,//YPP single GWI Limit
     yppRelationshipGWILimit:307,//YPP Relationship GWI Limit
-    yppParentalIncomeGWILimit:534,//YPP Parental Income GWI Limit
+    yppParentalIncomeGWILimit:2652,//YPP Parental Income GWI Limit
 
     ubSingle1819AtHomeGWILimit:276, //UB Single 18-19 at home GWI Limit
     ubSingle1819AwayGWILimit:324, //UB Single 18-19 away from home GWI Limit
@@ -203,8 +212,8 @@ engine.definitions = {
     	"$single && $age<20 && $age>=18 && !$livingAtHome": "170.80",
     	"$single && $age<25 && $age>19": "170.80",
     	"$single && $age>=25": "204.96",
-    	"$partner && $dependentChildren == 0 && (!$partnerWorked || !$partnerStillWorking)": "170.80 each",
-    	"$partner && $dependentChildren > 0": "170.80 each",
+    	"$partner && $dependentChildren == 0 && (!$partnerWorked || !$partnerStillWorking)": "170.80 (each - you and your partner)",
+    	"$partner && $dependentChildren > 0": "170.80 (each - you and your partner)",
     	"$single && $dependentChildren > 0": "293.58"
     	
     },
@@ -213,18 +222,17 @@ engine.definitions = {
     	"$single && $dependentChildren > 0":"336.55",
     	"$single && ($age>=16 && $age<18)":"207.32",
     	"$single && $age>=18":"256.19",
-    	"$partner && $dependentChildren == 0":"213.49 each",
-    	"$partner && $dependentChildren > 0":"213.49 each"
+    	"$partner && $dependentChildren == 0":"213.49 (each - you and your partner)",
+    	"$partner && $dependentChildren > 0":"213.49 (each - you and your partner)"
     	
     },
 
     ratesDPB : {
-    	"($potentialWidowsBenefitAny || $potentialDPBWomanAlone) && $single && $dependentChildren == 0":"213.49",
-    	"$potentialWidowsBenefitAny || $potentialDPBSoleParentAny":"293.58",
+    	"($potentialWidowsBenefitAny || $potentialDPBWomanAlone) && $dependentChildren == 0":"213.49",
+    	"($potentialWidowsBenefitAny || $potentialDPBSoleParentAny) && $dependentChildren >= 1":"293.58",
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 ":"256.19",
     	"$potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren >= 1 ":"336.55",
-    	"$potentialDPBCareOrSickOrInfirm && !$single && $age>=18 && $dependentChildren >= 1 ":"213.49 each"
-    	
+    	"$potentialDPBCareOrSickOrInfirm && !$single && $age>=18 && $dependentChildren >= 1 ":"213.49"
     },
 
     
@@ -371,16 +379,15 @@ engine.definitions = {
     	"	$youngParent && " +
     	"	!$potentialInvalidsBenefit && " +
     	"	(" +
-    	"		(" +
+    	"		(	" +
     	"			$single && " +
-    	"			($youthLivingCircs || " +
-    	"				($livingAtHome && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit)" +
-    	"			)" +
+    	"			$familyTotalGrossWeeklyIncome < $yppSingleGWILimit && " +
+    	"			($youthLivingCircs || ($livingAtHome && $parentsIncome <  $yppParentalIncomeGWILimit))" +
     	"		) " +
     	"			|| " +
 		"		(" +
 		"			!$single && " +
-		"			($partnerAge<18 && $partnerAge>=16) &&" +
+		"			($partnerAge<=18 && $partnerAge>=16) &&" +
 		"			$familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit" +
 		"		)" +
 		"	)	",
@@ -440,16 +447,16 @@ engine.definitions = {
 	
 			
 
-    potentialNewZealandSuperannuationSingle:"!$unlawfulResident && $seniorsAge && $resident && $single ", //ACC stuff not required
+    potentialNewZealandSuperannuationSingle:"!$unlawfulResident && $seniorsAge && $seniorResident && $single ", //ACC stuff not required
 
 
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"!$unlawfulResident && $seniorsAge && $seniorResident && !$single && " +
     		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
     		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
-    		"			$partnerAge >= 16 && $partnerResident",
+    		"			$partnerAge >= 16 && $seniorPartnerResident",
 
 
-    potentialNewZealandSuperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $resident && !$single && " +
+    potentialNewZealandSuperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $seniorResident && !$single && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,

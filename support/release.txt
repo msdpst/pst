@@ -85,4 +85,11 @@ JSEC-155:YP  not getting Disability Allowance when eligible (medium)
 
 Version 01.01.09
 JSEC-143: ) IE text size change does not work
-
+JSEC-59 : Half married rate for DPB CSI not displaying
+JSEC-129: NZS candidates should be asked income (and other) questions
+JSEC-159:Questions 39 and 40 have had their conditionality changed by unconditionally asking Child age rangs when there are children. (high)
+JSEC-154: Benefit eligiblity rules are wrong for all NZS - app reflects spreadheet but the spreadsheet is wrong (very high)
+JSEC-162:  YPP parental income limit not being enforced (high)
+JSEC-161: YPP (single) income limit not being enforced (high)
+JSEC-160:  YPP partner age criteria is being enforced incorrectly (high)
+JSEC-153: ACC question (Q51)  is no longer being asked (high)
