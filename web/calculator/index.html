@@ -394,7 +394,8 @@
 
         <!-- ======== Your Income ========= -->
 
-        <fieldset class="group" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))"><!-- GROUP 8    || $workingAge  || ($seniorsAge && (!$tenYears || !$fiveYears))-->
+        <fieldset class="group" data-visible="$workingAge || $youth || $seniorsAge">
+        <!-- GROUP 8 -->
 	        <div class="question" >
                 <fieldset>
                     <div>Have you worked in the last 52 weeks?</div><!-- Q8 -->
@@ -431,7 +432,7 @@
 
             <!-- ACC Details (Seniors only) -->
 
-	        <div class="question" data-visible="$seniorOk">
+	        <div class="question" data-visible="$seniorOk && $residencyResident && $stayingInNz">
                 <fieldset><!-- Q51 -->
                     <div>Are you currently receiving weekly compensation payments from the Accident Compensation Corporation (ACC)?</div>
                     <input type="radio" name="acc" id="accYes" value="true"> <label for="accYes">Yes</label>
@@ -483,7 +484,7 @@
 
 
         <fieldset class="group"><!-- GROUP 10 -->
-            <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
+            <div class="question" data-visible="$workingAge || $youth || $seniorsAge">
                 <fieldset>
                     <div>Do you or your partner expect to get other income in the next 52 weeks?</div><!-- Q15 -->
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
@@ -582,14 +583,16 @@
 
             <div class="question" data-visible="$trainingCourse">
                 <fieldset>
-                    <div>Is the training a Training Opportunities (TOP) course?</div>
-                    <input type="radio" name="topCourse" id="topCourseYes" value="true"> <label for="topCourseYes">Yes</label>
-                    <input type="radio" name="topCourse" id="topCourseNo" value="false"> <label for="topCourseNo">No</label>
-                </fieldset>
-				<p class="info">
-                    Training Opportunities Programmes (TOP) are funded by the Tertiary Education Commission. 
-                    If you're not sure if your course is a TOP course, talk to your Training Provider.
-				</p>
+                    <div>Is the training:<br>
+                    	<ul>
+                    		<li>a Foundation Focused Training Opportunity, or</li>
+                    		<li>a Training for Work course, or </li>
+                    		<li>full-time training (at least 20 hours per week) and less than 12 weeks</li>
+                    	</ul> 
+                    </div>
+                    <input type="radio" name="foundationCourse" id="foundationCourseYes" value="true"> <label for="foundationCourseYes">Yes</label>
+                    <input type="radio" name="foundationCourse" id="foundationCourseNo" value="false"> <label for="foundationCourseNo">No</label>
+                </fieldset>  
             </div>
         </fieldset>
 
@@ -639,7 +642,7 @@
         <fieldset class="group" data-visible="$workingAge">
             <div class="question">
                 <fieldset>
-                    <div>Are you caring full time for someone at home?</div>
+                    <div>Are you caring for a sick or disabled person at home (other than your partner or spouse) on a full-time basis?</div>
                     <input type="radio" name="caringFullTime" id="caringFullTimeYes" value="true"> <label for="caringFullTimeYes">Yes</label>
                     <input type="radio" name="caringFullTime" id="caringFullTimeNo" value="false"> <label for="caringFullTimeNo">No</label>
                 </fieldset>
@@ -917,7 +920,7 @@
                 </div>
             </div>
 
-            <div class="question" data-visible="$childAged1418">
+            <div class="question" data-visible="$childAged1418 && $caringForChild">
                 <fieldset><!-- Q39 -->
                     <div>Is the child or young person who is Aged 14 to 18 getting a Child Disability Allowance?</div>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceYes" value="true"> <label for="childDisabilityAllowanceYes">Yes</label>
@@ -925,7 +928,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-visible="$relationshipSituationPartner && ($oscarAgedChild || $childDisabilityAllowance)">
+            <div class="question" data-visible="$relationshipSituationPartner && (($oscarAgedChild && $oscar) || ( $childAged1418  && $childDisabilityAllowance ))">
                 <fieldset><!-- Q40 -->
                     <div>Can your partner provide childcare?</div>
                     <input type="radio" name="partnerProvideChildcare" id="partnerProvideChildcareYes" value="true"> <label for="partnerProvideChildcareYes">Yes</label>

@@ -3,3 +3,10 @@
     /* Allow for IE not doign box-shadow below the progress bar */
     padding-bottom: 0.7em;
 }
+
+
+.helpButton{
+	/*IE doesn't inherit this colour properly*/
+	color: #444444;
+    font-weight: 500;
+}
