@@ -7,8 +7,10 @@ engine.definitions = {
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
    
-    under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
+    //under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
    
+    under20:"$age < 20",
+    
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
@@ -251,6 +253,7 @@ engine.definitions = {
 
     potentialWidowsBenefitAny: "!$unlawfulResident && (($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
     		"	($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
@@ -270,6 +273,7 @@ engine.definitions = {
     		"	$familyTotalGrossWeeklyIncome < $dpbSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"	!$potentialWidowsBenefitAny",
     		
     		
@@ -310,9 +314,10 @@ engine.definitions = {
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialWidowsBenefitAny && " +
+    		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
     		"	!$potentialInvalidsBenefit && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"	(" +
     		"		$noSpouseSupport " +
     		"	|| " +
@@ -349,10 +354,10 @@ engine.definitions = {
 	    	"		!$single && $familyTotalGrossWeeklyIncome < $ibRelationshipGWILimit" +
 	    	"	) &&" +
 	    	"	!$potentialInvalidsBenefit && " +
-    		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialWidowsBenefitAny && " +
-    		"	!$potentialDPBSoleParentAny && " +
-    		"	!$potentialDPBWomanAlone" ,
+    		"	!$potentialDPBCareOrSickOrInfirm" ,
+    		//"	!$potentialWidowsBenefitAny && " +
+    		//"	!$potentialDPBSoleParentAny && " +
+    		//"	!$potentialDPBWomanAlone" ,
 
 
     potentialYouthPayment:

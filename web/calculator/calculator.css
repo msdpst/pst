@@ -414,7 +414,13 @@ input[type='checkbox'] {
 .info {
     padding: 1em 0 0 5em;
     font-size: 0.8em;
+    display:none;
 }
+
+.current > * > .info{
+	display:block;
+}
+
 .help {
     padding: 0.5em 0 0 5em;
     font-size: 0.8em;
