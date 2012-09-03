@@ -79,7 +79,7 @@
                 <p class="info">Use the format 4/9/1989 or 4 Sep 1989</p>
             </div>
 
-            <div class="question" data-ineligible="$residencyResident==false && $residencyRefugeePermanent==false">
+            <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
                 <label for="residency">What is your residency status?</label>
                 <select name="residency" id="residency">
                     <option value="">Please select</option>
@@ -111,7 +111,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-ineligible="$stayingInNz==false">
+            <div class="question" data-ineligible="!$stayingInNz">
                 <fieldset>
                     <div>Do you usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="stayingInNz" id="stayingInNzYes" value="true"> <label for="stayingInNzYes">Yes</label>
@@ -214,7 +214,7 @@
 
 			<div class="question" data-visible="$partner">
                 <label for="partnerAge">How old is your partner?</label>
-                <input type="text" name="partnerAge" id="partnerAge" class="digits" min="16" max="130" data-error="Please enter a whole number between 16 and 130">
+                <input type="text" name="partnerAge" id="partnerAge" class="digits" max="130" data-error="Please enter a whole number less than 131">
             </div>
 
             <div class="question" data-visible="$partner">
@@ -230,7 +230,7 @@
                 </select>
             </div>
 
-            <div class="question" data-visible="$partner==false">
+            <div class="question" data-visible="$single">
                 <label for="relationshipStatusSingle">What best describes your relationship status?</label>
                 <select name="relationshipStatusSingle" id="relationshipStatusSingle" class="required">
                     <option value="">Please select</option>
@@ -702,7 +702,7 @@
 
         <fieldset class="group"> <!-- GROUP 15 -->
 
-            <div class="question" data-visible="$age<20 || ($youth && !$totallyBlind)"><!-- || ($youth && $totallyBlind==false) -->
+            <div class="question" data-visible="($youth && !$totallyBlind) || ($age>=19 && $age<20) || ($age<19 && $age>=18 && $dependentChildren==0)">
                 <fieldset>
                     <div>Are you living at your parent’s / step-parent’s / guardian’s home?</div><!-- Q28 -->
                     <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
@@ -710,7 +710,7 @@
                 </fieldset>
             </div>
 
-	        <div class="question" data-visible="$age<20 && !$partner && $livingAtHome && $dependentChildren != 0">
+	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren != 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label><!-- Q69 -->
                 $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="1" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
                 
@@ -736,7 +736,7 @@
 
             <div class="question" data-visible="$youth && $livingAtHome==false && $parentSupport==false">
                 <fieldset>
-                    <div>Please select the reason why you are not living with them:</div>
+                    <div>Please select the reason why you are not living with them:</div><!-- Q30 -->
                     <input type="radio" name="reasonNotLivingAtHome" id="relationshipBreakdown" value="relationshipBreakdown"> <label for="relationshipBreakdown">Relationship breakdown with parents</label><br>
                     <input type="radio" name="reasonNotLivingAtHome" id="absent" value="absent"> <label for="absent">Parents are absent</label><br>
                     <input type="radio" name="reasonNotLivingAtHome" id="noLongerCyf" value="noLongerCyf"> <label for="noLongerCyf">No longer in Child, Youth and Family care</label><br>  
@@ -920,8 +920,8 @@
                 </div>
             </div>
 
-            <div class="question" data-visible="$childAged1418 && $caringForChild">
-                <fieldset><!-- Q39 -->
+            <div class="question" data-visible="$childAged1418 && ($oscar || $caringForChild)">
+                <fieldset><!-- Q39   youngPersonY AND (ccsOscarY OR childHasSeriousDisabilityY) -->
                     <div>Is the child or young person who is Aged 14 to 18 getting a Child Disability Allowance?</div>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceYes" value="true"> <label for="childDisabilityAllowanceYes">Yes</label>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceNo" value="false"> <label for="childDisabilityAllowanceNo">No</label>
@@ -1008,6 +1008,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 <div id="bottomBuffer"></div>

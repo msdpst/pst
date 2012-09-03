@@ -7,8 +7,10 @@ engine.definitions = {
     relationshipSituation: "$relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison'",
     relationshipSituationPartner: "$relationshipStatusPartner == 'Living Defacto' || $relationshipStatusPartner == 'Civil Union' || $relationshipStatusPartner == 'Married'",
    
-    under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
+    //under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
    
+    under20:"$age < 20",
+    
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
@@ -187,11 +189,29 @@ engine.definitions = {
     
     
     extraHelpGWILimits: {
-        "($workingAge || $youth) && $single && $dependentChildren == 0": 948.00, // ASUP Single Working Age GWI Limit Area 1
-        "($workingAge || $youth) && $single && $dependentChildren == 1": 1133.00, // ASUP Sole Parent 1 Child GWI Limit Area 1
-        "($workingAge || $youth) && $single && $dependentChildren > 1": 1393.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
-        "($workingAge || $youth) && !$single && $dependentChildren == 0": 1200.00, // ASUP Relationship Without Children GWI Limit Area 1
-        "($workingAge || $youth) && !$single && $dependentChildren > 0": 1460.00, // ASUP Relationship With Children GWI Limit Area 1
+        "$area==1 && ($workingAge || $youth) && $single && $dependentChildren == 0": 953.00, // ASUP Single Working Age GWI Limit Area 1
+        "$area==1 && ($workingAge || $youth) && $single && $dependentChildren == 1": 1140.00, // ASUP Sole Parent 1 Child GWI Limit Area 1
+        "$area==1 && ($workingAge || $youth) && $single && $dependentChildren > 1": 1400.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
+        "$area==1 && ($workingAge || $youth) && !$single && $dependentChildren == 0": 1208.00, // ASUP Relationship Without Children GWI Limit Area 1
+        "$area==1 && ($workingAge || $youth) && !$single && $dependentChildren > 0": 1468.00, // ASUP Relationship With Children GWI Limit Area 1
+        
+        "$area==2 && ($workingAge || $youth) && $single && $dependentChildren == 0": 773.00, // ASUP Single Working Age GWI Limit Area 2
+        "$area==2 && ($workingAge || $youth) && $single && $dependentChildren == 1": 1000.00, // ASUP Sole Parent 1 Child GWI Limit Area 2
+        "$area==2 && ($workingAge || $youth) && $single && $dependentChildren > 1": 1160.00, // ASUP Sole Parent 2 Child GWI Limit Area 2
+        "$area==2 && ($workingAge || $youth) && !$single && $dependentChildren == 0": 1068.00, // ASUP Relationship Without Children GWI Limit Area 2
+        "$area==2 && ($workingAge || $youth) && !$single && $dependentChildren > 0": 1228.00, // ASUP Relationship With Children GWI Limit Area 2
+        
+        "$area==3 && ($workingAge || $youth) && $single && $dependentChildren == 0": 633.00, // ASUP Single Working Age GWI Limit Area 3
+        "$area==3 && ($workingAge || $youth) && $single && $dependentChildren == 1": 800.00, // ASUP Sole Parent 1 Child GWI Limit Area 3
+        "$area==3 && ($workingAge || $youth) && $single && $dependentChildren > 1": 980.00, // ASUP Sole Parent 2 Child GWI Limit Area 3
+        "$area==3 && ($workingAge || $youth) && !$single && $dependentChildren == 0": 868.00, // ASUP Relationship Without Children GWI Limit Area 3
+        "$area==3 && ($workingAge || $youth) && !$single && $dependentChildren > 0": 1048.00, // ASUP Relationship With Children GWI Limit Area 3
+        
+        "$area==4 && ($workingAge || $youth) && $single && $dependentChildren == 0": 553.00, // ASUP Single Working Age GWI Limit Area 4
+        "$area==4 && ($workingAge || $youth) && $single && $dependentChildren == 1": 720.00, // ASUP Sole Parent 1 Child GWI Limit Area 4
+        "$area==4 && ($workingAge || $youth) && $single && $dependentChildren > 1": 800.00, // ASUP Sole Parent 2 Child GWI Limit Area 4
+        "$area==4 && ($workingAge || $youth) && !$single && $dependentChildren == 0": 778.00, // ASUP Relationship Without Children GWI Limit Area 4
+        "$area==4 && ($workingAge || $youth) && !$single && $dependentChildren > 0": 868.00, // ASUP Relationship With Children GWI Limit Area 4
         "true": -1 // disallow by default
     },
     extraHelpGWILimit: "engine.evalMap(engine.definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
@@ -251,6 +271,7 @@ engine.definitions = {
 
     potentialWidowsBenefitAny: "!$unlawfulResident && (($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
     		"	($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
@@ -270,6 +291,7 @@ engine.definitions = {
     		"	$familyTotalGrossWeeklyIncome < $dpbSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"	!$potentialWidowsBenefitAny",
     		
     		
@@ -310,9 +332,10 @@ engine.definitions = {
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialWidowsBenefitAny && " +
+    		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
     		"	!$potentialInvalidsBenefit && " +
+    		"	!$potentialHealthRelatedBenefit && " +
     		"	(" +
     		"		$noSpouseSupport " +
     		"	|| " +
@@ -349,10 +372,10 @@ engine.definitions = {
 	    	"		!$single && $familyTotalGrossWeeklyIncome < $ibRelationshipGWILimit" +
 	    	"	) &&" +
 	    	"	!$potentialInvalidsBenefit && " +
-    		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialWidowsBenefitAny && " +
-    		"	!$potentialDPBSoleParentAny && " +
-    		"	!$potentialDPBWomanAlone" ,
+    		"	!$potentialDPBCareOrSickOrInfirm" ,
+    		//"	!$potentialWidowsBenefitAny && " +
+    		//"	!$potentialDPBSoleParentAny && " +
+    		//"	!$potentialDPBWomanAlone" ,
 
 
     potentialYouthPayment:
@@ -370,7 +393,8 @@ engine.definitions = {
     		"			($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
     		"		)	" +
     		"	) && " +
-    		"	$dependentChildren == 0 && !$potentialInvalidsBenefit ",
+    		"	$dependentChildren == 0 && " +
+    		"	!$potentialInvalidsBenefit ",
 
 
     potentialYoungParentPayment:
@@ -472,7 +496,7 @@ engine.definitions = {
 
     potentialUndeterminedYouthPayment:
     		"	!$potentialInvalidsBenefit && " +
-    		"	$youthResidentLessThan2YearsResidence &&" +
+    		"	$youthResidentLessThan2YearsResidence && " +
     		"	$dependentChildren == 0 && " +
     		"	(" +
     		"			($single && $youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit)) " +
@@ -571,13 +595,22 @@ engine.definitions = {
 
 
     potentialExtraHelp:
-            "$stayingInNz && !$unlawfulResident && $residencyResident && " +
-            "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
-            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefitAny && " +
-            "!$potentialDPBSoleParentAny && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
-            "!$potentialYouthPayment && !$potentialYoungParentPayment && !$potentialUndeterminedYouthPayment && " +
-            "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
-    ,
+            "$stayingInNz && " +
+            "!$unlawfulResident && " +
+            "$residencyResident && " +
+            "!$potentialInvalidsBenefit && " +
+            "!$potentialDPBCareOrSickOrInfirm && " +
+            "!$potentialWidowsBenefitAny && " +
+            "!$potentialDPBSoleParentAny && " +
+            "!$potentialDPBWomanAlone && " +
+            "!$potentialHealthRelatedBenefit && " +
+            "!$potentialYouthPayment && " +
+            "!$potentialYoungParentPayment && " +
+            "!$potentialUndeterminedYouthPayment && " +
+            "!$potentialUndeterminedYoungParentPayment && " +
+            "!$potentialUnemploymentBenefitTraining && " +
+            "!$potentialUnemploymentBenefit && "+
+            "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit" ,
 
     hasObligations: 
         "$potentialWidowsBenefitPBA || " +
@@ -613,6 +646,7 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
                         "potentialUndeterminedYouthPayment",
+                        "potentialUndeterminedYoungParentPayment",
                         "potentialExtraHelp"
 ];
 var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
