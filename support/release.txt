@@ -93,3 +93,14 @@ JSEC-162:  YPP parental income limit not being enforced (high)
 JSEC-161: YPP (single) income limit not being enforced (high)
 JSEC-160:  YPP partner age criteria is being enforced incorrectly (high)
 JSEC-153: ACC question (Q51)  is no longer being asked (high)
+
+Version 01.01.10
+JSEC-165:Undetermined YPP not appearing on last page for any of the valid conditions for it to appear (high)
+JSEC-55: Under 20 Circumstances (group 15) appears when client totally blind
+JSEC-141:If I am too sick to work and I have a 14+ child I get DPB-SP with obligations
+JSEC-150:Hint/help text should be hidden when a new group of questions is displayed
+JSEC-156: partner age validation may be incorrect (medium)
+JSEC-163:Success text for Undetermined YP unexpected heading (and YPP) (high)
+JSEC-159:Questions 39 and 40 have had their conditionality changed by unconditionally asking Child age rangs when there are children. (high)
+
+
