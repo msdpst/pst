@@ -416,8 +416,8 @@
 
 	        <div class="question" data-visible="$stillWorking">
                 <label for="applicantGrossWeeklyWage">What is your total weekly wage before tax (gross weekly wage)?</label><br><!-- Q10 -->
-                $ <input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="currency" min="0" max="20000" 
-                			data-error="Please enter a valid amount between $0 and $20,000">
+                $ <input type="text" name="applicantGrossWeeklyWage" id="applicantGrossWeeklyWage" class="currency" min="0" 
+                			data-error="Please enter a valid amount">
 
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
@@ -471,8 +471,8 @@
 
 	        <div class="question" data-visible="$partnerStillWorking"><!-- Q14 -->
                 <label for="partnerGrossWeeklyWage">What is your partner's total weekly wage before tax (gross weekly wage)?</label><br>
-                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency" min="0" max="20000"
-                	data-error="Please enter a valid amount between $0 and $20,000" >
+                $&nbsp;<input type="text" name="partnerGrossWeeklyWage" id="partnerGrossWeeklyWage" class="currency" min="0"
+                	data-error="Please enter a valid amount" >
                 <p class="info">
                     Please include the value of any non-monetary benefits received, for example free board or any
                     drawings, whether or not the business makes a profit.
@@ -534,7 +534,7 @@
                         <div class="clearfix">
                             <label>How much do you and/or your partner receive before tax?</label>
 
-                            <div>$&nbsp;<input type="text" name="incomeAmount" class="currency" min="1" max="500000"/>
+                            <div>$&nbsp;<input type="text" name="incomeAmount" class="currency" min="1" />
                             </div>
                         </div>
                         <div class="clearfix">
@@ -712,7 +712,7 @@
 
 	        <div class="question" data-visible="$under20 && !$partner && $livingAtHome && $dependentChildren != 0">
                 <label for="parentsIncome">What is your parents' combined weekly income?</label><!-- Q69 -->
-                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="1" max="500000" data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="parentsIncome" id="parentsIncome" class="currency" min="1"  data-error="Please enter a valid amount greater than $1">
                 
                   <div class="info">
 	                Enter how much your parents/step parents/guardians earn before tax. 
@@ -782,20 +782,20 @@
 
             <div class="question" data-visible="$accommodationType == 'Rent'">
                 <label for="rentPerWeek">What is the total amount of rent you pay per week?</label>
-                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency" min="1" max="500000" 
-                data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="rentPerWeek" id="rentPerWeek" class="currency" min="1" 
+                data-error="Please enter a valid amount greater than $1">
             </div>
 
             <div class="question" data-visible="$accommodationType == 'Board'" >
                 <label for="boardPerWeek">What is the total amount of board you pay per week?</label>
-                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency"  min="1" max="500000" 
-                data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="boardPerWeek" id="boardPerWeek" class="currency"  min="1"
+                data-error="Please enter a valid amount greater than $1">
             </div>
 
             <div class="question" data-visible="$accommodationType == 'Home Owner'" >
                 <label for="outgoingsPerWeek">What is the total amount of costs for your own home that you pay per week?</label>
-                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency"  min="1" max="500000" 
-                data-error="Please enter a valid amount between $1 and $500,000">
+                $&nbsp;<input type="text" name="outgoingsPerWeek" id="outgoingsPerWeek" class="currency"  min="1"  
+                data-error="Please enter a valid amount greater than $1">
             </div>
 
         </fieldset>
@@ -820,7 +820,7 @@
             
              <div class="question" data-visible="$notMeetingLivingCosts || $accommodationCosts">
                 <label for="cashAssets">What is the current value of any cash assets you or your partner have?</label><br>
-                $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" max="1000000" data-error="Please enter a valid amount between $0 and $1,000,000"> <!-- Q36 -->
+                $ <input type="text" name="cashAssets" id="cashAssets" class="currency" min="0" data-error="Please enter a valid amount"> <!-- Q36 -->
 
                 <p class="info">
                     <a href="#" class="helpButton">Click here for examples of cash assets.</a>
