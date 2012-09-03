@@ -103,4 +103,7 @@ JSEC-156: partner age validation may be incorrect (medium)
 JSEC-163:Success text for Undetermined YP unexpected heading (and YPP) (high)
 JSEC-159:Questions 39 and 40 have had their conditionality changed by unconditionally asking Child age rangs when there are children. (high)
 
-
+Version 01.01.11
+JSEC-166:Extra help income rules for people with children are not correctly enforced (high)
+JSEC-145: Issue with text displayed for NZS when it is with a Working age benefit
+JSEC-75: Query:the "Apply for financial assistance " button, now directs to different sections in the Online services application
