@@ -518,6 +518,17 @@ engine.definitions = {
 		"	) ",
 
 
+	potentialSupportedYouth:"$youth && (" +
+			"	($single && $livingAtHome && $dependentChildren==0)" +
+			"		||" +
+				"	( " +
+				"		(!$single && $partnerAge>=18 && $partnerAge<19 && $dependentChildren==0)" +
+				"			||" +
+				"		(!$single && $partnerAge>=19 && $dependentChildren>=1) " +
+				"	)" +
+			"	)",
+
+
 
     potentialBenefit: "$potentialInvalidsBenefit || $potentialDPBCareOrSickOrInfirm || $potentialWidowsBenefitAny || $potentialDPBSoleParentAny ||$potentialDPBWomanAlone || $potentialHealthRelatedBenefit || $potentialUnemploymentBenefitTraining || $potentialUnemploymentBenefit || $potentialExtraHelp",
     potentialYouthPackage: "$potentialYouthPayment || $potentialYoungParentPayment || $potentialUndeterminedYouthPayment || $potentialUndeterminedYoungParentPayment",
@@ -607,6 +618,7 @@ engine.definitions = {
             "!$potentialYouthPayment && " +
             "!$potentialYoungParentPayment && " +
             "!$potentialUndeterminedYouthPayment && " +
+            "!$potentialSupportedYouth && " +
             "!$potentialUndeterminedYoungParentPayment && " +
             "!$potentialUnemploymentBenefitTraining && " +
             "!$potentialUnemploymentBenefit && "+

@@ -107,3 +107,8 @@ Version 01.01.11
 JSEC-166:Extra help income rules for people with children are not correctly enforced (high)
 JSEC-145: Issue with text displayed for NZS when it is with a Working age benefit
 JSEC-75: Query:the "Apply for financial assistance " button, now directs to different sections in the Online services application
+JSEC-46:Other income - How much (Q16b)  not validated to >= 1.00 and <= 500,000.00
+JSEC-170:  Outcome for YP at home is not as defined for Supported youth (high)
+
+Version 01.01.12
+
