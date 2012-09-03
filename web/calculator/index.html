@@ -79,7 +79,7 @@
                 <p class="info">Use the format 4/9/1989 or 4 Sep 1989</p>
             </div>
 
-            <div class="question" data-ineligible="$residencyResident==false && $residencyRefugeePermanent==false">
+            <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
                 <label for="residency">What is your residency status?</label>
                 <select name="residency" id="residency">
                     <option value="">Please select</option>
@@ -111,7 +111,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-ineligible="$stayingInNz==false">
+            <div class="question" data-ineligible="!$stayingInNz">
                 <fieldset>
                     <div>Do you usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="stayingInNz" id="stayingInNzYes" value="true"> <label for="stayingInNzYes">Yes</label>
@@ -230,7 +230,7 @@
                 </select>
             </div>
 
-            <div class="question" data-visible="$partner==false">
+            <div class="question" data-visible="$single">
                 <label for="relationshipStatusSingle">What best describes your relationship status?</label>
                 <select name="relationshipStatusSingle" id="relationshipStatusSingle" class="required">
                     <option value="">Please select</option>
@@ -920,8 +920,8 @@
                 </div>
             </div>
 
-            <div class="question" data-visible="$childAged1418 && $caringForChild">
-                <fieldset><!-- Q39 -->
+            <div class="question" data-visible="$childAged1418 && ($oscar || $caringForChild)">
+                <fieldset><!-- Q39   youngPersonY AND (ccsOscarY OR childHasSeriousDisabilityY) -->
                     <div>Is the child or young person who is Aged 14 to 18 getting a Child Disability Allowance?</div>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceYes" value="true"> <label for="childDisabilityAllowanceYes">Yes</label>
                     <input type="radio" name="childDisabilityAllowance" id="childDisabilityAllowanceNo" value="false"> <label for="childDisabilityAllowanceNo">No</label>

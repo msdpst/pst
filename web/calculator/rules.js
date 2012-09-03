@@ -477,7 +477,7 @@ engine.definitions = {
 
     potentialUndeterminedYouthPayment:
     		"	!$potentialInvalidsBenefit && " +
-    		"	$youthResidentLessThan2YearsResidence &&" +
+    		"	$youthResidentLessThan2YearsResidence && " +
     		"	$dependentChildren == 0 && " +
     		"	(" +
     		"			($single && $youthLivingCircs && ($familyTotalGrossWeeklyIncome < $yppSingleGWILimit)) " +
@@ -576,13 +576,22 @@ engine.definitions = {
 
 
     potentialExtraHelp:
-            "$stayingInNz && !$unlawfulResident && $residencyResident && " +
-            "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit && " +
-            "!$potentialInvalidsBenefit && !$potentialDPBCareOrSickOrInfirm && !$potentialWidowsBenefitAny && " +
-            "!$potentialDPBSoleParentAny && !$potentialDPBWomanAlone && !$potentialHealthRelatedBenefit && " +
-            "!$potentialYouthPayment && !$potentialYoungParentPayment && !$potentialUndeterminedYouthPayment && " +
-            "!$potentialUnemploymentBenefitTraining && !$potentialUnemploymentBenefit"
-    ,
+            "$stayingInNz && " +
+            "!$unlawfulResident && " +
+            "$residencyResident && " +
+            "!$potentialInvalidsBenefit && " +
+            "!$potentialDPBCareOrSickOrInfirm && " +
+            "!$potentialWidowsBenefitAny && " +
+            "!$potentialDPBSoleParentAny && " +
+            "!$potentialDPBWomanAlone && " +
+            "!$potentialHealthRelatedBenefit && " +
+            "!$potentialYouthPayment && " +
+            "!$potentialYoungParentPayment && " +
+            "!$potentialUndeterminedYouthPayment && " +
+            "!$potentialUndeterminedYoungParentPayment && " +
+            "!$potentialUnemploymentBenefitTraining && " +
+            "!$potentialUnemploymentBenefit && "+
+            "$familyTotalGrossWeeklyIncome < $extraHelpGWILimit" ,
 
     hasObligations: 
         "$potentialWidowsBenefitPBA || " +
@@ -618,6 +627,7 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                     	"potentialUnemploymentBenefitTraining",
                     	"potentialUnemploymentBenefit",
                         "potentialUndeterminedYouthPayment",
+                        "potentialUndeterminedYoungParentPayment",
                         "potentialExtraHelp"
 ];
 var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
