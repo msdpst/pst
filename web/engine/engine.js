@@ -187,7 +187,7 @@ engine = {
     validator:undefined,
     currentGroupNum:0,
     SLIDE_TIME:500,
-
+    
     onReady:function () {
         debug("====== hello ======");
 
@@ -216,31 +216,9 @@ engine = {
             return result;
         }, "Please enter a value less than or equal to {0}");
         
-        // Can specify a custom error message on the validated field with the "data-error" attribute. Nice to keep the content in the html.
-        var customValidationMessages = { };
-        $("*[data-error]").each(function () {
-            customValidationMessages[$(this).attr("name")] = $(this).attr("data-error");
-        });
-        
         engine.validator = $("form").validate({
-            onkeyup: false,
-            messages: customValidationMessages
+            onkeyup: false
         });
-        
-        
-        
-        
-        // make pressing return be the same as clicking next
-        $(".question :input").keypress(function (e) {
-            if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-                engine.onNext();
-                return false;
-            } 
-            else {
-                return true;
-            }
-        });
-
 
         // Expandable help sections
         $(".helpButton").each(function () {
@@ -274,6 +252,9 @@ engine = {
         if ($("#progress").length)
             $("#progress").progressbar({value:5});
 
+        
+        engine.onDomAdded();
+
         // Update question visibility every time a question's answered.
         // (We used to update progress here too, but now it's just based on groups so there's no need.)
         $(".question :input").change(function () {
@@ -294,6 +275,22 @@ engine = {
 
         engine.changeGroup(0);
     },
+    
+
+    /** Add behaviour to the DOM. The client should call this if it adds new elements to the DOM. */
+    onDomAdded:function () {
+        // make pressing return be the same as clicking next
+        $(".question :input").keypress(function (e) {
+            if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                engine.onNext();
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+    }, 
+    
 
     /** They clicked the Back button */
     onBack:function () {

@@ -113,3 +113,4 @@ JSEC-170:  Outcome for YP at home is not as defined for Supported youth (high)
 Version 01.01.12
 
 JSEC-167: refugeeWithPermanentResidence  does not appear to be implemented correctly (high)
+JSEC-147: Other income How much (Q16b)  Error message is displayed on all instances of the field (Medium)
