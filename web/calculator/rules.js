@@ -636,7 +636,8 @@ engine.definitions = {
 };
 
 
-var allBenefits = [ /* This is all the variables that we want to be checked as potential benefits */
+/* All the variables that we want to be checked as potential main benefits */
+var allMainBenefits = [ 
                     	"potentialNewZealandSuperannuationSingle",
                     	"potentialNewZealandSuperannuationNonQualifiedSpouse",
                     	"potentialNewZealandSuperannuationPartnerNotIncluded",
@@ -658,7 +659,8 @@ var allBenefits = [ /* This is all the variables that we want to be checked as p
                         "potentialUndeterminedYoungParentPayment",
                         "potentialExtraHelp"
 ];
-var allOtherBenefits = [   //these are actually supplements but we treat them the same way.
+/* All the variables that we want to be checked as potential supplementary benefits */
+var allSupplementaryBenefits = [
                         "potentialAccommodationSupplement",
                         "potentialDisabilityAllowance",
                         "potentialChildcareSubsidy",

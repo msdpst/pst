@@ -5,96 +5,96 @@
 // Note there is engine customisation at the end of this file.
 
 var calculator = {
-    nextIncomeSourceIndex: 1,
-    
-    addIncomeSource: function() {
+    nextIncomeSourceIndex:1,
+
+    addIncomeSource:function () {
         var last = $(".incomeSource").last();
         var nnew = last.clone();
-        
-        nnew.find(':input[name^="income"]').each(function() {
+
+        nnew.find(':input[name^="income"]').each(function () {
             $(this).attr("name", $(this).attr("name").replace(/\d*$/, calculator.nextIncomeSourceIndex));
         });
         calculator.nextIncomeSourceIndex++;
-        
+
         // Validation errors in the one we're copying
         nnew.find("label.error").remove();
-        
+
         last.after(nnew);
         engine.clearAllControlsIn(nnew);
 
         // Show the close button. These are hidden by default so it doesn't show on the first one.
         nnew.find("button").show();
-        
+
         engine.onDomAdded();
     },
 
-    removeIncomeSource: function(domElement) {
+    removeIncomeSource:function (domElement) {
         $(domElement).closest(".incomeSource").remove();
     },
-    
+
     /**
      * Something is being hidden, so questions are being set to unanswered. Remove all
      * income sources except the first.
      * (callback from the engine)
      */
-    onControlsClearedInElement: function(elt) {
+    onControlsClearedInElement:function (elt) {
         elt.find(".incomeSource").not(":first").remove();
     },
-    
-    applyNow:function(){
-    	
-    	
-    	
-    	/*
-    	 *  Aged Under 19 with 1 or more dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html			
-			Aged 16 -17 with no dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html			
-			Aged 18 - 64.75: (18 year old with no dependent children): http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html			
-			Aged between 64.75 and 65: http://www.workandincome.govt.nz/online-services/ (since we can't easily tell if they want to apply for a benefit or NZS)
-			Aged 65 or more: http://www.workandincome.govt.nz/online-services/superannuation/index.html
-    	 * 
-    	 */
-    	
-    	//we can decide where to send them for their on-line application.
-    	if (		
-    			engine.evaluate("$potentialNewZealandSuperannuationSingle")
-    			||  engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
-    			||  engine.evaluate("$potentialNewZealandSuperannuationPartnerNotIncluded")){
-    		
-    		if (engine.evaluate("$age<65")){
-    			window.location="http://www.workandincome.govt.nz/online-services/";
-    		}else{
-    			window.location="http://www.workandincome.govt.nz/online-services/superannuation/"; 	
-    		}
-    		return;
-    	}else if (engine.evaluate("$age16to17 && $single && $dependentChildren==0" )){
-    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
-    	}else if (engine.evaluate("$youngParent" )){	
-    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
-    	}else if (engine.evaluate("$workingAge && $dependentChildren==0" )){	
-    		window.location="http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
-    	}else{
-    		//fall back
-    		window.location="http://www.workandincome.govt.nz/online-services/";
-    		return;
-    	}
-    	
-    	
+
+    applyNow:function () {
+
+
+
+        /*
+         *  Aged Under 19 with 1 or more dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html			
+         Aged 16 -17 with no dependent children: http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html			
+         Aged 18 - 64.75: (18 year old with no dependent children): http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html			
+         Aged between 64.75 and 65: http://www.workandincome.govt.nz/online-services/ (since we can't easily tell if they want to apply for a benefit or NZS)
+         Aged 65 or more: http://www.workandincome.govt.nz/online-services/superannuation/index.html
+         * 
+         */
+
+        //we can decide where to send them for their on-line application.
+        if (
+            engine.evaluate("$potentialNewZealandSuperannuationSingle")
+                || engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
+                || engine.evaluate("$potentialNewZealandSuperannuationPartnerNotIncluded")) {
+
+            if (engine.evaluate("$age<65")) {
+                window.location = "http://www.workandincome.govt.nz/online-services/";
+            } else {
+                window.location = "http://www.workandincome.govt.nz/online-services/superannuation/";
+            }
+            return;
+        } else if (engine.evaluate("$age16to17 && $single && $dependentChildren==0")) {
+            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
+        } else if (engine.evaluate("$youngParent")) {
+            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
+        } else if (engine.evaluate("$workingAge && $dependentChildren==0")) {
+            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
+        } else {
+            //fall back
+            window.location = "http://www.workandincome.govt.nz/online-services/";
+            return;
+        }
+
+
     },
-    
-    exitWI:function(){
-    	
-    	window.location="http://www.workandincome.govt.nz/online-services/";
+
+    exitWI:function () {
+
+        window.location = "http://www.workandincome.govt.nz/online-services/";
     },
-    
-    
-    confirmExit:function(){
-    	$('#outer').hide();
-    	$('#confirmExit').show();
+
+
+    confirmExit:function () {
+        $('#outer').hide();
+        $('#confirmExit').show();
     },
-    
-    cancelExit:function(){
-    	$('#confirmExit').hide();
-    	$('#outer').show();
+
+    cancelExit:function () {
+        $('#confirmExit').hide();
+        $('#outer').show();
     },
 
     /** They clicked the back button in the results section */
@@ -119,7 +119,7 @@ var calculator = {
         return age;
     },
 
-    calculateTotalOtherIncome: function() {
+    calculateTotalOtherIncome:function () {
         var total = 0;
         var amounts = $('input[name^="incomeAmount"]:visible');
         var freqs = $('select[name^="incomeFrequency"]:visible');
@@ -142,21 +142,20 @@ var calculator = {
             else if (freq == 'Yearly')
                 total += amount / 52;
             /*
-            else
-                debug("ignoring income '" + amount + "' with invalid frequency '" + freq + "'");
-            */
+             else
+             debug("ignoring income '" + amount + "' with invalid frequency '" + freq + "'");
+             */
         }
         debug("calculateTotalOtherIncome: " + total);
         return total;
     },
-    
-    
-    
-    calculateAccSuppMax: function() {
+
+
+    calculateAccSuppMax:function () {
         var partner = engine.getAnswer("partner");
         var dependentChildren = engine.getAnswer("dependentChildren");
         var area = engine.getAnswer("area");
-        
+
         // If area's not set yet, don't cause a scripting error
         if (!(area >= 1 && area <= 4)) {
             debug("calculateAccSuppMax exiting because of invalid area: " + area);
@@ -164,7 +163,7 @@ var calculator = {
         }
 
         area--; // convert to array index
-        
+
         if (partner) {
             if (dependentChildren > 0)
                 return engine.definitions.accSuppCoupleWithChildren[area];
@@ -180,78 +179,82 @@ var calculator = {
                 return engine.definitions.accSuppSingle[area];
         }
     },
-    
+
     /**
      * We've reached the end. Work out what they're entitled to and display it.
      *
      * The engine calls this function.
      */
-    onFinished: function () {
+    onFinished:function () {
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
         //
         //gives the illusion of speed by waiting.. 
-        setTimeout(function(){
-            
-            
-             engine.disableCurrentGroup();
-             var benefitPageUrls = [];
-                var otherBenefitUrls = [];
-                var ub = engine.evaluate("$potentialUnemploymentBenefit");
-                for (var i = 0; i < allBenefits.length; i++) {
-                    if (engine.evaluate("$" + allBenefits[i])) {
-                        // Special handling for when they're entitled to both UB and super
-                        // (aged between 64.75 and 65) - super goes in "other" section. JSEC-77.
-                        if (ub && /^potentialNewZealandSuperannuation/.test(allBenefits[i]))
-                            otherBenefitUrls.push("benefits/" + allBenefits[i] + ".html");
-                        else    
-                            benefitPageUrls.push("benefits/" + allBenefits[i] + ".html");
-                    }
+        setTimeout(function () {
+
+
+            engine.disableCurrentGroup();
+            var mainBenefitUrls = [];
+            var superIndex = undefined;
+            for (var i = 0; i < allMainBenefits.length; i++) {
+                if (engine.evaluate("$" + allMainBenefits[i])) {
+                    mainBenefitUrls.push("benefits/" + allMainBenefits[i] + ".html");
+                    
+                    if (/^potentialNewZealandSuperannuation/.test(allMainBenefits[i]))
+                        superIndex = mainBenefitUrls.length - 1;
                 }
-                debug("benefits: " + benefitPageUrls);
-    
-    
-    
-               //  PBAs - these work in the same way as benefits.
-                for (var i = 0; i < allOtherBenefits.length; i++) {
-                    if (engine.evaluate("$" + allOtherBenefits[i]))
-                        otherBenefitUrls.push("benefits/" + allOtherBenefits[i] + ".html");
-                }
-                debug("Others: " + otherBenefitUrls);
-    
-    
-                // They're eligible for something. Assemble the information - there's a page
-                // fragment (ie. an html file) for each benefit and for each obligation.
-                // Load the appropriate fragments from the server and insert them into the page.
-                if (benefitPageUrls.length > 0 || otherBenefitUrls > 0) {
-                    engine.loadPageFragmentsAndReplaceVariables($("#benefits"), benefitPageUrls, function () {
-                        engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), otherBenefitUrls, function () {
-                            engine.applyVisibilityToChildren($("#eligible"));
-                            $("#controlBox").hide();
-                            $("#eligible").slideDown(engine.SLIDE_TIME);
-                            $("form").hide();
-                            $('html,body').scrollTop(0);
-                            $('#loadingAnimation').hide();
-                            $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');	
-                            $('.nextText').html('Next');
-                        });
+            }
+
+
+            //  Supplementaries - these work in the same way as benefits.
+            var supplementaryBenefitUrls = [];
+            for (var i = 0; i < allSupplementaryBenefits.length; i++) {
+                if (engine.evaluate("$" + allSupplementaryBenefits[i]))
+                    supplementaryBenefitUrls.push("benefits/" + allSupplementaryBenefits[i] + ".html");
+            }
+
+            // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
+            // In this case, super is displayed as a supplementary.
+            if (superIndex != undefined && mainBenefitUrls.length > 1) {
+                supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
+                mainBenefitUrls.splice(superIndex, 1);
+            }
+
+            debug("benefits: " + mainBenefitUrls);
+            debug("supplementaries: " + supplementaryBenefitUrls);
+
+
+            // They're eligible for something. Assemble the information - there's a page
+            // fragment (ie. an html file) for each benefit and for each obligation.
+            // Load the appropriate fragments from the server and insert them into the page.
+            if (mainBenefitUrls.length > 0 || supplementaryBenefitUrls > 0) {
+                engine.loadPageFragmentsAndReplaceVariables($("#benefits"), mainBenefitUrls, function () {
+                    engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), supplementaryBenefitUrls, function () {
+                        engine.applyVisibilityToChildren($("#eligible"));
+                        $("#controlBox").hide();
+                        $("#eligible").slideDown(engine.SLIDE_TIME);
+                        $("form").hide();
+                        $('html,body').scrollTop(0);
+                        $('#loadingAnimation').hide();
+                        $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
+                        $('.nextText').html('Next');
                     });
-                }
-    
-                // They're not entitled to anything. Say so.
-                else {
-                    $("#controlBox").hide();
-                    $("#ineligible").slideDown(engine.SLIDE_TIME);
-                    $("form").hide();
-                    $('html,body').scrollTop(0);
-                    $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');	
-                    $('.nextText').html('Next');
-                }
-            
-            
-            
-        },500);
+                });
+            }
+
+            // They're not entitled to anything. Say so.
+            else {
+                $("#controlBox").hide();
+                $("#ineligible").slideDown(engine.SLIDE_TIME);
+                $("form").hide();
+                $('html,body').scrollTop(0);
+                $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
+                $('.nextText').html('Next');
+            }
+
+
+        }, 500);
     }
 };
 
