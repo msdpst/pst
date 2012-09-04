@@ -63,7 +63,7 @@ engine.definitions = {
     seniorResident:"$residencyResident && $tenYears && $fiveYears",
    
     ibWorkingAge : "($age >= 18 && $age <= 64)",
-    age50to64: "($age >= 50 && $age <= 64)",
+    age50to64: "($age >= 50 && $age < 65)",
     partner16or17: "$partnerAge >= 16 && $partnerAge <= 17",
     partner16to18: "$partnerAge >= 16 && $partnerAge <= 18",
     single: "!$partner", // spreadsheet also lists all values of relationshipStatusSingle; not sure why

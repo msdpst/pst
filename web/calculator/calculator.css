@@ -582,6 +582,20 @@ li {
     font-weight: 600;
 }
 
+#ineligible h3 {
+    color: #CE3436;
+    text-shadow: 0 1px 0 #ffcccc;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 2em 0 0.5em 0;
+    padding: 0;
+    text-align: left;
+}
+#ineligible h3:first-child {
+    margin-top: 0;
+}
+
+
 #PBAs .preBenefitActivityName{
 	 font-weight: 600;
 }
