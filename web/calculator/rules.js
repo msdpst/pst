@@ -131,6 +131,7 @@ engine.definitions = {
     widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
     dpbSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
     dpbCsiSoleParentGWILimit : 638,//DPB CSI Sole Parent GWI Limit
+    dpbWomanAloneGWILimit : 463,//DPB Woman Alone GWI Limit
 
     ibSingle18GWILimit : 524,//IB Single 18+ GWI Limit
     ibSingleYouthGWILimit : 454,//IB Single Youth GWI Limit
@@ -329,6 +330,7 @@ engine.definitions = {
     		"	$gender == 'Female' && " +
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
+            "   $familyTotalGrossWeeklyIncome <= $dpbWomanAloneGWILimit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
