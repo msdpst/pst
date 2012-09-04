@@ -116,3 +116,4 @@ JSEC-167: refugeeWithPermanentResidence  does not appear to be implemented corre
 JSEC-147: Other income How much (Q16b)  Error message is displayed on all instances of the field (Medium)
 JSEC-174: Income limit for DPB WA does not seem to be implemented
 JSEC-145:Issue with text displayed for NZS when it is with a Working age benefit
+JSEC-176: order of details on last page when DPBSP within 92 days of 65 and eligible for super
