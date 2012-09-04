@@ -5,15 +5,27 @@
 // Note there is engine customisation at the end of this file.
 
 var calculator = {
+    nextIncomeSourceIndex: 1,
+    
     addIncomeSource: function() {
         var last = $(".incomeSource").last();
         var nnew = last.clone();
+        
+        nnew.find(':input[name^="income"]').each(function() {
+            $(this).attr("name", $(this).attr("name").replace(/\d*$/, calculator.nextIncomeSourceIndex));
+        });
+        calculator.nextIncomeSourceIndex++;
+        
+        // Validation errors in the one we're copying
+        nnew.find("label.error").remove();
+        
         last.after(nnew);
         engine.clearAllControlsIn(nnew);
 
         // Show the close button. These are hidden by default so it doesn't show on the first one.
         nnew.find("button").show();
         
+        engine.onDomAdded();
     },
 
     removeIncomeSource: function(domElement) {
@@ -109,8 +121,8 @@ var calculator = {
 
     calculateTotalOtherIncome: function() {
         var total = 0;
-        var amounts = $('input[name="incomeAmount"]:visible');
-        var freqs = $('select[name="incomeFrequency"]:visible');
+        var amounts = $('input[name^="incomeAmount"]:visible');
+        var freqs = $('select[name^="incomeFrequency"]:visible');
         //debug(amounts.length + " other income sources");
         for (var i = 0; i < amounts.length; i++) {
             var amount = parseFloat($(amounts[i]).val());
