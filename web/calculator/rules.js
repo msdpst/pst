@@ -184,9 +184,8 @@ engine.definitions = {
         "$seniorsAge && $single && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
         "$seniorsAge && $partner": 851.83, // NZS DA Married, civil union or defacto couple (with or without children)
         
-        // Default to no income limit testing. I suspect we shouldn't get here, but the spreadsheet as written
-        // doesn't have a case for young parents with partners 18+.
-        "true": 999999
+        // Default to no eligibility
+        "true": 0
     },
     daGWILimit: "engine.evalMap(engine.definitions.daGWILimits, 'daGWILimits')",
     
@@ -235,7 +234,7 @@ engine.definitions = {
     	"$single && $age<20 && $age>=18 && !$livingAtHome": "170.80",
     	"$single && $age<25 && $age>19": "170.80",
     	"$single && $age>=25": "204.96",
-    	"$partner && $dependentChildren == 0 && (!$partnerWorked || !$partnerStillWorking)": "170.80 (each - you and your partner)",
+    	"$partner && $dependentChildren == 0 && ((!$partnerWorked || !$partnerStillWorking) || ($partnerStillWorking && $totalFamilyGrossWeeklyWage<$ubRelationshipGWILimit))": "170.80 (each - you and your partner)",
     	"$partner && $dependentChildren > 0": "170.80 (each - you and your partner)",
     	"$single && $dependentChildren > 0": "293.58"
     	

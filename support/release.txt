@@ -117,3 +117,6 @@ JSEC-147: Other income How much (Q16b)  Error message is displayed on all instan
 JSEC-174: Income limit for DPB WA does not seem to be implemented
 JSEC-145:Issue with text displayed for NZS when it is with a Working age benefit
 JSEC-176: order of details on last page when DPBSP within 92 days of 65 and eligible for super
+
+Version 01.01.13 (lucky for some)
+JSEC-178:UB rate does not display for married user aged between 64.75 and 65
