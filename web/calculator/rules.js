@@ -330,7 +330,7 @@ engine.definitions = {
     		"	$gender == 'Female' && " +
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
-            "   $familyTotalGrossWeeklyIncome <= $dpbWomanAloneGWILimit && " +
+            "   $familyTotalGrossWeeklyIncome < $dpbWomanAloneGWILimit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
