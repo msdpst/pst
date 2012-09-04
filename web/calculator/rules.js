@@ -171,18 +171,22 @@ engine.definitions = {
     nonQualifiedPartnerIncludedLimit:860,//Non-qualified partner included
 
     daGWILimits: {
-        "$workingAge && !$partner && $dependentChildren == 0": 585.67, // DA Single Working Age GWI Limit
-        "$workingAge && !$partner && $dependentChildren == 1": 705.72, // DA Sole Parent 1 Child GWI Limit
-        "$workingAge && !$partner && $dependentChildren > 1": 743.53,  // DA Sole Parent 2+ Children GWI Limit
-        "($workingAge || $youth) && $partner": 866.91, // DA Relationship GWI Limit
-        "$youth && !$partner && $dependentChildren == 0": 506.01, // DA Single Youth GWI Limit
-        "$youngParent && !$partner": 506.01, // DA Single Youth GWI Limit
-        // TODO what about young parents with partners over 18?
+        "$workingAge && $single && $dependentChildren == 0": 585.67, // DA Single Working Age GWI Limit
+        "$workingAge && $single && $dependentChildren == 1": 705.72, // DA Sole Parent 1 Child GWI Limit
+        "$workingAge && $single && $dependentChildren > 1": 743.53,  // DA Sole Parent 2+ Children GWI Limit
+        "$workingAge && $partner": 866.91, // DA Relationship GWI Limit
+        "$youth && $single && $dependentChildren == 0": 506.01, // DA Single Youth GWI Limit
+        "$youth && $partner && $dependentChildren == 0": 866.91, // DA Relationship GWI Limit
+        "$youngParent && $single": 506.01, // DA Single Youth GWI Limit
         "$youngParent && $partner && $partnerAge < 18": 866.91, // DA Relationship GWI Limit
-        "$seniorsAge && !$partner && $dependentChildren == 0": 575.58, // NZS DA Siingle 18+ years
-        "$seniorsAge && !$partner && $dependentChildren == 1": 693.45, // NZS DA Sole Parent 1 child
-        "$seniorsAge && !$partner && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
-        "$seniorsAge && $partner": 851.83 // NZS DA Married, civil union or defacto couple (with or without children)
+        "$seniorsAge && $single && $dependentChildren == 0": 575.58, // NZS DA Siingle 18+ years
+        "$seniorsAge && $single && $dependentChildren == 1": 693.45, // NZS DA Sole Parent 1 child
+        "$seniorsAge && $single && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
+        "$seniorsAge && $partner": 851.83, // NZS DA Married, civil union or defacto couple (with or without children)
+        
+        // Default to no income limit testing. I suspect we shouldn't get here, but the spreadsheet as written
+        // doesn't have a case for young parents with partners 18+.
+        "true": 999999
     },
     daGWILimit: "engine.evalMap(engine.definitions.daGWILimits, 'daGWILimits')",
     
