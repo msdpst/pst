@@ -79,7 +79,7 @@
                 <p class="info">Use the format 4/9/1989 or 4 Sep 1989</p>
             </div>
 
-            <div class="question" data-ineligible="!$residencyResident && !$residencyRefugeePermanent">
+            <div class="question" data-ineligible="$unlawfulResident">
                 <label for="residency">What is your residency status?</label>
                 <select name="residency" id="residency">
                     <option value="">Please select</option>
@@ -111,7 +111,7 @@
                 </fieldset>
             </div>
 
-            <div class="question" data-ineligible="!$stayingInNz">
+            <div class="question">
                 <fieldset>
                     <div>Do you usually live in New Zealand and intend to stay here?</div>
                     <input type="radio" name="stayingInNz" id="stayingInNzYes" value="true"> <label for="stayingInNzYes">Yes</label>

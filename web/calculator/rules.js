@@ -40,9 +40,7 @@ engine.definitions = {
     		"$residency == 'Permanent Resident' || " +
     		"$residency == 'Refugee - Quota' || " +
     		"$residency == 'Australian' || " +
-    		"$residencyRefugeePermanent",
-    		
-    residencyRefugeePermanent: "$residency == 'Refugee - Other with Permanent Residence'",
+    		"$residency == 'Refugee - Other with Permanent Residence'",
 
     
     unlawfulResident: "!$under20 && !$seniorsAge && " +
@@ -60,7 +58,7 @@ engine.definitions = {
     // -------- Benefit definitions --------
 
     resident: "$stayingInNz && $twoYears && $residencyResident",
-    refugeeOtherWithPermanentResidence: "$stayingInNz && $twoYears && $residencyRefugeePermanent",
+    refugeeOtherWithPermanentResidence: "$stayingInNz && !$twoYears && $residency == 'Refugee - Other with Permanent Residence'",
     
     seniorResident:"$residencyResident && $tenYears && $fiveYears",
    
@@ -269,7 +267,7 @@ engine.definitions = {
 
     // -------- Main benefit eligibility --------
 
-    potentialWidowsBenefitAny: "!$unlawfulResident && (($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialWidowsBenefitAny: "(($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
@@ -284,7 +282,7 @@ engine.definitions = {
     		
     potentialWidowsBenefitNoPBA : "$potentialWidowsBenefitAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
 
-    potentialDPBSoleParentAny: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBSoleParentAny: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
     		"	$single && " +
     		"	$dependentChildren >= 1 && " +
@@ -302,10 +300,10 @@ engine.definitions = {
     
     
 
-    potentialInvalidsBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($healthDisability && $totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
 
-    potentialDPBCareOrSickOrInfirm: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
     		"	$workingAge && (" +
     		
@@ -327,7 +325,7 @@ engine.definitions = {
     		
     		
 
-    potentialDPBWomanAlone: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialDPBWomanAlone: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$gender == 'Female' && " +
     		"	$age50to64 && " +
     		"   $dependentChildren == 0 && " +
@@ -346,7 +344,7 @@ engine.definitions = {
     		"	) "
     		,
 
-    potentialHealthRelatedBenefit: "!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialHealthRelatedBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
     
     		"	$healthDisabilityAffectsWork && " +
     		"	$workingAge && " +
@@ -379,7 +377,6 @@ engine.definitions = {
 
 
     potentialYouthPayment:
-    		"	!$unlawfulResident && " +
     		"   $resident && " +
     		"	$youth  &&" +// +
     		"	(	" +
@@ -398,7 +395,6 @@ engine.definitions = {
 
 
     potentialYoungParentPayment:
-    	"	!$unlawfulResident && " +
     	"   $resident && " +
     	"	$youngParent && " +
     	"	!$potentialInvalidsBenefit && " +
@@ -417,7 +413,7 @@ engine.definitions = {
 		"	)	",
 
 
-    potentialUnemploymentBenefitTraining:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialUnemploymentBenefitTraining:"($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
     		"	$foundationCourse && " +
     		" ( " +
@@ -443,7 +439,7 @@ engine.definitions = {
 
 
     		
-    potentialUnemploymentBenefit:"!$unlawfulResident && ($resident || $refugeeOtherWithPermanentResidence) && " +
+    potentialUnemploymentBenefit:"($resident || $refugeeOtherWithPermanentResidence) && " +
 			"	$workingAge && " +
 			" ( " +
 			"		!$haveWorked " +
@@ -471,23 +467,23 @@ engine.definitions = {
 	
 			
 
-    potentialNewZealandSuperannuationSingle:"!$unlawfulResident && $seniorsAge && $seniorResident && $single ", //ACC stuff not required
+    potentialNewZealandSuperannuationSingle:"$seniorsAge && $seniorResident && $single ", //ACC stuff not required
 
 
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"!$unlawfulResident && $seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $seniorResident && !$single && " +
     		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
     		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
     		"			$partnerAge >= 16 && $seniorPartnerResident",
 
 
-    potentialNewZealandSuperannuationPartnerNotIncluded:"!$unlawfulResident && $seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationPartnerNotIncluded:"$seniorsAge && $seniorResident && !$single && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
 
 
    potentialUndeterminedWorkingAgeFinancialAssistance:
-	   "	!$unlawfulResident && ($workingAge || $seniorsAge ) && " +
+	   "	($workingAge || $seniorsAge ) && " +
 	   "	!$potentialBenefit && " +
 	   "	!$potentialWidowsBenefitAny && " +
 	   "	!$potentialSuper",
@@ -607,7 +603,6 @@ engine.definitions = {
 
     potentialExtraHelp:
             "$stayingInNz && " +
-            "!$unlawfulResident && " +
             "$residencyResident && " +
             "!$potentialInvalidsBenefit && " +
             "!$potentialDPBCareOrSickOrInfirm && " +
