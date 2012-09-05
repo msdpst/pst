@@ -202,19 +202,20 @@ var calculator = {
                 }
             }
 
-
-            //  Supplementaries - these work in the same way as benefits.
             var supplementaryBenefitUrls = [];
-            for (var i = 0; i < allSupplementaryBenefits.length; i++) {
-                if (engine.evaluate("$" + allSupplementaryBenefits[i]))
-                    supplementaryBenefitUrls.push("benefits/" + allSupplementaryBenefits[i] + ".html");
-            }
 
             // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
-            // In this case, super is displayed as a supplementary.
+            // In this case, super is displayed as a supplementary, and appears first.
             if (superIndex != undefined && mainBenefitUrls.length > 1) {
                 supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
                 mainBenefitUrls.splice(superIndex, 1);
+            }
+
+
+            //  Supplementaries - these work in the same way as benefits.
+            for (var i = 0; i < allSupplementaryBenefits.length; i++) {
+                if (engine.evaluate("$" + allSupplementaryBenefits[i]))
+                    supplementaryBenefitUrls.push("benefits/" + allSupplementaryBenefits[i] + ".html");
             }
 
             debug("benefits: " + mainBenefitUrls);

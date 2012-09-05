@@ -10,7 +10,7 @@ engine.definitions = {
     //under20: "($age>=18 && $age<19 && $dependentChildren == 0) || ($age>=19 && $age<20)", //((age = 18 AND dependentchildren = 0) OR age = 19)?
    
     under20:"$age < 20",
-    
+    age18: "$age >= 18 && $age < 19",
     age16to17: "$age >= 16 && $age < 18",
     age16to18: "$age >= 16 && $age < 19",
     age18to19: "$age >= 18 && $age < 20",
@@ -409,7 +409,7 @@ engine.definitions = {
     	"		(	" +
     	"			$single && " +
     	"			$familyTotalGrossWeeklyIncome < $yppSingleGWILimit && " +
-    	"			($youthLivingCircs || ($livingAtHome && $parentsIncome <  $yppParentalIncomeGWILimit))" +
+    	"			($youthLivingCircs || ($livingAtHome && ($age18 || $parentsIncome <  $yppParentalIncomeGWILimit)))" +
     	"		) " +
     	"			|| " +
 		"		(" +
@@ -668,12 +668,12 @@ var allMainBenefits = [
 /* All the variables that we want to be checked as potential supplementary benefits */
 var allSupplementaryBenefits = [
                         "potentialAccommodationSupplement",
-                        "potentialDisabilityAllowance",
-                        "potentialChildcareSubsidy",
-                        "potentialGuaranteedChildcareAssistancePayment",
-                        "potentialOSCARSubsidy",
-                        "potentialTemporaryAdditionalSupport",
                         "potentialChildDisabilityAllowance",
-                        "potentialLivingAlonePayment"
+                        "potentialChildcareSubsidy",
+                        "potentialDisabilityAllowance",
+                        "potentialGuaranteedChildcareAssistancePayment",
+                        "potentialLivingAlonePayment",
+                        "potentialOSCARSubsidy",
+                        "potentialTemporaryAdditionalSupport"
                    ];
 
