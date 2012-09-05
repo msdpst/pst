@@ -130,4 +130,5 @@ JSEC-184:Widows benefit not enforcing age limit when there are no children (high
 JSEC-181:NZS including non-qual partner is not displaying correct when in the 92 days before turning 65 and not eligible for a working age benefit (high)
 JSEC-179: Supps not in alphabetical order
 JSEC-171: Parental Income should be ignored if 18 y.o. YPP at home
+JSEC-185:(SRE) Widows benefit income limit not enforced when no children
 

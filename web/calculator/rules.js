@@ -129,6 +129,7 @@ engine.definitions = {
     // -- Limits -- //
 
     widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
+    widowsSingleGWILimit : 463,//Widows Sole Parent GWI Limit
     dpbSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
     dpbCsiSoleParentGWILimit : 638,//DPB CSI Sole Parent GWI Limit
     dpbWomanAloneGWILimit : 463,//DPB Woman Alone GWI Limit
@@ -278,9 +279,10 @@ engine.definitions = {
     		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
-    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
-    		"		|| " +
-    		"	($dependentChildren == 0 && $age50to64 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit))" +
+	    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
+	    		"		|| " +
+	    		"	($dependentChildren == 0 && $age50to64 && $familyTotalGrossWeeklyIncome < $widowsSingleGWILimit)" +
+	    		")" +
     		")",
     		
     		
