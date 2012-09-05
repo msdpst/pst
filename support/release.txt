@@ -120,3 +120,4 @@ JSEC-176: order of details on last page when DPBSP within 92 days of 65 and elig
 
 Version 01.01.13 (lucky for some)
 JSEC-178:UB rate does not display for married user aged between 64.75 and 65
+JSEC-177:UB displayed instead of IB (High)
