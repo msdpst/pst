@@ -126,3 +126,4 @@ Version 01.01.14
 JSEC-147: Income sources (again)
 JSEC-179: Supps not in alphabetical order
 JSEC-171: Parental Income should be ignored if 18 y.o. YPP at home
+JSEC-182: Undetermined YPP income limits  not being enforced
