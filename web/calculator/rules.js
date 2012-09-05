@@ -62,10 +62,10 @@ engine.definitions = {
     
     seniorResident:"$residencyResident && $tenYears && $fiveYears",
    
-    ibWorkingAge : "($age >= 18 && $age <= 64)",
+    ibWorkingAge: "($age >= 18 && $age < 65)",  
     age50to64: "($age >= 50 && $age < 65)",
-    partner16or17: "$partnerAge >= 16 && $partnerAge <= 17",
-    partner16to18: "$partnerAge >= 16 && $partnerAge <= 18",
+    partner16or17: "$partnerAge >= 16 && $partnerAge < 18",
+    partner16to18: "$partnerAge >= 16 && $partnerAge < 19",
     single: "!$partner", // spreadsheet also lists all values of relationshipStatusSingle; not sure why
 
     youthLivingCircs : "!$livingAtHome && !$parentSupport && " +
@@ -111,7 +111,7 @@ engine.definitions = {
     blindSingle:"$single && $totallyBlind && $dependentChildren == 0 && " +
     		" (" +
     		"	($ibWorkingAge && $totalOtherIncomeCalculation < $ibSingle18GWILimit)" +
-    		"	||" +
+    		"		||" +
     		"	($ibYouth && $totalOtherIncomeCalculation < $ibSingleYouthGWILimit)" +
     		")",
     
@@ -305,7 +305,7 @@ engine.definitions = {
     
 
     potentialInvalidsBenefit: "($resident || $refugeeOtherWithPermanentResidence) && " +
-    		"	($healthDisability && $totallyBlind) & ($blindSingle || $blindRelationship || $blindSoleParent) ",
+    		"	($healthDisability && $totallyBlind) && ($blindSingle || $blindRelationship || $blindSoleParent) ",
 
     potentialDPBCareOrSickOrInfirm: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	($caringFullTime && $carerRelationship != 'Partner')  && " +
