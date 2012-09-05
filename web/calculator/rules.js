@@ -138,7 +138,6 @@ engine.definitions = {
     ibSoleParentGWILimit : 638,//IB Sole Parent GWI Limit
     ibRelationshipGWILimit : 768,//IB Relationship GWI Limit
 
-    // TODO According to the spreadsheet these are mock rates!
     yppSingleGWILimit : 257,//YPP single GWI Limit
     yppRelationshipGWILimit:307,//YPP Relationship GWI Limit
     yppParentalIncomeGWILimit:2652,//YPP Parental Income GWI Limit
@@ -509,14 +508,14 @@ engine.definitions = {
 
 
     potentialUndeterminedYoungParentPayment:
-    	"	$youngParent &&" +
-    	"	!$potentialInvalidsBenefit && " +
 		"	$youthResidentLessThan2YearsResidence &&" +
+    	"	$youngParent &&" +
 		"	(" +
-		"			($single && ($youthLivingCircs || ($livingAtHome && ($familyTotalGrossWeeklyIncome < $yppParentalIncomeGWILimit)))) " +
+		"			($single && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit && ($youthLivingCircs || ($livingAtHome && $parentsIncome < $yppParentalIncomeGWILimit))) " +
 		"					|| " +
-		"			(!$single && $partner16to18 && ($familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit))" +
-		"	) ",
+		"			(!$single && $partner16to18 && $familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
+		"	) && " +
+    	"	!$potentialInvalidsBenefit",
 
 
 	potentialSupportedYouth:"$youth && (" +
