@@ -116,7 +116,7 @@ engine.definitions = {
     		")",
     
     
-    blindRelationship:"!$single && $totallyBlind && $totalOtherIncomeCalculation < $ibRelationshipGWILimit && " +
+    blindRelationship:"!$single && $totallyBlind && $blindApplicantTotalIncomeRelationship < $ibRelationshipGWILimit && " +
 	" (" +
 	"	$ibWorkingAge || $ibYouth" +
 	" )",
@@ -268,6 +268,7 @@ engine.definitions = {
     totalFamilyGrossWeeklyWage: "$applicantGrossWeeklyWage + $partnerGrossWeeklyWage",
     totalOtherIncomeCalculation: "calculator.calculateTotalOtherIncome()",
     familyTotalGrossWeeklyIncome: "$totalFamilyGrossWeeklyWage + $totalOtherIncomeCalculation",
+    blindApplicantTotalIncomeRelationship:"$totalOtherIncomeCalculation + $partnerGrossWeeklyWage",
 
 
     // -------- Main benefit eligibility --------

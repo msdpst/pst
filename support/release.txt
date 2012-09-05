@@ -131,4 +131,4 @@ JSEC-181:NZS including non-qual partner is not displaying correct when in the 92
 JSEC-179: Supps not in alphabetical order
 JSEC-171: Parental Income should be ignored if 18 y.o. YPP at home
 JSEC-185:(SRE) Widows benefit income limit not enforced when no children
-
+JSEC-187: Income limit for partnered IB not being enforced
