@@ -124,3 +124,4 @@ JSEC-177:UB displayed instead of IB (High)
 
 Version 01.01.14
 JSEC-147: Income sources (again)
+JSEC-179: Supps not in alphabetical order
