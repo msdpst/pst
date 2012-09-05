@@ -273,12 +273,14 @@ engine.definitions = {
 
     potentialWidowsBenefitAny: "(($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
+    		"	!$potentialInvalidsBenefit && " +
+    		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
-    		"	($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
+    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
     		"		|| " +
-    		"	($age50to64 && $dependentChildren == 0 && ($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit)))" +
+    		"	($dependentChildren == 0 && $age50to64 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit))" +
     		")",
     		
     		
@@ -475,13 +477,14 @@ engine.definitions = {
     potentialNewZealandSuperannuationSingle:"$seniorsAge && $seniorResident && $single ", //ACC stuff not required
 
 
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $seniorResident && !$single && !$acc && " +
     		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
     		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
     		"			$partnerAge >= 16 && $seniorPartnerResident",
 
 
-    potentialNewZealandSuperannuationPartnerNotIncluded:"$seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationPartnerNotIncluded:"$seniorsAge && $seniorResident && !$single && !$acc && " +
+    		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
