@@ -665,12 +665,12 @@ var allMainBenefits = [
 /* All the variables that we want to be checked as potential supplementary benefits */
 var allSupplementaryBenefits = [
                         "potentialAccommodationSupplement",
-                        "potentialDisabilityAllowance",
-                        "potentialChildcareSubsidy",
-                        "potentialGuaranteedChildcareAssistancePayment",
-                        "potentialOSCARSubsidy",
-                        "potentialTemporaryAdditionalSupport",
                         "potentialChildDisabilityAllowance",
-                        "potentialLivingAlonePayment"
+                        "potentialChildcareSubsidy",
+                        "potentialDisabilityAllowance",
+                        "potentialGuaranteedChildcareAssistancePayment",
+                        "potentialLivingAlonePayment",
+                        "potentialOSCARSubsidy",
+                        "potentialTemporaryAdditionalSupport"
                    ];
 
