@@ -129,6 +129,7 @@ engine.definitions = {
     // -- Limits -- //
 
     widowsSoleParentGWILimit : 577,//Widows Sole Parent GWI Limit
+    widowsSingleGWILimit : 463,//Widows Sole Parent GWI Limit
     dpbSoleParentGWILimit : 577,//DPB Sole Parent GWI Limit
     dpbCsiSoleParentGWILimit : 638,//DPB CSI Sole Parent GWI Limit
     dpbWomanAloneGWILimit : 463,//DPB Woman Alone GWI Limit
@@ -272,12 +273,15 @@ engine.definitions = {
 
     potentialWidowsBenefitAny: "(($resident || $refugeeOtherWithPermanentResidence) && " +
     		"$gender == 'Female' && $deceasedPartner) && " +
+    		"	!$potentialInvalidsBenefit && " +
+    		"	!$potentialDPBCareOrSickOrInfirm && " +
     		"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
-    		"	($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
-    		"		|| " +
-    		"	($age50to64 && $dependentChildren == 0 && ($familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit)))" +
+	    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
+	    		"		|| " +
+	    		"	($dependentChildren == 0 && $age50to64 && $familyTotalGrossWeeklyIncome < $widowsSingleGWILimit)" +
+	    		")" +
     		")",
     		
     		
@@ -474,13 +478,14 @@ engine.definitions = {
     potentialNewZealandSuperannuationSingle:"$seniorsAge && $seniorResident && $single ", //ACC stuff not required
 
 
-    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationNonQualifiedSpouse:"$seniorsAge && $seniorResident && !$single && !$acc && " +
     		"			$includePartnerInNZS && !$partnerReceivingNZS && " +
     		"			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit && " +
     		"			$partnerAge >= 16 && $seniorPartnerResident",
 
 
-    potentialNewZealandSuperannuationPartnerNotIncluded:"$seniorsAge && $seniorResident && !$single && " +
+    potentialNewZealandSuperannuationPartnerNotIncluded:"$seniorsAge && $seniorResident && !$single && !$acc && " +
+    		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse && " +
     		"			((!$includePartnerInNZS || $partnerReceivingNZS) || " +
     		"			($includePartnerInNZS  && !$partnerReceivingNZS)) && " +
     		"			!$potentialNewZealandSuperannuationNonQualifiedSpouse " ,
