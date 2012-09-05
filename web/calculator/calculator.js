@@ -8,18 +8,14 @@ var calculator = {
     nextIncomeSourceIndex:1,
 
     addIncomeSource:function () {
-        var last = $(".incomeSource").last();
-        var nnew = last.clone();
+        var nnew = $(".incomeSource").first().clone();
 
         nnew.find(':input[name^="income"]').each(function () {
-            $(this).attr("name", $(this).attr("name").replace(/\d*$/, calculator.nextIncomeSourceIndex));
+            $(this).attr("name", $(this).attr("name") + calculator.nextIncomeSourceIndex);
         });
         calculator.nextIncomeSourceIndex++;
 
-        // Validation errors in the one we're copying
-        nnew.find("label.error").remove();
-
-        last.after(nnew);
+        $(".incomeSource").last().after(nnew);
         engine.clearAllControlsIn(nnew);
 
         // Show the close button. These are hidden by default so it doesn't show on the first one.

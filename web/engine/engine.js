@@ -844,6 +844,9 @@ engine = {
         // select the first option in every select - we assume this is the "unselected" option
         elt.find("select :nth-child(1)").attr("selected", "selected");
 
+        // remove any validation error messages
+        elt.find("label.error").remove();
+
         // Custom client code
         engine.onControlsClearedInElement(elt);
     },
