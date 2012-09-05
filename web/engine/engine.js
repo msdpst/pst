@@ -280,9 +280,14 @@ engine = {
     /** Add behaviour to the DOM. The client should call this if it adds new elements to the DOM. */
     onDomAdded:function () {
         // make pressing return be the same as clicking next
-        $(".question :input").keypress(function (e) {
+        $(".question :input").keydown(function (e) {
             if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-                engine.onNext();
+                if (e.shiftKey) {
+                    if (engine.currentGroupNum > 0)
+                        engine.onBack();
+                }
+                else
+                    engine.onNext();
                 return false;
             }
             else {
