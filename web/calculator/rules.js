@@ -43,15 +43,15 @@ engine.definitions = {
     		"$residency == 'Refugee - Other with Permanent Residence'",
 
     
-    unlawfulResident: "!$under20 && !$seniorsAge && " +
-    		"($residency == 'Limited Purpose Permit' || " +
+    unlawfulResident:
+    		" $residency == 'Limited Purpose Permit' || " +
     		" $residency == 'Living In Other Countries' || " +
     		" $residency == 'No Current Permit' || " +
     		" $residency == 'Refugee - other without Permanent Residence' || " +
     		" $residency == 'Student Permit' || " +
     		" $residency == 'Temporary Work Permit' || " +
     		" $residency == 'Visitor Permit' || " +
-    		" $residency == 'Working Holiday' )",
+    		" $residency == 'Working Holiday'",
     
     deceasedPartner: "$relationshipStatusSingle=='Widowed' || $relationshipStatusSingle =='Defacto Partner Deceased' || $relationshipStatusSingle=='Civil Union Partner Deceased'",
 
