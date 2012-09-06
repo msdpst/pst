@@ -135,4 +135,5 @@ JSEC-187: Income limit for partnered IB not being enforced
 JSEC-182: Undetermined YPP income limits  not being enforced
 
 Version 01.01.15
+JSEC-183: Windows benefit (high)
 
