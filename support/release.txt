@@ -144,3 +144,5 @@ JSEC-186:Widows Benefit is displaying with other eligible working age benefits
 Version 01.01.16
 *** SIMPLIFED EXTRA HELP RULES *****
 JSEC-166:Extra help income rules for people with children are not correctly enforced (high)
+JSEC-193:( CDA)  not being given for 5 year old not at school
+

@@ -179,10 +179,10 @@ engine.definitions = {
         "$youth && $partner && $dependentChildren == 0": 866.91, // DA Relationship GWI Limit
         "$youngParent && $single": 506.01, // DA Single Youth GWI Limit
         "$youngParent && $partner && $partnerAge < 18": 866.91, // DA Relationship GWI Limit
-        "$seniorsAge && $single && $dependentChildren == 0": 575.58, // NZS DA Siingle 18+ years
-        "$seniorsAge && $single && $dependentChildren == 1": 693.45, // NZS DA Sole Parent 1 child
-        "$seniorsAge && $single && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
-        "$seniorsAge && $partner": 851.83, // NZS DA Married, civil union or defacto couple (with or without children)
+        "$seniorsAge && $single && $dependentChildren == 0": 585.67, // NZS DA Siingle 18+ years
+        "$seniorsAge && $single && $dependentChildren == 1": 705.72, // NZS DA Sole Parent 1 child
+        "$seniorsAge && $single && $dependentChildren > 1": 743.53,  // NZS DA Sole Parent 2+ children
+        "$seniorsAge && $partner": 866.91, // NZS DA Married, civil union or defacto couple (with or without children)
         
         // Default to no eligibility
         "true": 0
@@ -573,7 +573,7 @@ engine.definitions = {
     		"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     		"	&& ($youth || $workingAge || $seniorsAge)	" +
     		"	&& $caringForChild " +
-    		"	&& ($childAged04 || $childAged513 || $childAged1418 )" +
+    		"	&& ($childAged04 || $childAged513 || $childAged1418 || $childAged5NotAtSchool)" +
     		"	&& $childStayingInNz " +
     		"	&& ($childLivingSituation=='Living at home' || ($childLivingSituation=='Residential Home or Hostel' && $supportChildInHostel))" ,
     
