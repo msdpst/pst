@@ -151,7 +151,11 @@ var calculator = {
      *
      * The engine calls this function.
      */
-    onFinished:function () {
+    onFinished:function(ineligible) {
+        if (ineligible) {
+            calculator.displayIneligible();
+            return;
+        }
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
@@ -212,16 +216,20 @@ var calculator = {
 
             // They're not entitled to anything. Say so.
             else {
-                $("#controlBox").hide();
-                $("#ineligible").slideDown(engine.SLIDE_TIME);
-                $("form").hide();
-                $('html,body').scrollTop(0);
                 $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
                 $('.nextText').html('Next');
+                calculator.displayIneligible();
             }
 
 
         }, 500);
+    },
+    
+    displayIneligible: function() {
+        $("#controlBox").hide();
+        $("#ineligible").slideDown(engine.SLIDE_TIME);
+        $("form").hide();
+        $('html,body').scrollTop(0);
     }
 };
 

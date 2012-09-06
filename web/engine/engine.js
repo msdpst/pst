@@ -171,7 +171,7 @@ engine = {
     /**
      * Called when they reach the end of the questions. The client should override this!
      */
-    onFinished: function() {},
+    onFinished: function(ineligible) {},
 
     /**
      * Called after clearing all inputs within an element, usually because the element
@@ -386,7 +386,7 @@ engine = {
             }
         });
         if (ineligible) {
-            engine.finish();
+            engine.finish(true);
             return;
         }
 
@@ -409,10 +409,10 @@ engine = {
         return false;
     },
     
-    /** They've just hit Next in the last group */
-    finish: function() {
+    /** They've just hit Next in the last group, or they've been kicked out early */
+    finish: function(ineligible) {
         engine.setProgressBarToFinished();
-        engine.onFinished();        
+        engine.onFinished(ineligible);        
     },
     
     /**
@@ -433,7 +433,7 @@ engine = {
 
             // Have we reached the end?
             if (group.length == 0) {
-                engine.finish();
+                engine.finish(false);
                 return;
             }
 
