@@ -146,36 +146,6 @@ var calculator = {
         return total;
     },
 
-
-    calculateAccSuppMax:function () {
-        var partner = engine.getAnswer("partner");
-        var dependentChildren = engine.getAnswer("dependentChildren");
-        var area = engine.getAnswer("area");
-
-        // If area's not set yet, don't cause a scripting error
-        if (!(area >= 1 && area <= 4)) {
-            debug("calculateAccSuppMax exiting because of invalid area: " + area);
-            return 0;
-        }
-
-        area--; // convert to array index
-
-        if (partner) {
-            if (dependentChildren > 0)
-                return engine.definitions.accSuppCoupleWithChildren[area];
-            else
-                return engine.definitions.accSuppCouple[area];
-        }
-        else {
-            if (dependentChildren > 1)
-                return engine.definitions.accSuppSoleParent2OrMoreChildren[area];
-            else if (dependentChildren == 1)
-                return engine.definitions.accSuppSoleParent1Child[area];
-            else
-                return engine.definitions.accSuppSingle[area];
-        }
-    },
-
     /**
      * We've reached the end. Work out what they're entitled to and display it.
      *

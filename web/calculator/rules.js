@@ -221,14 +221,6 @@ engine.definitions = {
 
     // -- Rates -- //
 
-    // Accommodation supplement maximums - each has a rate for each area
-    accSuppSingle: [145, 100, 65, 45], //UB SB YP Single Working Age 
-    accSuppCouple: [160, 125, 75, 55], //UB SB YP relationship without children
-    accSuppCoupleWithChildren: [225, 165, 120, 75], //UB SB YPP - relationship with children
-    accSuppSoleParent1Child: [160, 125, 75, 55], //Sole Parent with one child
-    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75], //Sole Parent with two or more children
-    accSuppMax: "calculator.calculateAccSuppMax()",
-
     ratesUB : {
     	"$single && $age<20 && $age>=18 && $livingAtHome": "136.64",
     	"$single && $age<20 && $age>=18 && !$livingAtHome": "170.80",
