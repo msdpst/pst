@@ -509,7 +509,7 @@ engine.definitions = {
 		"	$youthResidentLessThan2YearsResidence &&" +
     	"	$youngParent &&" +
 		"	(" +
-		"			($single && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit && ($youthLivingCircs || ($livingAtHome && $parentsIncome < $yppParentalIncomeGWILimit))) " +
+		"			($single && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit && ($youthLivingCircs || ($livingAtHome && ($age18 || $parentsIncome <  $yppParentalIncomeGWILimit)))) " +
 		"					|| " +
 		"			(!$single && $partner16to18 && $familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
 		"	) && " +
