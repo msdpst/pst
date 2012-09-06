@@ -43,15 +43,15 @@ engine.definitions = {
     		"$residency == 'Refugee - Other with Permanent Residence'",
 
     
-    unlawfulResident: "!$under20 && !$seniorsAge && " +
-    		"($residency == 'Limited Purpose Permit' || " +
+    unlawfulResident:
+    		" $residency == 'Limited Purpose Permit' || " +
     		" $residency == 'Living In Other Countries' || " +
     		" $residency == 'No Current Permit' || " +
     		" $residency == 'Refugee - other without Permanent Residence' || " +
     		" $residency == 'Student Permit' || " +
     		" $residency == 'Temporary Work Permit' || " +
     		" $residency == 'Visitor Permit' || " +
-    		" $residency == 'Working Holiday' )",
+    		" $residency == 'Working Holiday'",
     
     deceasedPartner: "$relationshipStatusSingle=='Widowed' || $relationshipStatusSingle =='Defacto Partner Deceased' || $relationshipStatusSingle=='Civil Union Partner Deceased'",
 
@@ -220,14 +220,6 @@ engine.definitions = {
 
 
     // -- Rates -- //
-
-    // Accommodation supplement maximums - each has a rate for each area
-    accSuppSingle: [145, 100, 65, 45], //UB SB YP Single Working Age 
-    accSuppCouple: [160, 125, 75, 55], //UB SB YP relationship without children
-    accSuppCoupleWithChildren: [225, 165, 120, 75], //UB SB YPP - relationship with children
-    accSuppSoleParent1Child: [160, 125, 75, 55], //Sole Parent with one child
-    accSuppSoleParent2OrMoreChildren: [225, 165, 120, 75], //Sole Parent with two or more children
-    accSuppMax: "calculator.calculateAccSuppMax()",
 
     ratesUB : {
     	"$single && $age<20 && $age>=18 && $livingAtHome": "136.64",
@@ -517,7 +509,7 @@ engine.definitions = {
 		"	$youthResidentLessThan2YearsResidence &&" +
     	"	$youngParent &&" +
 		"	(" +
-		"			($single && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit && ($youthLivingCircs || ($livingAtHome && $parentsIncome < $yppParentalIncomeGWILimit))) " +
+		"			($single && $familyTotalGrossWeeklyIncome < $yppSingleGWILimit && ($youthLivingCircs || ($livingAtHome && ($age18 || $parentsIncome <  $yppParentalIncomeGWILimit)))) " +
 		"					|| " +
 		"			(!$single && $partner16to18 && $familyTotalGrossWeeklyIncome < $yppRelationshipGWILimit)" +
 		"	) && " +
