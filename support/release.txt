@@ -145,4 +145,8 @@ Version 01.01.16
 *** SIMPLIFED EXTRA HELP RULES *****
 JSEC-166:Extra help income rules for people with children are not correctly enforced (high)
 JSEC-193:( CDA)  not being given for 5 year old not at school
+JSEC-195:Pre condition for Q56 may be incorrect (although correct to he spreadsheet)
+JSEC-170:Outcome for YP at home is not as defined for Supported youth (high)
+JSEC-191:NZS ASUP and DA limits look out of date
+JSEC-192:Extra help income limit for Single working age is not as expected
 
