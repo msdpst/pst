@@ -168,7 +168,7 @@ engine.definitions = {
     TASSoleParent1ChildCashAssetLimit:1346,//TAS Sole Parent 1 Child Cash Asset Limit
     TASanyotherSoleParentCashAssetLimit:1445.89,//TAS any other Sole Parent Cash Asset Limit
 
-    nonQualifiedPartnerIncludedLimit:860,//Non-qualified partner included
+    nonQualifiedPartnerIncludedLimit:918,//Non-qualified partner included
 
     daGWILimits: {
         "$workingAge && $single && $dependentChildren == 0": 585.67, // DA Single Working Age GWI Limit
