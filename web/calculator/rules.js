@@ -172,7 +172,7 @@ engine.definitions = {
     TASSoleParent1ChildCashAssetLimit:1346,//TAS Sole Parent 1 Child Cash Asset Limit
     TASanyotherSoleParentCashAssetLimit:1445.89,//TAS any other Sole Parent Cash Asset Limit
 
-    nonQualifiedPartnerIncludedLimit:860,//Non-qualified partner included
+    nonQualifiedPartnerIncludedLimit:918,//Non-qualified partner included
 
     daGWILimits: {
         "$workingAge && $single && $dependentChildren == 0": 585.67, // DA Single Working Age GWI Limit
@@ -183,10 +183,10 @@ engine.definitions = {
         "$youthForRules && $partner && $dependentChildren == 0": 866.91, // DA Relationship GWI Limit
         "$youngParent && $single": 506.01, // DA Single Youth GWI Limit
         "$youngParent && $partner && $partnerAge < 18": 866.91, // DA Relationship GWI Limit
-        "$seniorsAge && $single && $dependentChildren == 0": 575.58, // NZS DA Siingle 18+ years
-        "$seniorsAge && $single && $dependentChildren == 1": 693.45, // NZS DA Sole Parent 1 child
-        "$seniorsAge && $single && $dependentChildren > 1": 730.60,  // NZS DA Sole Parent 2+ children
-        "$seniorsAge && $partner": 851.83, // NZS DA Married, civil union or defacto couple (with or without children)
+        "$seniorsAge && $single && $dependentChildren == 0": 585.67, // NZS DA Siingle 18+ years
+        "$seniorsAge && $single && $dependentChildren == 1": 705.72, // NZS DA Sole Parent 1 child
+        "$seniorsAge && $single && $dependentChildren > 1": 743.53,  // NZS DA Sole Parent 2+ children
+        "$seniorsAge && $partner": 866.91, // NZS DA Married, civil union or defacto couple (with or without children)
         
         // Default to no eligibility
         "true": 0
@@ -195,29 +195,11 @@ engine.definitions = {
     
     
     extraHelpGWILimits: {
-        "$area==1 && ($workingAge || $youthForRules) && $single && $dependentChildren == 0": 953.00, // ASUP Single Working Age GWI Limit Area 1
-        "$area==1 && ($workingAge || $youthForRules) && $single && $dependentChildren == 1": 1140.00, // ASUP Sole Parent 1 Child GWI Limit Area 1
-        "$area==1 && ($workingAge || $youthForRules) && $single && $dependentChildren > 1": 1400.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
-        "$area==1 && ($workingAge || $youthForRules) && !$single && $dependentChildren == 0": 1208.00, // ASUP Relationship Without Children GWI Limit Area 1
-        "$area==1 && ($workingAge || $youthForRules) && !$single && $dependentChildren > 0": 1468.00, // ASUP Relationship With Children GWI Limit Area 1
-        
-        "$area==2 && ($workingAge || $youthForRules) && $single && $dependentChildren == 0": 773.00, // ASUP Single Working Age GWI Limit Area 2
-        "$area==2 && ($workingAge || $youthForRules) && $single && $dependentChildren == 1": 1000.00, // ASUP Sole Parent 1 Child GWI Limit Area 2
-        "$area==2 && ($workingAge || $youthForRules) && $single && $dependentChildren > 1": 1160.00, // ASUP Sole Parent 2 Child GWI Limit Area 2
-        "$area==2 && ($workingAge || $youthForRules) && !$single && $dependentChildren == 0": 1068.00, // ASUP Relationship Without Children GWI Limit Area 2
-        "$area==2 && ($workingAge || $youthForRules) && !$single && $dependentChildren > 0": 1228.00, // ASUP Relationship With Children GWI Limit Area 2
-        
-        "$area==3 && ($workingAge || $youthForRules) && $single && $dependentChildren == 0": 633.00, // ASUP Single Working Age GWI Limit Area 3
-        "$area==3 && ($workingAge || $youthForRules) && $single && $dependentChildren == 1": 800.00, // ASUP Sole Parent 1 Child GWI Limit Area 3
-        "$area==3 && ($workingAge || $youthForRules) && $single && $dependentChildren > 1": 980.00, // ASUP Sole Parent 2 Child GWI Limit Area 3
-        "$area==3 && ($workingAge || $youthForRules) && !$single && $dependentChildren == 0": 868.00, // ASUP Relationship Without Children GWI Limit Area 3
-        "$area==3 && ($workingAge || $youthForRules) && !$single && $dependentChildren > 0": 1048.00, // ASUP Relationship With Children GWI Limit Area 3
-        
-        "$area==4 && ($workingAge || $youthForRules) && $single && $dependentChildren == 0": 553.00, // ASUP Single Working Age GWI Limit Area 4
-        "$area==4 && ($workingAge || $youthForRules) && $single && $dependentChildren == 1": 720.00, // ASUP Sole Parent 1 Child GWI Limit Area 4
-        "$area==4 && ($workingAge || $youthForRules) && $single && $dependentChildren > 1": 800.00, // ASUP Sole Parent 2 Child GWI Limit Area 4
-        "$area==4 && ($workingAge || $youthForRules) && !$single && $dependentChildren == 0": 778.00, // ASUP Relationship Without Children GWI Limit Area 4
-        "$area==4 && ($workingAge || $youthForRules) && !$single && $dependentChildren > 0": 868.00, // ASUP Relationship With Children GWI Limit Area 4
+        "($workingAge || $youth) && $single && $dependentChildren == 0": 953.00, // ASUP Single Working Age GWI Limit Area 1
+        "($workingAge || $youth) && $single && $dependentChildren == 1": 1140.00, // ASUP Sole Parent 1 Child GWI Limit Area 1
+        "($workingAge || $youth) && $single && $dependentChildren > 1": 1400.00, // ASUP Sole Parent 2 Child GWI Limit Area 1
+        "($workingAge || $youth) && !$single && $dependentChildren == 0": 1208.00, // ASUP Relationship Without Children GWI Limit Area 1
+        "($workingAge || $youth) && !$single && $dependentChildren > 0": 1468.00, // ASUP Relationship With Children GWI Limit Area 1
         "true": -1 // disallow by default
     },
     extraHelpGWILimit: "engine.evalMap(engine.definitions.extraHelpGWILimits, 'extraHelpGWILimits')",
@@ -272,7 +254,7 @@ engine.definitions = {
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
 	    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
@@ -293,7 +275,7 @@ engine.definitions = {
     		"	$familyTotalGrossWeeklyIncome < $dpbSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"	!$potentialWidowsBenefitAny",
     		
     		
@@ -338,7 +320,7 @@ engine.definitions = {
     		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
     		"	!$potentialInvalidsBenefit && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"	(" +
     		"		$noSpouseSupport " +
     		"	|| " +
@@ -383,7 +365,7 @@ engine.definitions = {
 
     potentialYouthPayment:
     		"   $resident && " +
-    		"	$youthForRules  &&" +// +
+    		"	$youth  &&" +// +
     		"	(	" +
     		"		(" +
     		"			$single  && $youthLivingCircs &&" + //&& $
@@ -520,7 +502,7 @@ engine.definitions = {
     	"	!$potentialInvalidsBenefit",
 
 
-	potentialSupportedYouth:"$youthForRules && (" +
+	potentialSupportedYouth:"$youth && (" +
 			"	($single && $livingAtHome && $dependentChildren==0)" +
 			"		||" +
 				"	( " +
@@ -595,7 +577,7 @@ engine.definitions = {
     		"   ($potentialBenefit || $potentialYouthPackage || $potentialSuper) " +
     		"	&& ($youthForRules || $workingAge || $seniorsAge)	" +
     		"	&& $caringForChild " +
-    		"	&& ($childAged04 || $childAged513 || $childAged1418 )" +
+    		"	&& ($childAged04 || $childAged513 || $childAged1418 || $childAged5NotAtSchool)" +
     		"	&& $childStayingInNz " +
     		"	&& ($childLivingSituation=='Living at home' || ($childLivingSituation=='Residential Home or Hostel' && $supportChildInHostel))" ,
     

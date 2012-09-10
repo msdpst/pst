@@ -135,6 +135,21 @@ JSEC-187: Income limit for partnered IB not being enforced
 JSEC-182: Undetermined YPP income limits  not being enforced
 
 Version 01.01.15
+JSEC-183: Windows benefit (high)
 JSEC-190: stayingInNZY  precondition not being enforced
 JSEC-189: remove age checks from (un)lawfulResident
 JSEC-171: (for undetermined YPP as well)
+JSEC-186:Widows Benefit is displaying with other eligible working age benefits
+
+Version 01.01.16
+*** SIMPLIFED EXTRA HELP RULES *****
+JSEC-166:Extra help income rules for people with children are not correctly enforced (high)
+JSEC-193:( CDA)  not being given for 5 year old not at school
+JSEC-195:Pre condition for Q56 may be incorrect (although correct to he spreadsheet)
+JSEC-170:Outcome for YP at home is not as defined for Supported youth (high)
+JSEC-191:NZS ASUP and DA limits look out of date
+JSEC-192:Extra help income limit for Single working age is not as expected
+
+Version 01.01.17
+JSEC-196: Income limit for NZS non-qualifierd spouse not correctly enforced
+JSEC-188:  Health related benefit is incorrectly superceding WB, DPB SP and DPB WA
