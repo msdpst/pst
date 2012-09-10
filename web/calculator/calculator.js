@@ -167,12 +167,16 @@ var calculator = {
             engine.disableCurrentGroup();
             var mainBenefitUrls = [];
             var superIndex = undefined;
+            var hrbIndex = undefined;
             for (var i = 0; i < allMainBenefits.length; i++) {
                 if (engine.evaluate("$" + allMainBenefits[i])) {
                     mainBenefitUrls.push("benefits/" + allMainBenefits[i] + ".html");
                     
                     if (/^potentialNewZealandSuperannuation/.test(allMainBenefits[i]))
                         superIndex = mainBenefitUrls.length - 1;
+                        
+                    if (/^potentialHealthRelatedBenefit/.test(allMainBenefits[i]))
+                        hrbIndex = mainBenefitUrls.length - 1;    
                 }
             }
 
@@ -184,11 +188,19 @@ var calculator = {
                 supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
                 mainBenefitUrls.splice(superIndex, 1);
             }
+            
+            
+            // if the person gets HRB as well as some other benefit, we display HRB as a suplimentary
+            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
+                supplementaryBenefitUrls.push(mainBenefitUrls[hrbIndex]);
+                mainBenefitUrls.splice(hrbIndex, 1);
+            }
 
 
             //  Supplementaries - these work in the same way as benefits.
             for (var i = 0; i < allSupplementaryBenefits.length; i++) {
                 if (engine.evaluate("$" + allSupplementaryBenefits[i]))
+                
                     supplementaryBenefitUrls.push("benefits/" + allSupplementaryBenefits[i] + ".html");
             }
 

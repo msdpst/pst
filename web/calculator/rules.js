@@ -250,7 +250,7 @@ engine.definitions = {
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
 	    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
@@ -271,7 +271,7 @@ engine.definitions = {
     		"	$familyTotalGrossWeeklyIncome < $dpbSoleParentGWILimit && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"	!$potentialWidowsBenefitAny",
     		
     		
@@ -316,7 +316,7 @@ engine.definitions = {
     		"	!$potentialWidowsBenefitAny && " +//potentialHealthRelatedBenefit
     		"	!$potentialDPBSoleParentAny && " +
     		"	!$potentialInvalidsBenefit && " +
-    		"	!$potentialHealthRelatedBenefit && " +
+    		//"	!$potentialHealthRelatedBenefit && " +
     		"	(" +
     		"		$noSpouseSupport " +
     		"	|| " +
