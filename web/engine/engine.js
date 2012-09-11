@@ -161,11 +161,8 @@ engine = {
     groupScrollYPosition: 20,
 
 
-    /**
-     * Rule definitions - a map of names to expressions.
-     * Override this in the client.
-     */
-    definitions: {},
+    /** Files containing rules. Override this in the client. */
+    rulesFiles: [],
 
 
     /**
@@ -187,8 +184,74 @@ engine = {
     validator:undefined,
     currentGroupNum:0,
     SLIDE_TIME:500,
+    definitions: {},
+    
+    parseRules: function(content, destinationMap) {
+        if (destinationMap == undefined)
+            destinationMap = {};
+            
+        content = content.replace(/\/\/.*?$/gm, ""); // remove line comments
+        content = content.replace(/\/\*.*?\*\//gm, ""); // remove block comments
+        content = content.replace(/[\n\r]/gm, ""); // remove line breaks
+        
+        var p;
+        while ((p = content.indexOf(":")) >= 0) {
+            var name = $.trim(content.substring(0, p));
+            debug(name);
+            content = $.trim(content.substring(p + 1));
+            
+            // The value is a map of conditions to values. Treat this specially.
+            if (content.match(/^\{/)) {
+                debug("it's a map!");
+                var mapName = name + "_evalMap";
+                destinationMap[name] = "engine.evalMap(engine.definitions[\"" + mapName + "\"])";
+                
+                // Get everything up to the closing }
+                p = content.indexOf("}");
+                if (p < 0)
+                    throw "missing } in " + content;
+                
+                var mapContent = content.substring(1, p);
+                content = $.trim(content.substring(p + 1));
+                destinationMap[mapName] = engine.parseRules(mapContent);
+
+                // consume the ;
+                if (!content.match(/^;/))
+                    throw "missing ; in " + content;
+                content = content.substring(1);
+                debug("finished map");
+            }
+            
+            // The value is an expression (the normal case)
+            else {
+                p = content.indexOf(";");
+                if (p < 0)
+                    throw "missing ; in " + content;
+                destinationMap[name] = $.trim(content.substring(0, p));
+
+                content = content.substring(p + 1);
+            }
+        }
+        
+        // We'll have consumed everything unless there's a syntax error in the file.
+        if (!content.match(/^\s*$/))
+            throw "invalid syntax in rules file; leftover content: " + content;
+        
+        return destinationMap;
+    },
     
     onReady:function () {
+        if (engine.rulesFiles.length > 0) {
+            var rulesFile = engine.rulesFiles.pop();
+            debug("loading rules file: " + rulesFile);
+            $.get(rulesFile, undefined, function(content) {
+                engine.parseRules(content, engine.definitions);
+                engine.onReady();
+            }, "text");
+            return;
+        }
+        
+        
         debug("====== hello ======");
 
         // Make sure everything's hidden to start off with. The html page should do this in a
@@ -281,7 +344,7 @@ engine = {
     onDomAdded:function () {
         // make pressing return be the same as clicking next
         $(".question :input").keydown(function (e) {
-            if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            if (e.which == 13) {
                 if (e.shiftKey) {
                     if (engine.currentGroupNum > 0)
                         engine.onBack();
@@ -1034,3 +1097,4 @@ Date.prototype.yearsBefore = function(otherDate) {
     years += (otherDate.getDate() - copy.getDate()) / 365.4;
     return years;
 };
+

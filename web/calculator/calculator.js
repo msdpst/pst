@@ -5,6 +5,45 @@
 // Note there is engine customisation at the end of this file.
 
 var calculator = {
+    
+    /* All the variables that we want to be checked as potential main benefits */
+    allMainBenefits: [ 
+                    	"potentialNewZealandSuperannuationSingle",
+                    	"potentialNewZealandSuperannuationNonQualifiedSpouse",
+                    	"potentialNewZealandSuperannuationPartnerNotIncluded",
+                    	"potentialUndeterminedWorkingAgeFinancialAssistance",
+                    	"potentialDPBSoleParentNoPBA",
+                    	"potentialDPBSoleParentPBAWithTeen",
+                    	"potentialDPBSoleParentPBAWithYoungChild",
+                    	"potentialInvalidsBenefit",
+                    	"potentialDPBCareOrSickOrInfirm",
+                    	"potentialWidowsBenefitPBA" ,
+                    	"potentialWidowsBenefitNoPBA" ,
+                    	"potentialWidowsBenefitPBAPartTime" ,
+                    	"potentialDPBWomanAlone",
+                    	"potentialHealthRelatedBenefit",
+                    	"potentialYouthPayment",
+                    	"potentialYoungParentPayment",
+                    	"potentialUnemploymentBenefitTraining",
+                    	"potentialUnemploymentBenefit",
+                        "potentialUndeterminedYouthPayment",
+                        "potentialUndeterminedYoungParentPayment",
+                        "potentialExtraHelp"
+    ],
+    
+    /* All the variables that we want to be checked as potential supplementary benefits */
+    allSupplementaryBenefits: [
+                        "potentialAccommodationSupplement",
+                        "potentialChildDisabilityAllowance",
+                        "potentialChildcareSubsidy",
+                        "potentialDisabilityAllowance",
+                        "potentialGuaranteedChildcareAssistancePayment",
+                        "potentialLivingAlonePayment",
+                        "potentialOSCARSubsidy",
+                        "potentialTemporaryAdditionalSupport"
+                   ],
+
+
     nextIncomeSourceIndex:1,
 
     addIncomeSource:function () {
@@ -146,16 +185,42 @@ var calculator = {
         return total;
     },
 
+
+    calculateAccSuppMax:function () {
+        var partner = engine.getAnswer("partner");
+        var dependentChildren = engine.getAnswer("dependentChildren");
+        var area = engine.getAnswer("area");
+
+        // If area's not set yet, don't cause a scripting error
+        if (!(area >= 1 && area <= 4)) {
+            debug("calculateAccSuppMax exiting because of invalid area: " + area);
+            return 0;
+        }
+
+        area--; // convert to array index
+
+        if (partner) {
+            if (dependentChildren > 0)
+                return engine.definitions.accSuppCoupleWithChildren[area];
+            else
+                return engine.definitions.accSuppCouple[area];
+        }
+        else {
+            if (dependentChildren > 1)
+                return engine.definitions.accSuppSoleParent2OrMoreChildren[area];
+            else if (dependentChildren == 1)
+                return engine.definitions.accSuppSoleParent1Child[area];
+            else
+                return engine.definitions.accSuppSingle[area];
+        }
+    },
+
     /**
      * We've reached the end. Work out what they're entitled to and display it.
      *
      * The engine calls this function.
      */
-    onFinished:function(ineligible) {
-        if (ineligible) {
-            calculator.displayIneligible();
-            return;
-        }
+    onFinished:function () {
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
@@ -167,16 +232,12 @@ var calculator = {
             engine.disableCurrentGroup();
             var mainBenefitUrls = [];
             var superIndex = undefined;
-            var hrbIndex = undefined;
-            for (var i = 0; i < allMainBenefits.length; i++) {
-                if (engine.evaluate("$" + allMainBenefits[i])) {
-                    mainBenefitUrls.push("benefits/" + allMainBenefits[i] + ".html");
+            for (var i = 0; i < calculator.allMainBenefits.length; i++) {
+                if (engine.evaluate("$" + calculator.allMainBenefits[i])) {
+                    mainBenefitUrls.push("benefits/" + calculator.allMainBenefits[i] + ".html");
                     
-                    if (/^potentialNewZealandSuperannuation/.test(allMainBenefits[i]))
+                    if (/^potentialNewZealandSuperannuation/.test(calculator.allMainBenefits[i]))
                         superIndex = mainBenefitUrls.length - 1;
-                        
-                    if (/^potentialHealthRelatedBenefit/.test(allMainBenefits[i]))
-                        hrbIndex = mainBenefitUrls.length - 1;    
                 }
             }
 
@@ -188,20 +249,12 @@ var calculator = {
                 supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
                 mainBenefitUrls.splice(superIndex, 1);
             }
-            
-            
-            // if the person gets HRB as well as some other benefit, we display HRB as a suplimentary
-            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
-                supplementaryBenefitUrls.push(mainBenefitUrls[hrbIndex]);
-                mainBenefitUrls.splice(hrbIndex, 1);
-            }
 
 
             //  Supplementaries - these work in the same way as benefits.
-            for (var i = 0; i < allSupplementaryBenefits.length; i++) {
-                if (engine.evaluate("$" + allSupplementaryBenefits[i]))
-                
-                    supplementaryBenefitUrls.push("benefits/" + allSupplementaryBenefits[i] + ".html");
+            for (var i = 0; i < calculator.allSupplementaryBenefits.length; i++) {
+                if (engine.evaluate("$" + calculator.allSupplementaryBenefits[i]))
+                    supplementaryBenefitUrls.push("benefits/" + calculator.allSupplementaryBenefits[i] + ".html");
             }
 
             debug("benefits: " + mainBenefitUrls);
@@ -228,20 +281,16 @@ var calculator = {
 
             // They're not entitled to anything. Say so.
             else {
+                $("#controlBox").hide();
+                $("#ineligible").slideDown(engine.SLIDE_TIME);
+                $("form").hide();
+                $('html,body').scrollTop(0);
                 $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
                 $('.nextText').html('Next');
-                calculator.displayIneligible();
             }
 
 
         }, 500);
-    },
-    
-    displayIneligible: function() {
-        $("#controlBox").hide();
-        $("#ineligible").slideDown(engine.SLIDE_TIME);
-        $("form").hide();
-        $('html,body').scrollTop(0);
     }
 };
 
@@ -249,3 +298,4 @@ var calculator = {
 engine.groupScrollYPosition = 250;
 engine.onFinished = calculator.onFinished;
 engine.onControlsClearedInElement = calculator.onControlsClearedInElement;
+engine.rulesFiles = ["calculator.rules"];
