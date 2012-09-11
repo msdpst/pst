@@ -153,3 +153,8 @@ JSEC-192:Extra help income limit for Single working age is not as expected
 Version 01.01.17
 JSEC-196: Income limit for NZS non-qualifierd spouse not correctly enforced
 JSEC-188:  Health related benefit is incorrectly superceding WB, DPB SP and DPB WA
+JSEC-192: Extra help income limit for Single working age is not as expected
+
+Version 01.01.18
+JSEC-200:Error message on Other income amount not correct (low)
+

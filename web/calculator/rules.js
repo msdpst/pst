@@ -30,6 +30,8 @@ engine.definitions = {
 
     hasYoungest14Plus:"!$childAged04 && !$childAged5NotAtSchool && !$childAged513 && $childAged1418",
     hasYoungest5to13:"!$childAged04 && !$childAged5NotAtSchool && $childAged513",
+    hasYoungest5NotAtSchool:"$childAged5NotAtSchool && !$childAged04 ",
+    hasYoungestAged4:"$childAged04",
     
 
     // -------- Shortcuts for questions --------
@@ -250,7 +252,6 @@ engine.definitions = {
     		"$gender == 'Female' && $deceasedPartner) && " +
     		"	!$potentialInvalidsBenefit && " +
     		"	!$potentialDPBCareOrSickOrInfirm && " +
-    		//"	!$potentialHealthRelatedBenefit && " +
     		"(	" +
     		"	($workingAge && " +
 	    		"	($dependentChildren >= 1 && $familyTotalGrossWeeklyIncome < $widowsSoleParentGWILimit) " +
@@ -260,9 +261,11 @@ engine.definitions = {
     		")",
     		
     		
-    potentialWidowsBenefitPBA: "$potentialWidowsBenefitAny && ($dependentChildren == 0 || $hasYoungest14Plus || $hasYoungest5to13)",		
-    		
-    potentialWidowsBenefitNoPBA : "$potentialWidowsBenefitAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool))",		
+    potentialWidowsBenefitPBA: "$potentialWidowsBenefitAny && ($dependentChildren == 0 || $hasYoungest14Plus)",		
+    	
+    potentialWidowsBenefitPBAPartTime: "$potentialWidowsBenefitAny && ($hasYoungest5to13 || $hasYoungest5NotAtSchool)",		
+    	
+    potentialWidowsBenefitNoPBA : "$potentialWidowsBenefitAny && $childAged04",		
 
     potentialDPBSoleParentAny: "($resident || $refugeeOtherWithPermanentResidence) && " +
     		"	$workingAge && " +
@@ -631,6 +634,7 @@ var allMainBenefits = [
                     	"potentialDPBCareOrSickOrInfirm",
                     	"potentialWidowsBenefitPBA" ,
                     	"potentialWidowsBenefitNoPBA" ,
+                    	"potentialWidowsBenefitPBAPartTime" ,
                     	"potentialDPBWomanAlone",
                     	"potentialHealthRelatedBenefit",
                     	"potentialYouthPayment",
