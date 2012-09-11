@@ -1,6 +1,8 @@
 // Uncomment this to enable debugging. Don't leave it that way though because it's
 // a performance hit.
-// enableDebugging();
+//enableDebugging();
+
+
 
 // Note there is engine customisation at the end of this file.
 
@@ -181,19 +183,26 @@ var calculator = {
             }
 
             var supplementaryBenefitUrls = [];
-
+            
+            
+             // if the person gets HRB as well as some other benefit, we display HRB as a suplimentary
+            var insertedHRB = false;
+            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
+                supplementaryBenefitUrls.push(mainBenefitUrls[hrbIndex]);
+                mainBenefitUrls.splice(hrbIndex, 1);
+                insertedHRB = true;
+            }
+            
             // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
             // In this case, super is displayed as a supplementary, and appears first.
             if (superIndex != undefined && mainBenefitUrls.length > 1) {
                 supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
-                mainBenefitUrls.splice(superIndex, 1);
-            }
-            
-            
-            // if the person gets HRB as well as some other benefit, we display HRB as a suplimentary
-            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
-                supplementaryBenefitUrls.push(mainBenefitUrls[hrbIndex]);
-                mainBenefitUrls.splice(hrbIndex, 1);
+                //if this case has already spliced the HRB, then our index might be wrong.
+                if (insertedHRB && hrbIndex < superIndex){
+                	 mainBenefitUrls.splice(superIndex-1, 1);
+                }else{
+                	 mainBenefitUrls.splice(superIndex, 1);
+                }   
             }
 
 
