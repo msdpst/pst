@@ -394,7 +394,7 @@
 
         <!-- ======== Your Income ========= -->
 
-        <fieldset class="group" data-visible="$workingAge || $youth || $seniorsAge">
+        <fieldset class="group" data-visible="$workingAge || $youthForPreconditions || $seniorsAge">
         <!-- GROUP 8 -->
 	        <div class="question" >
                 <fieldset>
@@ -484,7 +484,7 @@
 
 
         <fieldset class="group"><!-- GROUP 10 -->
-            <div class="question" data-visible="$workingAge || $youth || $seniorsAge">
+            <div class="question" data-visible="$workingAge || $youthForPreconditions || $seniorsAge">
                 <fieldset>
                     <div>Do you or your partner expect to get other income in the next 52 weeks?</div><!-- Q15 -->
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
@@ -570,7 +570,7 @@
         <!-- =============== Your circumstances ============== -->
 
         <fieldset class="group">
-	        <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
+	        <div class="question" data-visible="$workingAge || $youthForPreconditions || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Are you already on or plan to start a training course?</div>
                     <input type="radio" name="trainingCourse" id="trainingCourseYes" value="true"> <label for="trainingCourseYes">Yes</label>
@@ -598,7 +598,7 @@
 
 
         <fieldset class="group">
-            <div class="question" data-visible="$workingAge || $youth || ($seniorsAge && (!$tenYears || !$fiveYears))">
+            <div class="question" data-visible="$workingAge || $youthForPreconditions || ($seniorsAge && (!$tenYears || !$fiveYears))">
                 <fieldset>
                     <div>Do you have a health condition or disability?</div>
                     <input type="radio" name="healthDisability" id="healthDisabilityYes" value="true"> <label for="healthDisabilityYes">Yes</label>
@@ -702,7 +702,7 @@
 
         <fieldset class="group"> <!-- GROUP 15 -->
 
-            <div class="question" data-visible="($youth && !$totallyBlind) || ($age>=19 && $age<20) || ($age<19 && $age>=18 && $dependentChildren==0)">
+            <div class="question" data-visible="($youthForPreconditions && !$totallyBlind) || ($age>=19 && $age<20) || ($age<19 && $age>=18 && $dependentChildren==0)">
                 <fieldset>
                     <div>Are you living at your parent’s / step-parent’s / guardian’s home?</div><!-- Q28 -->
                     <input type="radio" name="livingAtHome" id="livingAtHomeYes" value="true"> <label for="livingAtHomeYes">Yes</label>
@@ -720,7 +720,7 @@
                 </div>
             </div>
 
-            <div class="question" data-visible="$youth && $livingAtHome==false">
+            <div class="question" data-visible="$youthForPreconditions && $livingAtHome==false">
                 <fieldset>
                     <div>Are you receiving any financial support from your parents / step-parents / guardians?</div><!-- Q29 -->
                     <input type="radio" name="parentSupport" id="parentSupportYes" value="true"> <label for="parentSupportYes">Yes</label>
@@ -734,7 +734,7 @@
                 
             </div>
 
-            <div class="question" data-visible="$youth && $livingAtHome==false && $parentSupport==false">
+            <div class="question" data-visible="$youthForPreconditions && $livingAtHome==false && $parentSupport==false">
                 <fieldset>
                     <div>Please select the reason why you are not living with them:</div><!-- Q30 -->
                     <input type="radio" name="reasonNotLivingAtHome" id="relationshipBreakdown" value="relationshipBreakdown"> <label for="relationshipBreakdown">Relationship breakdown with parents</label><br>
