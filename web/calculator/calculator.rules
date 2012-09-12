@@ -67,14 +67,15 @@ age50to64: ($age >= 50 && $age < 65);
 partner16or17: $partnerAge >= 16 && $partnerAge < 18;
 partner16to18: $partnerAge >= 16 && $partnerAge < 19;
 
+//single is not the opposite of partner!  There are some partner options that effectively mean the person is single (partner in prison)
 single: (!$partner || (
-			$relationshipStatusPartner =='Civil Union - Partner in prison' || 
-			$relationshipStatusPartner =='Defacto - Partner in prison' || 
-			$relationshipStatusPartner =='Married - Partner in prison')
-) ; 
+			$relationshipStatusPartner == 'Civil Union - Partner in prison' || 
+			$relationshipStatusPartner == 'Defacto - Partner in prison' || 
+			$relationshipStatusPartner == 'Married - Partner in prison'
+			)
+		); 
 
-youthLivingCircs : !$livingAtHome && !$parentSupport &&
-        (
+youthLivingCircs : !$livingAtHome && !$parentSupport && (
         	$reasonNotLivingAtHome == 'relationshipBreakdown' ||
         	$reasonNotLivingAtHome == 'absent' ||
         	$reasonNotLivingAtHome == 'other' ||
