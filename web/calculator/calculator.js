@@ -137,6 +137,7 @@ var calculator = {
     /** They clicked the back button in the results section */
     onBackFromResults:function () {
         $(".results").hide();
+        $("#rightSidebar").hide();
         $("form").show();
         $("#controlBox").show();
         $('#nextButton').show();
@@ -231,13 +232,6 @@ var calculator = {
         setTimeout(function () {
 
 
-			if (engine.evaluate("$workingAge")){
-				//not activated yet.  uncomment and fix urls.
-				//engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {});
-				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["eligibility-sidebar-right.inc"], function () {});
-			}
-
-
             engine.disableCurrentGroup();
             var mainBenefitUrls = [];
             var superIndex = undefined;
@@ -322,6 +316,22 @@ var calculator = {
                 $('.nextText').html('Next');
             }
 
+
+			if (engine.evaluate("$workingAge")){
+				//not activated yet.  uncomment and fix urls.
+				//engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {});
+				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["eligibility-sidebar-right.inc"], function () {
+					
+					
+				});
+				
+				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {
+					
+					$("#leftSidebar").fadeIn('slow');
+					$("#rightSidebar").fadeIn('slow');
+				});
+				
+			}
 
         }, 500);
     }
