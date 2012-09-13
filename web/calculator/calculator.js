@@ -7,7 +7,7 @@
 // Note there is engine customisation at the end of this file.
 
 var calculator = {
-    
+
     /* All the variables that we want to be checked as potential main benefits */
     allMainBenefits: [ 
                     	"potentialNewZealandSuperannuationSingle",
@@ -229,6 +229,13 @@ var calculator = {
         //
         //gives the illusion of speed by waiting.. 
         setTimeout(function () {
+
+
+			if (engine.evaluate("$workingAge")){
+				//not activated yet.  uncomment and fix urls.
+				//engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {});
+				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["eligibility-sidebar-right.inc"], function () {});
+			}
 
 
             engine.disableCurrentGroup();

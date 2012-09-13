@@ -205,6 +205,13 @@ extraHelpGWILimit: {
 };
 
 
+asupCashAssetLimit: {
+    $single && $dependentChildren == 0: 8100.00; // ASUP Single Cash Asset Limit
+    $dependentChildren >= 1: 16200.00; // ASUP Couple or Sole Parent Cash Asset Limit
+    true: -1; // disallow by default
+};
+
+
 // -- Rates -- //
 
 ubRate : {
@@ -215,7 +222,6 @@ ubRate : {
     $partner && $dependentChildren == 0 && ((!$partnerWorked || !$partnerStillWorking) || ($partnerStillWorking && $totalFamilyGrossWeeklyWage<$ubRelationshipGWILimit)): 170.80 (each - you and your partner);
     $partner && $dependentChildren > 0: 170.80 (each - you and your partner);
     $single && $dependentChildren > 0: 293.58;
-
 };
 
 ibRate : {
@@ -515,11 +521,21 @@ potentialSuper: $potentialNewZealandSuperannuationSingle || $potentialNewZealand
 
 // -------- Supplements (e.g., not main benefits) ------- //
 
-// Note we're deliberately not testing income and asset thresholds here. The rules are very complicated.
 potentialAccommodationSupplement:
-       ($potentialBenefit || $potentialYouthPackage || $potentialSuper)
-       && ($accommodationCosts) &&
-    	!($accommodationType == 'Rent' && $housingNz); // a simpler equivalent of the spreadsheet condition
+       (	
+    		$potentialBenefit 
+    		
+    		|| 
+    		
+    		($potentialYouthPackage && $cashAssets < $asupCashAssetLimit) 
+    		
+    		|| 
+    		
+    		($potentialSuper && $cashAssets < $asupCashAssetLimit )
+    		
+    	)
+      && ($accommodationCosts) &&
+      !($accommodationType == 'Rent' && $housingNz); 
 
 
 potentialDisabilityAllowance:

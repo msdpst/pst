@@ -25,7 +25,7 @@ body {
 #headerInner, #buffer, #outer {
     width: 44em;
 }
-header img, #headerInner, #buffer, #outer {
+header .logo, #headerInner, #buffer, #outer {
     margin-left: -23em;
 }
 #progress, form {
@@ -221,7 +221,32 @@ header {
     _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
 
 }
-header img {
+
+
+#rightSidebar{
+	position: absolute;
+    left:736px;
+   
+	z-index: 11;
+	top:94px;
+	/*border: 1px solid #a0a0a0;*/
+	width:162px;
+	
+}
+
+#leftSidebar{
+	position: absolute;
+    right:736px;
+    width:162px;
+	z-index: 11;
+	/*border: 1px solid #a0a0a0;*/
+	top:94px;
+
+}
+
+
+
+header .logo {
     position: relative;
     left: 50%;
 }

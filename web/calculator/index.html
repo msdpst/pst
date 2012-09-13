@@ -6,6 +6,9 @@
     	
     <link rel="stylesheet" href="../thirdparty/cssreset-min.css" type="text/css"/>	
 	<link rel="stylesheet" href="calculator.css?dummy=6" type="text/css"/>
+	<!--This URL will be available in prod - we won't host it ourselves.-->
+	<link rel="stylesheet" href="eligibility-sidebar.css" type="text/css"/>
+
     <!--[if (gte IE 6)&(lte IE 99)]>
     	<link rel="stylesheet" href="calculator-ie.css?dummy=6" type="text/css"/>
     <![endif]-->
@@ -16,6 +19,7 @@
     <script src="../engine/debug.js?dummy=13"></script>
     <script src="../engine/engine.js?dummy=13"></script>
     <script src="calculator.js?dummy=13"></script>  
+    
     
     <!--[if (gte IE 6)&(lte IE 8)]>
     	<script src="../thirdparty/selectivizr-min.js" type="text/javascript"></script>
@@ -54,14 +58,17 @@
 <body>
 
 <header>
-    <img src="images/logo.gif" alt="MSD Logo">
+    <img src="images/logo.gif" alt="MSD Logo" class="logo">
 
     <div id="headerInner">
         <h1>Check what you might get</h1>
         <label id="progressLabel">Progress</label>
         <div id="progress"></div>
+        <div id="leftSidebar"></div>
+		<div id="rightSidebar"></div>
     </div>
     <div id="buffer"></div>
+   
 </header>
 
 <div id="outer">
@@ -811,7 +818,7 @@
             
              <div class="question">
                 <fieldset>
-                    <div>Are you struggling to meet your essential living costs from what income you earn or from other sources?</div> <!-- Q35 -->
+                    <div>Are you finding it hard to meet your essential living costs?</div> <!-- Q35 -->
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsYes" value="true"> <label for="livingCostsYes">Yes</label>
                     <input type="radio" name="notMeetingLivingCosts" id="livingCostsNo" value="false"> <label for="livingCostsNo">No</label>
                 </fieldset>
@@ -1009,8 +1016,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 
