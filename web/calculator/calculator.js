@@ -138,6 +138,7 @@ var calculator = {
     onBackFromResults:function () {
         $(".results").hide();
         $("#rightSidebar").hide();
+        $("#leftSidebar").hide();
         $("form").show();
         $("#controlBox").show();
         $('#nextButton').show();
@@ -319,13 +320,11 @@ var calculator = {
 
 			if (engine.evaluate("$workingAge")){
 				//not activated yet.  uncomment and fix urls.
-				//engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {});
-				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["eligibility-sidebar-right.inc"], function () {
-					
-					
+				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
+
 				});
 				
-				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["eligibility-sidebar-left.inc"], function () {
+				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
 					
 					$("#leftSidebar").fadeIn('slow');
 					$("#rightSidebar").fadeIn('slow');

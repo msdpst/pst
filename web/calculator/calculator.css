@@ -226,23 +226,21 @@ header {
 #rightSidebar{
 	position: absolute;
     left:736px;
-   
 	z-index: 11;
 	top:94px;
-	/*border: 1px solid #a0a0a0;*/
+	/*border: 1px solid red;*/
 	width:162px;
-	display: none;
-	
+	height:500px;
 }
 
 #leftSidebar{
 	position: absolute;
     right:736px;
-    width:162px;
+    width:192px;
 	z-index: 11;
-	/*border: 1px solid #a0a0a0;*/
+	height:500px;
+	/*border: 1px solid red;*/
 	top:94px;
-
 }
 
 
