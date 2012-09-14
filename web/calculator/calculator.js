@@ -119,7 +119,7 @@ var calculator = {
     },
 
     exitWI:function () {
-
+		_gaq.push(['_trackEvent', 'Exit', 'clicked']);
         window.location = "http://www.workandincome.govt.nz/online-services/";
     },
 

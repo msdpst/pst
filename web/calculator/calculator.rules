@@ -96,7 +96,7 @@ single25uBSBIncomeLimit: $single && $age25Plus && ($familyTotalGrossWeeklyIncome
 uBSBrelationshipIncomeLimit: !$single && ($familyTotalGrossWeeklyIncome < $ubRelationshipGWILimit );
 uBSBsoleParentIncomeLimit: !$single && $dependentChildren >= 1 && ($familyTotalGrossWeeklyIncome < $ubSoleParentGWILimit );
 
-
+singleSharing:$single &&  ($visitorStaying || $liveWithAdult);
 singleLivingAlone: $single && $liveAlone && !$visitorStaying;
 singleNotLivingAlone:
         $single && !$liveAlone && !$visitorStaying &&
@@ -205,10 +205,51 @@ extraHelpGWILimit: {
 };
 
 
+asupIncomeLimit: {
+	$single && $dependentChildren == 0 : 538.15; //NZS ASUP Single
+	$single && $dependentChildren == 1 : 653.01;//NZS ASUP Sole Parent 1 child
+	$single && $dependentChildren >= 2 : 687.98; //NZS ASUP Sole Parent 2+ children
+	!$single : 781.62;//NZS ASUP Married, civil union or de facto couple (with or without children) 	
+    true: -1; // disallow by default
+};
+
 asupCashAssetLimit: {
     $single && $dependentChildren == 0: 8100.00; // ASUP Single Cash Asset Limit
-    $dependentChildren >= 1: 16200.00; // ASUP Couple or Sole Parent Cash Asset Limit
+    ($single || $dependentChildren >= 1): 16200.00; // ASUP Couple or Sole Parent Cash Asset Limit
     true: -1; // disallow by default
+};
+
+
+asupRentBoardLimits:{
+	$single && $dependentChildren == 0 && !$singleSharing: 87.00;
+	$single && $dependentChildren == 0 && $singleSharing: 81.00;
+	$single && $dependentChildren == 1 && !$singleSharing: 110.00;
+	$single && $dependentChildren == 1 && $singleSharing: 104.00;
+	$single && $dependentChildren >= 2 && !$singleSharing: 110.00;
+	$single && $dependentChildren >= 2 && $singleSharing: 104.00;
+	
+	$partner && $dependentChildren == 0 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && $!partnerReceivingNZS && $includePartnerInNZS: 110.00;
+	$partner && $dependentChildren == 0 && ($potentialNewZealandSuperannuationPartnerNotIncluded || $potentialNewZealandSuperannuationNonQualifiedSpouse) : 128.00;
+	$partner && $dependentChildren >= 1 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && $partnerReceivingNZS : 157.00;
+	$partner && $dependentChildren >= 1 && (!$potentialNewZealandSuperannuationPartnerNotIncluded || $potentialNewZealandSuperannuationNonQualifiedSpouse) : 151.00;
+	$partner && $dependentChildren >= 1 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && !$partnerReceivingNZS && $includePartnerInNZS: 110.00;
+	
+};
+
+asupHomeLimits:{
+	$single && $dependentChildren == 0 && !$singleSharing: 105.00;
+	$single && $dependentChildren == 0 && $singleSharing: 97.00;
+	$single && $dependentChildren == 1 && !$singleSharing: 132.00;
+	$single && $dependentChildren == 1 && $singleSharing: 124.00;
+	$single && $dependentChildren >= 2 && !$singleSharing: 132.00;
+	$single && $dependentChildren >= 2 && $singleSharing: 124.00;
+	
+	$partner && $dependentChildren == 0 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && $!partnerReceivingNZS && $includePartnerInNZS: 132.00;
+	$partner && $dependentChildren == 0 && ($potentialNewZealandSuperannuationPartnerNotIncluded || $potentialNewZealandSuperannuationNonQualifiedSpouse) : 153.00;
+	$partner && $dependentChildren >= 1 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && $partnerReceivingNZS : 189.00;
+	$partner && $dependentChildren >= 1 && (!$potentialNewZealandSuperannuationPartnerNotIncluded || $potentialNewZealandSuperannuationNonQualifiedSpouse) : 181.00;
+	$partner && $dependentChildren >= 1 && ($potentialNewZealandSuperannuationPartnerNotIncluded || !$potentialNewZealandSuperannuationNonQualifiedSpouse) && !$partnerReceivingNZS && $includePartnerInNZS: 132.00;
+	
 };
 
 
@@ -523,15 +564,21 @@ potentialSuper: $potentialNewZealandSuperannuationSingle || $potentialNewZealand
 
 potentialAccommodationSupplement:
        (	
-    		$potentialBenefit 
+    		$potentialBenefit || 
+    		($potentialYouthPackage && 
+    				$cashAssets < $asupCashAssetLimit) || 
     		
-    		|| 
-    		
-    		($potentialYouthPackage && $cashAssets < $asupCashAssetLimit) 
-    		
-    		|| 
-    		
-    		($potentialSuper && $cashAssets < $asupCashAssetLimit )
+    		($potentialSuper && 
+    				$cashAssets < $asupCashAssetLimit &&  
+    				$familyTotalGrossWeeklyIncome < $asupIncomeLimit &&
+    				(
+    				 (($accommodationType == 'Rent') && $rentPerWeek > $asupRentBoardLimits)
+    				 ||
+    				 (($accommodationType == 'Board') && $boardPerWeek > $asupRentBoardLimits)
+    				 ||
+    				 (($accommodationType == 'Home Owner') && $outgoingsPerWeek > $asupHomeLimits)
+    				)
+    		)
     		
     	)
       && ($accommodationCosts) &&

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    	
+    <link type="image/x-icon" href="/webadmin/images/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="../thirdparty/cssreset-min.css" type="text/css"/>	
 	<link rel="stylesheet" href="calculator.css?dummy=6" type="text/css"/>
 	<!--This URL will be available in prod - we won't host it ourselves.-->
@@ -12,6 +12,14 @@
     <!--[if (gte IE 6)&(lte IE 99)]>
     	<link rel="stylesheet" href="calculator-ie.css?dummy=6" type="text/css"/>
     <![endif]-->
+    
+   <script type="text/javascript">
+	<!--Google Analytics-->
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-2196406-3']);
+	  _gaq.push(['_trackPageview']);
+
+	</script>
 	
     <script src="../thirdparty/jquery-1.7.2.js"></script>
     <script src="../thirdparty/jquery.validate.js"></script>
@@ -980,16 +988,17 @@
 		  	<ul>
 		  	<li>To apply now, please complete an online application form</li>
 		  	<li>If you're deaf, hearing-impaired or find it hard to communicate by phone you can contact 
-		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or email <a href="mailto:MSD_Deaf_Services@msd.govt.nz">MSD_Deaf_Services@msd.govt.nz</a>.</li>
+		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or email 
+		  <a href="mailto:MSD_Deaf_Services@msd.govt.nz">MSD_Deaf_Services@msd.govt.nz</a>.</li>
 		  	</ul>
 		</div>
         
 		<br><br>
         <div class="resultsButtonBox">
 	        <button id="finalExitButton" type="button" onclick="calculator.confirmExit()"><span class="exitText">Exit</span></button>
-        	<button id="restartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
-            <button id="finalBackButton" onclick="calculator.onBackFromResults()"><span class="exitText">Back</span></button>
-            <button id="applyButton" onclick="calculator.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
+        	<button id="restartButton" onclick="_gaq.push(['_trackEvent', 'Restart', 'clicked']); engine.restart()"><span class="restartText">Start Over</span></button>
+            <button id="finalBackButton" onclick="_gaq.push(['_trackEvent', 'BackFromResults', 'clicked']);calculator.onBackFromResults()"><span class="exitText">Back</span></button>
+            <button id="applyButton" onclick="_gaq.push(['_trackEvent', 'Apply', 'clicked']);calculator.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
         </div>
     </div>
 
@@ -1021,17 +1030,27 @@
 
 <div id="bottomBuffer"></div>
 
-<span id="confirmExit" class="noscript">	
-        <div class="noscriptInner">
-        	 <h2>	Are you sure you wish to exit?</h2>
-	 		<button id="exitButtonNo" type="button" onclick="calculator.cancelExit('exitButton','confirmExit')">
-	 			<span class="noText">No</span>
-	 		</button>
-	 		<button id="exitButtonYes" type="button" onclick="calculator.exitWI()">
-	 			<span class="yesText">Yes</span>
-	 		</button>
-        </div>
-</span>
+	<span id="confirmExit" class="noscript">	
+	        <div class="noscriptInner">
+	        	 <h2>	Are you sure you wish to exit?</h2>
+		 		<button id="exitButtonNo" type="button" onclick="calculator.cancelExit('exitButton','confirmExit')">
+		 			<span class="noText">No</span>
+		 		</button>
+		 		<button id="exitButtonYes" type="button" onclick="calculator.exitWI()">
+		 			<span class="yesText">Yes</span>
+		 		</button>
+	        </div>
+	</span>
+
+	<!-- Google analytics-->
+	<script type="text/javascript">
+	 (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		  
+	</script>
 
 </body>
 </html>

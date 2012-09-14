@@ -236,7 +236,7 @@ header {
 #leftSidebar{
 	position: absolute;
     right:736px;
-    width:192px;
+    width:162px;
 	z-index: 11;
 	height:500px;
 	/*border: 1px solid red;*/
