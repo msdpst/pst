@@ -4,7 +4,7 @@
 	float: left;
 	border: none;
 	/*margin:10px 0 0 40px;*/
-	padding:0;
+	padding: 0;
 	width: 162px;
 	text-align: left;
 	background-color: transparent;
@@ -23,11 +23,21 @@
 		url("http://www.workandincome.govt.nz/webadmin/images/bg-sidebar-handy-links.jpg");
 	background-repeat: repeat-y;
 	background-position: right;
-    border-left: 1px solid #E88E90;
+	border-left: 1px solid #E88E90;
 	border-bottom: 1px solid #E88E90;
 }
 
+#handy #sidebarlinks {
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-left-radius: 6px;
+}
 
+#sidebar #sidebarlinks {
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-bottom-right-radius: 6px;
+}
 
 #handy #sidebarlinks  .block {
 	margin: 0;
@@ -64,7 +74,7 @@
 	background-repeat: repeat-y;
 	background-position: left;
 	border-bottom: 1px solid #E88E90;
-    border-right: 1px solid #E88E90;
+	border-right: 1px solid #E88E90;
 }
 
 #sidebar #sidebarlinks .block {
@@ -85,8 +95,7 @@
 	text-align: left;
 }
 
-#sidebar #sidebarlinks .block h2, 
-#handy #sidebarlinks .block h2 {
+#sidebar #sidebarlinks .block h2,#handy #sidebarlinks .block h2 {
 	margin: 0;
 	padding: 2px 0 8px 0;
 	border: none;
@@ -105,7 +114,7 @@
 	background-repeat: no-repeat;
 	background-position: top left;
 	min-height: 20px;
-	width:130px;
+	width: 130px;
 }
 
 .links a {
@@ -128,8 +137,7 @@
 	text-decoration: none;
 }
 
-#sidebar #sidebarlinks .links ,
-#handy #sidebarlinks .links {
+#sidebar #sidebarlinks .links,#handy #sidebarlinks .links {
 	border: none;
 	display: block;
 	font-family: Arial, Helvetica, sans-serif;
@@ -140,9 +148,10 @@
 	width: auto;
 }
 
-#sidebar #sidebarlinks .default,
-#handy #sidebarlinks .default {
-	background: url("http://www.workandincome.govt.nz/webadmin/images/right.gif") no-repeat scroll transparent left top;
+#sidebar #sidebarlinks .default,#handy #sidebarlinks .default {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/right.gif")
+		no-repeat scroll transparent left top;
 	margin-left: 11px;
 	padding-bottom: 0;
 	padding-left: 18px;
@@ -150,82 +159,98 @@
 
 .word {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/word.gif")  no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/word.gif")
+		no-repeat scroll transparent left top;
 }
 
 .rtf {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/rtf.gif")  no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/rtf.gif")
+		no-repeat scroll transparent left top;
 }
 
 .pdf {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/pdf.gif")  no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/pdf.gif")
+		no-repeat scroll transparent left top;
 }
 
 .powerpoint {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/powerpoint.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/powerpoint.gif")
+		no-repeat scroll transparent left top;
 }
 
 .excel {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/excel.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/excel.gif")
+		no-repeat scroll transparent left top;
 }
 
 .project {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/project.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/project.gif")
+		no-repeat scroll transparent left top;
 }
 
 .text {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/text.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/text.gif")
+		no-repeat scroll transparent left top;
 }
 
 .image {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/image.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/image.gif")
+		no-repeat scroll transparent left top;
 }
 
 .zip {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/zip.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/zip.gif")
+		no-repeat scroll transparent left top;
 }
 
 .mpeg {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/mpeg.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/mpeg.gif")
+		no-repeat scroll transparent left top;
 }
 
 .flashvideo {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/flashvideo.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/flashvideo.gif")
+		no-repeat scroll transparent left top;
 }
 
 .flash {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/flash.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/flash.gif")
+		no-repeat scroll transparent left top;
 }
 
 .email {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/email.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/email.gif")
+		no-repeat scroll transparent left top;
 }
 
 .website {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/website.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/website.gif")
+		no-repeat scroll transparent left top;
 }
 
 .newsroom {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/newsroom.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/newsroom.gif")
+		no-repeat scroll transparent left top;
 }
 
 .whatshappening {
 	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/whats-happening.gif") no-repeat scroll transparent left top;
+		url("http://www.workandincome.govt.nz/webadmin/images/whats-happening.gif")
+		no-repeat scroll transparent left top;
 }
 
 #sidebar .topBottomFloat {
@@ -235,8 +260,8 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#sidebar .topBottomFloat div a:hover,
-#sidebar .topBottomFloat div a:active {
+#sidebar .topBottomFloat div a:hover,#sidebar .topBottomFloat div a:active
+	{
 	border: none;
 	cursor: pointer;
 	border: none;
