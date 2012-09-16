@@ -10,3 +10,12 @@
 	color: #444444;
     font-weight: 500;
 }
+
+#leftSidebar,
+#rightSidebar {
+    top: 95px;
+}
+
+#sidebar {
+	margin-left:-3px;
+}

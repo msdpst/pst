@@ -1,35 +1,42 @@
 /* Handy links */
 #handy {
 	/*background:#fff url("http://www.workandincome.govt.nz/webadmin/images/handy-bg.jpg) no-repeat bottom left;*/
-	/*padding:0 0 10px 0;*/
+	float: left;
+	border: none;
 	/*margin:10px 0 0 40px;*/
-	border: none;
-	width: 152px;
+	padding:0;
+	width: 162px;
+	text-align: left;
+	background-color: transparent;
+}
+
+#handy p {
+	margin: 4px 0;
+	padding: 0;
+}
+
+#handy #sidebarlinks {
 	float: left;
+	margin: 0;
+	padding: 8px 0 8px 0;
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/bg-sidebar-handy-links.jpg");
+	background-repeat: repeat-y;
+	background-position: right;
+    border-left: 1px solid #E88E90;
+	border-bottom: 1px solid #E88E90;
+}
+
+
+
+#handy #sidebarlinks  .block {
+	margin: 0;
+	padding: 0 16px 0 8px;
+	width: 136px;
+	border: none;
+	background-color: transparent;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 80%;
-	
-}
-
-#handy h2 {
-	/*background:#cc2e32 url("http://www.workandincome.govt.nz/webadmin/images/handy-title-bg.jpg") no-repeat top left;*/
-	padding: 10px 15px 10px 15px;
-	margin: 0;
-	border: none;
-	width: 195px;
-	float: left;
-	font-size: 130%;
-	color: #fff;
-}
-
-#handy .resources {
-	/*background:transparent url("http://www.workandincome.govt.nz/webadmin/images/handy-resources-bg.jpg) no-repeat top left;*/
-	/*padding:5px 10px 0 5px;*/
-	margin: 0;
-	border: none;
-	width: 192px;
-	float: left;
-	color: #fff;
+	color: #003366;
 }
 
 /* sidebar */
@@ -43,91 +50,26 @@
 	background-color: transparent;
 }
 
-#sidebar #firstad {
-	float: right;
-	margin: 0;
+#sidebar p {
+	margin: 4px 0;
 	padding: 0;
-	width: 162px;
-	height: 65px;
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/bg-sidebar-top.gif")
-		no-repeat top right;
-}
-
-#sidebar #firstad a,#sidebar #firstad a:visited {
-	float: right;
-	display: block;
-	margin: 0;
-	padding: 0 62px 0 0;
-	width: 100px;
-	height: 49px;
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/go-button-top.gif") no-repeat scroll transparent left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 120%;
-	line-height: 90%;
-	font-weight: bold;
-	text-decoration: none;
-	text-align: right;
-	color: #036;
-}
-
-html>body #sidebar #firstad a,html>body #sidebar #firstad a:visited {
-	height: 65px;
-}
-
-#sidebar #firstad a:active,#sidebar #firstad a:hover {
-	color: #ce3436;
-}
-
-#sidebar #firstad a img {
-	margin: 15px 0 0 0;
-	padding: 0 0 0 0;
-}
-
-#sidebar #language {
-	float: right;
-	margin: 0;
-	padding: 0;
-	width: 162px;
-	height: 66px;
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/bg-sidebar-bottom.gif")
-		no-repeat bottom right;
-	background-color: #ce3436;
-}
-
-#sidebar #language a,#sidebar #language a:visited {
-	display: block;
-	margin: 0;
-	padding: 10px 0 0 0;
-	width: 162px;
-	height: 56px;
-	background: transparent;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 115%;
-	font-weight: bold;
-	text-align: center;
-	color: #FFFFFF;
-}
-
-#sidebar #language a:active,#sidebar #language a:hover {
-	color: #003366;
 }
 
 #sidebar #sidebarlinks {
 	float: right;
 	margin: 0;
-	padding: 8px 0 0 0;
+	padding: 8px 0 8px 0;
 	background:
 		url("http://www.workandincome.govt.nz/webadmin/images/bg-sidebar-links.jpg");
 	background-repeat: repeat-y;
 	background-position: left;
+	border-bottom: 1px solid #E88E90;
+    border-right: 1px solid #E88E90;
 }
 
-#sidebar .block {
+#sidebar #sidebarlinks .block {
 	margin: 0;
-	padding: 0 12px 0 14px;
+	padding: 0 11px 0 14px;
 	width: 136px;
 	border: none;
 	background-color: transparent;
@@ -135,7 +77,7 @@ html>body #sidebar #firstad a,html>body #sidebar #firstad a:visited {
 	color: #003366;
 }
 
-#sidebar .block .topBottomFloat {
+#sidebar #sidebarlinks .block .topBottomFloat {
 	margin: 0;
 	padding: 0 0 10px 0;
 	border: none;
@@ -143,7 +85,8 @@ html>body #sidebar #firstad a,html>body #sidebar #firstad a:visited {
 	text-align: left;
 }
 
-#sidebar .block h2 {
+#sidebar #sidebarlinks .block h2, 
+#handy #sidebarlinks .block h2 {
 	margin: 0;
 	padding: 2px 0 8px 0;
 	border: none;
@@ -151,47 +94,6 @@ html>body #sidebar #firstad a,html>body #sidebar #firstad a:visited {
 	font-size: 75%;
 	font-weight: bold;
 	color: #000000;
-}
-
-#sidebar .block ul {
-	margin: 0;
-	border: none;
-	padding: 8px 0 4px 0;
-	list-style: none;
-}
-
-#sidebar .block ul {
-	font-size: 75%;
-}
-
-#sidebar .block li {
-	padding: 0 0 0 24px;
-	margin: 4px 0 4px 5px;
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/bg-menu-bullet.gif")
-		no-repeat left top;
-}
-
-#sidebar .block li a {
-	color: #003366;
-	text-decoration: underline;
-}
-
-#sidebar .block li a:hover,#sidebar .block li a:active {
-	color: #CE3436;
-}
-
-#sidebar .block hr {
-	padding: 0 0 0 0;
-	margin: 0 0 0 0;
-	height: 1px;
-	border: solid 1px #f3beb8;
-	background-color: #f3beb8;
-}
-
-html>body #sidebar .block hr {
-	margin: 0 0 8px 0;
-	border: none;
 }
 
 .links {
@@ -204,155 +106,6 @@ html>body #sidebar .block hr {
 	background-position: top left;
 	min-height: 20px;
 	width:130px;
-}
-
-* html .links {
-	height: 22px;
-}
-
-#sidebar #sidebarlinks .links {
-	/*padding: 0 0 0 26px;*/
-	/*margin: 0px 0 8px 0;*/
-	border: none;
-	display: block;
-	font-family: Arial, Helvetica, sans-serif;
-	background-repeat: no-repeat;
-	background-position: top left;
-	min-height: 20px;
-	font-size: 75%;
-	word-wrap: break-word;
-}
-
-#handy .resources .default {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/right.gif")no-repeat scroll transparent left;
-	background-position: 9px 0;
-	padding-bottom: 0px;
-}
-
-#sidebar #sidebarlinks .default {
-	background: url("http://www.workandincome.govt.nz/webadmin/images/right.gif") no-repeat scroll transparent left;
-	margin-left: 11px;
-	padding-bottom: 0;
-	padding-left: 18px;
-}
-
-.word {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/word.gif")  no-repeat scroll transparent left;
-}
-
-.rtf {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/rtf.gif")  no-repeat scroll transparent left;
-}
-
-.pdf {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/pdf.gif")  no-repeat scroll transparent left;
-}
-
-.powerpoint {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/powerpoint.gif") no-repeat scroll transparent left;
-}
-
-.excel {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/excel.gif") no-repeat scroll transparent left;
-}
-
-.project {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/project.gif") no-repeat scroll transparent left;
-}
-
-.text {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/text.gif") no-repeat scroll transparent left;
-}
-
-.image {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/image.gif") no-repeat scroll transparent left;
-}
-
-.zip {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/zip.gif") no-repeat scroll transparent left;
-}
-
-.mpeg {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/mpeg.gif") no-repeat scroll transparent left;
-}
-
-.flashvideo {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/flashvideo.gif") no-repeat scroll transparent left;
-}
-
-.flash {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/flash.gif") no-repeat scroll transparent left;
-}
-
-.email {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/email.gif") no-repeat scroll transparent left;
-}
-
-.website {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/website.gif") no-repeat scroll transparent left;
-}
-
-.newsroom {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/newsroom.gif") no-repeat scroll transparent left;
-}
-
-.whatshappening {
-	background:
-		url("http://www.workandincome.govt.nz/webadmin/images/whats-happening.gif") no-repeat scroll transparent left;
-}
-
-#sidebar p {
-	margin: 4px 0;
-	padding: 0;
-}
-
-#sidebar .rightFloat img {
-	float: right;
-	position: relative;
-	display: inline;
-	margin: 4px 0;
-	padding: 0 0 0 6px;
-}
-
-#sidebar .leftFloat img {
-	float: left;
-	position: relative;
-	display: inline;
-	margin: 4px 0;
-	padding: 0 6px 0 0;
-}
-
-#sidebar .topBottomFloat,#sidebar .rightFloat,#sidebar .leftFloat {
-	margin: 4px 0;
-	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-#sidebar .topBottomFloat {
-	text-align: center;
-}
-
-#sidebar .topBottomFloat div a:hover,#sidebar .topBottomFloat div a:active
-	{
-	border: none;
-	cursor: pointer;
-	border: none;
 }
 
 .links a {
@@ -373,4 +126,118 @@ html>body #sidebar .block hr {
 .links a:hover {
 	color: #000;
 	text-decoration: none;
+}
+
+#sidebar #sidebarlinks .links ,
+#handy #sidebarlinks .links {
+	border: none;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	background-repeat: no-repeat;
+	background-position: top left;
+	min-height: 20px;
+	font-size: 75%;
+	width: auto;
+}
+
+#sidebar #sidebarlinks .default,
+#handy #sidebarlinks .default {
+	background: url("http://www.workandincome.govt.nz/webadmin/images/right.gif") no-repeat scroll transparent left top;
+	margin-left: 11px;
+	padding-bottom: 0;
+	padding-left: 18px;
+}
+
+.word {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/word.gif")  no-repeat scroll transparent left top;
+}
+
+.rtf {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/rtf.gif")  no-repeat scroll transparent left top;
+}
+
+.pdf {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/pdf.gif")  no-repeat scroll transparent left top;
+}
+
+.powerpoint {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/powerpoint.gif") no-repeat scroll transparent left top;
+}
+
+.excel {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/excel.gif") no-repeat scroll transparent left top;
+}
+
+.project {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/project.gif") no-repeat scroll transparent left top;
+}
+
+.text {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/text.gif") no-repeat scroll transparent left top;
+}
+
+.image {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/image.gif") no-repeat scroll transparent left top;
+}
+
+.zip {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/zip.gif") no-repeat scroll transparent left top;
+}
+
+.mpeg {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/mpeg.gif") no-repeat scroll transparent left top;
+}
+
+.flashvideo {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/flashvideo.gif") no-repeat scroll transparent left top;
+}
+
+.flash {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/flash.gif") no-repeat scroll transparent left top;
+}
+
+.email {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/email.gif") no-repeat scroll transparent left top;
+}
+
+.website {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/website.gif") no-repeat scroll transparent left top;
+}
+
+.newsroom {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/newsroom.gif") no-repeat scroll transparent left top;
+}
+
+.whatshappening {
+	background:
+		url("http://www.workandincome.govt.nz/webadmin/images/whats-happening.gif") no-repeat scroll transparent left top;
+}
+
+#sidebar .topBottomFloat {
+	margin: 4px 0;
+	padding: 0;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#sidebar .topBottomFloat div a:hover,
+#sidebar .topBottomFloat div a:active {
+	border: none;
+	cursor: pointer;
+	border: none;
 }

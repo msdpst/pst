@@ -579,11 +579,15 @@ li {
     margin-bottom: 1em;
 }
 
-#eligible a[href^='http'] {
+.results a[href^='http'] {
     background: url("images/right.png") no-repeat scroll transparent left;
     padding-left:25px;
 }
 
+#eligible a[href^='http'] {
+    background: url("images/right.png") no-repeat scroll transparent left;
+    padding-left:25px;
+}
 #ineligible a[href^='http'] {
     background: url("images/right.png") no-repeat scroll transparent left;
     padding-left:25px;
