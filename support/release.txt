@@ -157,4 +157,13 @@ JSEC-192: Extra help income limit for Single working age is not as expected
 
 Version 01.01.18
 JSEC-200:Error message on Other income amount not correct (low)
+JSEC-207:Change wording for "Struggling" question
+JSEC-206:Conditionally display the Online Services job vacancy websites sidebar on the Results page
+JSEC-205:DPB-SP not being offerred when "single" is partner in prison
+JSEC-204:Triple dip is failing to get to last page (high)
+JSEC-202:Changes to Success Text wording and links
+JSEC-200:Error message on Other income amount not correct (low)
+JSEC-199:Income limits on Accommodation Supp for NZS not implemented
+JSEC-198: Accommodation entry thresholds do not seem to be implemented
+JSEC-197:Cash assest limit for ASUP does not seem to be implemented
 
