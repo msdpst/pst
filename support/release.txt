@@ -167,3 +167,10 @@ JSEC-199:Income limits on Accommodation Supp for NZS not implemented
 JSEC-198: Accommodation entry thresholds do not seem to be implemented
 JSEC-197:Cash assest limit for ASUP does not seem to be implemented
 
+Version 01.01.19
+JSEC-213:Supps are not in alphabetical order
+JSEC-213: Text dropped off DPB WA outcome
+JSEC-210: Recieiving ACC question (Q51)  is not being ignored for NZS Non-Qual spouse and partner not included (high)
+JSEC-209:NZS Non-qualified spouse residency of Refugee - Other with Permanent Residence being ignored (high)
+JSEC-208:refugeeOtherWithPermanentResidence is being applied to NZS (high)
+JSEC-197:Cash assest limit for ASUP does not seem to be implemented
