@@ -60,7 +60,15 @@ deceasedPartner: $relationshipStatusSingle=='Widowed' || $relationshipStatusSing
 resident: $stayingInNz && $twoYears && $residencyResident;
 refugeeOtherWithPermanentResidence: $stayingInNz && !$twoYears && $residency == 'Refugee - Other with Permanent Residence';
 
-seniorResident: $residencyResident && $tenYears && $fiveYears;
+seniorResident: $stayingInNz && $tenYears && $fiveYears && 
+		(
+			$residency == 'NZ Citizen (by birth)' ||
+			$residency == 'NZ Citizen (Other)' ||
+			$residency == 'Permanent Resident' ||
+			$residency == 'Refugee - Quota' ||
+			$residency == 'Australian' ||
+			$residency == 'Refugee - Other with Permanent Residence'
+		);
 
 ibWorkingAge: ($age >= 18 && $age < 65);
 age50to64: ($age >= 50 && $age < 65);
