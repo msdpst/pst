@@ -5,6 +5,19 @@
 	.dontRead { display: none !important; }
 }
 
+@media print {
+    /* See also calculator-ie.css */
+    #leftSidebar, #rightSidebar, #progressLabel, #bottomBuffer { 
+        display: none !important; 
+    }
+    #progress { 
+        visibility: hidden !important; 
+    }
+    .results {
+        margin-top: -1em !important;
+    }
+}
+
 
 html {
     min-height: 100%;
@@ -551,7 +564,7 @@ li {
 
 .results {
     padding: 2em 1.5em 2em 1.5em;
-    margin: 2em 2em 0 2em;
+    margin: 0 2em 0 2em;
 }
 
 /* floating the button right causes problems in IE */
