@@ -24,7 +24,15 @@ ibYouth: $age16to17;
 parent: $dependentChildren >= 1;
 youngParent: $age16to18 && $parent;
 oscarAgedChild: $childAged513;
-seniorPartnerResident: $partnerNZ && ($partnerResidency == 'NZ Citizen (by birth)' || $partnerResidency == 'NZ Citizen (Other)' || $partnerResidency == 'Permanent Resident' || $partnerResidency == 'Refugee - Quota' || $partnerResidency == 'Australian');
+seniorPartnerResident: $partnerNZ && 
+	(	
+		$partnerResidency == 'NZ Citizen (by birth)' || 
+		$partnerResidency == 'NZ Citizen (Other)' || 
+		$partnerResidency == 'Permanent Resident' || 
+		$partnerResidency == 'Refugee - Quota' || 
+		$partnerResidency == 'Australian' ||
+		$partnerResidency == 'Refugee - Other with Permanent Residence'
+	);
 
 hasYoungest14Plus: !$childAged04 && !$childAged5NotAtSchool && !$childAged513 && $childAged1418;
 hasYoungest5to13: !$childAged04 && !$childAged5NotAtSchool && $childAged513;
@@ -223,7 +231,7 @@ asupIncomeLimit: {
 
 asupCashAssetLimit: {
     $single && $dependentChildren == 0: 8100.00; // ASUP Single Cash Asset Limit
-    ($single || $dependentChildren >= 1): 16200.00; // ASUP Couple or Sole Parent Cash Asset Limit
+    (!$single || $dependentChildren >= 1): 16200.00; // ASUP Couple or Sole Parent Cash Asset Limit
     true: -1; // disallow by default
 };
 
@@ -507,13 +515,13 @@ potentialUnemploymentBenefit: ($resident || $refugeeOtherWithPermanentResidence)
 potentialNewZealandSuperannuationSingle: $seniorsAge && $seniorResident && $single ; //ACC stuff not required
 
 
-potentialNewZealandSuperannuationNonQualifiedSpouse: $seniorsAge && $seniorResident && !$single && !$acc &&
+potentialNewZealandSuperannuationNonQualifiedSpouse: $seniorsAge && $seniorResident && !$single &&
         			$includePartnerInNZS && !$partnerReceivingNZS &&
         			$familyTotalGrossWeeklyIncome < $nonQualifiedPartnerIncludedLimit &&
         			$partnerAge >= 16 && $seniorPartnerResident;
 
 
-potentialNewZealandSuperannuationPartnerNotIncluded: $seniorsAge && $seniorResident && !$single && !$acc &&
+potentialNewZealandSuperannuationPartnerNotIncluded: $seniorsAge && $seniorResident && !$single &&
         			!$potentialNewZealandSuperannuationNonQualifiedSpouse &&
         			((!$includePartnerInNZS || $partnerReceivingNZS) ||
         			($includePartnerInNZS  && !$partnerReceivingNZS)) &&
@@ -572,9 +580,8 @@ potentialSuper: $potentialNewZealandSuperannuationSingle || $potentialNewZealand
 
 potentialAccommodationSupplement:
        (	
-    		$potentialBenefit || 
-    		($potentialYouthPackage && 
-    				$cashAssets < $asupCashAssetLimit) || 
+    		(($potentialBenefit || $potentialYouthPackage)
+    			&& $cashAssets < $asupCashAssetLimit) || 
     		
     		($potentialSuper && 
     				$cashAssets < $asupCashAssetLimit &&  
