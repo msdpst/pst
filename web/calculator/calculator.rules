@@ -213,7 +213,7 @@ daGWILimit: {
 
 extraHelpGWILimit: {
     ($workingAge || $youthForRules || $youngParent) && $single && $dependentChildren == 0: 953.00; // ASUP Single Working Age GWI Limit Area 1
-    ($workingAge || $youthForRules || $youngParent) && $relationship && $dependentChildren == 0: 1208.00; // ASUP Relationship Without Children GWI Limit Area 1
+    ($workingAge || $youthForRules || $youngParent) && !$single && $dependentChildren == 0: 1208.00; // ASUP Relationship Without Children GWI Limit Area 1
     ($workingAge || $youthForRules || $youngParent) $dependentChildren == 1 && $ccaGrandParenting: 1486.00; // CCS 1 Child GWI Limit Pre October 2010
     ($workingAge || $youthForRules || $youngParent) $dependentChildren == 1 && $ccaGrandParenting: 1400.00; // CCS 1 Child GWI Limit
     ($workingAge || $youthForRules || $youngParent) $dependentChildren == 2 && $ccaGrandParenting: 1698.00; // CCS 2 Child GWI Limit Pre October 2010
