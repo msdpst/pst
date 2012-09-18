@@ -162,7 +162,7 @@ button:active {
 	float:left;
 }
 
-#pbaArea{
+.pbaArea{
 	padding-left:25px;
 }
 
@@ -592,19 +592,19 @@ li {
     margin-bottom: 1em;
 }
 
-.results a[href^='http'] {
+.newline {
     background: url("images/right.png") no-repeat scroll transparent left;
     padding-left:25px;
 }
 
-#eligible a[href^='http'] {
+/*#eligible a[href^='http'] {
     background: url("images/right.png") no-repeat scroll transparent left;
     padding-left:25px;
 }
 #ineligible a[href^='http'] {
     background: url("images/right.png") no-repeat scroll transparent left;
     padding-left:25px;
-}
+}*/
 
 
 #eligible h2 {

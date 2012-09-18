@@ -153,8 +153,8 @@ var calculator = {
     /** They clicked the back button in the results section */
     onBackFromResults:function () {
         $(".results").hide();
-        $("#rightSidebar").hide();
-        $("#leftSidebar").hide();
+        //$("#rightSidebar").hide();
+        //$("#leftSidebar").hide();
         $("form").show();
         $("#controlBox").show();
         $('#nextButton').show();
