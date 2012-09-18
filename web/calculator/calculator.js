@@ -6,6 +6,22 @@
 
 // Note there is engine customisation at the end of this file.
 
+//if (engine.evaluate("$workingAge")){
+				//not activated yet.  uncomment and fix urls.
+$(document).ready(function(){
+
+				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {});
+				
+				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
+					
+					$("#leftSidebar").fadeIn('slow');
+					$("#rightSidebar").fadeIn('slow');
+				});
+	
+});				
+				
+
+
 var calculator = {
     
     hasPotentialSupplementary: false,
@@ -261,38 +277,41 @@ var calculator = {
             for (var i = 0; i < calculator.allSupplementaryBenefits.length; i++) {
                 if (engine.evaluate("$" + calculator.allSupplementaryBenefits[i]))
                     supplementaryBenefitUrls.push("benefits/" + calculator.allSupplementaryBenefits[i] + ".html");
+                    
             }
 
- 			
-            var insertedHRB = false;
-            
-         
-            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
-                supplementaryBenefitUrls.push(mainBenefitUrls[hrbIndex]);      
-                mainBenefitUrls.splice(hrbIndex, 1);
-				insertedHRB = true;
-            }
-			
-            
-           // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
+            var insertedSuper = false;
+
+            // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
             // In this case, super is displayed as a supplementary, and appears first.
             if (superIndex != undefined && mainBenefitUrls.length > 1) {
                 //if this case has already spliced the super, then our index might be wrong.
-                if (insertedHRB && hrbIndex < superIndex ){
-                	supplementaryBenefitUrls.push(mainBenefitUrls[superIndex-1]);
-                	mainBenefitUrls.splice(superIndex-1, 1);
+				supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[superIndex]);   
+                mainBenefitUrls.splice(superIndex, 1);
+
+                insertedSuper = true;
+            }
+            
+         
+            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
+                if (insertedSuper && superIndex < hrbIndex ){
+                	supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[hrbIndex-1]);
+                	mainBenefitUrls.splice(hrbIndex-1, 1);
                 }else{
-                	supplementaryBenefitUrls.push(mainBenefitUrls[superIndex]);
-               	 	mainBenefitUrls.splice(superIndex, 1);
+                	
+                	supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[hrbIndex]);
+               	 	mainBenefitUrls.splice(hrbIndex, 1);
                 }
             }
 
+
             debug("benefits: " + mainBenefitUrls);
             debug("supplementaries: " + supplementaryBenefitUrls);
-			supplementaryBenefitUrls.reverse();
-            
-            calculator.hasPotentialSupplementary = supplementaryBenefitUrls.length > 0;
+			//supplementaryBenefitUrls.reverse();
 
+            calculator.hasPotentialSupplementary = supplementaryBenefitUrls.length > 0;
+            
+            
             // They're eligible for something. Assemble the information - there's a page
             // fragment (ie. an html file) for each benefit and for each obligation.
             // Load the appropriate fragments from the server and insert them into the page.
@@ -322,19 +341,19 @@ var calculator = {
             }
 
 
-			if (engine.evaluate("$workingAge")){
-				//not activated yet.  uncomment and fix urls.
-				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
-
-				});
-				
-				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
-					
-					$("#leftSidebar").fadeIn('slow');
-					$("#rightSidebar").fadeIn('slow');
-				});
-				
-			}
+//			if (engine.evaluate("$workingAge")){
+//				//not activated yet.  uncomment and fix urls.
+//				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
+//
+//				});
+//				
+//				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
+//					
+//					$("#leftSidebar").fadeIn('slow');
+//					$("#rightSidebar").fadeIn('slow');
+//				});
+//				
+//			}
 
         }, 500);
     }
