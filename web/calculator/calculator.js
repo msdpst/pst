@@ -23,6 +23,8 @@ $(document).ready(function(){
 
 
 var calculator = {
+    
+    hasPotentialSupplementary: false,
 
     /* All the variables that we want to be checked as potential main benefits */
     allMainBenefits: [ 
@@ -307,6 +309,9 @@ var calculator = {
             debug("supplementaries: " + supplementaryBenefitUrls);
 			//supplementaryBenefitUrls.reverse();
 
+            calculator.hasPotentialSupplementary = supplementaryBenefitUrls.length > 0;
+            
+            
             // They're eligible for something. Assemble the information - there's a page
             // fragment (ie. an html file) for each benefit and for each obligation.
             // Load the appropriate fragments from the server and insert them into the page.
