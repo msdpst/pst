@@ -6,6 +6,22 @@
 
 // Note there is engine customisation at the end of this file.
 
+//if (engine.evaluate("$workingAge")){
+				//not activated yet.  uncomment and fix urls.
+$(document).ready(function(){
+
+				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {});
+				
+				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
+					
+					$("#leftSidebar").fadeIn('slow');
+					$("#rightSidebar").fadeIn('slow');
+				});
+	
+});				
+				
+
+
 var calculator = {
 
     /* All the variables that we want to be checked as potential main benefits */
@@ -320,19 +336,19 @@ var calculator = {
             }
 
 
-			if (engine.evaluate("$workingAge")){
-				//not activated yet.  uncomment and fix urls.
-				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
-
-				});
-				
-				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
-					
-					$("#leftSidebar").fadeIn('slow');
-					$("#rightSidebar").fadeIn('slow');
-				});
-				
-			}
+//			if (engine.evaluate("$workingAge")){
+//				//not activated yet.  uncomment and fix urls.
+//				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
+//
+//				});
+//				
+//				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
+//					
+//					$("#leftSidebar").fadeIn('slow');
+//					$("#rightSidebar").fadeIn('slow');
+//				});
+//				
+//			}
 
         }, 500);
     }
