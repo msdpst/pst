@@ -10,7 +10,7 @@
     #leftSidebar, #rightSidebar, #progressLabel, #bottomBuffer { 
         display: none !important; 
     }
-    body, header {
+    body, header, #outer, #headerInner {
         background: none !important;
     }
     #progress { 
@@ -18,12 +18,14 @@
     }
     #outer {
         box-shadow: none !important;
+        z-index: 50 !important;
     }
     .results {
-        margin-top: -1em !important;
+        margin-top: -4em !important;
     }
     #eligible, #ineligible {
         border: none !important;
+        background-color: transparent !important;
     }
 }
 
