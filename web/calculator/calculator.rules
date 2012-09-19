@@ -647,8 +647,8 @@ potentialTemporaryAdditionalSupport:   ($potentialBenefit || $potentialYouthPack
         	);
 
 potentialChildDisabilityAllowance:
-           ($potentialBenefit || $potentialYouthPackage || $potentialSuper)
-        	&& ($youthForRules || $workingAge || $seniorsAge)	
+           ($potentialBenefit || $potentialSuper || $potentialYouthPackage)
+        	&& ($workingAge || $youngParent || $seniorsAge)	
         	&& $caringForChild
         	&& ($childAged04 || $childAged513 || $childAged1418 || $childAged5NotAtSchool)
         	&& $childStayingInNz

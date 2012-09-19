@@ -192,3 +192,6 @@ JSEC-224: Client Single (Partner in prison)  Wrong questions displayed
 JSEC-194: Supported youth partner age limits
 JSEC-228: Parental income when partner in prison
 JSEC-229: Youth exceeding extra help limits
+
+Version 01.01.22
+JSEC-227: CDA not being returned with YPP - might be definition of youth again
