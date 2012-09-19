@@ -534,9 +534,13 @@ potentialNewZealandSuperannuationPartnerNotIncluded: $seniorsAge && $seniorResid
 
 
 potentialUndeterminedWorkingAgeFinancialAssistance:
-   	($workingAge || $seniorsAge ) &&
+   	(
+   	    $workingAge || 
+   	    $seniorsAge || 
+   	    $youthForRules || 
+   	    ($youngParent && !$potentialYouthPackage)
+    ) &&
    	!$potentialBenefit &&
-   	!$potentialWidowsBenefitAny &&
    	!$potentialSuper;
 
 
