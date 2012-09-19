@@ -185,3 +185,5 @@ JSEC-219:Changes to the Success Text page
 JSEC-220:NZS Non-qual spouse with an accommodation supp not getting to the last page (Firefox) (high)
 JSEC-221:Widows Benefit does not have "Other Support" heading when child 5 to 13
 
+Version 01.01.21
+JSEC-164: freeze at end when undetermined
