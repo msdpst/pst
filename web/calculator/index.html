@@ -501,7 +501,8 @@
         <fieldset class="group"><!-- GROUP 10 -->
             <div class="question" data-visible="$workingAge || $youthForPreconditions || $seniorsAge">
                 <fieldset>
-                    <div>Do you <span data-visible="$partner">or your partner </span>expect to get other income in the next 52 weeks?</div><!-- Q15 -->
+                    <!-- Note deliberate use of !$single rather than $partner -->
+                    <div>Do you <span data-visible="!$single">or your partner </span>expect to get other income in the next 52 weeks?</div><!-- Q15 -->
                     <input type="radio" name="expectIncome" id="expectIncomeYes" value="true"> <label for="expectIncomeYes">Yes</label>
                     <input type="radio" name="expectIncome" id="expectIncomeNo" value="false"> <label for="expectIncomeNo">No</label>
                 </fieldset>

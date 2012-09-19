@@ -188,3 +188,4 @@ JSEC-221:Widows Benefit does not have "Other Support" heading when child 5 to 13
 Version 01.01.21
 JSEC-164: freeze at end when undetermined
 JSEC-223: YPP with under age partner not getting extra help
+JSEC-224: Client Single (Partner in prison)  Wrong questions displayed
