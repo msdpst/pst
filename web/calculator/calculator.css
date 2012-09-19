@@ -10,11 +10,20 @@
     #leftSidebar, #rightSidebar, #progressLabel, #bottomBuffer { 
         display: none !important; 
     }
+    body, header {
+        background: none !important;
+    }
     #progress { 
         visibility: hidden !important; 
     }
+    #outer {
+        box-shadow: none !important;
+    }
     .results {
         margin-top: -1em !important;
+    }
+    #eligible, #ineligible {
+        border: none !important;
     }
 }
 
