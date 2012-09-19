@@ -686,11 +686,11 @@ potentialExtraHelp:
         !$potentialSupportedYouth
     );
     
-/**
+/*
 Eligible for any supplementary. We could define it as a normal rule, but
 doing it this way is faster. 
 */
-potentialSupplementary: calculator.hasPotentialSupplementary();
+potentialSupplementary: calculator.hasPotentialSupplementary;
 
 hasObligations:
 	

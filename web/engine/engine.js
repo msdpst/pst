@@ -191,8 +191,8 @@ engine = {
             destinationMap = {};
             
         content = content.replace(/\/\/.*?$/gm, ""); // remove line comments
-        content = content.replace(/\/\*.*?\*\//gm, ""); // remove block comments
         content = content.replace(/[\n\r]/gm, ""); // remove line breaks
+        content = content.replace(/\/\*.*?\*\//g, ""); // remove block comments
         
         var p;
         while ((p = content.indexOf(":")) >= 0) {
@@ -250,8 +250,8 @@ engine = {
             }, "text");
             return;
         }
-        
-        
+
+
         debug("====== hello ======");
 
         // Make sure everything's hidden to start off with. The html page should do this in a

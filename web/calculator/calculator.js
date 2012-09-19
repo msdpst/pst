@@ -1,7 +1,4 @@
-// Uncomment this to enable debugging. Don't leave it that way though because it's
-// a performance hit.
-//enableDebugging();
-
+// enableDebugging();// Uncomment this to enable debugging. Don't leave it that way though because it's a performance hit.
 
 
 // Note there is engine customisation at the end of this file.
