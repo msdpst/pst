@@ -565,15 +565,7 @@ potentialUndeterminedYoungParentPayment:
     	!$potentialInvalidsBenefit;
 
 
-potentialSupportedYouth: $youthForRules && (
-        	($single && $livingAtHome && $dependentChildren==0)
-        		||
-            	(
-            		(!$single && $partnerAge>=18 && $partnerAge<19 && $dependentChildren==0)
-            			||
-            		(!$single && $partnerAge>=19 && $dependentChildren>=1)
-            	)
-        	);
+potentialSupportedYouth: $youthForRules && $single && $livingAtHome;
 
 
 
