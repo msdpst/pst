@@ -195,3 +195,4 @@ JSEC-229: Youth exceeding extra help limits
 
 Version 01.01.22
 JSEC-227: CDA not being returned with YPP - might be definition of youth again
+JSEC-222: Accommodation Suppliment eligiblity rules for seniors not applied when almost 65 and not eligible for a working age benefit

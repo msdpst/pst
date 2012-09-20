@@ -679,7 +679,10 @@ potentialExtraHelp:
         !$potentialUndeterminedYoungParentPayment &&
         !$potentialUnemploymentBenefitTraining &&
         !$potentialUnemploymentBenefit &&
-        !$potentialSupportedYouth
+        !$potentialSupportedYouth &&
+        !$potentialNewZealandSuperannuationSingle &&
+        !$potentialNewZealandSuperannuationNonQualifiedSpouse &&
+        !$potentialNewZealandSuperannuationPartnerNotIncluded
     );
     
 /*
