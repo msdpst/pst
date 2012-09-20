@@ -200,3 +200,4 @@ JSEC-166: Extra help income rules for people with children are not correctly enf
 
 Version 01.01.23
 JSEC-231: YP also has Undetermined text displayed
+JSEC-230: Youth without valid residency getting undermined instead of Might Not

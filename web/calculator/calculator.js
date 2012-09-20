@@ -239,7 +239,7 @@ var calculator = {
      *
      * The engine calls this function.
      */
-    onFinished:function () {
+    onFinished:function(ineligible) {
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
@@ -250,54 +250,56 @@ var calculator = {
 
             engine.disableCurrentGroup();
             var mainBenefitUrls = [];
-            var superIndex = undefined;
-            var hrbIndex = undefined;
-            for (var i = 0; i < calculator.allMainBenefits.length; i++) {
-                if (engine.evaluate("$" + calculator.allMainBenefits[i])) {
-                    mainBenefitUrls.push("benefits/" + calculator.allMainBenefits[i] + ".html");
-                    
-                    if (/^potentialNewZealandSuperannuation/.test(calculator.allMainBenefits[i])){
-                        superIndex = mainBenefitUrls.length - 1;
-                    }
-                        
-                    if (/^potentialHealthRelatedBenefit/.test(calculator.allMainBenefits[i])){
-                        hrbIndex = mainBenefitUrls.length - 1;    
-                    }
-                }
-            }
-
-			
-
             var supplementaryBenefitUrls = [];
 
-			 //  Supplementaries - these work in the same way as benefits.
-            for (var i = 0; i < calculator.allSupplementaryBenefits.length; i++) {
-                if (engine.evaluate("$" + calculator.allSupplementaryBenefits[i]))
-                    supplementaryBenefitUrls.push("benefits/" + calculator.allSupplementaryBenefits[i] + ".html");
-                    
-            }
 
-            var insertedSuper = false;
+            if (!ineligible) {
+                var superIndex = undefined;
+                var hrbIndex = undefined;
+                for (var i = 0; i < calculator.allMainBenefits.length; i++) {
+                    if (engine.evaluate("$" + calculator.allMainBenefits[i])) {
+                        mainBenefitUrls.push("benefits/" + calculator.allMainBenefits[i] + ".html");
 
-            // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
-            // In this case, super is displayed as a supplementary, and appears first.
-            if (superIndex != undefined && mainBenefitUrls.length > 1) {
-                //if this case has already spliced the super, then our index might be wrong.
-				supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[superIndex]);   
-                mainBenefitUrls.splice(superIndex, 1);
+                        if (/^potentialNewZealandSuperannuation/.test(calculator.allMainBenefits[i])) {
+                            superIndex = mainBenefitUrls.length - 1;
+                        }
 
-                insertedSuper = true;
-            }
-            
-         
-            if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
-                if (insertedSuper && superIndex < hrbIndex ){
-                	supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[hrbIndex-1]);
-                	mainBenefitUrls.splice(hrbIndex-1, 1);
-                }else{
-                	
-                	supplementaryBenefitUrls.splice(0,0,mainBenefitUrls[hrbIndex]);
-               	 	mainBenefitUrls.splice(hrbIndex, 1);
+                        if (/^potentialHealthRelatedBenefit/.test(calculator.allMainBenefits[i])) {
+                            hrbIndex = mainBenefitUrls.length - 1;
+                        }
+                    }
+                }
+
+
+                //  Supplementaries - these work in the same way as benefits.
+                for (var i = 0; i < calculator.allSupplementaryBenefits.length; i++) {
+                    if (engine.evaluate("$" + calculator.allSupplementaryBenefits[i]))
+                        supplementaryBenefitUrls.push("benefits/" + calculator.allSupplementaryBenefits[i] + ".html");
+
+                }
+
+                var insertedSuper = false;
+
+                // Between 64.75 and 65 they can be entitled both to super and another main benefit (eg. UB).
+                // In this case, super is displayed as a supplementary, and appears first.
+                if (superIndex != undefined && mainBenefitUrls.length > 1) {
+                    //if this case has already spliced the super, then our index might be wrong.
+                    supplementaryBenefitUrls.splice(0, 0, mainBenefitUrls[superIndex]);
+                    mainBenefitUrls.splice(superIndex, 1);
+
+                    insertedSuper = true;
+                }
+
+
+                if (hrbIndex != undefined && mainBenefitUrls.length > 1) {
+                    if (insertedSuper && superIndex < hrbIndex) {
+                        supplementaryBenefitUrls.splice(0, 0, mainBenefitUrls[hrbIndex - 1]);
+                        mainBenefitUrls.splice(hrbIndex - 1, 1);
+                    } else {
+
+                        supplementaryBenefitUrls.splice(0, 0, mainBenefitUrls[hrbIndex]);
+                        mainBenefitUrls.splice(hrbIndex, 1);
+                    }
                 }
             }
 
@@ -336,21 +338,6 @@ var calculator = {
                 $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
                 $('.nextText').html('Next');
             }
-
-
-//			if (engine.evaluate("$workingAge")){
-//				//not activated yet.  uncomment and fix urls.
-//				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {
-//
-//				});
-//				
-//				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
-//					
-//					$("#leftSidebar").fadeIn('slow');
-//					$("#rightSidebar").fadeIn('slow');
-//				});
-//				
-//			}
 
         }, 500);
     }
