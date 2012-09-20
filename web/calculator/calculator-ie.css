@@ -1,18 +1,6 @@
 /* CSS fixes for IE */
 
 
-@media print {
-    /* Fixed positioning make IE do awful things when printing. Work around this. */
-    header {
-        position: relative !important;
-    }
-    #outer {
-        padding-top: 0 !important;
-    }
-}
-
-
-
 #headerInner {
     /* Allow for IE not doign box-shadow below the progress bar */
     padding-bottom: 0.7em;

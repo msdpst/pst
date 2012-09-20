@@ -6,26 +6,95 @@
 }
 
 @media print {
-    /* See also calculator-ie.css */
-    #leftSidebar, #rightSidebar, #progressLabel, #bottomBuffer { 
+    #leftSidebar, #rightSidebar, #progressLabel, #bottomBuffer, #progress, .resultsButtonBox { 
         display: none !important; 
     }
-    body, header, #outer, #headerInner {
-        background: none !important;
+    
+    /* -- font sizes -- */
+    body, #eligible, #ineligible {
+        font-size: 13px !important;
     }
-    #progress { 
-        visibility: hidden !important; 
+    h1 {
+        font-size: 19px !important;
+    }
+    #eligible h2 {
+        font-size: 17px !important;
+    }
+    #eligible h3 {
+        font-size: 16px !important;
+    }
+    #ineligible h3 {
+        font-size: 16px !important;
+    }
+}
+
+@media screen {
+    body {
+        background-color: #f0f0f0;
+        background-image: -moz-linear-gradient(90deg, #ffffff, #eeeeee);
+        background-image: -webkit-linear-gradient(90deg, #f0f0f0, #ffffff 33px);
+        text-shadow: 0 1px 0 #FFFFFF;
+    }
+    header {
+        background-image: url("images/bg-page-gradient2.jpg");
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 176px;
+
+        /* Make fixed positioning work in IE6: */
+        _position: absolute;
+        _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
     }
     #outer {
-        box-shadow: none !important;
-        z-index: 50 !important;
+        background-color: white;
+        box-shadow: 0 0 1em #d0d0d0;
+        padding-top: 202px;
+    }
+    #headerInner {
+        background-color: white;
+    }
+    #eligible {
+        background-color: #f8f8f8;
+        border: 2px solid #00a000;
+    }
+    #ineligible {
+        background-color: #f8f8f8;
+        border: 2px solid #a00000;
+    }
+    
+    
+    
+    #headerInner, #buffer, #outer {
+        width: 44em;
+    }
+    header .logo, #headerInner, #buffer, #outer {
+        margin-left: -23em;
+    }
+    #progress, form {
+        width: 36em;
+    }
+    #outer, header .logo, #headerInner {
+        left: 50%;
+        position: relative;
+        padding-left: 1em;
+        padding-right: 1em;
+        z-index: 1;
+    }
+    form, #progress {
+        margin-left: 4em !important;
     }
     .results {
-        margin-top: -4em !important;
+        padding: 2em 1.5em 2em 1.5em;
+        margin: 0 2em 0 2em;
     }
-    #eligible, #ineligible {
-        border: none !important;
-        background-color: transparent !important;
+    
+    
+    h1 {
+        text-shadow: 0 1px 0 #ffcccc;
+    }
+    .results h3 {
+        text-shadow: 0 1px 0 #ffcccc;
     }
 }
 
@@ -40,24 +109,6 @@ body {
     font-family: sans-serif;
     font-size: 16px;
     color: #666666;
-    text-shadow: 0 1px 0 #FFFFFF;
-    background-color: #f0f0f0;
-    background-image: -moz-linear-gradient(90deg, #ffffff, #eeeeee);
-    background-image: -webkit-linear-gradient(90deg, #f0f0f0, #ffffff 33px);
-}
-
-#headerInner, #buffer, #outer {
-    width: 44em;
-}
-header .logo, #headerInner, #buffer, #outer {
-    margin-left: -23em;
-}
-#progress, form {
-    width: 36em;
-}
-
-form, #progress {
-    margin-left: 4em !important;
 }
 
 #answerAllMessage{
@@ -126,20 +177,16 @@ button:active {
 }
 
 #exitButtonYes{
-	
 	width:50px;
 }
 
-
 #exitButtonNo{
-	
 	width:50px;
 }
 
 #confirmExit{
 	display:none;
 }
-
 
 #nextButton{
 	width:70px;
@@ -231,19 +278,8 @@ button:active {
 
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 176px;
     width: 100%;
-    background-image: url("images/bg-page-gradient2.jpg");
     z-index: 10;
-    /*box-shadow: 0 0 1em #d0d0d0;*/
-
-    /* Make fixed positioning work in IE6: */
-    _position: absolute;
-    _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
-
 }
 
 
@@ -269,14 +305,7 @@ header {
 
 
 
-header .logo {
-    position: relative;
-    left: 50%;
-}
 #headerInner {
-    position: relative;
-    left: 50%;
-    background-color: white;
     margin-top: 5px;
     padding: 1.2em 1em 0 1em;
     border-top-left-radius: 10px;
@@ -313,7 +342,6 @@ header .logo {
 
 h1 {
     color: #CE3436;
-    text-shadow: 0 1px 0 #ffcccc;
     font-size: 32px;
     font-weight: 600;
     margin: 0 0 0.5em 0;
@@ -344,24 +372,6 @@ h1 {
     height: 1.3em;
     background-image: none !important;
     background-color: #80c080 !important;
-}
-
-#outer {
-    left: 50%;
-    padding: 202px 1em 0 1em;
-    position: relative;
-    background-color: white;
-    box-shadow: 0 0 1em #d0d0d0;
-    z-index: 1;
-    /*
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    */
-}
-
-#blurb {
-    font-size: 14px;
-    margin: 0 7em 0 6em;
 }
 
 p {
@@ -575,10 +585,6 @@ li {
     margin: 0.8em 0 0 0;
 }
 
-.results {
-    padding: 2em 1.5em 2em 1.5em;
-    margin: 0 2em 0 2em;
-}
 
 /* floating the button right causes problems in IE */
 .resultsButtonBox {
@@ -589,14 +595,10 @@ li {
 }
 
 #ineligible {
-    background-color: #f8f8f8;
-    border: 2px solid #a00000;
     color: #202020;
 }
 
 #eligible {
-    background-color: #f8f8f8;
-    border: 2px solid #00a000;
     color: #404040;
     font-size: 15px;
 }
@@ -629,16 +631,15 @@ li {
     margin-top: 0;
 }
 
-#eligible h3 {
+.results h3 {
     color: #CE3436;
-    text-shadow: 0 1px 0 #ffcccc;
     font-size: 18px;
     font-weight: 600;
     margin: 2em 0 0.5em 0;
     padding: 0;
     text-align: left;
 }
-#eligible h3:first-child {
+.results h3:first-child {
     margin-top: 0;
 }
 
@@ -649,19 +650,6 @@ li {
 
 #eligible .benefitName{
     font-weight: 600;
-}
-
-#ineligible h3 {
-    color: #CE3436;
-    text-shadow: 0 1px 0 #ffcccc;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 2em 0 0.5em 0;
-    padding: 0;
-    text-align: left;
-}
-#ineligible h3:first-child {
-    margin-top: 0;
 }
 
 
