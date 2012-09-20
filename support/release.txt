@@ -199,3 +199,4 @@ JSEC-222: Accommodation Suppliment eligiblity rules for seniors not applied when
 JSEC-166: Extra help income rules for people with children are not correctly enforced (high)
 
 Version 01.01.23
+JSEC-231: YP also has Undetermined text displayed

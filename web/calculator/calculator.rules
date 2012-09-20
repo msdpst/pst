@@ -537,8 +537,7 @@ potentialUndeterminedWorkingAgeFinancialAssistance:
    	(
    	    $workingAge || 
    	    $seniorsAge || 
-   	    $youthForRules || 
-   	    ($youngParent && !$potentialYouthPackage)
+   	    (($youthForRules || $youngParent) && !$potentialYouthPackage)
     ) &&
    	!$potentialBenefit &&
    	!$potentialSuper;
