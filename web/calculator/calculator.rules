@@ -99,7 +99,7 @@ youthLivingCircs : !$livingAtHome && !$parentSupport && (
         );
 
 
-youthResidentLessThan2YearsResidence : $youthForRules && $stayingInNz && !$twoYears && $residencyResident;
+youthResidentLessThan2YearsResidence : ($youthForRules || $youngParent) && $stayingInNz && !$twoYears && $residencyResident;
 
 single18to19uBSBAtHomeIncomeLimit: $single && $age18to19 && $livingAtHome && ($familyTotalGrossWeeklyIncome<$ubSingle1819AtHomeGWILimit);
 
