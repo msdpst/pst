@@ -4,10 +4,10 @@
 // Note there is engine customisation at the end of this file.
 
 $(document).ready(function () {
-    engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["/includes/eligibility-sidebar.inc"], function () {
+    engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["/webadmin/includes/eligibility-sidebar.inc"], function () {
     });
 
-    engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["/includes/eligibility-handy-links.inc"], function () {
+    engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["/webadmin/includes/eligibility-handy-links.inc"], function () {
 
         $("#leftSidebar").fadeIn('slow');
         $("#rightSidebar").fadeIn('slow');
@@ -359,4 +359,4 @@ var calculator = {
 engine.groupScrollYPosition = 250;
 engine.onFinished = calculator.onFinished;
 engine.onControlsClearedInElement = calculator.onControlsClearedInElement;
-engine.rulesFiles = ["/includes/ec/calculator.rules"];
+engine.rulesFiles = ["/webadmin/includes/ec/calculator.rules"];

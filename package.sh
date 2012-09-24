@@ -17,6 +17,6 @@ cd web
 if [[ $type == sre ]]; then
     zip -r "$outputFile" .
 else
-    zip -r "$outputFile" content/ec css/ec images/ec includes/ec scripts/ec
+    zip -r "$outputFile" content/ec webadmin/css/ec webadmin/images/ec webadmin/includes/ec webadmin/scripts/ec
 fi
 
