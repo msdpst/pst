@@ -204,3 +204,8 @@ JSEC-230: Youth without valid residency getting undermined instead of Might Not
 (Printing)
 JSEC-235: Undetermined YPP no longer happening  (when eligible and do NOT have any supplimentaries) (Urgent)
 JSEC-234: Supported youth criteria not being applied
+JSEC-237:Child care subsidy (CCS) not being displayed correctly if childcare assistance 2009/2010 is Yes
+JSEC-236:Sole Parent scenario - How much you might get wording (High)
+JSEC-233: Accommodation Supp cost threshold for married, no children and both qualified not correctly applies
+JSEC-225: Results page issues
+
