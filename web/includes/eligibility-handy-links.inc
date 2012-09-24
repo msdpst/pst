@@ -1,3 +1,8 @@
+<!-- 
+This is a copy of a file managed by the Web Team, not part of our code.
+It's only for dev and sre and is not to be included in a real deployment.
+-->
+
 <div id="handy">
 
 <div id="sidebarlinks">

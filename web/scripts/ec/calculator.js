@@ -3,18 +3,17 @@
 
 // Note there is engine customisation at the end of this file.
 
-$(document).ready(function(){
+$(document).ready(function () {
+    engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["/includes/eligibility-sidebar.inc"], function () {
+    });
 
-				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {});
-				
-				engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["temp/eligibility-handy-links.inc"], function () {
-					
-					$("#leftSidebar").fadeIn('slow');
-					$("#rightSidebar").fadeIn('slow');
-				});
-	
-});				
-				
+    engine.loadPageFragmentsAndReplaceVariables($("#leftSidebar"), ["/includes/eligibility-handy-links.inc"], function () {
+
+        $("#leftSidebar").fadeIn('slow');
+        $("#rightSidebar").fadeIn('slow');
+    });
+
+});
 
 
 var calculator = {

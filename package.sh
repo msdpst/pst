@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 set -e
 
+type=$1
+[[ $type != sre && $type != prod ]] && { echo "Usage: $0 sre (for SRE) | prod (for UAT/FIT/Production)"; exit 1; }
+
 cd $(dirname "$0")
 
 outputFile=$(pwd)/ec.zip
@@ -9,5 +12,11 @@ if [ -f "$outputFile" ]; then
 	exit 1;
 fi
 
+cd web
 
-zip -r "$outputFile" web/
+if [[ $type == sre ]]; then
+    zip -r "$outputFile" .
+else
+    zip -r "$outputFile" content/ec css/ec images/ec includes/ec scripts/ec
+fi
+
