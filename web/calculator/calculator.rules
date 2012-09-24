@@ -181,6 +181,10 @@ ccs1ChildLimit: 1400;//CCS 1 Child GWI Limit
 ccs2ChildrenLimit: 1600;//CCS 2 Children GWI Limit
 ccs3ChildrenLimit: 1800;//CCS 3 or more Children GWI Limit
 
+ccs1ChildLimitPreOct2010: 1486;//CCS 1 Child GWI Limit
+ccs2ChildrenLimitPreOct2010: 1698;//CCS 2 Children GWI Limit
+ccs3ChildrenLimitPreOct2010: 1910;//CCS 3 or more Children GWI Limit
+
 OSCAR1ChildLimit: 1400.00;//OSCAR 1 Child GWI Limit
 OSCAR2ChildrenLimit: 1600.00;//OSCAR 2 Children GWI Limit
 OSCAR3ChildrenLimit: 1800.00;//OSCAR 3 or more Children GWI Limit
@@ -607,13 +611,20 @@ potentialDisabilityAllowance:
 
 
 
+        			
+
 potentialChildcareSubsidy:
        ($potentialBenefit || $potentialYouthPackage || $potentialSuper)
     	&& ($childAged04 || $childAged5NotAtSchool)
     	&& $oscar
     	&& (
+    		($dependentChildren == 1 && $familyTotalGrossWeeklyIncome < $ccs1ChildLimitPreOct2010 && $ccaGrandParenting) ||	
     		($dependentChildren == 1 && $familyTotalGrossWeeklyIncome < $ccs1ChildLimit) ||
+    		
+    		($dependentChildren == 2 && $familyTotalGrossWeeklyIncome < $ccs2ChildrenLimitPreOct2010 && $ccaGrandParenting) ||
     		($dependentChildren == 2 && $familyTotalGrossWeeklyIncome < $ccs2ChildrenLimit) ||
+    		
+    		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimitPreOct2010 && $ccaGrandParenting) ||
     		($dependentChildren >= 3 && $familyTotalGrossWeeklyIncome < $ccs3ChildrenLimit)
     		);
 
