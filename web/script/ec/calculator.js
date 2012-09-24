@@ -258,7 +258,7 @@ var calculator = {
                 var hrbIndex = undefined;
                 for (var i = 0; i < calculator.allMainBenefits.length; i++) {
                     if (engine.evaluate("$" + calculator.allMainBenefits[i])) {
-                        mainBenefitUrls.push("benefits/" + calculator.allMainBenefits[i] + ".html");
+                        mainBenefitUrls.push(calculator.benefitFragmentUrl(calculator.allMainBenefits[i]));
 
                         if (/^potentialNewZealandSuperannuation/.test(calculator.allMainBenefits[i])) {
                             superIndex = mainBenefitUrls.length - 1;
@@ -274,7 +274,7 @@ var calculator = {
                 //  Supplementaries - these work in the same way as benefits.
                 for (var i = 0; i < calculator.allSupplementaryBenefits.length; i++) {
                     if (engine.evaluate("$" + calculator.allSupplementaryBenefits[i]))
-                        supplementaryBenefitUrls.push("benefits/" + calculator.allSupplementaryBenefits[i] + ".html");
+                        supplementaryBenefitUrls.push(calculator.benefitFragmentUrl(calculator.allSupplementaryBenefits[i]));
 
                 }
 
@@ -340,6 +340,21 @@ var calculator = {
             }
 
         }, 500);
+    },
+
+    /**
+     * eg. convert "potentialDPBSoleParent" to "benefits/potential-dpb-sole-parent.html".
+     * Note case change and hyphens.
+     */
+    benefitFragmentUrl: function(ruleName) {
+        ruleName = ruleName.replace(/([A-Z])([a-z])/g, function (all, first, second) {
+            return "-" + first.toLowerCase() + second;
+        });
+        ruleName = ruleName.replace(/[A-Z]+/g, function (all) {
+            return "-" + all.toLowerCase();
+        });
+        ruleName = ruleName.replace(/potential-/, "");
+        return "benefits/" + ruleName + ".html";
     }
 };
 
