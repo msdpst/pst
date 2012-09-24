@@ -3,8 +3,6 @@
 
 // Note there is engine customisation at the end of this file.
 
-//if (engine.evaluate("$workingAge")){
-				//not activated yet.  uncomment and fix urls.
 $(document).ready(function(){
 
 				engine.loadPageFragmentsAndReplaceVariables($("#rightSidebar"), ["temp/eligibility-sidebar.inc"], function () {});
@@ -362,4 +360,4 @@ var calculator = {
 engine.groupScrollYPosition = 250;
 engine.onFinished = calculator.onFinished;
 engine.onControlsClearedInElement = calculator.onControlsClearedInElement;
-engine.rulesFiles = ["calculator.rules"];
+engine.rulesFiles = ["/includes/ec/calculator.rules"];
