@@ -36,7 +36,7 @@
         text-shadow: 0 1px 0 #FFFFFF;
     }
     header {
-        background-image: url("images/bg-page-gradient2.jpg");
+        background-image: url("/images/ec/bg-page-gradient2.jpg");
         position: fixed;
         top: 0;
         left: 0;
@@ -227,52 +227,52 @@ button:active {
 
 .exitText{
 	padding-left: 20px;
-	background: url("images/arrow-left.png") no-repeat scroll transparent left;
+	background: url("/images/ec/arrow-left.png") no-repeat scroll transparent left;
 }
 
 .noText{
 	padding-left: 20px;
-	background: url("images/cancel.png") no-repeat scroll transparent left;
+	background: url("/images/ec/cancel.png") no-repeat scroll transparent left;
 }
 
 .yesText{
 	padding-left: 20px;
-	background: url("images/tick.png") no-repeat scroll transparent left;
+	background: url("/images/ec/tick.png") no-repeat scroll transparent left;
 }
 
 
 .restartText{
 	padding-left: 20px;
-	background: url("images/arrow-rotate-anticlockwise.png") no-repeat scroll transparent left;
+	background: url("/images/ec/arrow-rotate-anticlockwise.png") no-repeat scroll transparent left;
 	
 }
 
 .backText{
 	padding-left: 20px;
-	background: url("images/arrow-up.png") no-repeat scroll transparent left;
+	background: url("/images/ec/arrow-up.png") no-repeat scroll transparent left;
 }
 
 
 
 .backFromResultsText{
 	padding-left: 20px;
-	background: url("images/arrow-left.png") no-repeat scroll transparent left;
+	background: url("/images/ec/arrow-left.png") no-repeat scroll transparent left;
 }
 
 .nextText{
 	padding-right: 20px;
-	background: url("images/arrow-down.png") no-repeat scroll transparent right;
+	background: url("/images/ec/arrow-down.png") no-repeat scroll transparent right;
 }
 
 .nextTextAnimated{
 	
-	background: url("images/ajax-loader.gif") no-repeat scroll transparent right;
+	background: url("/images/ec/ajax-loader.gif") no-repeat scroll transparent right;
 }
 
 
 .applyText{
 	padding-right: 20px;
-	background: url("images/arrow-right.png") no-repeat scroll transparent right;
+	background: url("/images/ec/arrow-right.png") no-repeat scroll transparent right;
 }
 
 
@@ -538,10 +538,10 @@ li {
 
 .addIncomeSource{
 	padding-left:20px;
-	background: url("images/add.png") no-repeat scroll transparent left;
+	background: url("/images/ec/add.png") no-repeat scroll transparent left;
 }
 .addIncomeSource:hover{
-	background: url("images/add.png") no-repeat scroll transparent left;
+	background: url("/images/ec/add.png") no-repeat scroll transparent left;
 }
 
 .removeIncomeSource{
@@ -549,14 +549,14 @@ li {
     position: absolute;
     margin: -1px 0 0 -1px;
     padding-left:20px;
-    background: url("images/cancel.png") no-repeat scroll transparent left;
+    background: url("/images/ec/cancel.png") no-repeat scroll transparent left;
 }
 .removeIncomeSource:hover{
 	display: none;
     position: absolute;
     margin: -1px 0 0 -1px;
     padding-left:20px;
-    background: url("images/cancel.png") no-repeat scroll transparent left;
+    background: url("/images/ec/cancel.png") no-repeat scroll transparent left;
 }
 
 .incomeSource > div {
@@ -608,7 +608,7 @@ li {
 }
 
 .newline {
-    background: url("images/right.png") no-repeat scroll transparent left;
+    background: url("/images/ec/right.png") no-repeat scroll transparent left;
     padding-left:25px;
 }
 
