@@ -209,3 +209,5 @@ JSEC-236:Sole Parent scenario - How much you might get wording (High)
 JSEC-233: Accommodation Supp cost threshold for married, no children and both qualified not correctly applies
 JSEC-225: Results page issues
 
+Version 01.01.24
+JSEC-240: Undetermined YPP with a supplimentary not resulting as Extra Help
