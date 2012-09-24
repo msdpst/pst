@@ -9,5 +9,5 @@ if [ -f "$outputFile" ]; then
 	exit 1;
 fi
 
-cd web
-zip -r "$outputFile" calculator/ engine/ thirdparty/
+
+zip -r "$outputFile" web/
