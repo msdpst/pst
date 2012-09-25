@@ -27,8 +27,8 @@
         font-size: 16px !important;
     }
     #outer, header .logo, #headerInner {
-        padding-left: 4em;
-        padding-right: 4em;
+        padding-left: 2em;
+        padding-right: 2em;
     }
 }
 

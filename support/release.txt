@@ -211,3 +211,4 @@ JSEC-225: Results page issues
 
 Version 01.01.24
 JSEC-240: Undetermined YPP with a supplimentary not resulting as Extra Help
+JSEC-245: Safari - Text not fitting on page when printing from Safari
