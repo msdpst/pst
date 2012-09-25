@@ -217,3 +217,7 @@ JSEC-242: Accommodation Supp threshold for NZS, married, no children, Non-qual s
 JSEC-241:Accommodation supplement section not displayed for 65+ person with accommodation costs
 jSEC-239: Accommodation Supp threshold for NZS married, no children, partner not included not correct
 
+Version 01.01.25
+JSEC-247:Some Accommodation Supplement threshold values need to be updated
+JSEC-248: Accommodation suppliment threshold now incorrect for non-Qual Spouse with children
+JSEC-246:The next button is not displayed when "wait" message is displayed
