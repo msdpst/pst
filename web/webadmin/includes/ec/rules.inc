@@ -1,4 +1,8 @@
+/*
+This file is named .inc so it can be deployed by TeamSite.
 
+Really, it should be called ".rules". ".inc" implies it's a piece of html.
+*/
 seniorsAge: $age >= 64.75 && $age < 131;
 livingAlonePartnerInCare: !$liveTogether && ($partnerLives == 'Rest home' || $partnerLives == 'Private hospital' || $partnerLives == 'Other');
 relationshipSituation: $relationshipStatusSingle == 'Separated from Civil Union Partner' || $relationshipStatusSingle == 'Separated from Defacto Partner' || $relationshipStatusSingle == 'Separated from Spouse' || $relationshipStatusSingle == 'Divorced' || $relationshipStatusSingle == 'Civil Union Dissolved' || $relationshipStatusSingle == 'Single' || $relationshipStatusPartner == 'Defacto - Partner in prison' || $relationshipStatusPartner == 'Civil Union - Partner in prison' || $relationshipStatusPartner == 'Married - Partner in prison';

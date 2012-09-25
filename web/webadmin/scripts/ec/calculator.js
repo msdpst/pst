@@ -359,4 +359,4 @@ var calculator = {
 engine.groupScrollYPosition = 250;
 engine.onFinished = calculator.onFinished;
 engine.onControlsClearedInElement = calculator.onControlsClearedInElement;
-engine.rulesFiles = ["/webadmin/includes/ec/calculator.rules"];
+engine.rulesFiles = ["/webadmin/includes/ec/rules.inc"];
