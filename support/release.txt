@@ -212,3 +212,8 @@ JSEC-225: Results page issues
 Version 01.01.24
 JSEC-240: Undetermined YPP with a supplimentary not resulting as Extra Help
 JSEC-245: Safari - Text not fitting on page when printing from Safari
+JSEC-238:What you might get screen not displayed for a 50+ client with health conditions
+JSEC-242: Accommodation Supp threshold for NZS, married, no children, Non-qual spouse included not correct implemented
+JSEC-241:Accommodation supplement section not displayed for 65+ person with accommodation costs
+jSEC-239: Accommodation Supp threshold for NZS married, no children, partner not included not correct
+

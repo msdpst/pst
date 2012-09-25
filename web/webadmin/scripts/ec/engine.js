@@ -796,10 +796,17 @@ engine = {
         var element = $(":input[name=" + fieldName + "]");
         var val = engine.getAnswerAsText(fieldName);
 
-        if (element.attr("type") == "radio" || element.attr("type") == "checkbox") {
+        if (element.attr("type") == "radio") {
             if (val == "true")
                 val = true;
-            else if (val == "false")
+            else if (val == "false") 
+                val = false;
+        }
+        
+        else if (element.attr("type") == "checkbox") {
+            if (val == "true")
+                val = true;
+            else 
                 val = false;
         }
 

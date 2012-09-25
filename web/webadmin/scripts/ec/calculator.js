@@ -240,6 +240,7 @@ var calculator = {
 
         $('.nextText').addClass('nextTextAnimated').removeClass('.nextText');
         $('.nextText').html('Wait..');
+        $('#backButton').hide();
         //
         //gives the illusion of speed by waiting.. 
         setTimeout(function () {
@@ -300,7 +301,6 @@ var calculator = {
                 }
             }
 
-
             debug("benefits: " + mainBenefitUrls);
             debug("supplementaries: " + supplementaryBenefitUrls);
 			//supplementaryBenefitUrls.reverse();
@@ -314,28 +314,23 @@ var calculator = {
             if (mainBenefitUrls.length > 0 || supplementaryBenefitUrls > 0) {
                 engine.loadPageFragmentsAndReplaceVariables($("#benefits"), mainBenefitUrls, function () {
                     engine.loadPageFragmentsAndReplaceVariables($("#otherBenefits"), supplementaryBenefitUrls, function () {
-                        engine.applyVisibilityToChildren($("#eligible"));
-                        $("#controlBox").hide();
+                        engine.applyVisibilityToChildren($("#eligible"));                  
                         $("#eligible").slideDown(engine.SLIDE_TIME);
-                        $("form").hide();
-                        $('html,body').scrollTop(0);
-                        $('#loadingAnimation').hide();
-                        $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
-                        $('.nextText').html('Next');
                     });
                 });
             }
-
             // They're not entitled to anything. Say so.
             else {
-                $("#controlBox").hide();
-                $("#ineligible").slideDown(engine.SLIDE_TIME);
-                $("form").hide();
-                $('html,body').scrollTop(0);
-                $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
-                $('.nextText').html('Next');
+            	$("#ineligible").slideDown(engine.SLIDE_TIME); 
             }
-
+            $("#controlBox").hide();
+            $("form").hide();
+            $('html,body').scrollTop(0);
+            $('#loadingAnimation').hide();
+            $('.nextTextAnimated').addClass('nextText').removeClass('nextTextAnimated');
+            $('.nextText').html('Next'); 
+            $('#backButton').show();
+            
         }, 500);
     },
 

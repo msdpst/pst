@@ -389,20 +389,18 @@ potentialDPBCareOrSickOrInfirm: ($resident || $refugeeOtherWithPermanentResidenc
 potentialDPBWomanAlone: ($resident || $refugeeOtherWithPermanentResidence) &&
         	$gender == 'Female' &&
         	$age50to64 &&
-           $dependentChildren == 0 &&
-           $familyTotalGrossWeeklyIncome < $dpbWomanAloneGWILimit &&
+           	$dependentChildren == 0 &&
+           	$familyTotalGrossWeeklyIncome < $dpbWomanAloneGWILimit &&
         	!$potentialDPBCareOrSickOrInfirm &&
-        	!$potentialWidowsBenefitAny && //potentialHealthRelatedBenefit
+        	!$potentialWidowsBenefitAny && 
         	!$potentialDPBSoleParentAny &&
         	!$potentialInvalidsBenefit &&
-        //	!$potentialHealthRelatedBenefit &&
         	(
         		$noSpouseSupport
-        	||
+        			||
         		$stoppedCaring
-        	||
+        			||
         		$lastChildNoLongerDependent
-         	
         	);
 
 potentialHealthRelatedBenefit: ($resident || $refugeeOtherWithPermanentResidence) &&
