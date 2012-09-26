@@ -221,3 +221,7 @@ Version 01.01.25
 JSEC-247:Some Accommodation Supplement threshold values need to be updated
 JSEC-248: Accommodation suppliment threshold now incorrect for non-Qual Spouse with children
 JSEC-246:The next button is not displayed when "wait" message is displayed
+
+Version 01.01.26
+JSEC-250:Change the wording on the Accommodation Supplement link
+
