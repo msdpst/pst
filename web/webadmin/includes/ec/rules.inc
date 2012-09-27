@@ -257,13 +257,16 @@ asupRentBoardLimits:{
 	$single && $dependentChildren >= 2 && !$singleSharing: 110.00;
 	$single && $dependentChildren >= 2 && $singleSharing: 104.00;
 	
-	$partner && $dependentChildren == 0 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && !$includePartnerInNZS : 110.00;
-	$partner && $dependentChildren == 0 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && $partnerReceivingNZS: 134.00;
-	$partner && $dependentChildren == 0 && $potentialNewZealandSuperannuationNonQualifiedSpouse: 128.00;
-		
-	$partner && $dependentChildren >= 1 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && !$includePartnerInNZS : 110.00;
-	$partner && $dependentChildren >= 1 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && $partnerReceivingNZS: 151.00;
-	$partner && $dependentChildren >= 1 && $potentialNewZealandSuperannuationNonQualifiedSpouse: 157.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationNonQualifiedSpouse: 128.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationPartnerNotIncluded &&  $partnerReceivingNZS : 134.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS: 110.00;
+	$partner && $dependentChildren == 0 &&  !$potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && $includePartnerInNZS: 110.00;
+	
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationNonQualifiedSpouse: 151.00;
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationPartnerNotIncluded &&  $partnerReceivingNZS : 157.00;
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS: 133.00;
+	$partner && $dependentChildren >= 1 &&  !$potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && $includePartnerInNZS: 133.00;
+	
 };
 
 asupHomeLimits:{
@@ -271,16 +274,18 @@ asupHomeLimits:{
 	$single && $dependentChildren == 0 && $singleSharing: 97.00;
 	$single && $dependentChildren == 1 && !$singleSharing: 132.00;
 	$single && $dependentChildren == 1 && $singleSharing: 124.00;
-	$single && $dependentChildren >= 2 && !$singleSharing: 97.00;
+	$single && $dependentChildren >= 2 && !$singleSharing: 132.00;
 	$single && $dependentChildren >= 2 && $singleSharing: 124.00;
 	
-	$partner && $dependentChildren == 0 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && !$includePartnerInNZS : 132.00;
-	$partner && $dependentChildren == 0 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && $partnerReceivingNZS: 161.00;
-	$partner && $dependentChildren == 0 && $potentialNewZealandSuperannuationNonQualifiedSpouse: 153.00;
-		
-	$partner && $dependentChildren >= 1 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && !$includePartnerInNZS : 132.00;
-	$partner && $dependentChildren >= 1 && !$potentialNewZealandSuperannuationNonQualifiedSpouse && $potentialNewZealandSuperannuationPartnerNotIncluded && $partnerReceivingNZS: 181.00;
-	$partner && $dependentChildren >= 1 && $potentialNewZealandSuperannuationNonQualifiedSpouse: 189.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationNonQualifiedSpouse: 153.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationPartnerNotIncluded &&  $partnerReceivingNZS : 161.00;
+	$partner && $dependentChildren == 0 &&  $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS: 132.00;
+	$partner && $dependentChildren == 0 &&  !$potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && $includePartnerInNZS: 132.00;
+	
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationNonQualifiedSpouse: 181.00;
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationPartnerNotIncluded &&  $partnerReceivingNZS : 189.00;
+	$partner && $dependentChildren >= 1 &&  $potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS: 160.00;
+	$partner && $dependentChildren >= 1 &&  !$potentialNewZealandSuperannuationPartnerNotIncluded && !$partnerReceivingNZS && $includePartnerInNZS: 160.00;
 	
 };
 
