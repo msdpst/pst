@@ -224,4 +224,9 @@ JSEC-246:The next button is not displayed when "wait" message is displayed
 
 Version 01.01.26
 JSEC-250:Change the wording on the Accommodation Supplement link
-JSEC-249: Other income error displayed in the wrong place
+JSEC-249: Other income error displayed in the wrong placeReleas
+
+
+Version 01.01.27
+JSEC-251:Change to the Apply Now section on the Results screen
+JSEC-252:Add a new section for 'When your payments might start'

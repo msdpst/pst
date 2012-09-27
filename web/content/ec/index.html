@@ -954,7 +954,7 @@
 
 
         <div id="controlBox">
-            <button id="exitButton" type="button" onclick="calculator.confirmExit()"><span class="exitText">Exit</span></button>
+            <button id="exitButton" type="button" onclick="_gaq.push(['_trackEvent', 'ExitInMiddle', 'clicked']);calculator.confirmExit()"><span class="exitText">Exit</span></button>
             <span id="answerAllMessage">Please answer all questions</span>
             <button id="backButton" type="button" onclick="engine.onBack()"><span class="backText">Back</span></button>
             <button id="nextButton" type="button" onclick="engine.onNext()"><span class="nextText">Next</span></button>
@@ -982,21 +982,27 @@
         
         <span class="benefitName">Other assistance</span><br>
 		When you apply we'll ensure that you get all the assistance that you're entitled to from us.
-        <br> <br> <br>
+        <br> <br>
+		
+		 <div data-visible="!$potentialSuper">
+		  <h3>When your payments might start</h3>
+		  
+		  Payments usually start 2 to 3 weeks after you apply. You may have to wait longer if you have been working, 
+		  and received holiday pay or another payment at the end of your job.<br><br>
+		  	
+		</div>
 		
         <div>
 		  <h3>Apply now</h3>
-		  	<ul>
-		  	<li>To apply now, please complete an online application form</li>
-		  	<li>If you're deaf, hearing-impaired or find it hard to communicate by phone you can contact 
-		  us on Deaf Link free-fax <b>0800 621 621</b>, <b>TTY 0800 111 113</b> or email 
-		  <a href="mailto:MSD_Deaf_Services@msd.govt.nz">MSD_Deaf_Services@msd.govt.nz</a>.</li>
-		  	</ul>
+		  	
+		  	To <a href="#" onclick="_gaq.push(['_trackEvent', 'Apply', 'clicked']);calculator.applyNow()">apply for financial assistance</a>, 
+		  	please complete an online application form.
+		  	
 		</div>
         
 		<br><br>
         <div class="resultsButtonBox">
-	        <button id="finalExitButton" type="button" onclick="calculator.confirmExit()"><span class="exitText">Exit</span></button>
+	        <button id="finalExitButton" type="button" onclick="_gaq.push(['_trackEvent', 'Exit', 'clicked']); calculator.confirmExit()"><span class="exitText">Exit</span></button>
         	<button id="restartButton" onclick="_gaq.push(['_trackEvent', 'Restart', 'clicked']); engine.restart()"><span class="restartText">Start Over</span></button>
             <button id="finalBackButton" onclick="_gaq.push(['_trackEvent', 'BackFromResults', 'clicked']);calculator.onBackFromResults()"><span class="exitText">Back</span></button>
             <button id="applyButton" onclick="_gaq.push(['_trackEvent', 'Apply', 'clicked']);calculator.applyNow()"><span class="applyText">Apply for financial assistance</span></button>
@@ -1020,9 +1026,9 @@
         <p>Remember, we're here to help if you need it, whether or not you receive financial assistance from us.</p>
 
        <div class="resultsButtonBox">
-	        <button id="rejectExitButton" type="button" onclick="calculator.confirmExit()"><span class="exitText">Exit</span></button>
-        	<button id="rejectRestartButton" onclick="engine.restart()"><span class="restartText">Start Over</span></button>
-            <button id="rejectFinalBackButton" onclick="calculator.onBackFromResults()"><span class="backText">Back</span></button>            
+	        <button id="rejectExitButton" type="button" onclick="_gaq.push(['_trackEvent', 'Exit', 'clicked']); calculator.confirmExit()"><span class="exitText">Exit</span></button>
+        	<button id="rejectRestartButton" onclick="_gaq.push(['_trackEvent', 'Restart', 'clicked']); engine.restart()"><span class="restartText">Start Over</span></button>
+            <button id="rejectFinalBackButton" onclick="_gaq.push(['_trackEvent', 'BackFromResults', 'clicked']); calculator.onBackFromResults()"><span class="backText">Back</span></button>            
         </div>
     </div>
     
