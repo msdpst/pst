@@ -224,4 +224,4 @@ JSEC-246:The next button is not displayed when "wait" message is displayed
 
 Version 01.01.26
 JSEC-250:Change the wording on the Accommodation Supplement link
-
+JSEC-249: Other income error displayed in the wrong place
