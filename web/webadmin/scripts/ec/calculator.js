@@ -62,13 +62,15 @@ var calculator = {
 
     addIncomeSource:function () {
         var nnew = $(".incomeSource").first().clone();
+        nnew.appendTo($(".incomeSources"));
+        nnew = $(".incomeSource").last();
 
-        nnew.find(':input[name^="income"]').each(function () {
-            $(this).attr("name", $(this).attr("name") + calculator.nextIncomeSourceIndex);
-        });
+        // The following is horrible, but DOM manipulation simply wouldn't work in IE (setting the name, specifically)
+        var html = nnew.html();
+        html = html.replace(/name=("?)(income\w+)("?)/g, "name=\"$2" + calculator.nextIncomeSourceIndex + "\"");
+        nnew.html(html);
         calculator.nextIncomeSourceIndex++;
-
-        $(".incomeSource").last().after(nnew);
+        
         engine.clearAllControlsIn(nnew);
 
         // Show the close button. These are hidden by default so it doesn't show on the first one.
@@ -172,8 +174,8 @@ var calculator = {
 
     calculateTotalOtherIncome:function () {
         var total = 0;
-        var amounts = $('input[name^="incomeAmount"]:visible');
-        var freqs = $('select[name^="incomeFrequency"]:visible');
+        var amounts = $('input[name^="incomeAmount"]');
+        var freqs = $('select[name^="incomeFrequency"]');
         //debug(amounts.length + " other income sources");
         for (var i = 0; i < amounts.length; i++) {
             var amount = parseFloat($(amounts[i]).val());
