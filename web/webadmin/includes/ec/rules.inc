@@ -386,7 +386,7 @@ potentialDPBCareOrSickOrInfirm: ($resident || $refugeeOtherWithPermanentResidenc
         	(
         		!$single &&
         		$familyTotalGrossWeeklyIncome < $csiHalfRelLimit
-        	));
+        	)) && !$potentialInvalidsBenefit;
 
 
 

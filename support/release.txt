@@ -230,3 +230,9 @@ JSEC-249: Other income error displayed in the wrong placeReleas
 Version 01.01.27
 JSEC-251:Change to the Apply Now section on the Results screen
 JSEC-252:Add a new section for 'When your payments might start'
+
+
+Version 01.01.28
+JSEC-254:Spacing issues on "What you might get" screen
+JSEC-255: EC with eligiblity for IB and DPBCSI is displaying both rather than just the IB (Urgent)
+
