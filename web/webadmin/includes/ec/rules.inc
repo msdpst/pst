@@ -362,7 +362,7 @@ potentialDPBSoleParentAny: ($resident || $refugeeOtherWithPermanentResidence) &&
 potentialDPBSoleParentPBAWithTeen: $potentialDPBSoleParentAny && ($dependentChildren != 0 && $hasYoungest14Plus);		
 potentialDPBSoleParentPBAWithYoungChild: $potentialDPBSoleParentAny && ($dependentChildren != 0 && $hasYoungest5to13);
 
-potentialDPBSoleParentNoPBA: $potentialDPBSoleParentAny && ($dependentChildren != 0 & ($childAged04 || $childAged5NotAtSchool));		
+potentialDPBSoleParentNoPBA: $potentialDPBSoleParentAny && ($dependentChildren != 0 && ($childAged04 || $childAged5NotAtSchool));		
 
 
 
