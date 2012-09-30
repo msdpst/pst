@@ -106,30 +106,29 @@ var calculator = {
          */
 
         //we can decide where to send them for their on-line application.
+        var destination;
         if (
             engine.evaluate("$potentialNewZealandSuperannuationSingle")
                 || engine.evaluate("$potentialNewZealandSuperannuationNonQualifiedSpouse")
                 || engine.evaluate("$potentialNewZealandSuperannuationPartnerNotIncluded")) {
 
             if (engine.evaluate("$age<65")) {
-                window.location = "http://www.workandincome.govt.nz/online-services/";
+                destination = "http://www.workandincome.govt.nz/online-services/";
             } else {
-                window.location = "http://www.workandincome.govt.nz/online-services/superannuation/";
+                destination = "http://www.workandincome.govt.nz/online-services/superannuation/";
             }
-            return;
         } else if (engine.evaluate("$age16to17 && $single && $dependentChildren==0")) {
-            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
+            destination = "http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
         } else if (engine.evaluate("$youngParent")) {
-            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
+            destination = "http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
         } else if (engine.evaluate("$workingAge && $dependentChildren==0")) {
-            window.location = "http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
+            destination = "http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
         } else {
             //fall back
-            window.location = "http://www.workandincome.govt.nz/online-services/";
-            return;
+            destination = "http://www.workandincome.govt.nz/online-services/";
         }
 
-
+        window.open(destination, "_blank");
     },
 
     exitWI:function () {
