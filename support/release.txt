@@ -236,3 +236,7 @@ Version 01.01.28
 JSEC-254:Spacing issues on "What you might get" screen
 JSEC-255: EC with eligiblity for IB and DPBCSI is displaying both rather than just the IB (Urgent)
 
+
+Version 01.01.29
+JSEC-256: Full stops at the end of Links on the "What you might get" screen
+
