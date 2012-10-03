@@ -32,6 +32,168 @@
     }
 }
 
+
+@media screen and (max-width: 400px) and (min-width: 10px){
+
+	#leftSidebar, #rightSidebar, #bottomBuffer, #buffer{ 
+        display: none !important;
+    }
+    
+    header{
+    	display:inline !important;
+    	position: fixed;
+        top: 0;
+        left: 0;
+        height: 50px !important;
+        width: 100%;
+		background-color: white;
+		box-shadow: 0 0 1em #d0d0d0;
+
+        /* Make fixed positioning work in IE6: */
+        _position: absolute;
+        _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+        
+    }
+    #headerInner > h1{
+    	font-size: 16px !important;
+    }
+    
+    header > img{
+    	display:none;
+    }
+    
+    #headerInner{
+    	height: 50px;
+    }
+    
+ 
+   #outer{
+   		padding-left: 0px  !important;
+        padding-right: 0px  !important;
+        padding-top: 100px !important;
+        padding-bottom: 0px  !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px  !important;
+   		position:static !important;
+   		width:320px !important;
+   		
+   }
+   
+   #controlBox{
+   		width:250px !important;
+   		margin-left: auto !important;
+        margin-right: auto !important;
+   }
+   
+   .question{
+   		width:250px !important;
+   		margin-left: auto !important;
+        margin-right: auto !important;
+   }
+   
+   select{
+   		width:176px !important;
+   }
+   
+    
+    
+    #progress,form {
+		margin-left: auto !important;
+        margin-right: auto !important;
+		width:300px !important;
+    }
+    
+}
+
+
+@media screen and (min-width:400px) and (max-width: 767px){
+
+	#leftSidebar, #rightSidebar, #bottomBuffer, #buffer{ 
+        display: none !important;
+    }
+    
+    header{
+    	display:inline !important;
+    	position: fixed;
+        top: 0;
+        left: 0;
+        height: 50px !important;
+        width: 100%;
+		background-color: white;
+		box-shadow: 0 0 1em #d0d0d0;
+
+        /* Make fixed positioning work in IE6: */
+        _position: absolute;
+        _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+        
+    }
+    #headerInner > h1{
+    	font-size: 16px !important;
+    }
+    
+    header > img{
+    	display:none;
+    }
+    
+    #headerInner{
+    	height: 50px;
+    }
+    
+ 
+   #outer{
+   		padding-left: 0px  !important;
+        padding-right: 0px  !important;
+        padding-top: 100px !important;
+        padding-bottom: 0px  !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px  !important;
+   		position:static !important;
+   		width:320px !important;
+   		
+   }
+   
+   #controlBox{
+   		width:250px !important;
+   		margin-left: auto !important;
+        margin-right: auto !important;
+   }
+   
+   .question{
+   		width:250px !important;
+   		margin-left: auto !important;
+        margin-right: auto !important;
+   }
+   
+   select{
+   		width:176px !important;
+   }
+   
+    
+    
+    #progress,form {
+		margin-left: auto !important;
+        margin-right: auto !important;
+		width:300px !important;
+    }
+   
+    
+
+}
+
+
+
+@media screen and (min-width:767px) and (max-width: 900px){
+	
+	#leftSidebar, #rightSidebar{ 
+        display: none !important;
+    }
+}
+
+
 @media screen {
     body {
         background-color: #f0f0f0;
@@ -49,6 +211,9 @@
         /* Make fixed positioning work in IE6: */
         _position: absolute;
         _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+    }
+    #mobileHeader{
+    	display:none;
     }
     #outer {
         background-color: white;
@@ -86,7 +251,7 @@
         z-index: 1;
     }
     form, #progress {
-        margin-left: 4em !important;
+        margin-left: 4em;
     }
     .results {
         padding: 2em 1.5em 2em 1.5em;
