@@ -2,11 +2,11 @@
 set -e
 
 type=$1
-[[ $type != sre && $type != prod ]] && { echo "Usage: $0 sre (for SRE) | prod (for UAT/FIT/Production)"; exit 1; }
+[[ $type != sre && $type != prod && $type != fit ]] && { echo "Usage: $0 sre (for SRE) | prod | fit (for UAT/FIT/Production)"; exit 1; }
 
 cd $(dirname "$0")
 
-outputFile=$(pwd)/ec.zip
+outputFile=$(pwd)/ec-$type.zip
 if [ -f "$outputFile" ]; then
 	echo "Won't overwrite existing file $outputFile!"
 	exit 1;
