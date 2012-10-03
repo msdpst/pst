@@ -315,7 +315,8 @@ dpbRate : {
     ($potentialWidowsBenefitAny || $potentialDPBSoleParentAny) && $dependentChildren >= 1: 293.58;
     $potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren == 0 : 256.19;
     $potentialDPBCareOrSickOrInfirm && $single && $age>=18 && $dependentChildren >= 1 : 336.55;
-    $potentialDPBCareOrSickOrInfirm && !$single && $age>=18 && $dependentChildren >= 1 : 213.49;
+    $potentialDPBCareOrSickOrInfirm && !$single && $age>=18 : 213.49;
+    
 };
 
 
