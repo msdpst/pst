@@ -239,3 +239,6 @@ JSEC-255: EC with eligiblity for IB and DPBCSI is displaying both rather than ju
 Version 01.01.29
 JSEC-256: Full stops at the end of Links on the "What you might get" screen
 JSEC-253: Apply for financial assistance link does not display in new browser
+
+Version 01.01.30
+JSEC-259:DPB-CSI: Rate not showing.  Only $ sign
