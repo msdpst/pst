@@ -1,3 +1,13 @@
+/*
+EC-specific code. Most of the code is generic and lives in engine.js.
+
+For general development documentation, see the Eligibility Calculator wiki page, here:
+
+http://zebedee.ssi.govt.nz/twiki/bin/view/MSD_Development/EligibilityCalculator
+ */
+
+
+
 // enableDebugging();// Uncomment this to enable debugging. Don't leave it that way though because it's a performance hit.
 
 
