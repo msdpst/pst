@@ -4,4 +4,4 @@ target/
 .settings/
 .svn/
 ec.zip
-
+ec-*.zip
