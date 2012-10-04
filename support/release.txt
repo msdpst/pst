@@ -242,3 +242,6 @@ JSEC-253: Apply for financial assistance link does not display in new browser
 
 Version 01.01.30
 JSEC-259:DPB-CSI: Rate not showing.  Only $ sign
+
+Version 01.01.31
+JSEC-260: Spacing issue on the results screen in all browsers other than IE
