@@ -131,7 +131,7 @@ var calculator = {
             destination = "http://www.workandincome.govt.nz/online-services/apply/apply-16-17.html";
         } else if (engine.evaluate("$youngParent")) {
             destination = "http://www.workandincome.govt.nz/online-services/apply/apply-under-19-with-child.html";
-        } else if (engine.evaluate("$workingAge && $dependentChildren==0")) {
+        } else if (engine.evaluate("$workingAge")) {
             destination = "http://www.workandincome.govt.nz/online-services/apply/apply-18-64.html";
         } else {
             //fall back
