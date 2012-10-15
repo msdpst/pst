@@ -245,3 +245,9 @@ JSEC-259:DPB-CSI: Rate not showing.  Only $ sign
 
 Version 01.01.31
 JSEC-260: Spacing issue on the results screen in all browsers other than IE
+
+
+Version 01.01.32 (URGENT RELEASE TO FIX TEXT)
+JSEC-261:Change the wording on the help text for the Health Related Benefit question
+JSEC-262:Update the static text on the Other Income question
+JSEC-263: Update a heading on the Results Text Page for users with obligations
