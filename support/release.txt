@@ -254,3 +254,8 @@ JSEC-263: Update a heading on the Results Text Page for users with obligations
 JSEC-264:Update the job search link in the Results page for benefits with obligations
 JSEC-265:Change the work obligations link on the Results page for benefits with obligations
 JSEC-266:Apply now link is incorrect for DPB aged 19 - 64.75
+
+
+
+Version 01.01.33 (Second URGENT RELEASE TO FIX TEXT)
+JSEC-267:Add a new link to the Results page
